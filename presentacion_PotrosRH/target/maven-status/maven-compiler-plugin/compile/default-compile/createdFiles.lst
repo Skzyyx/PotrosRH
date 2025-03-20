@@ -13,6 +13,7 @@ Paneles\BusquedaRFCNomina.class
 Paneles\MenuPrincipal$11.class
 Paneles\MenuPrincipal$3.class
 Paneles\PrevisualisarEmpleado$3.class
+Paneles\PrevisualizarNomina$3.class
 Paneles\MenuPrincipal$5.class
 Paneles\BusquedaRFCNomina$1.class
 Paneles\PrevisualisarEmpleado.class
@@ -20,6 +21,7 @@ Paneles\MenuPrincipal$1.class
 Paneles\MenuPrincipal$7.class
 Paneles\PrevisualizarNomina$2.class
 Paneles\PrevisualisarEmpleado$1.class
+Paneles\PrevisualisarEmpleado$4.class
 Frame\CarcasaPaneles.class
 Paneles\MenuPrincipal$4.class
 Paneles\BusquedaRFCNomina$3.class
