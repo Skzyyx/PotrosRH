@@ -8,6 +8,7 @@ import PanelController.PanelController;
 import Paneles.BusquedaRFCNomina;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualisarEmpleado;
+import Paneles.PrevisualizarNomina;
 import java.awt.CardLayout;
 
 /**
@@ -21,6 +22,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     
     private BusquedaRFCNomina busquedaRFCNomina;
     private PrevisualisarEmpleado previsualisarEmpleado;
+    private PrevisualizarNomina previsualizarNomina;
     
     /**
      * Creates new form CarcasaPaneles
@@ -35,10 +37,11 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         menuPrincipal = MenuPrincipal.getInstance();
         busquedaRFCNomina = BusquedaRFCNomina.getInstance();
         previsualisarEmpleado = PrevisualisarEmpleado.getInstance();
-        
+        previsualizarNomina = PrevisualizarNomina.getInstance();
         contenedor.add(menuPrincipal, "menuPrincipal");
         contenedor.add(busquedaRFCNomina, "busquedaRFCNomina");
         contenedor.add(previsualisarEmpleado, "previsualisarEmpleado");
+        contenedor.add(previsualizarNomina,"previsualizarNomina");
     }
     public static CarcasaPaneles getInstance() {
         if (instance == null) {
