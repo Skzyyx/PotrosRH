@@ -48,19 +48,19 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblNombreEmpleado = new javax.swing.JLabel();
+        lblApellidoPaternoEmpleado = new javax.swing.JLabel();
+        lblNumeroEmpleado = new javax.swing.JLabel();
+        lblApellidoMaternoEmpleado = new javax.swing.JLabel();
+        lblRfcEmpleado = new javax.swing.JLabel();
+        lblPuestoEmpleado = new javax.swing.JLabel();
+        lblEstadoEmpleado = new javax.swing.JLabel();
+        lblHorasTrabajadasEmpleado = new javax.swing.JLabel();
+        lblHorasExtraEmpleado = new javax.swing.JLabel();
+        lblSalarioBrutoEmpleado = new javax.swing.JLabel();
+        lblIsrEmpleado = new javax.swing.JLabel();
+        lblSalarioNetoEmpleado = new javax.swing.JLabel();
+        txtFieldBonoEmpleado = new javax.swing.JTextField();
         btnGenerar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         setBackground(new java.awt.Color(17, 119, 202));
         setPreferredSize(new java.awt.Dimension(1290, 600));
 
-        panel2.setBackground(new java.awt.Color(239, 239, 239));
+        panel2.setBackground(new java.awt.Color(243, 243, 243));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -124,56 +124,56 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Agregar bono:");
 
-        jLabel16.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel16.setText("Leonardo");
+        lblNombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblNombreEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombreEmpleado.setText("Leonardo");
 
-        jLabel17.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel17.setText("Flores");
+        lblApellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblApellidoPaternoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblApellidoPaternoEmpleado.setText("Flores");
 
-        jLabel18.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel18.setText("010");
+        lblNumeroEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblNumeroEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblNumeroEmpleado.setText("010");
 
-        jLabel19.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel19.setText("Leyva");
+        lblApellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblApellidoMaternoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblApellidoMaternoEmpleado.setText("Leyva");
 
-        jLabel22.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel22.setText("FLAHSDKA67893");
+        lblRfcEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblRfcEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblRfcEmpleado.setText("FLAHSDKA67893");
 
-        jLabel20.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel20.setText("Ingeniero en software");
+        lblPuestoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblPuestoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblPuestoEmpleado.setText("Ingeniero en software");
 
-        jLabel23.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel23.setText("Activo");
+        lblEstadoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblEstadoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblEstadoEmpleado.setText("Activo");
 
-        jLabel24.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel24.setText("40 Horas");
+        lblHorasTrabajadasEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblHorasTrabajadasEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblHorasTrabajadasEmpleado.setText("40 Horas");
 
-        jLabel25.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel25.setText("5 Horas");
+        lblHorasExtraEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblHorasExtraEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblHorasExtraEmpleado.setText("5 Horas");
 
-        jLabel26.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel26.setText("8000 Pesos");
+        lblSalarioBrutoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblSalarioBrutoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblSalarioBrutoEmpleado.setText("8000 Pesos");
 
-        jLabel27.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel27.setText("1500 Pesos");
+        lblIsrEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblIsrEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblIsrEmpleado.setText("1500 Pesos");
 
-        jLabel28.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel28.setText("6500 Pesos");
+        lblSalarioNetoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblSalarioNetoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        lblSalarioNetoEmpleado.setText("6500 Pesos");
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        txtFieldBonoEmpleado.setBackground(new java.awt.Color(204, 204, 204));
+        txtFieldBonoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -197,19 +197,19 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                     .addComponent(jLabel14))
                 .addGap(39, 39, 39)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel20)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSalarioNetoEmpleado)
+                    .addComponent(lblIsrEmpleado)
+                    .addComponent(lblSalarioBrutoEmpleado)
+                    .addComponent(lblHorasExtraEmpleado)
+                    .addComponent(lblHorasTrabajadasEmpleado)
+                    .addComponent(lblEstadoEmpleado)
+                    .addComponent(lblRfcEmpleado)
+                    .addComponent(lblApellidoMaternoEmpleado)
+                    .addComponent(lblNumeroEmpleado)
+                    .addComponent(lblApellidoPaternoEmpleado)
+                    .addComponent(lblNombreEmpleado)
+                    .addComponent(lblPuestoEmpleado)
+                    .addComponent(txtFieldBonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(645, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
@@ -218,55 +218,55 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 .addGap(47, 47, 47)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel18))
+                    .addComponent(lblNumeroEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel16))
+                    .addComponent(lblNombreEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel17))
+                    .addComponent(lblApellidoPaternoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel19))
+                    .addComponent(lblApellidoMaternoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel22))
+                    .addComponent(lblRfcEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel20))
+                    .addComponent(lblPuestoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel23))
+                    .addComponent(lblEstadoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel24))
+                    .addComponent(lblHorasTrabajadasEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel25))
+                    .addComponent(lblHorasExtraEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
+                    .addComponent(lblSalarioBrutoEmpleado)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel27))
+                    .addComponent(lblIsrEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel28))
+                    .addComponent(lblSalarioNetoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFieldBonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -362,20 +362,8 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -383,7 +371,19 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblApellidoMaternoEmpleado;
+    private javax.swing.JLabel lblApellidoPaternoEmpleado;
+    private javax.swing.JLabel lblEstadoEmpleado;
+    private javax.swing.JLabel lblHorasExtraEmpleado;
+    private javax.swing.JLabel lblHorasTrabajadasEmpleado;
+    private javax.swing.JLabel lblIsrEmpleado;
+    private javax.swing.JLabel lblNombreEmpleado;
+    private javax.swing.JLabel lblNumeroEmpleado;
+    private javax.swing.JLabel lblPuestoEmpleado;
+    private javax.swing.JLabel lblRfcEmpleado;
+    private javax.swing.JLabel lblSalarioBrutoEmpleado;
+    private javax.swing.JLabel lblSalarioNetoEmpleado;
     private java.awt.Panel panel2;
+    private javax.swing.JTextField txtFieldBonoEmpleado;
     // End of variables declaration//GEN-END:variables
 }
