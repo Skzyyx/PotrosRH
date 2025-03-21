@@ -4,27 +4,43 @@
  */
 package Paneles;
 
-import PanelController.PanelController;
-import static Paneles.PrevisualisarEmpleado.getInstance;
+import Controles.ControlFlujo;
+import Excepciones.ObtenerEmpleadoException;
+import Excepciones.PresentacionException;
+import static Paneles.PrevisualizarEmpleado.getInstance;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Panel;
+import java.awt.RenderingHints;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
  *
  * @author INSPIRON
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
+
     private static PrevisualizarNomina instance;
+
     /**
      * Creates new form PrevisualizarNomina
      */
     public PrevisualizarNomina() {
         initComponents();
     }
+
     public static PrevisualizarNomina getInstance() {
         if (instance == null) {
             instance = new PrevisualizarNomina();
         }
         return instance;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,7 +76,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         lblSalarioBrutoEmpleado = new javax.swing.JLabel();
         lblIsrEmpleado = new javax.swing.JLabel();
         lblSalarioNetoEmpleado = new javax.swing.JLabel();
-        txtFieldBonoEmpleado = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         btnGenerar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -73,114 +89,88 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         panel2.setBackground(new java.awt.Color(243, 243, 243));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Numero del empleado:");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre:");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Apellido paterno:");
 
         jLabel4.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Apellido materno:");
 
         jLabel5.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("RFC:");
 
         jLabel6.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Puesto:");
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Estado:");
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Horas trabajadas:");
 
         jLabel9.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Horas extra:");
 
         jLabel10.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Salario neto:");
 
         jLabel11.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Salario bruto:");
 
         jLabel13.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("ISR:");
 
         jLabel14.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Agregar bono:");
 
         lblNombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblNombreEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblNombreEmpleado.setText("Leonardo");
 
         lblApellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblApellidoPaternoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblApellidoPaternoEmpleado.setText("Flores");
 
         lblNumeroEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblNumeroEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblNumeroEmpleado.setText("010");
 
         lblApellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblApellidoMaternoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblApellidoMaternoEmpleado.setText("Leyva");
 
         lblRfcEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblRfcEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblRfcEmpleado.setText("FLAHSDKA67893");
 
         lblPuestoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblPuestoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblPuestoEmpleado.setText("Ingeniero en software");
 
         lblEstadoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblEstadoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblEstadoEmpleado.setText("Activo");
 
         lblHorasTrabajadasEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblHorasTrabajadasEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblHorasTrabajadasEmpleado.setText("40 Horas");
 
         lblHorasExtraEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblHorasExtraEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblHorasExtraEmpleado.setText("5 Horas");
 
         lblSalarioBrutoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblSalarioBrutoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblSalarioBrutoEmpleado.setText("8000 Pesos");
 
         lblIsrEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblIsrEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblIsrEmpleado.setText("1500 Pesos");
 
         lblSalarioNetoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblSalarioNetoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         lblSalarioNetoEmpleado.setText("6500 Pesos");
 
-        txtFieldBonoEmpleado.setBackground(new java.awt.Color(204, 204, 204));
-        txtFieldBonoEmpleado.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(23, 23, 23)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -209,13 +199,13 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                     .addComponent(lblApellidoPaternoEmpleado)
                     .addComponent(lblNombreEmpleado)
                     .addComponent(lblPuestoEmpleado)
-                    .addComponent(txtFieldBonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(645, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(639, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(14, 14, 14)
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblNumeroEmpleado))
@@ -264,12 +254,20 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(lblSalarioNetoEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtFieldBonoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox1))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jComboBox1.addItem("BonoType1");
+        jComboBox1.addItem("BonoType2");
+        jComboBox1.addItem("BonoType3");
+        jComboBox1.addItem("BonoType4");
+
+        btnGenerar.setBackground(new java.awt.Color(44, 44, 44));
+        btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,9 +276,12 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         });
 
         jLabel15.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
 
+        btnCancelar.setBackground(new java.awt.Color(44, 44, 44));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setMaximumSize(new java.awt.Dimension(1820, 23));
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCancelarMouseClicked(evt);
@@ -302,7 +303,8 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel15))
+                        .addComponent(jLabel15)
+                        .addGap(397, 397, 397))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -310,41 +312,80 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                                 .addComponent(jLabel12))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(397, 397, 397))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                                .addGap(0, 75, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(385, 385, 385))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel21)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(38, 38, 38)
+                            .addComponent(jLabel15)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel15))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38))))
         );
+
+        btnGenerar.setBorderPainted(false);
+        btnGenerar.setContentAreaFilled(false);
+        btnGenerar.setOpaque(false);
+        btnGenerar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setOpaque(false);
+        btnCancelar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            ControlFlujo.mostrarPrevisualizarEmpleado();
+        } catch (PresentacionException ex) {
+            Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        PanelController.showPanel(getInstance(), BusquedaRFCNomina.getInstance());
+
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
@@ -355,6 +396,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -384,6 +426,263 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel lblSalarioBrutoEmpleado;
     private javax.swing.JLabel lblSalarioNetoEmpleado;
     private java.awt.Panel panel2;
-    private javax.swing.JTextField txtFieldBonoEmpleado;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JButton getBtnGenerar() {
+        return btnGenerar;
+    }
+
+    public void setBtnGenerar(JButton btnGenerar) {
+        this.btnGenerar = btnGenerar;
+    }
+
+    public JComboBox<String> getjComboBox1() {
+        return jComboBox1;
+    }
+
+    public void setjComboBox1(JComboBox<String> jComboBox1) {
+        this.jComboBox1 = jComboBox1;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    public void setjLabel10(JLabel jLabel10) {
+        this.jLabel10 = jLabel10;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public void setjLabel11(JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public void setjLabel12(JLabel jLabel12) {
+        this.jLabel12 = jLabel12;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public void setjLabel13(JLabel jLabel13) {
+        this.jLabel13 = jLabel13;
+    }
+
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public void setjLabel14(JLabel jLabel14) {
+        this.jLabel14 = jLabel14;
+    }
+
+    public JLabel getjLabel15() {
+        return jLabel15;
+    }
+
+    public void setjLabel15(JLabel jLabel15) {
+        this.jLabel15 = jLabel15;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel21() {
+        return jLabel21;
+    }
+
+    public void setjLabel21(JLabel jLabel21) {
+        this.jLabel21 = jLabel21;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public void setjLabel9(JLabel jLabel9) {
+        this.jLabel9 = jLabel9;
+    }
+
+    public JLabel getLblApellidoMaternoEmpleado() {
+        return lblApellidoMaternoEmpleado;
+    }
+
+    public void setLblApellidoMaternoEmpleado(JLabel lblApellidoMaternoEmpleado) {
+        this.lblApellidoMaternoEmpleado = lblApellidoMaternoEmpleado;
+    }
+
+    public JLabel getLblApellidoPaternoEmpleado() {
+        return lblApellidoPaternoEmpleado;
+    }
+
+    public void setLblApellidoPaternoEmpleado(JLabel lblApellidoPaternoEmpleado) {
+        this.lblApellidoPaternoEmpleado = lblApellidoPaternoEmpleado;
+    }
+
+    public JLabel getLblEstadoEmpleado() {
+        return lblEstadoEmpleado;
+    }
+
+    public void setLblEstadoEmpleado(JLabel lblEstadoEmpleado) {
+        this.lblEstadoEmpleado = lblEstadoEmpleado;
+    }
+
+    public JLabel getLblHorasExtraEmpleado() {
+        return lblHorasExtraEmpleado;
+    }
+
+    public void setLblHorasExtraEmpleado(JLabel lblHorasExtraEmpleado) {
+        this.lblHorasExtraEmpleado = lblHorasExtraEmpleado;
+    }
+
+    public JLabel getLblHorasTrabajadasEmpleado() {
+        return lblHorasTrabajadasEmpleado;
+    }
+
+    public void setLblHorasTrabajadasEmpleado(JLabel lblHorasTrabajadasEmpleado) {
+        this.lblHorasTrabajadasEmpleado = lblHorasTrabajadasEmpleado;
+    }
+
+    public JLabel getLblIsrEmpleado() {
+        return lblIsrEmpleado;
+    }
+
+    public void setLblIsrEmpleado(JLabel lblIsrEmpleado) {
+        this.lblIsrEmpleado = lblIsrEmpleado;
+    }
+
+    public JLabel getLblNombreEmpleado() {
+        return lblNombreEmpleado;
+    }
+
+    public void setLblNombreEmpleado(JLabel lblNombreEmpleado) {
+        this.lblNombreEmpleado = lblNombreEmpleado;
+    }
+
+    public JLabel getLblNumeroEmpleado() {
+        return lblNumeroEmpleado;
+    }
+
+    public void setLblNumeroEmpleado(JLabel lblNumeroEmpleado) {
+        this.lblNumeroEmpleado = lblNumeroEmpleado;
+    }
+
+    public JLabel getLblPuestoEmpleado() {
+        return lblPuestoEmpleado;
+    }
+
+    public void setLblPuestoEmpleado(JLabel lblPuestoEmpleado) {
+        this.lblPuestoEmpleado = lblPuestoEmpleado;
+    }
+
+    public JLabel getLblRfcEmpleado() {
+        return lblRfcEmpleado;
+    }
+
+    public void setLblRfcEmpleado(JLabel lblRfcEmpleado) {
+        this.lblRfcEmpleado = lblRfcEmpleado;
+    }
+
+    public JLabel getLblSalarioBrutoEmpleado() {
+        return lblSalarioBrutoEmpleado;
+    }
+
+    public void setLblSalarioBrutoEmpleado(JLabel lblSalarioBrutoEmpleado) {
+        this.lblSalarioBrutoEmpleado = lblSalarioBrutoEmpleado;
+    }
+
+    public JLabel getLblSalarioNetoEmpleado() {
+        return lblSalarioNetoEmpleado;
+    }
+
+    public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {
+        this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;
+    }
+
+    public Panel getPanel2() {
+        return panel2;
+    }
+
+    public void setPanel2(Panel panel2) {
+        this.panel2 = panel2;
+    }
+    
+    
 }

@@ -1,5 +1,7 @@
 package dto;
 
+import enums.EstadoEmpleado;
+
 /**
  *
  * @author ErnestoLpz_25263
@@ -17,7 +19,26 @@ public class EmpleadoDTO {
     private String departamento;
     private String puesto;
     private double salarioBase;
-    private boolean estado;
+    private EstadoEmpleado estado;
+    
+    public EmpleadoDTO() {
+    }
+  
+    public EmpleadoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String rfc, String calle, String colonia, String numero, String telefono, String departamento, String puesto, double salarioBase, EstadoEmpleado estado) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.email = email;
+        this.rfc = rfc;
+        this.calle = calle;
+        this.colonia = colonia;
+        this.numero = numero;
+        this.telefono = telefono;
+        this.departamento = departamento;
+        this.puesto = puesto;
+        this.salarioBase = salarioBase;
+        this.estado = estado;
+    }
     
     public String getNombre() {
         return nombre;
@@ -115,30 +136,11 @@ public class EmpleadoDTO {
         this.salarioBase = salarioBase;
     }
 
-    public boolean isEstado() {
+    public EstadoEmpleado getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-    public EmpleadoDTO() {
-    }
-  
-    public EmpleadoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String rfc, String calle, String colonia, String numero, String telefono, String departamento, String puesto, double salarioBase, boolean estado) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.email = email;
-        this.rfc = rfc;
-        this.calle = calle;
-        this.colonia = colonia;
-        this.numero = numero;
-        this.telefono = telefono;
-        this.departamento = departamento;
-        this.puesto = puesto;
-        this.salarioBase = salarioBase;
+    public void setEstado(EstadoEmpleado estado) {
         this.estado = estado;
     }
     

@@ -4,10 +4,10 @@
  */
 package Frame;
 
-import PanelController.PanelController;
+import Controles.ControlFlujo;
 import Paneles.BusquedaRFCNomina;
 import Paneles.MenuPrincipal;
-import Paneles.PrevisualisarEmpleado;
+import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
 import java.awt.CardLayout;
 
@@ -20,8 +20,9 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     
     private static CarcasaPaneles instance;
     
+    private MenuPrincipal menuPrincipal;
     private BusquedaRFCNomina busquedaRFCNomina;
-    private PrevisualisarEmpleado previsualisarEmpleado;
+    private PrevisualizarEmpleado previsualisarEmpleado;
     private PrevisualizarNomina previsualizarNomina;
     
     /**
@@ -30,13 +31,14 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     private CarcasaPaneles() {
         initComponents();
         cargarPaneles();
+        setResizable(false);
         setLocationRelativeTo(null);
     }
     
     private void cargarPaneles() {
         menuPrincipal = MenuPrincipal.getInstance();
         busquedaRFCNomina = BusquedaRFCNomina.getInstance();
-        previsualisarEmpleado = PrevisualisarEmpleado.getInstance();
+        previsualisarEmpleado = PrevisualizarEmpleado.getInstance();
         previsualizarNomina = PrevisualizarNomina.getInstance();
         contenedor.add(menuPrincipal, "menuPrincipal");
         contenedor.add(busquedaRFCNomina, "busquedaRFCNomina");
@@ -59,14 +61,14 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuPrincipal = Paneles.MenuPrincipal.getInstance();
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(900, 650));
 
+        contenedor.setMaximumSize(new java.awt.Dimension(1280, 720));
+        contenedor.setMinimumSize(new java.awt.Dimension(1280, 720));
+        contenedor.setPreferredSize(new java.awt.Dimension(1280, 720));
         contenedor.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +123,5 @@ public class CarcasaPaneles extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenedor;
-    private Paneles.MenuPrincipal menuPrincipal;
     // End of variables declaration//GEN-END:variables
 }

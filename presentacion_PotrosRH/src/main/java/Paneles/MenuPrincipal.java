@@ -4,7 +4,7 @@
  */
 package Paneles;
 
-import PanelController.PanelController;
+import Controles.ControlFlujo;
 import static Paneles.BusquedaRFCNomina.getInstance;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -263,7 +263,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDespedirEmpleadoActionPerformed
 
     private void btnNominasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNominasActionPerformed
-        PanelController.showPanel(getInstance(), BusquedaRFCNomina.getInstance()); 
+        ControlFlujo.mostrarBusquedaRFCNomina();
 
     }//GEN-LAST:event_btnNominasActionPerformed
 

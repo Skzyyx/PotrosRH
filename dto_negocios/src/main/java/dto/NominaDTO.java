@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * @author ErnestoLpz_252663
  */
 public class NominaDTO {
+    
     private EmpleadoDTO empleado;
     private double bono;
     private double isr;
@@ -16,6 +17,20 @@ public class NominaDTO {
     private double horasTrabajadas;
     private double horaExtra;
 
+    public NominaDTO() {
+    }
+
+    public NominaDTO(EmpleadoDTO empleado, double bono, double isr, double salarioBruto, double salarioNeto, LocalDate fechaCorte, double horasTrabajadas, double horaExtra) {
+        this.empleado = empleado;
+        this.bono = bono;
+        this.isr = isr;
+        this.salarioBruto = salarioBruto;
+        this.salarioNeto = salarioNeto;
+        this.fechaCorte = fechaCorte;
+        this.horasTrabajadas = horasTrabajadas;
+        this.horaExtra = horaExtra;
+    }
+    
     public EmpleadoDTO getEmpleado() {
         return empleado;
     }
@@ -77,20 +92,6 @@ public class NominaDTO {
     }
 
     public void setHoraExtra(double horaExtra) {
-        this.horaExtra = horaExtra;
-    }
-
-    public NominaDTO() {
-    }
-
-    public NominaDTO(EmpleadoDTO empleado, double bono, double isr, double salarioBruto, double salarioNeto, LocalDate fechaCorte, double horasTrabajadas, double horaExtra) {
-        this.empleado = empleado;
-        this.bono = bono;
-        this.isr = isr;
-        this.salarioBruto = salarioBruto;
-        this.salarioNeto = salarioNeto;
-        this.fechaCorte = fechaCorte;
-        this.horasTrabajadas = horasTrabajadas;
         this.horaExtra = horaExtra;
     }
 
