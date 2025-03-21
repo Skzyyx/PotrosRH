@@ -274,7 +274,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
         int resultado = JOptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
-            ControlNomina.setNominaDTO(ControlNomina.generarNomina(ControlNomina.getEmpleadoDTO()));
+            ControlNomina.generarNomina();
             ControlFlujo.mostrarPrevisualizarNomina();
         }
     }//GEN-LAST:event_btnGenerarActionPerformed

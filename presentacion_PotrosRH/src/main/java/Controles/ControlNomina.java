@@ -39,8 +39,9 @@ public class ControlNomina {
         return empleado;
     }
 
-    public static NominaDTO generarNomina(EmpleadoDTO empleado) {
-        return new NominaDTO(empleado, 0, 1500, 8000, 6500, LocalDate.now(), 40, 5);
+    public static NominaDTO generarNomina() {
+        nominaDTO = new NominaDTO(empleadoDTO, 0, 1500, 8000, 6500, LocalDate.now(), 40, 5);
+        return nominaDTO;
     }
 
     public static NominaDTO guardarNomina(NominaDTO nomina) {
