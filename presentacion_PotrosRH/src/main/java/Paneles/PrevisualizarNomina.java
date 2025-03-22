@@ -9,8 +9,10 @@ import Controles.ControlNomina;
 import Enums.Bonos;
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
+import Exceptions.GenerarNominaException;
 import GenerarNomina.GenerarNomina;
 import static Paneles.PrevisualizarEmpleado.getInstance;
+import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Panel;
@@ -445,7 +447,14 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        GenerarNomina gn = new GenerarNomina();
+        try {
+            NominaDTO nomina = ControlNomina.getNominaDTO();
+            nomina.setBono(Double.parseDouble(lblBono.getText()));
+            ControlNomina.setNominaDTO(nomina);
+            ControlNomina.guardarNomina();
+        } catch (PresentacionException ex) {
+            Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void bonoSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bonoSelectorItemStateChanged

@@ -24,7 +24,7 @@ public class ObtenerEmpleado implements IObtenerEmpleado {
             throw new ObtenerEmpleadoException("El rfc debe tener 13 caracteres.");
         }
         
-        return new EmpleadoDTO("Benjamin", "Soto", "Coronado", "benjamin.sc@gmail.com", rfc, "Cactus", "Casa Blanca", "123", "1231231231", "Seguridad", "Empleado", 8000, EstadoEmpleado.ACTIVO);
+        return new EmpleadoDTO("Benjamin", "Soto", "Coronado", "jose.islas252574@potros.itson.edu.mx", rfc, "Cactus", "Casa Blanca", "123", "1231231231", "Seguridad", "Empleado", 8000, EstadoEmpleado.ACTIVO);
     }
     
 }

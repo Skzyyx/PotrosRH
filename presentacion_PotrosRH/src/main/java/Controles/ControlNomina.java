@@ -6,6 +6,7 @@ package Controles;
 
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
+import Exceptions.GenerarNominaException;
 import GenerarNomina.GenerarNomina;
 import Interfaces.IGenerarNomina;
 import Interfaces.IObtenerEmpleado;
@@ -46,6 +47,16 @@ public class ControlNomina {
         IGenerarNomina gn = new GenerarNomina();
         nominaDTO = gn.generarNomina(empleadoDTO);
         return nominaDTO;
+    }
+    
+    public static boolean guardarNomina() throws PresentacionException {
+        IGenerarNomina gn = new GenerarNomina();
+        try {
+            return gn.guardarNomina(nominaDTO);
+        } catch (GenerarNominaException ex) {
+            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException("Ocurrió un error al guardar la nomina.");
+        }
     }
 
     public static NominaDTO guardarNomina(NominaDTO nomina) {

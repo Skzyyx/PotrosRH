@@ -4,12 +4,10 @@
  */
 package Frame;
 
-import Controles.ControlFlujo;
 import Paneles.BusquedaRFCNomina;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
-import java.awt.CardLayout;
 
 /**
  *

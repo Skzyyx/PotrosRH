@@ -4,10 +4,18 @@
  */
 package GenerarNomina;
 
+import Excepciones.SistemaCorreoException;
+import Exceptions.GenerarNominaException;
+import Interface.ISistemaCorreo;
 import Interfaces.IGenerarNomina;
+import SistemaCorreo.SistemaCorreo;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import java.io.File;
+import java.net.URI;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,8 +32,16 @@ public class GenerarNomina implements IGenerarNomina {
     }
 
     @Override
-    public boolean guardarNomina(NominaDTO nomina) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
+        ISistemaCorreo sistemaCorreo = new SistemaCorreo();
+        
+        try {
+            sistemaCorreo.enviarCorreo(nomina);
+            return true;
+        } catch (SistemaCorreoException ex) {
+            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
+        }
     }
     
     // Tabla del SAT (Límite Inferior, Cuota Fija, % Excedente)

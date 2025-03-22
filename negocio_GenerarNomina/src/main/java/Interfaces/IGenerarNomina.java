@@ -4,6 +4,7 @@
  */
 package Interfaces;
 
+import Exceptions.GenerarNominaException;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 
@@ -15,5 +16,5 @@ public interface IGenerarNomina {
     
     public NominaDTO generarNomina(EmpleadoDTO empleado);
     
-    public boolean guardarNomina(NominaDTO nomina);
+    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException;
 }
