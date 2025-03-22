@@ -5,19 +5,24 @@
 package Paneles;
 
 import Controles.ControlFlujo;
+import Controles.ControlNomina;
+import Enums.Bonos;
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
+import GenerarNomina.GenerarNomina;
 import static Paneles.PrevisualizarEmpleado.getInstance;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Panel;
 import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -50,8 +55,33 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel2 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
+        btnGenerar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int arc = 50; // Radio de redondeo
+
+                // Dibujar fondo redondeado
+                g2.setColor(getBackground());
+                g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), arc, arc));
+
+                g2.dispose();
+
+                // Llamar a la implementación original para pintar los componentes hijos
+                super.paintComponent(g);
+            }
+
+            @Override
+            protected void paintBorder(Graphics g) {
+                // No pintar el borde predeterminado
+            }
+        }
+        ;
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,13 +90,12 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblBono = new javax.swing.JLabel();
         lblNombreEmpleado = new javax.swing.JLabel();
         lblApellidoPaternoEmpleado = new javax.swing.JLabel();
-        lblNumeroEmpleado = new javax.swing.JLabel();
         lblApellidoMaternoEmpleado = new javax.swing.JLabel();
         lblRfcEmpleado = new javax.swing.JLabel();
         lblPuestoEmpleado = new javax.swing.JLabel();
@@ -75,195 +104,17 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         lblHorasExtraEmpleado = new javax.swing.JLabel();
         lblSalarioBrutoEmpleado = new javax.swing.JLabel();
         lblIsrEmpleado = new javax.swing.JLabel();
-        lblSalarioNetoEmpleado = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        btnGenerar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
+        lblSalarioNetoEmpleado = new javax.swing.JLabel();
+        bonoSelector = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(17, 119, 202));
-        setPreferredSize(new java.awt.Dimension(1290, 600));
-
-        panel2.setBackground(new java.awt.Color(243, 243, 243));
-
-        jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel1.setText("Numero del empleado:");
-
-        jLabel2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre:");
-
-        jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel3.setText("Apellido paterno:");
-
-        jLabel4.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel4.setText("Apellido materno:");
-
-        jLabel5.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel5.setText("RFC:");
-
-        jLabel6.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel6.setText("Puesto:");
-
-        jLabel7.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel7.setText("Estado:");
-
-        jLabel8.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel8.setText("Horas trabajadas:");
-
-        jLabel9.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel9.setText("Horas extra:");
-
-        jLabel10.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel10.setText("Salario neto:");
-
-        jLabel11.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel11.setText("Salario bruto:");
-
-        jLabel13.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel13.setText("ISR:");
-
-        jLabel14.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel14.setText("Agregar bono:");
-
-        lblNombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblNombreEmpleado.setText("Leonardo");
-
-        lblApellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblApellidoPaternoEmpleado.setText("Flores");
-
-        lblNumeroEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblNumeroEmpleado.setText("010");
-
-        lblApellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblApellidoMaternoEmpleado.setText("Leyva");
-
-        lblRfcEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblRfcEmpleado.setText("FLAHSDKA67893");
-
-        lblPuestoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblPuestoEmpleado.setText("Ingeniero en software");
-
-        lblEstadoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblEstadoEmpleado.setText("Activo");
-
-        lblHorasTrabajadasEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblHorasTrabajadasEmpleado.setText("40 Horas");
-
-        lblHorasExtraEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblHorasExtraEmpleado.setText("5 Horas");
-
-        lblSalarioBrutoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblSalarioBrutoEmpleado.setText("8000 Pesos");
-
-        lblIsrEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblIsrEmpleado.setText("1500 Pesos");
-
-        lblSalarioNetoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        lblSalarioNetoEmpleado.setText("6500 Pesos");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>());
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel14))
-                .addGap(39, 39, 39)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSalarioNetoEmpleado)
-                    .addComponent(lblIsrEmpleado)
-                    .addComponent(lblSalarioBrutoEmpleado)
-                    .addComponent(lblHorasExtraEmpleado)
-                    .addComponent(lblHorasTrabajadasEmpleado)
-                    .addComponent(lblEstadoEmpleado)
-                    .addComponent(lblRfcEmpleado)
-                    .addComponent(lblApellidoMaternoEmpleado)
-                    .addComponent(lblNumeroEmpleado)
-                    .addComponent(lblApellidoPaternoEmpleado)
-                    .addComponent(lblNombreEmpleado)
-                    .addComponent(lblPuestoEmpleado)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(639, Short.MAX_VALUE))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblNumeroEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblNombreEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblApellidoPaternoEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblApellidoMaternoEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblRfcEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblPuestoEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lblEstadoEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lblHorasTrabajadasEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lblHorasExtraEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSalarioBrutoEmpleado)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(lblIsrEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(lblSalarioNetoEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        jComboBox1.addItem("BonoType1");
-        jComboBox1.addItem("BonoType2");
-        jComboBox1.addItem("BonoType3");
-        jComboBox1.addItem("BonoType4");
+        setMaximumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         btnGenerar.setBackground(new java.awt.Color(44, 44, 44));
         btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -274,8 +125,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 btnGenerarActionPerformed(evt);
             }
         });
-
-        jLabel15.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
 
         btnCancelar.setBackground(new java.awt.Color(44, 44, 44));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -293,54 +142,257 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(17, 119, 202));
+        jPanel3.setMinimumSize(new java.awt.Dimension(1280, 1280));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1280, 520));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1190, 508));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1190, 508));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1190, 508));
+        jPanel1.setOpaque(false); // Hacer el panel transparente para que se vea el fondo redondeado
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Margen interno
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel2.setText("Nombre:");
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel3.setText("Apellido paterno:");
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel4.setText("Apellido materno:");
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 0, 22)); // NOI18N
+        jLabel5.setText("RFC:");
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel6.setText("Puesto:");
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel7.setText("Estado:");
+
+        jLabel8.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel8.setText("Horas trabajadas:");
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel9.setText("Horas extra:");
+
+        jLabel11.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel11.setText("Salario bruto:");
+
+        jLabel13.setFont(new java.awt.Font("sansserif", 0, 22)); // NOI18N
+        jLabel13.setText("ISR:");
+
+        jLabel10.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel10.setText("Bono:");
+
+        lblBono.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblBono.setText("0.0");
+
+        lblNombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblNombreEmpleado.setText(".");
+
+        lblApellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblApellidoPaternoEmpleado.setText(".");
+
+        lblApellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblApellidoMaternoEmpleado.setText(".");
+
+        lblRfcEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblRfcEmpleado.setText(".");
+
+        lblPuestoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblPuestoEmpleado.setText(".");
+
+        lblEstadoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblEstadoEmpleado.setText(".");
+
+        lblHorasTrabajadasEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblHorasTrabajadasEmpleado.setText(".");
+
+        lblHorasExtraEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblHorasExtraEmpleado.setText(".");
+
+        lblSalarioBrutoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblSalarioBrutoEmpleado.setText(".");
+
+        lblIsrEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblIsrEmpleado.setText(".");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel12.setText("Nómina de Empleado");
+        jPanel2.add(jLabel12);
+
+        jLabel15.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel15.setText("Salario neto:");
+
+        lblSalarioNetoEmpleado.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        lblSalarioNetoEmpleado.setText(".");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEstadoEmpleado)
+                    .addComponent(lblNombreEmpleado)
+                    .addComponent(lblRfcEmpleado)
+                    .addComponent(lblApellidoMaternoEmpleado)
+                    .addComponent(lblApellidoPaternoEmpleado)
+                    .addComponent(lblPuestoEmpleado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel15))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblIsrEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSalarioBrutoEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSalarioNetoEmpleado))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblBono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblHorasExtraEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblHorasTrabajadasEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(225, 225, 225))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombreEmpleado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblApellidoPaternoEmpleado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblApellidoMaternoEmpleado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblRfcEmpleado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblPuestoEmpleado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblEstadoEmpleado)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(lblHorasTrabajadasEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblHorasExtraEmpleado)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(lblBono))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblSalarioBrutoEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIsrEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblSalarioNetoEmpleado)))
+                        .addGap(6, 6, 6)))
+                .addContainerGap(184, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel1);
+
+        bonoSelector.setModel(new javax.swing.DefaultComboBoxModel<>());
+        bonoSelector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                bonoSelectorItemStateChanged(evt);
+            }
+        });
+        bonoSelector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bonoSelectorActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Agregar bono:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(392, 392, 392)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel15)
-                        .addGap(397, 397, 397))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel12))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 75, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(385, 385, 385))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGap(407, 407, 407)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(508, 508, 508)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
+                .addComponent(bonoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGenerar});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addGap(28, 28, 28)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel21)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jLabel15)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38))))
+                    .addComponent(bonoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGenerar});
 
         btnGenerar.setBorderPainted(false);
         btnGenerar.setContentAreaFilled(false);
@@ -372,6 +424,10 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
+        Bonos[] bonos = Bonos.values();
+        for (Bonos bono : bonos) {
+            bonoSelector.addItem(bono.toString());
+        }
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -389,15 +445,22 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        // TODO add your handling code here:
+        GenerarNomina gn = new GenerarNomina();
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void bonoSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bonoSelectorItemStateChanged
+
+    }//GEN-LAST:event_bonoSelectorItemStateChanged
+
+    private void bonoSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bonoSelectorActionPerformed
+        actualizarBono();
+    }//GEN-LAST:event_bonoSelectorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> bonoSelector;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerar;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -405,7 +468,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -413,19 +475,21 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblApellidoMaternoEmpleado;
     private javax.swing.JLabel lblApellidoPaternoEmpleado;
+    private javax.swing.JLabel lblBono;
     private javax.swing.JLabel lblEstadoEmpleado;
     private javax.swing.JLabel lblHorasExtraEmpleado;
     private javax.swing.JLabel lblHorasTrabajadasEmpleado;
     private javax.swing.JLabel lblIsrEmpleado;
     private javax.swing.JLabel lblNombreEmpleado;
-    private javax.swing.JLabel lblNumeroEmpleado;
     private javax.swing.JLabel lblPuestoEmpleado;
     private javax.swing.JLabel lblRfcEmpleado;
     private javax.swing.JLabel lblSalarioBrutoEmpleado;
     private javax.swing.JLabel lblSalarioNetoEmpleado;
-    private java.awt.Panel panel2;
     // End of variables declaration//GEN-END:variables
 
     public JButton getBtnCancelar() {
@@ -444,20 +508,12 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         this.btnGenerar = btnGenerar;
     }
 
-    public JComboBox<String> getjComboBox1() {
-        return jComboBox1;
+    public JComboBox<String> getBonoSelector() {
+        return bonoSelector;
     }
 
-    public void setjComboBox1(JComboBox<String> jComboBox1) {
-        this.jComboBox1 = jComboBox1;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
+    public void setBonoSelector(JComboBox<String> bonoSelector) {
+        this.bonoSelector = bonoSelector;
     }
 
     public JLabel getjLabel10() {
@@ -500,28 +556,12 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         this.jLabel14 = jLabel14;
     }
 
-    public JLabel getjLabel15() {
-        return jLabel15;
-    }
-
-    public void setjLabel15(JLabel jLabel15) {
-        this.jLabel15 = jLabel15;
-    }
-
     public JLabel getjLabel2() {
         return jLabel2;
     }
 
     public void setjLabel2(JLabel jLabel2) {
         this.jLabel2 = jLabel2;
-    }
-
-    public JLabel getjLabel21() {
-        return jLabel21;
-    }
-
-    public void setjLabel21(JLabel jLabel21) {
-        this.jLabel21 = jLabel21;
     }
 
     public JLabel getjLabel3() {
@@ -636,14 +676,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         this.lblNombreEmpleado = lblNombreEmpleado;
     }
 
-    public JLabel getLblNumeroEmpleado() {
-        return lblNumeroEmpleado;
-    }
-
-    public void setLblNumeroEmpleado(JLabel lblNumeroEmpleado) {
-        this.lblNumeroEmpleado = lblNumeroEmpleado;
-    }
-
     public JLabel getLblPuestoEmpleado() {
         return lblPuestoEmpleado;
     }
@@ -668,6 +700,46 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         this.lblSalarioBrutoEmpleado = lblSalarioBrutoEmpleado;
     }
 
+    public JLabel getjLabel15() {
+        return jLabel15;
+    }
+
+    public void setjLabel15(JLabel jLabel15) {
+        this.jLabel15 = jLabel15;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
+    }
+
+    public JLabel getLblBono() {
+        return lblBono;
+    }
+
+    public void setLblBono(JLabel lblBono) {
+        this.lblBono = lblBono;
+    }
+
     public JLabel getLblSalarioNetoEmpleado() {
         return lblSalarioNetoEmpleado;
     }
@@ -676,13 +748,21 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;
     }
 
-    public Panel getPanel2() {
-        return panel2;
+    private void actualizarBono() {
+        String item = (String) bonoSelector.getSelectedItem();
+        
+        if (item.equals("NINGUNO") && ControlNomina.getEmpleadoDTO() == null) {
+            return;
+        }
+        double bono = Bonos.valueOf(item).getCantidad();
+        lblBono.setText(String.valueOf(bono));
+        
+        double salarioBruto = ControlNomina.getEmpleadoDTO().getSalarioBase() + bono;
+        lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
+        
+        double isr = ControlNomina.getNominaDTO().getIsr();
+        double salarioNeto = salarioBruto - isr;
+        lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
     }
 
-    public void setPanel2(Panel panel2) {
-        this.panel2 = panel2;
-    }
-    
-    
 }

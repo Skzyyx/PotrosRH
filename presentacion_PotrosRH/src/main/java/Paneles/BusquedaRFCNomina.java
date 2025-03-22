@@ -62,6 +62,11 @@ public class BusquedaRFCNomina extends javax.swing.JPanel {
         setBackground(new java.awt.Color(17, 119, 202));
 
         txtRfc.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtRfc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRfcActionPerformed(evt);
+            }
+        });
 
         btnGenerar.setBackground(new java.awt.Color(44, 44, 44));
         btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -195,6 +200,10 @@ public class BusquedaRFCNomina extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ControlFlujo.mostrarMenuPrincipal();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRfcActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

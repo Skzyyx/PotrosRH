@@ -10,8 +10,8 @@ public class NominaDTO {
     
     private EmpleadoDTO empleado;
     private double bono;
-    private double isr;
     private double salarioBruto;
+    private double isr;
     private double salarioNeto;
     private LocalDate fechaCorte;
     private double horasTrabajadas;
@@ -20,11 +20,11 @@ public class NominaDTO {
     public NominaDTO() {
     }
 
-    public NominaDTO(EmpleadoDTO empleado, double bono, double isr, double salarioBruto, double salarioNeto, LocalDate fechaCorte, double horasTrabajadas, double horaExtra) {
+    public NominaDTO(EmpleadoDTO empleado, double bono, double salarioBruto, double isr, double salarioNeto, LocalDate fechaCorte, double horasTrabajadas, double horaExtra) {
         this.empleado = empleado;
         this.bono = bono;
-        this.isr = isr;
         this.salarioBruto = salarioBruto;
+        this.isr = isr;
         this.salarioNeto = salarioNeto;
         this.fechaCorte = fechaCorte;
         this.horasTrabajadas = horasTrabajadas;

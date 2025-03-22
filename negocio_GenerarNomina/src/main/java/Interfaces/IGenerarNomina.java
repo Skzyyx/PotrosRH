@@ -13,5 +13,7 @@ import dto.NominaDTO;
  */
 public interface IGenerarNomina {
     
-    public NominaDTO generarNomina(EmpleadoDTO empleado, double bono);
+    public NominaDTO generarNomina(EmpleadoDTO empleado);
+    
+    public boolean guardarNomina(NominaDTO nomina);
 }

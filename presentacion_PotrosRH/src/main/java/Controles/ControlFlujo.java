@@ -52,7 +52,6 @@ public class ControlFlujo {
         // Buscar y Obtener el empleado.
         String rfc = BusquedaRFCNomina.getInstance().getTxtRfc().getText();
         EmpleadoDTO empleado = ControlNomina.obtenerEmpleado(rfc);
-        ControlNomina.setEmpleadoDTO(empleado);
         
         // Se setean los valores del panel PrevisualizarEmpleado.
         PrevisualizarEmpleado pe = PrevisualizarEmpleado.getInstance();
@@ -78,6 +77,7 @@ public class ControlFlujo {
         NominaDTO nomina = ControlNomina.getNominaDTO();
         EmpleadoDTO empleado = nomina.getEmpleado();
         
+        System.out.println(nomina);
         // Se setean los valores del panel PrevisualizarNomina.
         PrevisualizarNomina pn = PrevisualizarNomina.getInstance();
         pn.getLblNombreEmpleado().setText(empleado.getNombre());
@@ -89,8 +89,8 @@ public class ControlFlujo {
         pn.getLblHorasTrabajadasEmpleado().setText(String.valueOf(nomina.getHorasTrabajadas()));
         pn.getLblHorasExtraEmpleado().setText(String.valueOf(nomina.getHoraExtra()));
         pn.getLblSalarioBrutoEmpleado().setText(String.valueOf(nomina.getSalarioBruto()));
-        pn.getLblIsrEmpleado().setText(String.valueOf(nomina.getIsr()));
-        pn.getLblSalarioNetoEmpleado().setText(String.valueOf(nomina.getSalarioNeto()));
+        pn.getLblIsrEmpleado().setText(String.format("%.1f", nomina.getIsr()));
+        pn.getLblSalarioNetoEmpleado().setText(String.format("%.1f", nomina.getSalarioNeto()));
         
         // Cambiar de panel
         if (panelActual != null) {

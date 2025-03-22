@@ -20,11 +20,6 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.swinglabs/swingx -->
         <dependency>
-            <groupId>org.swinglabs</groupId>
-            <artifactId>swingx</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>dto_negocios</artifactId>
             <version>${project.version}</version>
@@ -32,6 +27,11 @@
         <dependency>
             <groupId>com.mycompany.com</groupId>
             <artifactId>negocio_ObtenerEmpleado</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany.com</groupId>
+            <artifactId>negocio_GenerarNomina</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

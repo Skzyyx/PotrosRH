@@ -6,6 +6,8 @@ package Controles;
 
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
+import GenerarNomina.GenerarNomina;
+import Interfaces.IGenerarNomina;
 import Interfaces.IObtenerEmpleado;
 import ObtenerEmpleado.ObtenerEmpleado;
 import dto.EmpleadoDTO;
@@ -32,6 +34,7 @@ public class ControlNomina {
         IObtenerEmpleado obtenerEmpleado = new ObtenerEmpleado();
         try {
             empleado = obtenerEmpleado.obtenerEmpleado(rfc);
+            empleadoDTO = empleado;
         } catch (ObtenerEmpleadoException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Error: " + ex.getMessage());
@@ -40,7 +43,8 @@ public class ControlNomina {
     }
 
     public static NominaDTO generarNomina() {
-        nominaDTO = new NominaDTO(empleadoDTO, 0, 1500, 8000, 6500, LocalDate.now(), 40, 5);
+        IGenerarNomina gn = new GenerarNomina();
+        nominaDTO = gn.generarNomina(empleadoDTO);
         return nominaDTO;
     }
 
