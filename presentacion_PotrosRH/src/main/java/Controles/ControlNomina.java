@@ -63,8 +63,9 @@ public class ControlNomina {
         return new NominaDTO();
     }
 
-    public static boolean validarRFC(String rfc) {
-        return true;
+    public static boolean validarRFC(String rfc) throws PresentacionException {
+        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
+        return rfc != null && rfc.matches(regexRFC) && rfc.length() <= 12;
     }
 
     public static EmpleadoDTO getEmpleadoDTO() {
