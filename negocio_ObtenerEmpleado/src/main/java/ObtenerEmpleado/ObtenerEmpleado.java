@@ -5,9 +5,13 @@
 package ObtenerEmpleado;
 
 import Excepciones.ObtenerEmpleadoException;
+import Exceptions.ObjetosNegocioException;
 import Interfaces.IObtenerEmpleado;
+import bo.EmpleadoBO;
 import dto.EmpleadoDTO;
 import enums.EstadoEmpleado;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +19,8 @@ import enums.EstadoEmpleado;
  */
 public class ObtenerEmpleado implements IObtenerEmpleado {
 
+    private EmpleadoBO empleadoBO = new EmpleadoBO();
+    
     @Override
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
         if (rfc.trim().isEmpty()) {
@@ -24,7 +30,15 @@ public class ObtenerEmpleado implements IObtenerEmpleado {
             throw new ObtenerEmpleadoException("El rfc debe tener 13 caracteres.");
         }
         
-        return new EmpleadoDTO("Benjamin", "Soto", "Coronado", "jose.islas252574@potros.itson.edu.mx", rfc, "Cactus", "Casa Blanca", "123", "1231231231", "Seguridad", "Empleado", 8000, EstadoEmpleado.ACTIVO);
+        EmpleadoDTO empleado = new EmpleadoDTO();
+        
+        try {
+            empleado = empleadoBO.obtenerEmpleado(rfc);
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return empleado;
     }
     
 }

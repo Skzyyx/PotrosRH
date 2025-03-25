@@ -14,7 +14,7 @@ import dto.NominaDTO;
  */
 public interface IGenerarNomina {
     
-    public NominaDTO generarNomina(EmpleadoDTO empleado);
+    public NominaDTO generarNomina(EmpleadoDTO empleado, double bono) throws GenerarNominaException;
     
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException;
 }
