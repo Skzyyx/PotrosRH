@@ -28,13 +28,13 @@ public class GenerarNomina implements IGenerarNomina {
     private NominaBO nominaBO = new NominaBO();
 
     @Override
-    public NominaDTO generarNomina(EmpleadoDTO empleado, double bono) throws GenerarNominaException {
+    public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
         if (empleado == null) {
             throw new GenerarNominaException("El empleado no puede ser nulo.");
         }
         
         try {
-            return nominaBO.generarNomina(empleado, 0);
+            return nominaBO.generarNomina(empleado);
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Error al generar la nómina: " + ex.getMessage());

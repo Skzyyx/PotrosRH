@@ -29,7 +29,7 @@ public class PruebasGenerarNomina {
             NominaBO nominaBO = new NominaBO();
             EmpleadoDTO empleado = new EmpleadoDTO("Benjamin", "Soto", "Coronado", "benjamin.sc@gmail.com", "1231231231231", "Cactus", "Casa Blanca", "123", "1231231231", "Seguridad", "Empleado", 8000, EstadoEmpleado.ACTIVO);
             GenerarNomina gn = new GenerarNomina();
-            NominaDTO nomina = nominaBO.generarNomina(empleado, 400);
+            NominaDTO nomina = nominaBO.generarNomina(empleado);
             System.out.println(nomina.getIsr());
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(PruebasGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);

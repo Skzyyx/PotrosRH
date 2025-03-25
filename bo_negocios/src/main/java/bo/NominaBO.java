@@ -35,12 +35,9 @@ public class NominaBO {
 
     }
 
-    public NominaDTO generarNomina(EmpleadoDTO empleado, double bono) throws ObjetosNegocioException {
+    public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
         if (empleado == null) {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
-        }
-        if (bono < 0) {
-            throw new ObjetosNegocioException("El bono no puede ser negativo");
         }
         NominaDTO nomina = new NominaDTO(empleado, 0, calcularISR(8000, 14), empleado.getSalarioBase(), 0, LocalDate.now(), 40, 5);
         nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());

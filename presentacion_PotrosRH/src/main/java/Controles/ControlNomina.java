@@ -25,6 +25,8 @@ public class ControlNomina {
 
     private static EmpleadoDTO empleadoDTO;
     private static NominaDTO nominaDTO;
+    
+    private static IGenerarNomina gn = new GenerarNomina();
 
     public static boolean validarEmpleado(String rfc) {
         return true;
@@ -43,9 +45,14 @@ public class ControlNomina {
         return empleado;
     }
 
-    public static NominaDTO generarNomina() {
-        IGenerarNomina gn = new GenerarNomina();
-        nominaDTO = gn.generarNomina(empleadoDTO);
+    public static NominaDTO generarNomina() throws PresentacionException {
+        
+        try {
+            nominaDTO = gn.generarNomina(empleadoDTO);
+        } catch (GenerarNominaException ex) {
+            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException("Error al generar la nómina: " + ex.getMessage());
+        }
         return nominaDTO;
     }
     

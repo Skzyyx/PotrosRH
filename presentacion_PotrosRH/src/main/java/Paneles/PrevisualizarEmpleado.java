@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -307,7 +309,12 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
         int resultado = JOptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
-            ControlNomina.generarNomina();
+            try {
+                ControlNomina.generarNomina();
+            } catch (PresentacionException ex) {
+                Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.OK_OPTION);
+            }
             ControlFlujo.mostrarPrevisualizarNomina();
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
