@@ -11,6 +11,7 @@ import dto.NominaDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Interface.ICorreo;
+import enums.EstadoEmpleado;
 
 /**
  *
@@ -28,6 +29,9 @@ public class GenerarNomina implements IGenerarNomina {
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
         if (empleado == null) 
             throw new GenerarNominaException("El empleado no puede ser nulo.");
+        
+        if(empleado.getEstado() == EstadoEmpleado.INACTIVO)
+            throw new GenerarNominaException("El empleado debe de estar activo.");
         
         try {
             return nominaBO.generarNomina(empleado);
