@@ -14,7 +14,21 @@ import dto.NominaDTO;
  */
 public interface IGenerarNomina {
     
+    /**
+     * Genera la nómina de un empleado activo.
+     * 
+     * @param empleado El objeto {@link EmpleadoDTO} que contiene los datos del empleado.
+     * @return Un objeto {@link NominaDTO} con la nómina generada.
+     * @throws GenerarNominaException Si el empleado es nulo o no está activo.
+     */
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException;
     
+    /**
+     * Guarda la nómina generada en la base de datos y envía un correo al empleado.
+     * 
+     * @param nomina El objeto {@link NominaDTO} que contiene la información de la nómina.
+     * @return `true` si la nómina fue guardada y el correo enviado correctamente, `false` en caso contrario.
+     * @throws GenerarNominaException Si la nómina es nula o si ocurre un error al guardar la nómina o enviar el correo.
+     */
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException;
 }

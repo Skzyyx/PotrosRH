@@ -33,6 +33,13 @@ public class NominaBO {
 
     public NominaBO() {}
 
+    /**
+     * Genera una nómina para un empleado dado.
+     * 
+     * @param empleado Objeto EmpleadoDTO con los datos del empleado.
+     * @return NominaDTO con los datos de la nómina generada.
+     * @throws ObjetosNegocioException si el empleado es nulo.
+     */
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
         if (empleado == null) {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
@@ -42,10 +49,23 @@ public class NominaBO {
         return nomina;
     } 
     
+    /**
+     * Simula el guardado de una nómina en la base de datos.
+     * 
+     * @param nomina Objeto NominaDTO que se desea guardar.
+     * @return true si la nómina se guardó correctamente, false en caso contrario.
+     */
     public boolean guardarNomina(NominaDTO nomina) {
         return new Random().nextBoolean();
     }
     
+    /**
+     * Calcula el ISR aplicando la tabla de tasas del SAT en base al ingreso mensual del empleado.
+     * 
+     * @param ingresoTotal Monto total del salario a considerar.
+     * @param diasPagados Número de días trabajados en el período de pago.
+     * @return Monto del ISR calculado en base al salario y los días trabajados.
+     */
     private double calcularISR(double ingresoTotal, int diasPagados) {
         double ingresoDiario = ingresoTotal / diasPagados;
         double ingresoMensual = ingresoDiario * 30.4;

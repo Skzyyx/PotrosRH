@@ -12,5 +12,11 @@ import dto.NominaDTO;
  * @author Benjamin Soto Coronado (253183)
  */
 public interface ICorreo {
+     /**
+     * Envía un correo electrónico con la información de una nómina.
+     * 
+     * @param nomina Objeto {@code NominaDTO} que contiene los datos de la nómina a enviar.
+     * @throws CorreoException Si ocurre un error durante el envío del correo.
+     */
     public void enviarCorreo(NominaDTO nomina) throws CorreoException;
 }

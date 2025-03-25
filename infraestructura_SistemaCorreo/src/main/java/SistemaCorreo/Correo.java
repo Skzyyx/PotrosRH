@@ -19,6 +19,12 @@ import Interface.ICorreo;
  */
 public class Correo implements ICorreo {
 
+    /**
+     * Envía un correo electrónico con los detalles del recibo de nómina de un empleado.
+     * 
+     * @param nomina Objeto {@code NominaDTO} que contiene los detalles de la nómina a enviar.
+     * @throws CorreoException Si ocurre un error al enviar el correo.
+     */
     @Override
     public void enviarCorreo(NominaDTO nomina) throws CorreoException {
         

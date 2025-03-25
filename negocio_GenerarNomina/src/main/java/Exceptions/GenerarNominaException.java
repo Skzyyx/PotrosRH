@@ -10,7 +10,18 @@ package Exceptions;
  */
 public class GenerarNominaException extends Exception{
 
+    /**
+     * Constructor que recibe un mensaje de error.
+     * 
+     * @param message Mensaje descriptivo del error ocurrido.
+     */
     public GenerarNominaException(String message) {super(message);}
 
+    /**
+     * Constructor que recibe un mensaje de error y la causa del mismo.
+     * 
+     * @param message Mensaje descriptivo del error ocurrido.
+     * @param cause Excepción que causó el error.
+     */
     public GenerarNominaException(String message, Throwable cause) {super(message, cause);}
 }

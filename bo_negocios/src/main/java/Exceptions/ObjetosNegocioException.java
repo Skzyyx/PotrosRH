@@ -10,7 +10,18 @@ package Exceptions;
  */
 public class ObjetosNegocioException extends Exception {
 
+    /**
+     * Crea una nueva instancia de {@code ObjetosNegocioException} con un mensaje específico.
+     * 
+     * @param message El mensaje descriptivo del error.
+     */
     public ObjetosNegocioException(String message) {super(message);}
 
+    /**
+     * Crea una nueva instancia de {@code ObjetosNegocioException} con un mensaje específico y una causa.
+     * 
+     * @param message El mensaje descriptivo del error.
+     * @param cause La causa original de la excepción (puede ser {@code null}).
+     */
     public ObjetosNegocioException(String message, Throwable cause) {super(message, cause);}
 }

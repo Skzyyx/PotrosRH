@@ -25,6 +25,13 @@ public class GenerarNomina implements IGenerarNomina {
     
     private final NominaBO nominaBO = new NominaBO();
 
+    /**
+     * Genera la nómina de un empleado activo.
+     *
+     * @param empleado Objeto EmpleadoDTO con la información del empleado.
+     * @return Objeto NominaDTO con los detalles de la nómina generada.
+     * @throws GenerarNominaException Si el empleado es nulo o está inactivo.
+     */
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
         if (empleado == null) 
@@ -41,6 +48,13 @@ public class GenerarNomina implements IGenerarNomina {
         }
     }
 
+    /**
+     * Guarda la nómina en la base de datos y envía un correo al empleado.
+     *
+     * @param nomina Objeto NominaDTO con la información de la nómina.
+     * @return `true` si el proceso fue exitoso, `false` en caso contrario.
+     * @throws GenerarNominaException Si la nómina es nula o si ocurre un error.
+     */
     @Override
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
         if(nomina == null)
