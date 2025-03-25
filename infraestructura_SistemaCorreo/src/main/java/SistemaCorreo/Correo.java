@@ -77,7 +77,14 @@ public class Correo implements ICorreo {
                 </div>
             </body>
             </html>
-            """, nombre, nomina.getFechaCorte(), empleado.getSalarioBase(), nomina.getBono(), nomina.getSalarioBruto(), nomina.getIsr(), nomina.getSalarioNeto());
+            """, 
+                nombre, 
+                nomina.getFechaCorte(), 
+                empleado.getSalarioBase(), 
+                nomina.getBono(), 
+                nomina.getSalarioBruto(), 
+                nomina.getIsr(), 
+                nomina.getSalarioNeto());
 
         CreateEmailOptions params = CreateEmailOptions.builder()
                 .from("PotrosRH <potros_rh@resend.dev>")
@@ -90,7 +97,6 @@ public class Correo implements ICorreo {
             CreateEmailResponse data = resend.emails().send(params);
             System.out.println(data.getId());
         } catch (ResendException e) {
-            e.printStackTrace();
             throw new CorreoException("Ocurrió un error al enviar el correo.");
         }
     }
