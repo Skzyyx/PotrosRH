@@ -43,6 +43,9 @@ public class GenerarNomina implements IGenerarNomina {
 
     @Override
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
+        if(nomina == null)
+            throw new GenerarNominaException("La nomina no puede ser nula.");
+        
         ICorreo sistemaCorreo = new Correo();
         try {
             nominaBO.guardarNomina(nomina);

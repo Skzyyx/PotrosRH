@@ -30,12 +30,10 @@ public class EmpleadoBO {
     }
 
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObjetosNegocioException {
-        if (rfc == null) 
-            throw new ObjetosNegocioException("El rfc no puede ser nulo");
+        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
         
-        if (rfc.trim().isEmpty()) 
-            throw new ObjetosNegocioException("El rfc no puede estar vacio");
-        
+        if(!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
+            throw new ObjetosNegocioException("RFC no válido");
         
         return new EmpleadoDTO(
                 "Benjamin", "Soto", "Coronado", 
