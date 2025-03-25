@@ -34,13 +34,13 @@ public class EmpleadoBO {
 
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObjetosNegocioException {
         String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
-        
-        if(!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
+
+        if (!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
-        
-    List<EmpleadoDTO> Empleados = new ArrayList<>();
-    
-    Empleados.add(new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
+
+        List<EmpleadoDTO> empleados = new ArrayList<>();
+
+        empleados.add(new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
                 "freddy.guzman@empresa.com", 
                 "GUMF900101ABC", 
                 "Peppa", "Power Rangers", "123", 
@@ -49,8 +49,8 @@ public class EmpleadoBO {
                 "Empleado", 
                 4000, 
                 EstadoEmpleado.ACTIVO));
-    
-    Empleados.add(new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
+
+        empleados.add(new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
                 "jesus.lopez@empresa.com", 
                 "LOIJ920315XYZ", 
                 "Furbo", "Real Madrid", "123", 
@@ -59,8 +59,8 @@ public class EmpleadoBO {
                 "Empleado", 
                 8000, 
                 EstadoEmpleado.ACTIVO));
-    
-    Empleados.add(new EmpleadoDTO("José Luis", "Islas", "Molina", 
+
+        empleados.add(new EmpleadoDTO("José Luis", "Islas", "Molina", 
                 "jose.islas@empresa.com", 
                 "ISLM850525DEF", 
                 "Avenida Siempre Viva", "Centro", "456", 
@@ -70,14 +70,14 @@ public class EmpleadoBO {
                 12000, 
                 EstadoEmpleado.ACTIVO));
 
-    if (Empleados.isEmpty()) {
-        throw new ObjetosNegocioException("No hay empleados disponibles");
-    }
+        // Buscar al empleado por RFC
+        for (EmpleadoDTO empleado : empleados) {
+            if (empleado.getRfc().equalsIgnoreCase(rfc)) {
+                return empleado;
+            }
+        }
 
-        // Elegir un empleado al azar
-        Random random = new Random();
-        int indiceAleatorio = random.nextInt(Empleados.size());
-
-        return Empleados.get(indiceAleatorio); // Retorna un empleado al azar
+        // Si no se encuentra el empleado, lanza una excepción
+        throw new ObjetosNegocioException("No se encontró un empleado con el RFC proporcionado");
     }
 }
