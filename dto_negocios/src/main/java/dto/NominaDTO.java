@@ -4,7 +4,11 @@ import java.time.LocalDate;
 
 /**
  *
- * @author ErnestoLpz_252663
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class NominaDTO {
     
@@ -17,10 +21,19 @@ public class NominaDTO {
     private double horasTrabajadas;
     private double horaExtra;
 
-    public NominaDTO() {
-    }
+    public NominaDTO() {}
 
-    public NominaDTO(EmpleadoDTO empleado, double bono, double salarioBruto, double isr, double salarioNeto, LocalDate fechaCorte, double horasTrabajadas, double horaExtra) {
+    public NominaDTO(
+            EmpleadoDTO empleado, 
+            double bono, 
+            double salarioBruto, 
+            double isr, 
+            double salarioNeto, 
+            LocalDate fechaCorte, 
+            double horasTrabajadas, 
+            double horaExtra
+    ) 
+    {
         this.empleado = empleado;
         this.bono = bono;
         this.salarioBruto = salarioBruto;
@@ -31,69 +44,37 @@ public class NominaDTO {
         this.horaExtra = horaExtra;
     }
     
-    public EmpleadoDTO getEmpleado() {
-        return empleado;
-    }
+    public EmpleadoDTO getEmpleado() {return empleado;}
 
-    public void setEmpleado(EmpleadoDTO empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(EmpleadoDTO empleado) {this.empleado = empleado;}
 
-    public double getBono() {
-        return bono;
-    }
+    public double getBono() {return bono;}
 
-    public void setBono(double bono) {
-        this.bono = bono;
-    }
+    public void setBono(double bono) {this.bono = bono;}
 
-    public double getIsr() {
-        return isr;
-    }
+    public double getIsr() {return isr;}
 
-    public void setIsr(double isr) {
-        this.isr = isr;
-    }
+    public void setIsr(double isr) {this.isr = isr;}
 
-    public double getSalarioBruto() {
-        return salarioBruto;
-    }
+    public double getSalarioBruto() {return salarioBruto;}
 
-    public void setSalarioBruto(double salarioBruto) {
-        this.salarioBruto = salarioBruto;
-    }
+    public void setSalarioBruto(double salarioBruto) {this.salarioBruto = salarioBruto;}
 
-    public double getSalarioNeto() {
-        return salarioNeto;
-    }
+    public double getSalarioNeto() {return salarioNeto;}
 
-    public void setSalarioNeto(double salarioNeto) {
-        this.salarioNeto = salarioNeto;
-    }
+    public void setSalarioNeto(double salarioNeto) {this.salarioNeto = salarioNeto;}
 
-    public LocalDate getFechaCorte() {
-        return fechaCorte;
-    }
+    public LocalDate getFechaCorte() {return fechaCorte;}
 
-    public void setFechaCorte(LocalDate fechaCorte) {
-        this.fechaCorte = fechaCorte;
-    }
+    public void setFechaCorte(LocalDate fechaCorte) {this.fechaCorte = fechaCorte;}
 
-    public double getHorasTrabajadas() {
-        return horasTrabajadas;
-    }
+    public double getHorasTrabajadas() {return horasTrabajadas;}
 
-    public void setHorasTrabajadas(double horasTrabajadas) {
-        this.horasTrabajadas = horasTrabajadas;
-    }
+    public void setHorasTrabajadas(double horasTrabajadas) {this.horasTrabajadas = horasTrabajadas;}
 
-    public double getHoraExtra() {
-        return horaExtra;
-    }
+    public double getHoraExtra() {return horaExtra;}
 
-    public void setHoraExtra(double horaExtra) {
-        this.horaExtra = horaExtra;
-    }
+    public void setHoraExtra(double horaExtra) {this.horaExtra = horaExtra;}
 
     @Override
     public String toString() {

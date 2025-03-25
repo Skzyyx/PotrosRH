@@ -1,27 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package SistemaCorreo;
 
-import Excepciones.SistemaCorreoException;
-import Interface.ISistemaCorreo;
+import Excepciones.CorreoException;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
 import com.resend.services.emails.model.CreateEmailResponse;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
-import java.io.File;
+import Interface.ICorreo;
 
 /**
  *
- * @author skyro
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
-public class SistemaCorreo implements ISistemaCorreo {
+public class Correo implements ICorreo {
 
     @Override
-    public void enviarCorreo(NominaDTO nomina) throws SistemaCorreoException {
+    public void enviarCorreo(NominaDTO nomina) throws CorreoException {
         
         EmpleadoDTO empleado = nomina.getEmpleado();
         String nombre = empleado.getNombre() + " " + empleado.getApellidoMaterno() + " " + empleado.getApellidoPaterno();
@@ -92,8 +91,7 @@ public class SistemaCorreo implements ISistemaCorreo {
             System.out.println(data.getId());
         } catch (ResendException e) {
             e.printStackTrace();
-            throw new SistemaCorreoException("Ocurrió un error al enviar el correo.");
+            throw new CorreoException("Ocurrió un error al enviar el correo.");
         }
     }
-
 }

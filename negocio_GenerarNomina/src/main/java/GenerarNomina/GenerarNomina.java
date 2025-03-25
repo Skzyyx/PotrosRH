@@ -1,37 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GenerarNomina;
 
-import Excepciones.SistemaCorreoException;
+import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
 import Exceptions.ObjetosNegocioException;
-import Interface.ISistemaCorreo;
 import Interfaces.IGenerarNomina;
-import SistemaCorreo.SistemaCorreo;
+import SistemaCorreo.Correo;
 import bo.NominaBO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
-import java.io.File;
-import java.net.URI;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Interface.ICorreo;
 
 /**
  *
- * @author skyro
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class GenerarNomina implements IGenerarNomina {
     
-    private NominaBO nominaBO = new NominaBO();
+    private final NominaBO nominaBO = new NominaBO();
 
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
-        if (empleado == null) {
+        if (empleado == null) 
             throw new GenerarNominaException("El empleado no puede ser nulo.");
-        }
         
         try {
             return nominaBO.generarNomina(empleado);
@@ -43,13 +39,12 @@ public class GenerarNomina implements IGenerarNomina {
 
     @Override
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
-        ISistemaCorreo sistemaCorreo = new SistemaCorreo();
-        
+        ICorreo sistemaCorreo = new Correo();
         try {
             nominaBO.guardarNomina(nomina);
             sistemaCorreo.enviarCorreo(nomina);
             return true;
-        } catch (SistemaCorreoException ex) {
+        } catch (CorreoException ex) {
             Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
         }

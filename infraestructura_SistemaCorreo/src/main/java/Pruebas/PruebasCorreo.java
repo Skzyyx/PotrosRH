@@ -8,7 +8,7 @@ package Pruebas;
  *
  * @author skyro
  */
-public class PruebasSistemaCorreo {
+public class PruebasCorreo {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");

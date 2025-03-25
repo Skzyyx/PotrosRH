@@ -1,25 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Frame;
 
-import Paneles.BusquedaRFCNomina;
+import Paneles.BusquedaEmpleado;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
 
 /**
  *
- * @author INSPIRON
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class CarcasaPaneles extends javax.swing.JFrame {
-
     
     private static CarcasaPaneles instance;
-    
     private MenuPrincipal menuPrincipal;
-    private BusquedaRFCNomina busquedaRFCNomina;
+    private BusquedaEmpleado busquedaRFCNomina;
     private PrevisualizarEmpleado previsualisarEmpleado;
     private PrevisualizarNomina previsualizarNomina;
     
@@ -35,7 +33,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     
     private void cargarPaneles() {
         menuPrincipal = MenuPrincipal.getInstance();
-        busquedaRFCNomina = BusquedaRFCNomina.getInstance();
+        busquedaRFCNomina = BusquedaEmpleado.getInstance();
         previsualisarEmpleado = PrevisualizarEmpleado.getInstance();
         previsualizarNomina = PrevisualizarNomina.getInstance();
         contenedor.add(menuPrincipal, "menuPrincipal");

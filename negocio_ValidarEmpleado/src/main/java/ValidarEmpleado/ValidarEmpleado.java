@@ -1,40 +1,24 @@
 package ValidarEmpleado;
 
 import Excepciones.ValidarEmpleadoException;
-import dto.EmpleadoDTO;
 
 /**
  *
- * @author ErnestoLpz_252663
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class ValidarEmpleado {
     
-    public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
+    public boolean validarEmpleado(String rfc) throws ValidarEmpleadoException {
         
-        if (empleado.getNombre() == null || empleado.getNombre().trim().isEmpty()) {
-            throw new ValidarEmpleadoException("El nombre no puede estar vacío.");
-        }
-        if (empleado.getApellidoPaterno() == null || empleado.getApellidoPaterno().trim().isEmpty()) {
-            throw new ValidarEmpleadoException("El apellido paterno no puede estar vacío.");
-        }
-        if (empleado.getEmail() == null || !empleado.getEmail().contains("@") || !empleado.getEmail().contains(".")) {
-            throw new ValidarEmpleadoException("El email no tiene un formato válido.");
-        }
-        if (empleado.getRfc() == null || empleado.getRfc().length() < 12 || empleado.getRfc().length() > 13) {
-            throw new ValidarEmpleadoException("El RFC debe tener entre 12 y 13 caracteres.");
-        }
-        if (empleado.getTelefono() == null || empleado.getTelefono().length() != 10 || !empleado.getTelefono().matches("\\d+")) {
-            throw new ValidarEmpleadoException("El teléfono debe contener exactamente 10 dígitos.");
-        }
-        if (empleado.getSalarioBase() <= 0) {
-            throw new ValidarEmpleadoException("El salario base debe ser un número positivo.");
-        }
-        if (empleado.getDepartamento() == null || empleado.getDepartamento().trim().isEmpty()) {
-            throw new ValidarEmpleadoException("El departamento no puede estar vacío.");
-        }
-        if (empleado.getPuesto() == null || empleado.getPuesto().trim().isEmpty()) {
-            throw new ValidarEmpleadoException("El puesto no puede estar vacío.");
-        }
+        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
+        
+        if(!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
+            throw new ValidarEmpleadoException("RFC no válido");
+        
         return true;
     }
     

@@ -8,13 +8,13 @@ package Excepciones;
  *
  * @author skyro
  */
-public class SistemaCorreoException extends Exception {
+public class CorreoException extends Exception {
 
-    public SistemaCorreoException(String message) {
+    public CorreoException(String message) {
         super(message);
     }
 
-    public SistemaCorreoException(String message, Throwable cause) {
+    public CorreoException(String message, Throwable cause) {
         super(message, cause);
     }
 }

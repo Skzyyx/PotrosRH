@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controles;
 
-import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
-import Paneles.BusquedaRFCNomina;
+import Paneles.BusquedaEmpleado;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
@@ -16,7 +11,11 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author skyro
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class ControlFlujo {
     
@@ -33,7 +32,7 @@ public class ControlFlujo {
         panelActual = MenuPrincipal.getInstance();
     }
     
-    public static void mostrarBusquedaRFCNomina() {
+    public static void mostrarBusquedaEmpleado() {
         //Verificaciones
 
         // Cambiar de panel
@@ -41,8 +40,9 @@ public class ControlFlujo {
             panelActual.setVisible(false); // Ocultar el panel actual
         }
         MenuPrincipal.getInstance().setVisible(false);
-        BusquedaRFCNomina.getInstance().setVisible(true);
-        panelActual = BusquedaRFCNomina.getInstance();
+        BusquedaEmpleado.getInstance().getTxtRfc().setText("");
+        BusquedaEmpleado.getInstance().setVisible(true);
+        panelActual = BusquedaEmpleado.getInstance();
     }
     
     public static void mostrarPrevisualizarEmpleado() throws PresentacionException {
@@ -50,7 +50,7 @@ public class ControlFlujo {
         
         /* Operaciones */
         // Buscar y Obtener el empleado.
-        String rfc = BusquedaRFCNomina.getInstance().getTxtRfc().getText();
+        String rfc = BusquedaEmpleado.getInstance().getTxtRfc().getText();
         EmpleadoDTO empleado = ControlNomina.obtenerEmpleado(rfc);
         
         // Se setean los valores del panel PrevisualizarEmpleado.

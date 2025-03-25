@@ -1,7 +1,7 @@
-package Interfaces;
+package Interface;
 
-import Excepciones.ValidarEmpleadoException;
-import dto.EmpleadoDTO;
+import Excepciones.CorreoException;
+import dto.NominaDTO;
 
 /**
  *
@@ -11,7 +11,6 @@ import dto.EmpleadoDTO;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public interface IValidarEmpleado {
-    
-    public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException;
+public interface ICorreo {
+    public void enviarCorreo(NominaDTO nomina) throws CorreoException;
 }

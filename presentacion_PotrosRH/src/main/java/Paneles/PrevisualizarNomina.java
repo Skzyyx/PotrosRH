@@ -1,34 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Paneles;
 
 import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Enums.Bonos;
-import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
-import Exceptions.GenerarNominaException;
-import GenerarNomina.GenerarNomina;
-import static Paneles.PrevisualizarEmpleado.getInstance;
 import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Panel;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author INSPIRON
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
 
@@ -37,9 +30,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     /**
      * Creates new form PrevisualizarNomina
      */
-    public PrevisualizarNomina() {
-        initComponents();
-    }
+    public PrevisualizarNomina() {initComponents();}
 
     public static PrevisualizarNomina getInstance() {
         if (instance == null) {
@@ -433,13 +424,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
-        try {
-            ControlFlujo.mostrarPrevisualizarEmpleado();
-        } catch (PresentacionException ex) {
-            Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
@@ -451,7 +436,9 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             NominaDTO nomina = ControlNomina.getNominaDTO();
             nomina.setBono(Double.parseDouble(lblBono.getText()));
             ControlNomina.setNominaDTO(nomina);
-            ControlNomina.guardarNomina();
+            if(ControlNomina.guardarNomina())
+                JOptionPane.showMessageDialog(this, "Nomina guardada con exito!", "Nomina guardada", JOptionPane.INFORMATION_MESSAGE);
+            ControlFlujo.mostrarBusquedaEmpleado();
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -500,262 +487,54 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel lblSalarioBrutoEmpleado;
     private javax.swing.JLabel lblSalarioNetoEmpleado;
     // End of variables declaration//GEN-END:variables
+    
+    public JLabel getLblApellidoMaternoEmpleado() {return lblApellidoMaternoEmpleado;}
 
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
+    public void setLblApellidoMaternoEmpleado(JLabel lblApellidoMaternoEmpleado) {this.lblApellidoMaternoEmpleado = lblApellidoMaternoEmpleado;}
 
-    public void setBtnCancelar(JButton btnCancelar) {
-        this.btnCancelar = btnCancelar;
-    }
+    public JLabel getLblApellidoPaternoEmpleado() {return lblApellidoPaternoEmpleado;}
 
-    public JButton getBtnGenerar() {
-        return btnGenerar;
-    }
+    public void setLblApellidoPaternoEmpleado(JLabel lblApellidoPaternoEmpleado) {this.lblApellidoPaternoEmpleado = lblApellidoPaternoEmpleado;}
 
-    public void setBtnGenerar(JButton btnGenerar) {
-        this.btnGenerar = btnGenerar;
-    }
+    public JLabel getLblEstadoEmpleado() {return lblEstadoEmpleado;}
 
-    public JComboBox<String> getBonoSelector() {
-        return bonoSelector;
-    }
+    public void setLblEstadoEmpleado(JLabel lblEstadoEmpleado) {this.lblEstadoEmpleado = lblEstadoEmpleado;}
 
-    public void setBonoSelector(JComboBox<String> bonoSelector) {
-        this.bonoSelector = bonoSelector;
-    }
+    public JLabel getLblHorasExtraEmpleado() {return lblHorasExtraEmpleado;}
 
-    public JLabel getjLabel10() {
-        return jLabel10;
-    }
+    public void setLblHorasExtraEmpleado(JLabel lblHorasExtraEmpleado) {this.lblHorasExtraEmpleado = lblHorasExtraEmpleado;}
 
-    public void setjLabel10(JLabel jLabel10) {
-        this.jLabel10 = jLabel10;
-    }
+    public JLabel getLblHorasTrabajadasEmpleado() {return lblHorasTrabajadasEmpleado;}
 
-    public JLabel getjLabel11() {
-        return jLabel11;
-    }
+    public void setLblHorasTrabajadasEmpleado(JLabel lblHorasTrabajadasEmpleado) {this.lblHorasTrabajadasEmpleado = lblHorasTrabajadasEmpleado;}
 
-    public void setjLabel11(JLabel jLabel11) {
-        this.jLabel11 = jLabel11;
-    }
+    public JLabel getLblIsrEmpleado() {return lblIsrEmpleado;}
 
-    public JLabel getjLabel12() {
-        return jLabel12;
-    }
+    public void setLblIsrEmpleado(JLabel lblIsrEmpleado) {this.lblIsrEmpleado = lblIsrEmpleado;}
 
-    public void setjLabel12(JLabel jLabel12) {
-        this.jLabel12 = jLabel12;
-    }
+    public JLabel getLblNombreEmpleado() {return lblNombreEmpleado;}
 
-    public JLabel getjLabel13() {
-        return jLabel13;
-    }
+    public void setLblNombreEmpleado(JLabel lblNombreEmpleado) {this.lblNombreEmpleado = lblNombreEmpleado;}
 
-    public void setjLabel13(JLabel jLabel13) {
-        this.jLabel13 = jLabel13;
-    }
+    public JLabel getLblPuestoEmpleado() {return lblPuestoEmpleado;}
 
-    public JLabel getjLabel14() {
-        return jLabel14;
-    }
+    public void setLblPuestoEmpleado(JLabel lblPuestoEmpleado) {this.lblPuestoEmpleado = lblPuestoEmpleado;}
 
-    public void setjLabel14(JLabel jLabel14) {
-        this.jLabel14 = jLabel14;
-    }
+    public JLabel getLblRfcEmpleado() {return lblRfcEmpleado;}
 
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
+    public void setLblRfcEmpleado(JLabel lblRfcEmpleado) {this.lblRfcEmpleado = lblRfcEmpleado;}
 
-    public void setjLabel2(JLabel jLabel2) {
-        this.jLabel2 = jLabel2;
-    }
+    public JLabel getLblSalarioBrutoEmpleado() {return lblSalarioBrutoEmpleado;}
 
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
+    public void setLblSalarioBrutoEmpleado(JLabel lblSalarioBrutoEmpleado) {this.lblSalarioBrutoEmpleado = lblSalarioBrutoEmpleado;}
 
-    public void setjLabel3(JLabel jLabel3) {
-        this.jLabel3 = jLabel3;
-    }
+    public JLabel getLblBono() {return lblBono;}
 
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
+    public void setLblBono(JLabel lblBono) {this.lblBono = lblBono;}
 
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
+    public JLabel getLblSalarioNetoEmpleado() {return lblSalarioNetoEmpleado;}
 
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public void setjLabel7(JLabel jLabel7) {
-        this.jLabel7 = jLabel7;
-    }
-
-    public JLabel getjLabel8() {
-        return jLabel8;
-    }
-
-    public void setjLabel8(JLabel jLabel8) {
-        this.jLabel8 = jLabel8;
-    }
-
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
-
-    public void setjLabel9(JLabel jLabel9) {
-        this.jLabel9 = jLabel9;
-    }
-
-    public JLabel getLblApellidoMaternoEmpleado() {
-        return lblApellidoMaternoEmpleado;
-    }
-
-    public void setLblApellidoMaternoEmpleado(JLabel lblApellidoMaternoEmpleado) {
-        this.lblApellidoMaternoEmpleado = lblApellidoMaternoEmpleado;
-    }
-
-    public JLabel getLblApellidoPaternoEmpleado() {
-        return lblApellidoPaternoEmpleado;
-    }
-
-    public void setLblApellidoPaternoEmpleado(JLabel lblApellidoPaternoEmpleado) {
-        this.lblApellidoPaternoEmpleado = lblApellidoPaternoEmpleado;
-    }
-
-    public JLabel getLblEstadoEmpleado() {
-        return lblEstadoEmpleado;
-    }
-
-    public void setLblEstadoEmpleado(JLabel lblEstadoEmpleado) {
-        this.lblEstadoEmpleado = lblEstadoEmpleado;
-    }
-
-    public JLabel getLblHorasExtraEmpleado() {
-        return lblHorasExtraEmpleado;
-    }
-
-    public void setLblHorasExtraEmpleado(JLabel lblHorasExtraEmpleado) {
-        this.lblHorasExtraEmpleado = lblHorasExtraEmpleado;
-    }
-
-    public JLabel getLblHorasTrabajadasEmpleado() {
-        return lblHorasTrabajadasEmpleado;
-    }
-
-    public void setLblHorasTrabajadasEmpleado(JLabel lblHorasTrabajadasEmpleado) {
-        this.lblHorasTrabajadasEmpleado = lblHorasTrabajadasEmpleado;
-    }
-
-    public JLabel getLblIsrEmpleado() {
-        return lblIsrEmpleado;
-    }
-
-    public void setLblIsrEmpleado(JLabel lblIsrEmpleado) {
-        this.lblIsrEmpleado = lblIsrEmpleado;
-    }
-
-    public JLabel getLblNombreEmpleado() {
-        return lblNombreEmpleado;
-    }
-
-    public void setLblNombreEmpleado(JLabel lblNombreEmpleado) {
-        this.lblNombreEmpleado = lblNombreEmpleado;
-    }
-
-    public JLabel getLblPuestoEmpleado() {
-        return lblPuestoEmpleado;
-    }
-
-    public void setLblPuestoEmpleado(JLabel lblPuestoEmpleado) {
-        this.lblPuestoEmpleado = lblPuestoEmpleado;
-    }
-
-    public JLabel getLblRfcEmpleado() {
-        return lblRfcEmpleado;
-    }
-
-    public void setLblRfcEmpleado(JLabel lblRfcEmpleado) {
-        this.lblRfcEmpleado = lblRfcEmpleado;
-    }
-
-    public JLabel getLblSalarioBrutoEmpleado() {
-        return lblSalarioBrutoEmpleado;
-    }
-
-    public void setLblSalarioBrutoEmpleado(JLabel lblSalarioBrutoEmpleado) {
-        this.lblSalarioBrutoEmpleado = lblSalarioBrutoEmpleado;
-    }
-
-    public JLabel getjLabel15() {
-        return jLabel15;
-    }
-
-    public void setjLabel15(JLabel jLabel15) {
-        this.jLabel15 = jLabel15;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
-    }
-
-    public JPanel getjPanel2() {
-        return jPanel2;
-    }
-
-    public void setjPanel2(JPanel jPanel2) {
-        this.jPanel2 = jPanel2;
-    }
-
-    public JPanel getjPanel3() {
-        return jPanel3;
-    }
-
-    public void setjPanel3(JPanel jPanel3) {
-        this.jPanel3 = jPanel3;
-    }
-
-    public JLabel getLblBono() {
-        return lblBono;
-    }
-
-    public void setLblBono(JLabel lblBono) {
-        this.lblBono = lblBono;
-    }
-
-    public JLabel getLblSalarioNetoEmpleado() {
-        return lblSalarioNetoEmpleado;
-    }
-
-    public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {
-        this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;
-    }
+    public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;}
 
     private void actualizarBono() {
         String item = (String) bonoSelector.getSelectedItem();
@@ -773,5 +552,4 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         double salarioNeto = salarioBruto - isr;
         lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
     }
-
 }

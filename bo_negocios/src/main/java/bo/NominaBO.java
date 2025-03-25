@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bo;
 
 import Exceptions.ObjetosNegocioException;
@@ -12,7 +8,11 @@ import java.util.Random;
 
 /**
  *
- * @author alfre
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class NominaBO {
     
@@ -31,23 +31,19 @@ public class NominaBO {
         {74835.47, 22159.88, 35.00}
     };
 
-    public NominaBO() {
-
-    }
+    public NominaBO() {}
 
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
         if (empleado == null) {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         }
-        NominaDTO nomina = new NominaDTO(empleado, 0, calcularISR(8000, 14), empleado.getSalarioBase(), 0, LocalDate.now(), 40, 5);
+        NominaDTO nomina = new NominaDTO(empleado, 0, empleado.getSalarioBase(), calcularISR(empleado.getSalarioBase(), 14), 0, LocalDate.now(), 40, 5);
         nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());
         return nomina;
     } 
     
     public boolean guardarNomina(NominaDTO nomina) {
-        Random random = new Random();
-        
-        return random.nextBoolean();
+        return new Random().nextBoolean();
     }
     
     private double calcularISR(double ingresoTotal, int diasPagados) {
@@ -65,11 +61,9 @@ public class NominaBO {
                 break;
             }
         }
-
         // Calcular ISR mensual
         double excedente = ingresoMensual - limiteInferior;
         double isrMensual = cuotaFija + (excedente * (tasaExcedente / 100));
-
         // Ajustar ISR a los días trabajados
         return isrMensual * (diasPagados / 30.4);
     }

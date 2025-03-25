@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Paneles;
 
 import Controles.ControlFlujo;
-import static Paneles.BusquedaRFCNomina.getInstance;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -13,7 +8,11 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author INSPIRON
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class MenuPrincipal extends javax.swing.JPanel {
 
@@ -22,9 +21,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     /**
      * Creates new form MenuPrincipal
      */
-    private MenuPrincipal() {
-        initComponents();
-    }
+    private MenuPrincipal() {initComponents();}
     
     public static MenuPrincipal getInstance() {
         if (instance == null) {
@@ -263,7 +260,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDespedirEmpleadoActionPerformed
 
     private void btnNominasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNominasActionPerformed
-        ControlFlujo.mostrarBusquedaRFCNomina();
+        ControlFlujo.mostrarBusquedaEmpleado();
 
     }//GEN-LAST:event_btnNominasActionPerformed
 

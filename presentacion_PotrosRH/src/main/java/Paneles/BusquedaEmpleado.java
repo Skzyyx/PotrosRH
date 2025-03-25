@@ -1,45 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Paneles;
 
 import Controles.ControlFlujo;
 import Controles.ControlNomina;
-import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
-import static Paneles.MenuPrincipal.getInstance;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
 /**
  *
- * @author INSPIRON
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
-public class BusquedaRFCNomina extends javax.swing.JPanel {
+public class BusquedaEmpleado extends javax.swing.JPanel {
 
-    private static BusquedaRFCNomina instance;
+    private static BusquedaEmpleado instance;
 
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private BusquedaRFCNomina() {
-        initComponents();
-    }
+    private BusquedaEmpleado() {initComponents();}
 
-    public static BusquedaRFCNomina getInstance() {
+    public static BusquedaEmpleado getInstance() {
         if (instance == null) {
-            instance = new BusquedaRFCNomina();
+            instance = new BusquedaEmpleado();
         }
         return instance;
     }
@@ -187,24 +180,23 @@ public class BusquedaRFCNomina extends javax.swing.JPanel {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         try {
-            ControlNomina cn = new ControlNomina();
-            if (cn.validarRFC(txtRfc.getText()) && cn.validarEmpleado(txtRfc.getText())) {
+            if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
                 ControlFlujo.mostrarPrevisualizarEmpleado();
             }
         } catch (PresentacionException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.OK_OPTION);
-
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
         ControlFlujo.mostrarMenuPrincipal();
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRfcActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -214,44 +206,7 @@ public class BusquedaRFCNomina extends javax.swing.JPanel {
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
+    public JTextField getTxtRfc() {return txtRfc;}
 
-    public void setBtnCancelar(JButton btnCancelar) {
-        this.btnCancelar = btnCancelar;
-    }
-
-    public JButton getBtnGenerar() {
-        return btnGenerar;
-    }
-
-    public void setBtnGenerar(JButton btnGenerar) {
-        this.btnGenerar = btnGenerar;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
-    }
-
-    public JTextField getTxtRfc() {
-        return txtRfc;
-    }
-
-    public void setTxtRfc(JTextField txtRfc) {
-        this.txtRfc = txtRfc;
-    }
-
+    public void setTxtRfc(JTextField txtRfc) {this.txtRfc = txtRfc;}
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Paneles;
 
 import Controles.ControlFlujo;
@@ -17,11 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
- * @author INSPIRON
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
@@ -30,9 +29,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public PrevisualizarEmpleado() {
-        initComponents();
-    }
+    public PrevisualizarEmpleado() {initComponents();}
 
     public static PrevisualizarEmpleado getInstance() {
         if (instance == null) {
@@ -305,8 +302,6 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        ControlNomina cn = new ControlNomina();
-
         int resultado = JOptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
             try {
@@ -320,7 +315,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ControlFlujo.mostrarBusquedaRFCNomina();
+        ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
@@ -344,132 +339,36 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel puestoEmpleado;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getRFCEmpleado() {
-        return RFCEmpleado;
-    }
+    public JLabel getRFCEmpleado() {return RFCEmpleado;}
 
-    public void setRFCEmpleado(JLabel RFCEmpleado) {
-        this.RFCEmpleado = RFCEmpleado;
-    }
+    public void setRFCEmpleado(JLabel RFCEmpleado) {this.RFCEmpleado = RFCEmpleado;}
 
-    public JLabel getApellidoMaternoEmpleado() {
-        return apellidoMaternoEmpleado;
-    }
+    public JLabel getApellidoMaternoEmpleado() {return apellidoMaternoEmpleado;}
 
-    public void setApellidoMaternoEmpleado(JLabel apellidoMaternoEmpleado) {
-        this.apellidoMaternoEmpleado = apellidoMaternoEmpleado;
-    }
+    public void setApellidoMaternoEmpleado(JLabel apellidoMaternoEmpleado) {this.apellidoMaternoEmpleado = apellidoMaternoEmpleado;}
 
-    public JLabel getApellidoPaternoEmpleado() {
-        return apellidoPaternoEmpleado;
-    }
+    public JLabel getApellidoPaternoEmpleado() {return apellidoPaternoEmpleado;}
 
-    public void setApellidoPaternoEmpleado(JLabel apellidoPaternoEmpleado) {
-        this.apellidoPaternoEmpleado = apellidoPaternoEmpleado;
-    }
+    public void setApellidoPaternoEmpleado(JLabel apellidoPaternoEmpleado) {this.apellidoPaternoEmpleado = apellidoPaternoEmpleado;}
 
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
+    public JButton getBtnCancelar() {return btnCancelar;}
 
-    public void setBtnCancelar(JButton btnCancelar) {
-        this.btnCancelar = btnCancelar;
-    }
+    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
 
-    public JButton getBtnGenerar() {
-        return btnGenerar;
-    }
+    public JButton getBtnGenerar() {return btnGenerar;}
 
-    public void setBtnGenerar(JButton btnGenerar) {
-        this.btnGenerar = btnGenerar;
-    }
+    public void setBtnGenerar(JButton btnGenerar) {this.btnGenerar = btnGenerar;}
 
-    public JLabel getEstadoEmpleado() {
-        return estadoEmpleado;
-    }
+    public JLabel getEstadoEmpleado() {return estadoEmpleado;}
 
-    public void setEstadoEmpleado(JLabel estadoEmpleado) {
-        this.estadoEmpleado = estadoEmpleado;
-    }
+    public void setEstadoEmpleado(JLabel estadoEmpleado) {this.estadoEmpleado = estadoEmpleado;}
 
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
+    public JLabel getNombreEmpleado() {return nombreEmpleado;}
 
-    public void setjLabel2(JLabel jLabel2) {
-        this.jLabel2 = jLabel2;
-    }
+    public void setNombreEmpleado(JLabel nombreEmpleado) {this.nombreEmpleado = nombreEmpleado;}
 
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
+    public JLabel getPuestoEmpleado() {return puestoEmpleado;}
 
-    public void setjLabel3(JLabel jLabel3) {
-        this.jLabel3 = jLabel3;
-    }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public void setjLabel7(JLabel jLabel7) {
-        this.jLabel7 = jLabel7;
-    }
-
-    public JLabel getjLabel8() {
-        return jLabel8;
-    }
-
-    public void setjLabel8(JLabel jLabel8) {
-        this.jLabel8 = jLabel8;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
-    }
-
-    public JLabel getNombreEmpleado() {
-        return nombreEmpleado;
-    }
-
-    public void setNombreEmpleado(JLabel nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
-    }
-
-    public JLabel getPuestoEmpleado() {
-        return puestoEmpleado;
-    }
-
-    public void setPuestoEmpleado(JLabel puestoEmpleado) {
-        this.puestoEmpleado = puestoEmpleado;
-    }
+    public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
 
 }
