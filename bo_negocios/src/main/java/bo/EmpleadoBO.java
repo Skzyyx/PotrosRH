@@ -11,6 +11,9 @@ package bo;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import enums.EstadoEmpleado;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class EmpleadoBO {
     
@@ -35,15 +38,46 @@ public class EmpleadoBO {
         if(!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
         
-        return new EmpleadoDTO(
-                "Benjamin", "Soto", "Coronado", 
-                "jose.islas252574@potros.itson.edu.mx", 
-                rfc, 
-                "Cactus", "Casa Blanca", "123", 
-                "1231231231", 
-                "Seguridad", 
+    List<EmpleadoDTO> Empleados = new ArrayList<>();
+    
+    Empleados.add(new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
+                "freddy.guzman@empresa.com", 
+                "GUMF900101ABC", 
+                "Peppa", "Power Rangers", "123", 
+                "1231231950", 
+                "Limpieza", 
+                "Empleado", 
+                4000, 
+                EstadoEmpleado.ACTIVO));
+    
+    Empleados.add(new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
+                "jesus.lopez@empresa.com", 
+                "LOIJ920315XYZ", 
+                "Furbo", "Real Madrid", "123", 
+                "6442291849", 
+                "Recursos Humanos", 
                 "Empleado", 
                 8000, 
-                EstadoEmpleado.ACTIVO);
+                EstadoEmpleado.ACTIVO));
+    
+    Empleados.add(new EmpleadoDTO("José Luis", "Islas", "Molina", 
+                "jose.islas@empresa.com", 
+                "ISLM850525DEF", 
+                "Avenida Siempre Viva", "Centro", "456", 
+                "9876543210", 
+                "TI", 
+                "Analista", 
+                12000, 
+                EstadoEmpleado.ACTIVO));
+
+    if (Empleados.isEmpty()) {
+        throw new ObjetosNegocioException("No hay empleados disponibles");
+    }
+
+        // Elegir un empleado al azar
+        Random random = new Random();
+        int indiceAleatorio = random.nextInt(Empleados.size());
+
+        return Empleados.get(indiceAleatorio); // Retorna un empleado al azar
     }
 }
