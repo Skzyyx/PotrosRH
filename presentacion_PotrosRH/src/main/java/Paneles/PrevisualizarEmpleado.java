@@ -3,6 +3,7 @@ package Paneles;
 import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -302,13 +303,13 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        int resultado = JOptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación", JOptionPane.YES_NO_OPTION);
+        int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
             try {
                 ControlNomina.generarNomina();
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.OK_OPTION);
+                OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
             }
             ControlFlujo.mostrarPrevisualizarNomina();
         }

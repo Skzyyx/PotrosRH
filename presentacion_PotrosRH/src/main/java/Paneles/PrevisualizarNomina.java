@@ -4,6 +4,7 @@ import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Enums.Bonos;
 import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
 import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -437,7 +438,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             nomina.setBono(Double.parseDouble(lblBono.getText()));
             ControlNomina.setNominaDTO(nomina);
             if(ControlNomina.guardarNomina())
-                JOptionPane.showMessageDialog(this, "Nomina guardada con exito!", "Nomina guardada", JOptionPane.INFORMATION_MESSAGE);
+                OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
             ControlFlujo.mostrarBusquedaEmpleado();
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);

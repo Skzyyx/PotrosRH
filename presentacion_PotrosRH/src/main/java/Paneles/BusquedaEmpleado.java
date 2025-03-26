@@ -3,12 +3,14 @@ package Paneles;
 import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
@@ -28,7 +30,9 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private BusquedaEmpleado() {initComponents();}
+    private BusquedaEmpleado() {
+        initComponents();
+    }
 
     public static BusquedaEmpleado getInstance() {
         if (instance == null) {
@@ -180,18 +184,17 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         try {
-            if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
-                ControlFlujo.mostrarPrevisualizarEmpleado();
-            }
-        } catch (PresentacionException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.OK_OPTION);
+            btnBuscar();
+        } catch (PresentacionException ex) {
+            Logger.getLogger(BusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         ControlFlujo.mostrarMenuPrincipal();
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
@@ -206,7 +209,26 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getTxtRfc() {return txtRfc;}
+    public JTextField getTxtRfc() {
+        return txtRfc;
+    }
 
-    public void setTxtRfc(JTextField txtRfc) {this.txtRfc = txtRfc;}
+    public void setTxtRfc(JTextField txtRfc) {
+        this.txtRfc = txtRfc;
+    }
+
+    private void btnBuscar() throws PresentacionException {
+        String rfc = txtRfc.getText();
+        if (rfc.isEmpty()) {
+            throw new PresentacionException("Debes completar el campo del RFC.");
+        }
+        if (rfc.length() != 13) {
+            throw new PresentacionException("El RFC debe tener 13 caracteres.");
+        }
+
+        if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
+            ControlFlujo.mostrarPrevisualizarEmpleado();
+        }
+
+    }
 }

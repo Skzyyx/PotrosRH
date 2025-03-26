@@ -9,6 +9,7 @@ import Interfaces.IObtenerEmpleado;
 import ObtenerEmpleado.ObtenerEmpleado;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import enums.EstadoEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +28,19 @@ public class ControlNomina {
     
     private static IGenerarNomina gn = new GenerarNomina();
 
-    public static boolean validarEmpleado(String rfc) {return true;}
+    public static boolean validarEmpleado(String rfc) throws PresentacionException {
+        
+        validarRFC(rfc);
+        EmpleadoDTO empleado = obtenerEmpleado(rfc);
+        
+        if (empleado == null) {
+            throw new PresentacionException("No se encontró al empleado.");
+        }
+        if (empleado.getEstado() == EstadoEmpleado.INACTIVO) {
+            throw new PresentacionException("No se puede generar una nómina a un empleado inactivo.");
+        }
+        return true;
+    }
 
     public static EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
         EmpleadoDTO empleado = new EmpleadoDTO();
@@ -64,7 +77,15 @@ public class ControlNomina {
 
     public static boolean validarRFC(String rfc) throws PresentacionException {
         String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
-        return rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13;
+        
+        if (rfc == null) {
+            throw new PresentacionException("El RFC no puede ser nulo.");
+        }
+        
+        if (!rfc.matches(regexRFC)) {
+            throw new PresentacionException("El formato del RFC es incorrecto.");
+        }
+        return true;
     }
 
     public static EmpleadoDTO getEmpleadoDTO() {return empleadoDTO;}

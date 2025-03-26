@@ -61,7 +61,7 @@ public class EmpleadoBO {
 
         List<EmpleadoDTO> empleados = Arrays.asList(
                 new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
-                    "freddy.guzman@empresa.com", 
+                    "jose.islas252574@potros.itson.edu.mx", 
                     "GUMF900101ABC", 
                     "Peppa", "Power Rangers", "123", 
                     "1231231950", 
@@ -71,7 +71,7 @@ public class EmpleadoBO {
                     EstadoEmpleado.ACTIVO),
                 
                 new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
-                    "jesus.lopez@empresa.com", 
+                    "jose.islas252574@potros.itson.edu.mx", 
                     "LOIJ920315XYZ", 
                     "Furbo", "Real Madrid", "123", 
                     "6442291849", 
@@ -81,7 +81,7 @@ public class EmpleadoBO {
                     EstadoEmpleado.ACTIVO),
                 
                 new EmpleadoDTO("José Luis", "Islas", "Molina", 
-                    "jose.islas@empresa.com", 
+                    "jose.islas252574@potros.itson.edu.mx", 
                     "ISLM850525DEF", 
                     "Avenida Siempre Viva", "Centro", "456", 
                     "9876543210", 

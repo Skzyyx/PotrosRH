@@ -53,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnContrataciones.setBackground(new java.awt.Color(44, 44, 44));
         btnContrataciones.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnContrataciones.setForeground(new java.awt.Color(255, 255, 255));
-        btnContrataciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Contrataciones.png"))); // NOI18N
+        btnContrataciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Contrataciones.png"))); // NOI18N
         btnContrataciones.setText("Contrataciones");
         btnContrataciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
