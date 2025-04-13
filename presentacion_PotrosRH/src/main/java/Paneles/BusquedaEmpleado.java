@@ -25,20 +25,11 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  */
 public class BusquedaEmpleado extends javax.swing.JPanel {
 
-    private static BusquedaEmpleado instance;
-
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private BusquedaEmpleado() {
+    public BusquedaEmpleado() {
         initComponents();
-    }
-
-    public static BusquedaEmpleado getInstance() {
-        if (instance == null) {
-            instance = new BusquedaEmpleado();
-        }
-        return instance;
     }
 
     /**
@@ -209,14 +200,6 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getTxtRfc() {
-        return txtRfc;
-    }
-
-    public void setTxtRfc(JTextField txtRfc) {
-        this.txtRfc = txtRfc;
-    }
-
     private void btnBuscar() throws PresentacionException {
         String rfc = txtRfc.getText();
         if (rfc.isEmpty()) {
@@ -227,8 +210,12 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         }
 
         if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
-            ControlFlujo.mostrarPrevisualizarEmpleado();
+            ControlFlujo.mostrarPrevisualizarEmpleado(rfc);
         }
 
+    }
+
+    public void limpiarCampo() {
+        txtRfc.setText("");
     }
 }

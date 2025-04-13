@@ -4,6 +4,7 @@ import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -25,19 +26,10 @@ import javax.swing.JOptionPane;
  */
 public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
-    private static PrevisualizarEmpleado instance;
-
     /**
      * Creates new form PrevisualisarEmpleado
      */
     public PrevisualizarEmpleado() {initComponents();}
-
-    public static PrevisualizarEmpleado getInstance() {
-        if (instance == null) {
-            instance = new PrevisualizarEmpleado();
-        }
-        return instance;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -371,5 +363,14 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     public JLabel getPuestoEmpleado() {return puestoEmpleado;}
 
     public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
+
+    public void setDatosEmpleado(EmpleadoDTO empleado) {
+        nombreEmpleado.setText(empleado.getNombre());
+        apellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+        apellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+        RFCEmpleado.setText(empleado.getRfc());
+        puestoEmpleado.setText(empleado.getPuesto());
+        estadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+    }
 
 }

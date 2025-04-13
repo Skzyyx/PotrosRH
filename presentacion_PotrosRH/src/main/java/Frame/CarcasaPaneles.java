@@ -1,9 +1,11 @@
 package Frame;
 
+import Controles.ControlFlujo;
 import Paneles.BusquedaEmpleado;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,33 +16,21 @@ import Paneles.PrevisualizarNomina;
  * @author Benjamin Soto Coronado (253183)
  */
 public class CarcasaPaneles extends javax.swing.JFrame {
-    
+
     private static CarcasaPaneles instance;
-    private MenuPrincipal menuPrincipal;
-    private BusquedaEmpleado busquedaRFCNomina;
-    private PrevisualizarEmpleado previsualisarEmpleado;
-    private PrevisualizarNomina previsualizarNomina;
-    
+
     /**
      * Creates new form CarcasaPaneles
      */
     private CarcasaPaneles() {
         initComponents();
-        cargarPaneles();
         setResizable(false);
         setLocationRelativeTo(null);
+        
+        ControlFlujo.setContenedor(contenedor);
+        ControlFlujo.mostrarMenuPrincipal();
     }
-    
-    private void cargarPaneles() {
-        menuPrincipal = MenuPrincipal.getInstance();
-        busquedaRFCNomina = BusquedaEmpleado.getInstance();
-        previsualisarEmpleado = PrevisualizarEmpleado.getInstance();
-        previsualizarNomina = PrevisualizarNomina.getInstance();
-        contenedor.add(menuPrincipal, "menuPrincipal");
-        contenedor.add(busquedaRFCNomina, "busquedaRFCNomina");
-        contenedor.add(previsualisarEmpleado, "previsualisarEmpleado");
-        contenedor.add(previsualizarNomina,"previsualizarNomina");
-    }
+
     public static CarcasaPaneles getInstance() {
         if (instance == null) {
             instance = new CarcasaPaneles();
@@ -65,7 +55,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         contenedor.setMaximumSize(new java.awt.Dimension(1280, 720));
         contenedor.setMinimumSize(new java.awt.Dimension(1280, 720));
         contenedor.setPreferredSize(new java.awt.Dimension(1280, 720));
-        contenedor.setLayout(new java.awt.CardLayout());
+        contenedor.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +75,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -112,7 +102,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CarcasaPaneles().setVisible(true);
+                CarcasaPaneles.getInstance().setVisible(true);
             }
         });
     }
@@ -120,4 +110,8 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contenedor;
     // End of variables declaration//GEN-END:variables
+
+    public JPanel getContenedor() {
+        return contenedor;
+    }
 }

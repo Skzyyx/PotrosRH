@@ -18,85 +18,67 @@ import javax.swing.JPanel;
  * @author Benjamin Soto Coronado (253183)
  */
 public class ControlFlujo {
-    
+
+    private static JPanel panelContenedor;
     private static JPanel panelActual;
 
-    public static void mostrarMenuPrincipal() {
-        //Verificaciones
-        
-        // Cambiar de panel
-        if (panelActual != null) {
-            panelActual.setVisible(false); // Ocultar el panel actual
-        }
-        MenuPrincipal.getInstance().setVisible(true);
-        panelActual = MenuPrincipal.getInstance();
-    }
-    
-    public static void mostrarBusquedaEmpleado() {
-        //Verificaciones
+    private static MenuPrincipal menuPrincipal;
+    private static BusquedaEmpleado busquedaEmpleado;
+    private static PrevisualizarEmpleado previsualizarEmpleado;
+    private static PrevisualizarNomina previsualizarNomina;
 
-        // Cambiar de panel
-        if (panelActual != null) {
-            panelActual.setVisible(false); // Ocultar el panel actual
+    public static void mostrarMenuPrincipal() {
+        if (menuPrincipal == null) {
+            menuPrincipal = new MenuPrincipal();
         }
-        MenuPrincipal.getInstance().setVisible(false);
-        BusquedaEmpleado.getInstance().getTxtRfc().setText("");
-        BusquedaEmpleado.getInstance().setVisible(true);
-        panelActual = BusquedaEmpleado.getInstance();
+        cambiarPantalla(menuPrincipal);
     }
-    
-    public static void mostrarPrevisualizarEmpleado() throws PresentacionException {
-        //Verificaciones
-        
-        /* Operaciones */
-        // Buscar y Obtener el empleado.
-        String rfc = BusquedaEmpleado.getInstance().getTxtRfc().getText();
+
+    public static void mostrarBusquedaEmpleado() {
+        if (busquedaEmpleado == null) {
+            busquedaEmpleado = new BusquedaEmpleado();
+        }
+        busquedaEmpleado.limpiarCampo();
+        cambiarPantalla(busquedaEmpleado);
+    }
+
+    public static void mostrarPrevisualizarEmpleado(String rfc) throws PresentacionException {
+
         EmpleadoDTO empleado = ControlNomina.obtenerEmpleado(rfc);
-        
-        // Se setean los valores del panel PrevisualizarEmpleado.
-        PrevisualizarEmpleado pe = PrevisualizarEmpleado.getInstance();
-        pe.getNombreEmpleado().setText(empleado.getNombre());
-        pe.getApellidoPaternoEmpleado().setText(empleado.getApellidoPaterno());
-        pe.getApellidoMaternoEmpleado().setText(empleado.getApellidoMaterno());
-        pe.getRFCEmpleado().setText(empleado.getRfc());
-        pe.getPuestoEmpleado().setText(empleado.getPuesto());
-        pe.getEstadoEmpleado().setText(String.valueOf(empleado.getEstado()));
-        // Cambiar de panel
-        if (panelActual != null) {
-            panelActual.setVisible(false); // Ocultar el panel actual
+
+        if (previsualizarEmpleado == null) {
+            previsualizarEmpleado = new PrevisualizarEmpleado();
         }
-        PrevisualizarEmpleado.getInstance().setVisible(true);
-        panelActual = PrevisualizarEmpleado.getInstance();
+        previsualizarEmpleado.setDatosEmpleado(empleado);
+        cambiarPantalla(previsualizarEmpleado);
     }
-    
+
     public static void mostrarPrevisualizarNomina() {
-        //Verificaciones
-        
-        /* Operaciones */
-        // Buscar y Obtener el empleado.
         NominaDTO nomina = ControlNomina.getNominaDTO();
-        EmpleadoDTO empleado = nomina.getEmpleado();
-        
-        System.out.println(nomina);
-        // Se setean los valores del panel PrevisualizarNomina.
-        PrevisualizarNomina pn = PrevisualizarNomina.getInstance();
-        pn.getLblNombreEmpleado().setText(empleado.getNombre());
-        pn.getLblApellidoPaternoEmpleado().setText(empleado.getApellidoPaterno());
-        pn.getLblApellidoMaternoEmpleado().setText(empleado.getApellidoMaterno());
-        pn.getLblRfcEmpleado().setText(empleado.getRfc());
-        pn.getLblPuestoEmpleado().setText(empleado.getPuesto());
-        pn.getLblEstadoEmpleado().setText(String.valueOf(empleado.getEstado()));
-        pn.getLblHorasTrabajadasEmpleado().setText(String.valueOf(nomina.getHorasTrabajadas()));
-        pn.getLblHorasExtraEmpleado().setText(String.valueOf(nomina.getHoraExtra()));
-        pn.getLblSalarioBrutoEmpleado().setText(String.valueOf(nomina.getSalarioBruto()));
-        pn.getLblIsrEmpleado().setText(String.format("%.1f", nomina.getIsr()));
-        pn.getLblSalarioNetoEmpleado().setText(String.format("%.1f", nomina.getSalarioNeto()));
-        
-        // Cambiar de panel
-        if (panelActual != null) {
-            panelActual.setVisible(false); // Ocultar el panel actual
+
+        if (previsualizarNomina == null) {
+            previsualizarNomina = new PrevisualizarNomina();
         }
-        PrevisualizarNomina.getInstance().setVisible(true);
-        panelActual = PrevisualizarNomina.getInstance();
+
+        previsualizarNomina.setDatosNomina(nomina);
+        cambiarPantalla(previsualizarNomina);
+    }
+
+    private static void cambiarPantalla(JPanel nuevoPanel) {
+        if (panelContenedor == null) {
+            throw new IllegalStateException("El contenedor no ha sido inicializado.");
+        }
+
+        panelContenedor.removeAll();
+        panelContenedor.add(nuevoPanel);
+        panelContenedor.revalidate();
+        panelContenedor.repaint();
+
+        nuevoPanel.setVisible(true);
+        panelActual = nuevoPanel;
+    }
+
+    public static void setContenedor(JPanel contenedor) {
+        panelContenedor = contenedor;
     }
 }

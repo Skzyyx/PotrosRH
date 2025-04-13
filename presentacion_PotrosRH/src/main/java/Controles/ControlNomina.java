@@ -36,6 +36,7 @@ public class ControlNomina {
         if (empleado == null) {
             throw new PresentacionException("No se encontró al empleado.");
         }
+        
         if (empleado.getEstado() == EstadoEmpleado.INACTIVO) {
             throw new PresentacionException("No se puede generar una nómina a un empleado inactivo.");
         }

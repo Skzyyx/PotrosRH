@@ -5,6 +5,7 @@ import Controles.ControlNomina;
 import Enums.Bonos;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -26,19 +27,10 @@ import javax.swing.JOptionPane;
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
 
-    private static PrevisualizarNomina instance;
-
     /**
      * Creates new form PrevisualizarNomina
      */
     public PrevisualizarNomina() {initComponents();}
-
-    public static PrevisualizarNomina getInstance() {
-        if (instance == null) {
-            instance = new PrevisualizarNomina();
-        }
-        return instance;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -552,5 +544,20 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         double isr = ControlNomina.getNominaDTO().getIsr();
         double salarioNeto = salarioBruto - isr;
         lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
+    }
+
+    public void setDatosNomina(NominaDTO nomina) {
+        EmpleadoDTO empleado = nomina.getEmpleado();
+        lblNombreEmpleado.setText(empleado.getNombre());
+        lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+        lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+        lblRfcEmpleado.setText(empleado.getRfc());
+        lblPuestoEmpleado.setText(empleado.getPuesto());
+        lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+        lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
+        lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHoraExtra()));
+        lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
+        lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
+        lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
     }
 }

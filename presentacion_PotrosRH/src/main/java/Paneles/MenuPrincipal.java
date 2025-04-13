@@ -16,18 +16,11 @@ import javax.swing.JComponent;
  */
 public class MenuPrincipal extends javax.swing.JPanel {
 
-    private static MenuPrincipal instance;
-    
     /**
      * Creates new form MenuPrincipal
      */
-    private MenuPrincipal() {initComponents();}
-    
-    public static MenuPrincipal getInstance() {
-        if (instance == null) {
-            instance = new MenuPrincipal();
-        }
-        return instance;
+    public MenuPrincipal() {
+        initComponents();
     }
 
     /**
