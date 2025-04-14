@@ -11,6 +11,16 @@ import dto.EmpleadoDTO;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public interface IObtenerEmpleado {
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException;
-}
+
+   /**
+    * Obtiene un empleado a partir de su RFC.
+    *
+    * Delega la operación al ControlObtenerEmpleado.
+    *
+    * @param rfc RFC del empleado a buscar.
+    * @return Objeto EmpleadoDTO con los datos del empleado.
+    * @throws ObtenerEmpleadoException si el RFC es inválido o ocurre un error durante la obtención.
+    */
+    public interface IObtenerEmpleado {
+        public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException;
+    }

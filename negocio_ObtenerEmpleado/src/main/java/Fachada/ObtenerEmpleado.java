@@ -21,7 +21,13 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     private ObtenerEmpleado() {
         this.control = new ControlObtenerEmpleado();
     }
-    
+    /**
+    * Retorna la única instancia de ObtenerEmpleado.
+    * 
+    * Usa el patrón Singleton con sincronización para evitar múltiples instancias en entornos concurrentes.
+    *
+    * @return Instancia única de IObtenerEmpleado.
+    */
     public static synchronized IObtenerEmpleado getInstance() {
         if (instance == null) {
             instance = new ObtenerEmpleado();
@@ -30,7 +36,15 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     }
     
     
-
+    /**
+    * Obtiene un empleado a partir de su RFC.
+    *
+    * Delega la operación al ControlObtenerEmpleado.
+    *
+    * @param rfc RFC del empleado a buscar.
+    * @return Objeto EmpleadoDTO con los datos del empleado.
+    * @throws ObtenerEmpleadoException si el RFC es inválido o ocurre un error durante la obtención.
+    */
     @Override
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
         

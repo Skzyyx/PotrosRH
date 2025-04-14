@@ -20,7 +20,17 @@ import java.util.logging.Logger;
 public class ControlObtenerEmpleado implements IObtenerEmpleado {
 
     private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
-    
+    /**
+    * Obtiene los datos de un empleado a partir de su RFC.
+    *
+    * Valida que el RFC no esté vacío y cumpla con el formato oficial (4 letras, 6 números de fecha y 3 caracteres alfanuméricos).
+    * Si el RFC es válido, se solicita el empleado a la capa de negocio. 
+    * En caso de error, se lanza una excepción con el mensaje correspondiente.
+    *
+    * @param rfc El RFC del empleado a buscar.
+    * @return Un objeto EmpleadoDTO con la información del empleado.
+    * @throws ObtenerEmpleadoException Si el RFC es inválido o ocurre un error al obtener los datos.
+    */
     @Override
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
         
