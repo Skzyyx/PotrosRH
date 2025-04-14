@@ -6,7 +6,6 @@ import Exceptions.GenerarNominaException;
 import Control.ControlGenerarNomina;
 import Interfaces.IGenerarNomina;
 import Interfaces.IObtenerEmpleado;
-import Control.ControlObtenerEmpleado;
 import Excepciones.ValidarEmpleadoException;
 import Fachada.GenerarNomina;
 import Fachada.ObtenerEmpleado;
@@ -14,7 +13,6 @@ import Fachada.ValidarEmpleado;
 import Interfaces.IValidarEmpleado;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
-import enums.EstadoEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

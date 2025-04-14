@@ -68,12 +68,15 @@ public class ControlGenerarNomina implements IGenerarNomina {
         // Sistema de correo electrónico.
         ICorreo sistemaCorreo = new Correo();
         try {
-            nominaBO.guardarNomina(nomina ); // Se guarda la nómina.
+            nominaBO.guardarNomina(nomina); // Se guarda la nómina.
             sistemaCorreo.enviarCorreo(nomina); // Se envía el correo electrónico con la nómina generada.
             return true; // Regresa true como confirmación de nómina generada con éxito.
         } catch (CorreoException ex) {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GenerarNominaException(ex.getMessage(), ex);
         }
     }
 }
