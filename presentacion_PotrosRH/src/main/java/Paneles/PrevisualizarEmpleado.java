@@ -298,12 +298,14 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
             try {
-                ControlNomina.generarNomina();
+                ControlNomina controlNomina = ControlNomina.getInstance();
+                controlNomina.generarNomina();
+                ControlFlujo.mostrarPrevisualizarNomina();
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
             }
-            ControlFlujo.mostrarPrevisualizarNomina();
+            
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 

@@ -7,6 +7,8 @@ import Paneles.PrevisualizarEmpleado;
 import Paneles.PrevisualizarNomina;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -44,7 +46,8 @@ public class ControlFlujo {
 
     public static void mostrarPrevisualizarEmpleado(String rfc) throws PresentacionException {
 
-        EmpleadoDTO empleado = ControlNomina.obtenerEmpleado(rfc);
+        ControlNomina controlNomina = ControlNomina.getInstance();
+        EmpleadoDTO empleado = controlNomina.obtenerEmpleado(rfc);
 
         if (previsualizarEmpleado == null) {
             previsualizarEmpleado = new PrevisualizarEmpleado();
@@ -53,15 +56,20 @@ public class ControlFlujo {
         cambiarPantalla(previsualizarEmpleado);
     }
 
-    public static void mostrarPrevisualizarNomina() {
-        NominaDTO nomina = ControlNomina.getNominaDTO();
-
-        if (previsualizarNomina == null) {
-            previsualizarNomina = new PrevisualizarNomina();
+    public static void mostrarPrevisualizarNomina() throws PresentacionException {
+        try {
+            NominaDTO nomina = ControlNomina.getInstance().generarNomina();
+            
+            if (previsualizarNomina == null) {
+                previsualizarNomina = new PrevisualizarNomina();
+            }
+            
+            previsualizarNomina.setDatosNomina(nomina);
+            cambiarPantalla(previsualizarNomina);
+        } catch (PresentacionException ex) {
+            Logger.getLogger(ControlFlujo.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException(ex.getMessage());
         }
-
-        previsualizarNomina.setDatosNomina(nomina);
-        cambiarPantalla(previsualizarNomina);
     }
 
     private static void cambiarPantalla(JPanel nuevoPanel) {
@@ -74,7 +82,6 @@ public class ControlFlujo {
         panelContenedor.revalidate();
         panelContenedor.repaint();
 
-        nuevoPanel.setVisible(true);
         panelActual = nuevoPanel;
     }
 

@@ -208,8 +208,9 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         if (rfc.length() != 13) {
             throw new PresentacionException("El RFC debe tener 13 caracteres.");
         }
-
-        if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
+        
+        ControlNomina controlNomina = ControlNomina.getInstance();
+        if (controlNomina.validarRFC(txtRfc.getText()) && controlNomina.validarEmpleado(txtRfc.getText())) {
             ControlFlujo.mostrarPrevisualizarEmpleado(rfc);
         }
 

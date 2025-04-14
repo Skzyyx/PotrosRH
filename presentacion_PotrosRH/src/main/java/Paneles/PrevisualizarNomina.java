@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
 
+    private NominaDTO nomina;
     /**
      * Creates new form PrevisualizarNomina
      */
@@ -426,11 +427,12 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         try {
-            NominaDTO nomina = ControlNomina.getNominaDTO();
             nomina.setBono(Double.parseDouble(lblBono.getText()));
-            ControlNomina.setNominaDTO(nomina);
-            if(ControlNomina.guardarNomina())
+            nomina.setSalarioNeto(Double.parseDouble(lblSalarioNetoEmpleado.getText()));
+
+            if(ControlNomina.getInstance().guardarNomina(nomina))
                 OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
+            
             ControlFlujo.mostrarBusquedaEmpleado();
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
@@ -530,23 +532,30 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;}
 
     private void actualizarBono() {
-        String item = (String) bonoSelector.getSelectedItem();
-        
-        if (item.equals("NINGUNO") && ControlNomina.getEmpleadoDTO() == null) {
-            return;
+        try {
+            String rfc = lblRfcEmpleado.getText();
+            String item = (String) bonoSelector.getSelectedItem();
+            
+            if (item.equals("NINGUNO") && ControlNomina.getInstance().obtenerEmpleado(rfc) == null) {
+                return;
+            }
+            double bono = Bonos.valueOf(item).getCantidad();
+            lblBono.setText(String.valueOf(bono));
+            
+            double salarioBruto = ControlNomina.getInstance().obtenerEmpleado(rfc).getSalarioBase() + bono;
+            lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
+            
+            double isr = nomina.getIsr();
+            double salarioNeto = salarioBruto - isr;
+            lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
+        } catch (PresentacionException ex) {
+            Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
-        double bono = Bonos.valueOf(item).getCantidad();
-        lblBono.setText(String.valueOf(bono));
-        
-        double salarioBruto = ControlNomina.getEmpleadoDTO().getSalarioBase() + bono;
-        lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
-        
-        double isr = ControlNomina.getNominaDTO().getIsr();
-        double salarioNeto = salarioBruto - isr;
-        lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
     }
 
     public void setDatosNomina(NominaDTO nomina) {
+        this.nomina = nomina;
+        
         EmpleadoDTO empleado = nomina.getEmpleado();
         lblNombreEmpleado.setText(empleado.getNombre());
         lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());

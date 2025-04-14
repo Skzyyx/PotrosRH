@@ -23,12 +23,29 @@ import java.util.logging.Logger;
  */
 public class ControlNomina {
 
-    private static EmpleadoDTO empleadoDTO;
-    private static NominaDTO nominaDTO;
+    private static ControlNomina instance;
     
-    private static IGenerarNomina gn = new GenerarNomina();
+    private EmpleadoDTO empleadoDTO;
+    private NominaDTO nominaDTO;
+    
+    private static GenerarNomina generarNomina;
+    
+    private ControlNomina() {
+        this.empleadoDTO = new EmpleadoDTO();
+        this.nominaDTO = new NominaDTO();
+        
+        this.generarNomina = new GenerarNomina();
 
-    public static boolean validarEmpleado(String rfc) throws PresentacionException {
+    }
+    
+    public static ControlNomina getInstance() {
+        if (instance == null) {
+            instance = new ControlNomina();
+        }
+        return instance;
+    }
+
+    public boolean validarEmpleado(String rfc) throws PresentacionException {
         
         validarRFC(rfc);
         EmpleadoDTO empleado = obtenerEmpleado(rfc);
@@ -43,7 +60,7 @@ public class ControlNomina {
         return true;
     }
 
-    public static EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
+    public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
         EmpleadoDTO empleado = new EmpleadoDTO();
         IObtenerEmpleado obtenerEmpleado = new ObtenerEmpleado();
         try {
@@ -56,9 +73,9 @@ public class ControlNomina {
         return empleado;
     }
 
-    public static NominaDTO generarNomina() throws PresentacionException {
+    public NominaDTO generarNomina() throws PresentacionException {
         try {
-            nominaDTO = gn.generarNomina(empleadoDTO);
+            nominaDTO = generarNomina.generarNomina(empleadoDTO);
         } catch (GenerarNominaException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Error al generar la nómina: " + ex.getMessage());
@@ -66,17 +83,16 @@ public class ControlNomina {
         return nominaDTO;
     }
     
-    public static boolean guardarNomina() throws PresentacionException {
-        IGenerarNomina gn = new GenerarNomina();
+    public boolean guardarNomina(NominaDTO nomina) throws PresentacionException {
         try {
-            return gn.guardarNomina(nominaDTO);
+            return generarNomina.guardarNomina(nominaDTO);
         } catch (GenerarNominaException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Ocurrió un error al guardar la nomina.");
         }
     }
 
-    public static boolean validarRFC(String rfc) throws PresentacionException {
+    public boolean validarRFC(String rfc) throws PresentacionException {
         String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
         
         if (rfc == null) {
@@ -88,13 +104,4 @@ public class ControlNomina {
         }
         return true;
     }
-
-    public static EmpleadoDTO getEmpleadoDTO() {return empleadoDTO;}
-
-    public static void setEmpleadoDTO(EmpleadoDTO empleadoDTO) {ControlNomina.empleadoDTO = empleadoDTO;}
-
-    public static NominaDTO getNominaDTO() {return nominaDTO;}
-
-    public static void setNominaDTO(NominaDTO nominaDTO) {ControlNomina.nominaDTO = nominaDTO;}
-
 }
