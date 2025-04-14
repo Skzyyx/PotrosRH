@@ -3,7 +3,7 @@ package dto;
 import enums.EstadoEmpleado;
 
 /**
- *
+ * Objeto de transferencia para Empleados.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)

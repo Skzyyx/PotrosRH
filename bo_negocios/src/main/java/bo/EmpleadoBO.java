@@ -1,7 +1,7 @@
 package bo;
 
 /**
- *
+ * Objeto de negocio EmpleadoBO.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -14,14 +14,15 @@ import enums.EstadoEmpleado;
 import java.util.Arrays;
 import java.util.List;
 import Interfaces.IEmpleadoBO;
+import java.util.ArrayList;
 
 public class EmpleadoBO implements IEmpleadoBO{
     
     private static IEmpleadoBO instance;
     
-    private EmpleadoBO (){
-        
-    }
+    private List<EmpleadoDTO> empleados;
+    
+    private EmpleadoBO (){empleados = new ArrayList<>();}
     
     public static synchronized IEmpleadoBO getInstance() {
         if (instance == null) {
@@ -50,7 +51,6 @@ public class EmpleadoBO implements IEmpleadoBO{
 
     /**
      * Determina si el porcentaje de faltas de un empleado es aceptable.
-     *
      * @param rfc RFC del empleado a evaluar.
      * @return {@code true} si el porcentaje de faltas es menor al 80%, {@code false} en caso contrario.
      * @throws Exceptions.ObjetosNegocioException cuando no cumple con el minimo de asistencias.
@@ -60,16 +60,15 @@ public class EmpleadoBO implements IEmpleadoBO{
         double porcentajeFaltas = Math.random();
         boolean porcentaje = porcentajeFaltas < 0.80;
         
-        if (!porcentaje) {
+        if (!porcentaje) 
             throw new ObjetosNegocioException("No cumple con el mínimo de asistencias.");
-        }
+        
         return porcentaje;
     }
 
     /**
      * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC.
      * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
-     *
      * @param rfc RFC del empleado a buscar.
      * @return {@link EmpleadoDTO} con la información del empleado encontrado.
      * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no está registrado.
@@ -80,8 +79,8 @@ public class EmpleadoBO implements IEmpleadoBO{
 
         if (!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
-
-        List<EmpleadoDTO> empleados = Arrays.asList(
+        
+        empleados = Arrays.asList(
                 new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
                     "jose.islas252574@potros.itson.edu.mx", 
                     "GUMF900101ABC", 

@@ -1,15 +1,15 @@
 package bo;
 
 import Exceptions.ObjetosNegocioException;
-import Interfaces.IEmpleadoBO;
 import Interfaces.INominaBO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
+ * Objeto de negocio NominaBO.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -20,9 +20,9 @@ public class NominaBO implements INominaBO {
     
     private static INominaBO instance;
     
-    private NominaBO() {
-        
-    }
+    private List<NominaDTO> nominas;
+    
+    private NominaBO() {nominas = new ArrayList<>();}
     
     public static synchronized INominaBO getInstance() {
         if (instance == null) {
@@ -65,13 +65,17 @@ public class NominaBO implements INominaBO {
     
     /**
      * Simula el guardado de una nómina en la base de datos.
-     * 
      * @param nomina Objeto NominaDTO que se desea guardar.
      * @return true si la nómina se guardó correctamente, false en caso contrario.
+     * @throws Exceptions.ObjetosNegocioException Excepción.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) {
-        return new Random().nextBoolean();
+    public boolean guardarNomina(NominaDTO nomina) throws ObjetosNegocioException{
+        if(nomina == null)
+            throw new ObjetosNegocioException("No se aceptan nominas vacias.");
+        
+        nominas.add(nomina);
+        return true;
     }
     
     /**

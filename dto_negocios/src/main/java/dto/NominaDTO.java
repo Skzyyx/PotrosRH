@@ -3,7 +3,7 @@ package dto;
 import java.time.LocalDate;
 
 /**
- *
+ * Objeto de transferencia para Nominas.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
