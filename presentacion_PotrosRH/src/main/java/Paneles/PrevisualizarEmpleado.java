@@ -367,6 +367,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
 
     public void setDatosEmpleado(EmpleadoDTO empleado) {
+        System.out.println(empleado.toString());
         nombreEmpleado.setText(empleado.getNombre());
         apellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
         apellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());

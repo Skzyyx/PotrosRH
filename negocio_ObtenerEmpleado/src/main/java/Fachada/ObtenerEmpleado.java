@@ -46,8 +46,7 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     * @throws ObtenerEmpleadoException si el RFC es inválido o ocurre un error durante la obtención.
     */
     @Override
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
-        
+    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {   
         return control.obtenerEmpleado(rfc);
     }
     

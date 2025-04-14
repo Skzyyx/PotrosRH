@@ -68,6 +68,7 @@ public class ControlNomina {
     public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
         try {
             EmpleadoDTO empleado = obtenerEmpleado.obtenerEmpleado(rfc);
+            empleadoDTO = empleado;
             return empleado;
         } catch (ObtenerEmpleadoException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
