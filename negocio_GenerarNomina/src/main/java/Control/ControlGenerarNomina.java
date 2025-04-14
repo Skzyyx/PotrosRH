@@ -1,4 +1,4 @@
-package GenerarNomina;
+package Control;
 
 import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
@@ -11,6 +11,7 @@ import dto.NominaDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Interface.ICorreo;
+import Interfaces.INominaBO;
 import enums.EstadoEmpleado;
 
 /**
@@ -21,9 +22,9 @@ import enums.EstadoEmpleado;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class GenerarNomina implements IGenerarNomina {
+public class ControlGenerarNomina implements IGenerarNomina {
     
-    private final NominaBO nominaBO = new NominaBO();
+    private final INominaBO nominaBO = NominaBO.getInstance();
 
     /**
      * Genera la nómina de un empleado activo.
@@ -43,7 +44,7 @@ public class GenerarNomina implements IGenerarNomina {
         try {
             return nominaBO.generarNomina(empleado);
         } catch (ObjetosNegocioException ex) {
-            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Error al generar la nómina: " + ex.getMessage());
         }
     }
@@ -66,7 +67,7 @@ public class GenerarNomina implements IGenerarNomina {
             sistemaCorreo.enviarCorreo(nomina);
             return true;
         } catch (CorreoException ex) {
-            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
         }
     }

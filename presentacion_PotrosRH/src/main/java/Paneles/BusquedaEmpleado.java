@@ -210,7 +210,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         }
         
         ControlNomina controlNomina = ControlNomina.getInstance();
-        if (controlNomina.validarRFC(txtRfc.getText()) && controlNomina.validarEmpleado(txtRfc.getText())) {
+        if (controlNomina.validarEmpleado(txtRfc.getText())) {
             ControlFlujo.mostrarPrevisualizarEmpleado(rfc);
         }
 

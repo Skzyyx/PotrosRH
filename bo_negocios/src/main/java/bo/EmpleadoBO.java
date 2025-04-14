@@ -11,26 +11,40 @@ package bo;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import enums.EstadoEmpleado;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import Interfaces.IEmpleadoBO;
 
-public class EmpleadoBO {
+public class EmpleadoBO implements IEmpleadoBO{
+    
+    private static IEmpleadoBO instance;
+    
+    private EmpleadoBO (){
+        
+    }
+    
+    public static synchronized IEmpleadoBO getInstance() {
+        if (instance == null) {
+            instance = new EmpleadoBO();
+        }
+        return instance;
+    }
     
     /**
-     * Valida que el RFC proporcionado no sea nulo ni vacío.
+     * Valida que el estado del empleado sea ACTIVO.
      *
-     * @param rfc RFC del empleado a validar.
+     * @param empleado empleado a validar.
      * @return {@code true} si el RFC es válido.
      * @throws ObjetosNegocioException Si el RFC es nulo o está vacío.
      */
-    public boolean validarEstado(String rfc) throws ObjetosNegocioException {
-        if (rfc == null) 
-            throw new ObjetosNegocioException("El rfc no puede ser nulo");
+    @Override
+    public boolean validarEstado(EmpleadoDTO empleado) throws ObjetosNegocioException {
+        if (empleado == null) 
+            throw new ObjetosNegocioException("El empleado no puede ser nulo.");
         
-        if (rfc.trim().isEmpty()) 
-            throw new ObjetosNegocioException("El rfc no puede estar vacio");
-        
+        if (empleado.getEstado() == EstadoEmpleado.INACTIVO) {
+            throw new ObjetosNegocioException("El empleado no se cuenta activo."); 
+        }
         return true;
     }
 
@@ -39,10 +53,17 @@ public class EmpleadoBO {
      *
      * @param rfc RFC del empleado a evaluar.
      * @return {@code true} si el porcentaje de faltas es menor al 80%, {@code false} en caso contrario.
+     * @throws Exceptions.ObjetosNegocioException cuando no cumple con el minimo de asistencias.
      */
-    public boolean validarPorcentajeFaltas(String rfc) {
+    @Override
+    public boolean validarPorcentajeAsistencias(String rfc) throws ObjetosNegocioException {
         double porcentajeFaltas = Math.random();
-        return porcentajeFaltas < 0.80;
+        boolean porcentaje = porcentajeFaltas < 0.80;
+        
+        if (!porcentaje) {
+            throw new ObjetosNegocioException("No cumple con el mínimo de asistencias.");
+        }
+        return porcentaje;
     }
 
     /**
@@ -53,6 +74,7 @@ public class EmpleadoBO {
      * @return {@link EmpleadoDTO} con la información del empleado encontrado.
      * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no está registrado.
      */
+    @Override
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObjetosNegocioException {
         String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
 

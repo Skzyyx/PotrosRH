@@ -1,7 +1,8 @@
-package ObtenerEmpleado;
+package Control;
 
 import Excepciones.ObtenerEmpleadoException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IEmpleadoBO;
 import Interfaces.IObtenerEmpleado;
 import bo.EmpleadoBO;
 import dto.EmpleadoDTO;
@@ -16,22 +17,25 @@ import java.util.logging.Logger;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class ObtenerEmpleado implements IObtenerEmpleado {
+public class ControlObtenerEmpleado implements IObtenerEmpleado {
 
-    private final EmpleadoBO empleadoBO = new EmpleadoBO();
+    private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
     
     @Override
     public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
         
-        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
+        if (rfc.isEmpty()) 
+            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");
         
-        if(!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
+        String regex = "^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$";
+        
+        if(!rfc.matches(regex))
             throw new ObtenerEmpleadoException("RFC no válido");
         
         try {
             return empleadoBO.obtenerEmpleado(rfc);
         } catch (ObjetosNegocioException ex) {
-            Logger.getLogger(ObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObtenerEmpleadoException(ex.getMessage(), ex);
         }
     }

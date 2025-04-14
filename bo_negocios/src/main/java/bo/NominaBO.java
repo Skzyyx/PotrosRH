@@ -1,6 +1,8 @@
 package bo;
 
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IEmpleadoBO;
+import Interfaces.INominaBO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.time.LocalDate;
@@ -14,7 +16,20 @@ import java.util.Random;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class NominaBO {
+public class NominaBO implements INominaBO {
+    
+    private static INominaBO instance;
+    
+    private NominaBO() {
+        
+    }
+    
+    public static synchronized INominaBO getInstance() {
+        if (instance == null) {
+            instance = new NominaBO();
+        }
+        return instance;
+    }
     
     // Tabla del SAT (Límite Inferior, Cuota Fija, % Excedente)
     private final double[][] TABLA_ISR = {
@@ -31,8 +46,6 @@ public class NominaBO {
         {74835.47, 22159.88, 35.00}
     };
 
-    public NominaBO() {}
-
     /**
      * Genera una nómina para un empleado dado.
      * 
@@ -40,6 +53,7 @@ public class NominaBO {
      * @return NominaDTO con los datos de la nómina generada.
      * @throws ObjetosNegocioException si el empleado es nulo.
      */
+    @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
         if (empleado == null) {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
@@ -55,6 +69,7 @@ public class NominaBO {
      * @param nomina Objeto NominaDTO que se desea guardar.
      * @return true si la nómina se guardó correctamente, false en caso contrario.
      */
+    @Override
     public boolean guardarNomina(NominaDTO nomina) {
         return new Random().nextBoolean();
     }
