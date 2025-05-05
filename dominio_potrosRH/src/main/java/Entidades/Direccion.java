@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 /**
@@ -17,9 +13,7 @@ public class Direccion {
     private String numero;
     private String colonia;
 
-    public Direccion() {
-    }
-    
+    public Direccion() {}
     
     public Direccion(String calle, String numero, String colonia) {
         this.calle = calle;
@@ -27,34 +21,18 @@ public class Direccion {
         this.colonia = colonia;
     }
 
-    public String getCalle() {
-        return calle;
-    }
+    public String getCalle() {return calle;}
 
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
+    public void setCalle(String calle) {this.calle = calle;}
 
-    public String getNumero() {
-        return numero;
-    }
+    public String getNumero() {return numero;}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+    public void setNumero(String numero) {this.numero = numero;}
 
-    public String getColonia() {
-        return colonia;
-    }
+    public String getColonia() {return colonia;}
 
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
-    }
+    public void setColonia(String colonia) {this.colonia = colonia;}
 
     @Override
-    public String toString() {
-        return "Direccion{" + "calle=" + calle + ", numero=" + numero + ", colonia=" + colonia + '}';
-    }
-    
-    
+    public String toString() {return String.format("%s, %s, %s", getCalle(), getColonia(), getNumero());}
 }

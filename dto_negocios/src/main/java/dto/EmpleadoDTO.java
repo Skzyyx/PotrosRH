@@ -22,7 +22,7 @@ public class EmpleadoDTO {
     private String telefono;
     private String departamento;
     private String puesto;
-    private double salarioBase;
+    private Double salarioBase;
     private EstadoEmpleado estado;
     
     public EmpleadoDTO() {}
@@ -39,7 +39,7 @@ public class EmpleadoDTO {
             String telefono, 
             String departamento, 
             String puesto, 
-            double salarioBase, 
+            Double salarioBase, 
             EstadoEmpleado estado
     ) 
     {
@@ -102,16 +102,24 @@ public class EmpleadoDTO {
 
     public void setPuesto(String puesto) {this.puesto = puesto;}
 
-    public double getSalarioBase() {return salarioBase;}
+    public Double getSalarioBase() {return salarioBase;}
 
-    public void setSalarioBase(double salarioBase) {this.salarioBase = salarioBase;}
+    public void setSalarioBase(Double salarioBase) {this.salarioBase = salarioBase;}
 
     public EstadoEmpleado getEstado() {return estado;}
 
     public void setEstado(EstadoEmpleado estado) {this.estado = estado;}
     
     @Override
-    public String toString() {
-        return "EmpleadoDTO{" + "nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", email=" + email + ", rfc=" + rfc + ", calle=" + calle + ", colonia=" + colonia + ", numero=" + numero + ", telefono=" + telefono + ", departamento=" + departamento + ", puesto=" + puesto + ", salarioBase=" + salarioBase + ", estado=" + estado + '}';
+    public String toString() {return 
+            String.format(
+                    "%s %s %s, %s, %s, %s, %s", 
+                    getNombre(), 
+                    getApellidoPaterno(), 
+                    getApellidoMaterno(), 
+                    getEmail(), 
+                    getTelefono(), 
+                    getDepartamento(), 
+                    getPuesto());
     }
 }

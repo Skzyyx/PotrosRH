@@ -88,7 +88,7 @@ public class EmpleadoBO implements IEmpleadoBO{
                     "1231231950", 
                     "Limpieza", 
                     "Empleado", 
-                    4000, 
+                    4000.0, 
                     EstadoEmpleado.ACTIVO),
                 
                 new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
@@ -98,7 +98,7 @@ public class EmpleadoBO implements IEmpleadoBO{
                     "6442291849", 
                     "Recursos Humanos", 
                     "Empleado", 
-                    8000, 
+                    8000.0, 
                     EstadoEmpleado.ACTIVO),
                 
                 new EmpleadoDTO("José Luis", "Islas", "Molina", 
@@ -108,7 +108,7 @@ public class EmpleadoBO implements IEmpleadoBO{
                     "9876543210", 
                     "TI", 
                     "Analista", 
-                    12000, 
+                    12000.0, 
                     EstadoEmpleado.ACTIVO)
         );
 
