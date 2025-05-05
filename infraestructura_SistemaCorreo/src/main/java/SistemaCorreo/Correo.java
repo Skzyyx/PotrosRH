@@ -8,6 +8,15 @@ import com.resend.services.emails.model.CreateEmailResponse;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import Interface.ICorreo;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+import java.util.Properties;
 
 /**
  *
@@ -31,9 +40,12 @@ public class Correo implements ICorreo {
         EmpleadoDTO empleado = nomina.getEmpleado();
         String nombre = empleado.getNombre() + " " + empleado.getApellidoMaterno() + " " + empleado.getApellidoPaterno();
         
-        Resend resend = new Resend("re_JVn91i7s_BPEFemUDeoW7sj55cKbj1maz");
+        final String remitente = "potrosrh@gmail.com"; // tu correo
+        final String claveApp = "xadiaotujovdlnuo"; // no tu contraseña normal
 
-        String htmlTemplate = String.format("""
+        String destinatario = "jose.islas252574@potros.itson.edu.mx";
+        String asunto = "Reporte de Nómina";
+        String cuerpo = String.format("""
             <html>
             <head>
                 <style>
@@ -92,18 +104,32 @@ public class Correo implements ICorreo {
                 nomina.getIsr(), 
                 nomina.getSalarioNeto());
 
-        CreateEmailOptions params = CreateEmailOptions.builder()
-                .from("PotrosRH <potros_rh@resend.dev>")
-                .to(nomina.getEmpleado().getEmail())
-                .subject("Tu Recibo de Nómina")
-                .html(htmlTemplate)
-                .build();
+        // Configuración del servidor SMTP de Gmail
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
 
+        // Crear la sesión con autenticación
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(remitente, claveApp);
+            }
+        });
+        
         try {
-            CreateEmailResponse data = resend.emails().send(params);
-            System.out.println(data.getId());
-        } catch (ResendException e) {
-            throw new CorreoException("Ocurrió un error al enviar el correo.");
+            Message mensaje = new MimeMessage(session);
+            mensaje.setFrom(new InternetAddress(remitente));
+            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            mensaje.setSubject(asunto);
+            mensaje.setContent(cuerpo, "text/html; charset=utf-8");
+
+            Transport.send(mensaje);
+            System.out.println("Correo enviado con éxito.");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 }

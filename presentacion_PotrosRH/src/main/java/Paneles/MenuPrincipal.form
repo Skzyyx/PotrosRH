@@ -115,7 +115,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/DespedirEmpleado.png"/>
+          <Image iconType="3" name="/Images/MenuPrincipal/DespedirEmpleado.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Despedir&lt;br&gt;Empleado&lt;/html&gt;"/>
       </Properties>
@@ -138,7 +138,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/Nominas.png"/>
+          <Image iconType="3" name="/Images/MenuPrincipal/Nominas.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="N&#xf3;minas"/>
       </Properties>
@@ -161,7 +161,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/Asistencias.png"/>
+          <Image iconType="3" name="/Images/MenuPrincipal/Asistencias.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Asistencias"/>
       </Properties>
@@ -184,7 +184,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/Expedientes.png"/>
+          <Image iconType="3" name="/Images/MenuPrincipal/Expedientes.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Expedientes"/>
       </Properties>
@@ -207,7 +207,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/ReportarEmpleado.png"/>
+          <Image iconType="3" name="/Images/MenuPrincipal/ReportarEmpleado.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Reportar&lt;br&gt;Empleado&lt;/html&gt;"/>
       </Properties>
