@@ -16,6 +16,7 @@ public class EmpleadoDTO {
     private String apellidoMaterno;
     private String email;
     private String rfc;
+    private String curp;
     private String calle;
     private String colonia;
     private String numero;
@@ -32,7 +33,8 @@ public class EmpleadoDTO {
             String apellidoPaterno, 
             String apellidoMaterno, 
             String email, 
-            String rfc, 
+            String rfc,
+            String curp,
             String calle, 
             String colonia, 
             String numero, 
@@ -48,6 +50,7 @@ public class EmpleadoDTO {
         this.apellidoMaterno = apellidoMaterno;
         this.email = email;
         this.rfc = rfc;
+        this.curp = curp;
         this.calle = calle;
         this.colonia = colonia;
         this.numero = numero;
@@ -78,6 +81,10 @@ public class EmpleadoDTO {
 
     public void setRfc(String rfc) {this.rfc = rfc;}
 
+    public String getCurp() {return curp;}
+
+    public void setCurp(String curp) {this.curp = curp;}
+    
     public String getCalle() {return calle;}
 
     public void setCalle(String calle) {this.calle = calle;}

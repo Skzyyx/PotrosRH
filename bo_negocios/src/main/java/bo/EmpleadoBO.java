@@ -83,7 +83,8 @@ public class EmpleadoBO implements IEmpleadoBO{
         empleados = Arrays.asList(
                 new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
                     "jose.islas252574@potros.itson.edu.mx", 
-                    "GUMF900101ABC", 
+                    "GUMF900101ABC",
+                    "CURPFREDDY1234",
                     "Peppa", "Power Rangers", "123", 
                     "1231231950", 
                     "Limpieza", 
@@ -93,7 +94,8 @@ public class EmpleadoBO implements IEmpleadoBO{
                 
                 new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
                     "jose.islas252574@potros.itson.edu.mx", 
-                    "LOIJ920315XYZ", 
+                    "LOIJ920315XYZ",
+                    "CURPNETO1234",
                     "Furbo", "Real Madrid", "123", 
                     "6442291849", 
                     "Recursos Humanos", 
@@ -103,7 +105,8 @@ public class EmpleadoBO implements IEmpleadoBO{
                 
                 new EmpleadoDTO("José Luis", "Islas", "Molina", 
                     "jose.islas252574@potros.itson.edu.mx", 
-                    "ISLM850525DEF", 
+                    "ISLM850525DEF",
+                    "CURPJOSE1234",
                     "Avenida Siempre Viva", "Centro", "456", 
                     "9876543210", 
                     "TI", 
