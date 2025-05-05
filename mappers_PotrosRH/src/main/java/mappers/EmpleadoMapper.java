@@ -18,7 +18,14 @@ public class EmpleadoMapper {
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
-        empleado.setCurp(empleadoDTO.getC);
+        empleado.setRfc(empleadoDTO.getRfc());
+        empleado.setCurp(empleadoDTO.getCurp());
+        empleado.setEmail(empleadoDTO.getEmail());
+        empleado.setTelefono(empleadoDTO.getTelefono());
+        empleado.setEstado(false);
+        empleado.setDepartamento(empleadoDTO.getDepartamento());
+        
+        return empleado;
     }
     
 }
