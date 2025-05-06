@@ -22,7 +22,7 @@ public class ControlValidarEmpleado {
 
     public boolean validarEstado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
         try {
-            return empleadoBO.validarEstado(empleado);
+            return empleadoBO.validarEstado(empleado.getRfc());
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(ControlValidarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             throw new ValidarEmpleadoException(ex.getMessage());

@@ -1,4 +1,4 @@
-package Entidades;
+package dto;
 
 import java.time.LocalTime;
 
@@ -10,26 +10,25 @@ import java.time.LocalTime;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class HorarioLaboral {
+public class HorarioLaboralDTO {
     
-    private Empleado empleado;
+    private EmpleadoDTO empleado;
     private Short diaSemana;
     private LocalTime horaInicioTurno;
     private LocalTime horaFinTurno;
 
-    public HorarioLaboral() {}
+    public HorarioLaboralDTO() {}
     
-    
-    public HorarioLaboral(Empleado empleado, Short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
+    public HorarioLaboralDTO(EmpleadoDTO empleado, short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
         this.empleado = empleado;
         this.diaSemana = diaSemana;
         this.horaInicioTurno = horaInicioTurno;
         this.horaFinTurno = horaFinTurno;
     }
 
-    public Empleado getEmpleado() {return empleado;}
+    public EmpleadoDTO getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
+    public void setEmpleado(EmpleadoDTO empleado) {this.empleado = empleado;}
 
     public Short getDiaSemana() {return diaSemana;}
 

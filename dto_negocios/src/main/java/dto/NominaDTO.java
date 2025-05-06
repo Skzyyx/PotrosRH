@@ -13,25 +13,29 @@ import java.time.LocalDate;
 public class NominaDTO {
     
     private EmpleadoDTO empleado;
-    private double bono;
-    private double salarioBruto;
-    private double isr;
-    private double salarioNeto;
+    private Double bono;
+    private Double salarioBruto;
+    private Double isr;
+    private Double salarioNeto;
     private LocalDate fechaCorte;
-    private double horasTrabajadas;
-    private double horaExtra;
+    private Integer diasTrabajados;
+    private Double horasTrabajadas;
+    private Double horasExtra;
+    private boolean estadoCobro;
 
     public NominaDTO() {}
 
     public NominaDTO(
             EmpleadoDTO empleado, 
-            double bono, 
-            double salarioBruto, 
-            double isr, 
-            double salarioNeto, 
+            Double bono, 
+            Double salarioBruto, 
+            Double isr, 
+            Double salarioNeto, 
             LocalDate fechaCorte, 
-            double horasTrabajadas, 
-            double horaExtra
+            Integer diasTrabajados,
+            Double horasTrabajadas, 
+            Double horasExtra,
+            boolean estadoCobro
     ) 
     {
         this.empleado = empleado;
@@ -40,44 +44,65 @@ public class NominaDTO {
         this.isr = isr;
         this.salarioNeto = salarioNeto;
         this.fechaCorte = fechaCorte;
+        this.diasTrabajados = diasTrabajados;
         this.horasTrabajadas = horasTrabajadas;
-        this.horaExtra = horaExtra;
+        this.horasExtra = horasExtra;
+        this.estadoCobro = estadoCobro;
     }
     
     public EmpleadoDTO getEmpleado() {return empleado;}
 
     public void setEmpleado(EmpleadoDTO empleado) {this.empleado = empleado;}
 
-    public double getBono() {return bono;}
+    public Double getBono() {return bono;}
 
-    public void setBono(double bono) {this.bono = bono;}
+    public void setBono(Double bono) {this.bono = bono;}
 
-    public double getIsr() {return isr;}
+    public Double getIsr() {return isr;}
 
-    public void setIsr(double isr) {this.isr = isr;}
+    public void setIsr(Double isr) {this.isr = isr;}
 
-    public double getSalarioBruto() {return salarioBruto;}
+    public Double getSalarioBruto() {return salarioBruto;}
 
-    public void setSalarioBruto(double salarioBruto) {this.salarioBruto = salarioBruto;}
+    public void setSalarioBruto(Double salarioBruto) {this.salarioBruto = salarioBruto;}
 
-    public double getSalarioNeto() {return salarioNeto;}
+    public Double getSalarioNeto() {return salarioNeto;}
 
-    public void setSalarioNeto(double salarioNeto) {this.salarioNeto = salarioNeto;}
+    public void setSalarioNeto(Double salarioNeto) {this.salarioNeto = salarioNeto;}
 
     public LocalDate getFechaCorte() {return fechaCorte;}
 
     public void setFechaCorte(LocalDate fechaCorte) {this.fechaCorte = fechaCorte;}
+    
+    public Double getHorasTrabajadas() {return horasTrabajadas;}
 
-    public double getHorasTrabajadas() {return horasTrabajadas;}
+    public void setHorasTrabajadas(Double horasTrabajadas) {this.horasTrabajadas = horasTrabajadas;}
 
-    public void setHorasTrabajadas(double horasTrabajadas) {this.horasTrabajadas = horasTrabajadas;}
+    public Double getHorasExtra() {return horasExtra;}
 
-    public double getHoraExtra() {return horaExtra;}
+    public void setHorasExtra(Double horasExtra) {this.horasExtra = horasExtra;}
+    
+    public Integer getDiasTrabajados() {return diasTrabajados;}
+    
+    public void setDiasTrabajados(Integer diasTrabajados) {this.diasTrabajados = diasTrabajados;}
 
-    public void setHoraExtra(double horaExtra) {this.horaExtra = horaExtra;}
+    public boolean getEstadoCobro() {return estadoCobro;}
 
+    public void setEstadoCobro(boolean estadoCobro) {this.estadoCobro = estadoCobro;}
+    
     @Override
     public String toString() {
-        return "NominaDTO{" + "empleado=" + empleado + ", bono=" + bono + ", isr=" + isr + ", salarioBruto=" + salarioBruto + ", salarioNeto=" + salarioNeto + ", fechaCorte=" + fechaCorte + ", horasTrabajadas=" + horasTrabajadas + ", horaExtra=" + horaExtra + '}';
+        return String.format("%s, %f, %f, %f, %d/%d/%d, %d, %f, %f", 
+                getEmpleado().getNombre(),
+                getIsr(),
+                getSalarioBruto(),
+                getSalarioNeto(),
+                getFechaCorte().getDayOfMonth(),
+                getFechaCorte().getMonthValue(),
+                getFechaCorte().getYear(),
+                getDiasTrabajados(),
+                getHorasTrabajadas(),
+                getHorasExtra()
+        );
     }    
 }

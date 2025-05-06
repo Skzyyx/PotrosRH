@@ -1,4 +1,4 @@
-package Entidades;
+package dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,24 +11,25 @@ import java.time.LocalTime;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class RegistroAsistencia {
-    private Empleado empleado;
+public class RegistroAsistenciaDTO {
+ 
+    private EmpleadoDTO empleado;
     private LocalDate fechaAsistencia;
     private LocalTime horaEntrada;
     private LocalTime horaSalida;
 
-    public RegistroAsistencia() {}
+    public RegistroAsistenciaDTO() {}
 
-    public RegistroAsistencia(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaEntrada, LocalTime horaSalida) {
+    public RegistroAsistenciaDTO(EmpleadoDTO empleado, LocalDate fechaAsistencia, LocalTime horaEntrada, LocalTime horaSalida) {
         this.empleado = empleado;
         this.fechaAsistencia = fechaAsistencia;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
     }
 
-    public Empleado getEmpleado() {return empleado;}
+    public EmpleadoDTO getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
+    public void setEmpleado(EmpleadoDTO empleado) {this.empleado = empleado;}
 
     public LocalDate getFechaAsistencia() {return fechaAsistencia;}
 
@@ -57,5 +58,6 @@ public class RegistroAsistencia {
                 getHoraSalida().getMinute(),
                 getHoraSalida().getSecond()
         );
-    }   
+    }
+    
 }

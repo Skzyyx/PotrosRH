@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entidades;
 
 import java.time.LocalDate;
@@ -26,11 +22,20 @@ public class Nomina {
     private Double horasExtra;
     private boolean estadoCobro;
 
-    public Nomina() {
-    }
+    public Nomina() {}
     
-    
-    public Nomina(Empleado empleado, Double bono, Double isr, Double salarioBruto, Double salarioNeto, LocalDate fechaCorte, Integer diasTrabajados, Double horasTrabajadas, Double horasExtra, boolean estadoCobro) {
+    public Nomina(
+            Empleado empleado, 
+            Double bono, 
+            Double isr, 
+            Double salarioBruto, 
+            Double salarioNeto, 
+            LocalDate fechaCorte, 
+            Integer diasTrabajados, 
+            Double horasTrabajadas, 
+            Double horasExtra, 
+            boolean estadoCobro
+    ) {
         this.empleado = empleado;
         this.bono = bono;
         this.isr = isr;
@@ -43,90 +48,59 @@ public class Nomina {
         this.estadoCobro = estadoCobro;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    public Empleado getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
-    public Double getBono() {
-        return bono;
-    }
+    public Double getBono() {return bono;}
 
-    public void setBono(Double bono) {
-        this.bono = bono;
-    }
+    public void setBono(Double bono) {this.bono = bono;}
 
-    public Double getIsr() {
-        return isr;
-    }
+    public Double getIsr() {return isr;}
 
-    public void setIsr(Double isr) {
-        this.isr = isr;
-    }
+    public void setIsr(Double isr) {this.isr = isr;}
 
-    public Double getSalarioBruto() {
-        return salarioBruto;
-    }
+    public Double getSalarioBruto() {return salarioBruto;}
 
-    public void setSalarioBruto(Double salarioBruto) {
-        this.salarioBruto = salarioBruto;
-    }
+    public void setSalarioBruto(Double salarioBruto) {this.salarioBruto = salarioBruto;}
 
-    public Double getSalarioNeto() {
-        return salarioNeto;
-    }
+    public Double getSalarioNeto() {return salarioNeto;}
 
-    public void setSalarioNeto(Double salarioNeto) {
-        this.salarioNeto = salarioNeto;
-    }
+    public void setSalarioNeto(Double salarioNeto) {this.salarioNeto = salarioNeto;}
 
-    public LocalDate getFechaCorte() {
-        return fechaCorte;
-    }
+    public LocalDate getFechaCorte() {return fechaCorte;}
 
-    public void setFechaCorte(LocalDate fechaCorte) {
-        this.fechaCorte = fechaCorte;
-    }
+    public void setFechaCorte(LocalDate fechaCorte) {this.fechaCorte = fechaCorte;}
 
-    public Integer getDiasTrabajados() {
-        return diasTrabajados;
-    }
+    public Integer getDiasTrabajados() {return diasTrabajados;}
 
-    public void setDiasTrabajados(Integer diasTrabajados) {
-        this.diasTrabajados = diasTrabajados;
-    }
+    public void setDiasTrabajados(Integer diasTrabajados) {this.diasTrabajados = diasTrabajados;}
 
-    public Double getHorasTrabajadas() {
-        return horasTrabajadas;
-    }
+    public Double getHorasTrabajadas() {return horasTrabajadas;}
 
-    public void setHorasTrabajadas(Double horasTrabajadas) {
-        this.horasTrabajadas = horasTrabajadas;
-    }
+    public void setHorasTrabajadas(Double horasTrabajadas) {this.horasTrabajadas = horasTrabajadas;}
 
-    public Double getHorasExtra() {
-        return horasExtra;
-    }
+    public Double getHorasExtra() {return horasExtra;}
 
-    public void setHorasExtra(Double horasExtra) {
-        this.horasExtra = horasExtra;
-    }
+    public void setHorasExtra(Double horasExtra) {this.horasExtra = horasExtra;}
 
-    public boolean isEstadoCobro() {
-        return estadoCobro;
-    }
+    public boolean getEstadoCobro() {return estadoCobro;}
 
-    public void setEstadoCobro(boolean estadoCobro) {
-        this.estadoCobro = estadoCobro;
-    }
-
+    public void setEstadoCobro(boolean estadoCobro) {this.estadoCobro = estadoCobro;}
+    
     @Override
     public String toString() {
-        return "Nomina{" + "empleado=" + empleado + ", bono=" + bono + ", isr=" + isr + ", salarioBruto=" + salarioBruto + ", salarioNeto=" + salarioNeto + ", fechaCorte=" + fechaCorte + ", diasTrabajados=" + diasTrabajados + ", horasTrabajadas=" + horasTrabajadas + ", horasExtra=" + horasExtra + ", estadoCobro=" + estadoCobro + '}';
+        return String.format("%s, %f, %f, %f, %d/%d/%d, %d, %f, %f", 
+                getEmpleado().getNombre(),
+                getIsr(),
+                getSalarioBruto(),
+                getSalarioNeto(),
+                getFechaCorte().getDayOfMonth(),
+                getFechaCorte().getMonthValue(),
+                getFechaCorte().getYear(),
+                getDiasTrabajados(),
+                getHorasTrabajadas(),
+                getHorasExtra()
+        );
     }
-    
-    
 }

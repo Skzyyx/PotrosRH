@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import Entidades.Empleado;
@@ -9,6 +5,7 @@ import Entidades.Nomina;
 import Exceptions.AccesoDatosException;
 import Interfaces.INominaDAO;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +17,7 @@ import java.util.List;
  */
 public class NominaDAO implements INominaDAO {
 
-    private List<Nomina> nominas;
-
+    private final List<Nomina> nominas = new ArrayList<>();
     
     @Override
     public boolean guardarNomina(Nomina nomina) throws AccesoDatosException {
@@ -31,6 +27,6 @@ public class NominaDAO implements INominaDAO {
 
     @Override
     public LocalDate obtenerFechaUltimaNomina(Empleado empleado) throws AccesoDatosException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 }

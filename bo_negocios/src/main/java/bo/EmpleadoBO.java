@@ -12,46 +12,54 @@ import DAO.EmpleadoDAO;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
-import enums.EstadoEmpleado;
-import java.util.Arrays;
-import java.util.List;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
-
+/**
+ * 
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
+ */
 public class EmpleadoBO implements IEmpleadoBO{
     
     private static IEmpleadoBO instance;
-    private static IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    private static final IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
     
     private EmpleadoBO (){}
     
     public static synchronized IEmpleadoBO getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new EmpleadoBO();
-        }
+        
         return instance;
     }
     
     /**
      * Valida que el estado del empleado sea ACTIVO.
      *
-     * @param empleado empleado a validar.
-     * @return {@code true} si el RFC es válido.
+     * @param rfc RFC del empleado a evaluar.
+     * @return {@code true si el RFC es válido.
      * @throws ObjetosNegocioException Si el RFC es nulo o está vacío.
      */
     @Override
-    public boolean validarEstado(EmpleadoDTO empleado) throws ObjetosNegocioException {
-        if (empleado == null) 
-            throw new ObjetosNegocioException("El empleado no puede ser nulo.");
+    public boolean validarEstado(String rfc) throws ObjetosNegocioException {
         
-        if (empleado.getEstado() == EstadoEmpleado.INACTIVO) {
-            throw new ObjetosNegocioException("El empleado no se cuenta activo."); 
+        if (rfc == null) 
+            throw new ObjetosNegocioException("El RFC del empleado no puede ser nulo.");
+        
+        try {
+            
+            return empleadoDAO.validarEstado(rfc);
+            
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage(), ex);
         }
-        return true;
     }
 
     /**
@@ -62,13 +70,18 @@ public class EmpleadoBO implements IEmpleadoBO{
      */
     @Override
     public boolean validarPorcentajeAsistencias(String rfc) throws ObjetosNegocioException {
-        double porcentajeFaltas = Math.random();
-        boolean porcentaje = porcentajeFaltas < 0.80;
         
-        if (!porcentaje) 
-            throw new ObjetosNegocioException("No cumple con el mínimo de asistencias.");
+        if (rfc == null) 
+            throw new ObjetosNegocioException("El RFC del empleado no puede ser nulo."); 
         
-        return porcentaje;
+        try {
+            
+            return empleadoDAO.validarPorcentajeAsistencias(rfc);
+            
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage(), ex);
+        }
     }
 
     /**
@@ -90,7 +103,6 @@ public class EmpleadoBO implements IEmpleadoBO{
         } catch (AccesoDatosException ex) {
             Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage());
-            
         }
     }
 }

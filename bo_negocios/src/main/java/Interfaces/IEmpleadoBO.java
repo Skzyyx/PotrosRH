@@ -5,16 +5,20 @@ import dto.EmpleadoDTO;
 
 /**
  *
- * @author skyro
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public interface IEmpleadoBO {
     /**
      * Valida que el estado del empleado sea ACTIVO.
-     * @param empleado Empleado a validar.
+     * @param rfc RFC del empleado a evaluar.
      * @return {@code true} si el RFC es válido.
      * @throws ObjetosNegocioException Si el RFC es nulo o está vacío.
      */
-    public boolean validarEstado(EmpleadoDTO empleado) throws ObjetosNegocioException;
+    public boolean validarEstado(String rfc) throws ObjetosNegocioException;
     /**
      * Determina si el porcentaje de faltas de un empleado es aceptable.
      * @param rfc RFC del empleado a evaluar.

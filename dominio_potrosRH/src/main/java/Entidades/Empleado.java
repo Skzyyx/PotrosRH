@@ -1,6 +1,7 @@
 package Entidades;
 
 import enums.EstadoEmpleado;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Empleado {
     private String puesto;
     private Double salarioBase;
     private EstadoEmpleado estado;
+    private List<HorarioLaboral> horariosLaborales;
 
     public Empleado() {}
 
@@ -38,7 +40,8 @@ public class Empleado {
             String departamento, 
             String puesto, 
             Double salarioBase, 
-            EstadoEmpleado estado
+            EstadoEmpleado estado,
+            List<HorarioLaboral> horariosLaborales
     ) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -52,6 +55,7 @@ public class Empleado {
         this.puesto = puesto;
         this.salarioBase = salarioBase;
         this.estado = estado;
+        this.horariosLaborales = horariosLaborales;
     }
 
     public String getNombre() {return nombre;}
@@ -102,6 +106,10 @@ public class Empleado {
 
     public void setEstado(EstadoEmpleado estado) {this.estado = estado;}
 
+    public List<HorarioLaboral> getHorariosLaborales() {return horariosLaborales;}
+
+    public void setHorariosLaborales(List<HorarioLaboral> horariosLaborales) {this.horariosLaborales = horariosLaborales;}
+    
     public boolean compararRFC (String rfc){return rfc.equals(this.rfc);}
 
     @Override

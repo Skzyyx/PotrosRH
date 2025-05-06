@@ -8,8 +8,6 @@ import Interfaces.INominaDAO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.NominaMapper;
@@ -25,16 +23,14 @@ import mappers.NominaMapper;
 public class NominaBO implements INominaBO {
     
     private static INominaBO instance;
-    private static INominaDAO nominaDAO = new NominaDAO();
+    private static final INominaDAO nominaDAO = new NominaDAO();
     
-    private List<NominaDTO> nominas;
-    
-    private NominaBO() {nominas = new ArrayList<>();}
+    private NominaBO() {}
     
     public static synchronized INominaBO getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new NominaBO();
-        }
+        
         return instance;
     }
     
@@ -62,11 +58,20 @@ public class NominaBO implements INominaBO {
      */
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
-        if (empleado == null) {
+        
+        if (empleado == null) 
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
-        }
-        NominaDTO nomina = new NominaDTO(empleado, 0, empleado.getSalarioBase(), calcularISR(empleado.getSalarioBase(), 14), 0, LocalDate.now(), 40, 5);
+        
+        NominaDTO nomina = new NominaDTO();
+        nomina.setEmpleado(empleado);
+        nomina.setBono(0.0);
+        nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
+        nomina.setDiasTrabajados(14);
+        nomina.setSalarioBruto(empleado.getSalarioBase());
         nomina.setSalarioNeto(nomina.getEmpleado().getSalarioBase()- nomina.getIsr());
+        nomina.setFechaCorte(LocalDate.now());
+        nomina.setHorasTrabajadas(40.0);
+        nomina.setHorasExtra(5.0);
         return nomina;
     } 
     

@@ -1,10 +1,6 @@
 package SistemaCorreo;
 
 import Excepciones.CorreoException;
-import com.resend.Resend;
-import com.resend.core.exception.ResendException;
-import com.resend.services.emails.model.CreateEmailOptions;
-import com.resend.services.emails.model.CreateEmailResponse;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import Interface.ICorreo;
@@ -43,7 +39,7 @@ public class Correo implements ICorreo {
         final String remitente = "potrosrh@gmail.com"; // tu correo
         final String claveApp = "xadiaotujovdlnuo"; // no tu contraseña normal
 
-        String destinatario = "jose.islas252574@potros.itson.edu.mx";
+        String destinatario = empleado.getEmail();
         String asunto = "Reporte de Nómina";
         String cuerpo = String.format("""
             <html>
@@ -113,6 +109,7 @@ public class Correo implements ICorreo {
 
         // Crear la sesión con autenticación
         Session session = Session.getInstance(props, new Authenticator() {
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(remitente, claveApp);
             }
@@ -129,7 +126,7 @@ public class Correo implements ICorreo {
             System.out.println("Correo enviado con éxito.");
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            throw new CorreoException(e.getMessage(), e);
         }
     }
 }

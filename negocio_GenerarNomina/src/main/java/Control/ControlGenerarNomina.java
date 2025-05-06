@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Interface.ICorreo;
 import Interfaces.INominaBO;
-import enums.EstadoEmpleado;
 
 /**
  * Realiza validaciones de negocio y genera la nómina correspondiente
@@ -42,7 +41,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
         if (empleado == null) 
             throw new GenerarNominaException("El empleado no puede ser nulo.");
         // Si el empleado está inactivo.
-        if(empleado.getEstado() == EstadoEmpleado.INACTIVO)
+        if(!empleado.getEstado().equals("ACTIVO"))
             throw new GenerarNominaException("El empleado debe de estar activo.");
         
         try {

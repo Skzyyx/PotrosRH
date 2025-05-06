@@ -1,6 +1,6 @@
 package dto;
 
-import enums.EstadoEmpleado;
+import java.util.List;
 
 /**
  * Objeto de transferencia para Empleados.
@@ -11,6 +11,7 @@ import enums.EstadoEmpleado;
  * @author Benjamin Soto Coronado (253183)
  */
 public class EmpleadoDTO {
+    
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -24,7 +25,8 @@ public class EmpleadoDTO {
     private String departamento;
     private String puesto;
     private Double salarioBase;
-    private EstadoEmpleado estado;
+    private String estado;
+    private List<HorarioLaboralDTO> horariosLaborales;
     
     public EmpleadoDTO() {}
   
@@ -42,7 +44,8 @@ public class EmpleadoDTO {
             String departamento, 
             String puesto, 
             Double salarioBase, 
-            EstadoEmpleado estado
+            String estado,
+            List<HorarioLaboralDTO> horariosLaborales
     ) 
     {
         this.nombre = nombre;
@@ -59,6 +62,7 @@ public class EmpleadoDTO {
         this.puesto = puesto;
         this.salarioBase = salarioBase;
         this.estado = estado;
+        this.horariosLaborales = horariosLaborales;
     }
     
     public String getNombre() {return nombre;}
@@ -113,9 +117,13 @@ public class EmpleadoDTO {
 
     public void setSalarioBase(Double salarioBase) {this.salarioBase = salarioBase;}
 
-    public EstadoEmpleado getEstado() {return estado;}
+    public String getEstado() {return estado;}
 
-    public void setEstado(EstadoEmpleado estado) {this.estado = estado;}
+    public void setEstado(String estado) {this.estado = estado;}
+
+    public List<HorarioLaboralDTO> getHorariosLaborales() {return horariosLaborales;}
+
+    public void setHorariosLaborales(List<HorarioLaboralDTO> horariosLaborales) {this.horariosLaborales = horariosLaborales;}
     
     @Override
     public String toString() {return 
