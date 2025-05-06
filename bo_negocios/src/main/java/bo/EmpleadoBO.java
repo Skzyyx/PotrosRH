@@ -9,6 +9,7 @@ package bo;
  * @author Benjamin Soto Coronado (253183)
  */
 import DAO.EmpleadoDAO;
+import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import enums.EstadoEmpleado;
@@ -17,15 +18,16 @@ import java.util.List;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mappers.EmpleadoMapper;
 
 public class EmpleadoBO implements IEmpleadoBO{
     
     private static IEmpleadoBO instance;
     private static IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
     
-    private List<EmpleadoDTO> empleados;
-    
-    private EmpleadoBO (){empleados = new ArrayList<>();}
+    private EmpleadoBO (){}
     
     public static synchronized IEmpleadoBO getInstance() {
         if (instance == null) {
@@ -83,49 +85,12 @@ public class EmpleadoBO implements IEmpleadoBO{
         if (!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
         
-        empleados = Arrays.asList(
-                new EmpleadoDTO("Freddy", "Guzman", "Moreno", 
-                    "jose.islas252574@potros.itson.edu.mx", 
-                    "GUMF900101ABC",
-                    "CURPFREDDY1234",
-                    "Peppa", "Power Rangers", "123", 
-                    "1231231950", 
-                    "Limpieza", 
-                    "Empleado", 
-                    4000.0, 
-                    EstadoEmpleado.ACTIVO),
-                
-                new EmpleadoDTO("Jesús Ernesto", "López", "Ibarra", 
-                    "jose.islas252574@potros.itson.edu.mx", 
-                    "LOIJ920315XYZ",
-                    "CURPNETO1234",
-                    "Furbo", "Real Madrid", "123", 
-                    "6442291849", 
-                    "Recursos Humanos", 
-                    "Empleado", 
-                    8000.0, 
-                    EstadoEmpleado.ACTIVO),
-                
-                new EmpleadoDTO("José Luis", "Islas", "Molina", 
-                    "jose.islas252574@potros.itson.edu.mx", 
-                    "ISLM850525DEF",
-                    "CURPJOSE1234",
-                    "Avenida Siempre Viva", "Centro", "456", 
-                    "9876543210", 
-                    "TI", 
-                    "Analista", 
-                    12000.0, 
-                    EstadoEmpleado.ACTIVO)
-        );
-
-        // Buscar al empleado por RFC
-        for (EmpleadoDTO empleado : empleados) {
-            if (empleado.getRfc().equalsIgnoreCase(rfc)) {
-                return empleado;
-            }
+        try {
+            return EmpleadoMapper.toDTO(empleadoDAO.obtenerEmpleado(rfc));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage());
+            
         }
-
-        // Si no se encuentra el empleado, lanza una excepción
-        throw new ObjetosNegocioException("No se encontró un empleado con el RFC proporcionado");
     }
 }

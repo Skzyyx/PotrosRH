@@ -1,6 +1,7 @@
 package bo;
 
 import DAO.NominaDAO;
+import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.INominaBO;
 import Interfaces.INominaDAO;
@@ -9,6 +10,9 @@ import dto.NominaDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mappers.NominaMapper;
 
 /**
  * Objeto de negocio NominaBO.
@@ -77,8 +81,12 @@ public class NominaBO implements INominaBO {
         if(nomina == null)
             throw new ObjetosNegocioException("No se aceptan nominas vacias.");
         
-        //return nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina));
-        return true;
+        try {
+            return nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
     }
     
     /**

@@ -1,5 +1,7 @@
 package Entidades;
 
+import enums.EstadoEmpleado;
+
 /**
  *
  * @author Leonardo Flores Leyva (252390)
@@ -20,7 +22,7 @@ public class Empleado {
     private String departamento;
     private String puesto;
     private Double salarioBase;
-    private boolean estado;
+    private EstadoEmpleado estado;
 
     public Empleado() {}
 
@@ -36,7 +38,7 @@ public class Empleado {
             String departamento, 
             String puesto, 
             Double salarioBase, 
-            boolean estado
+            EstadoEmpleado estado
     ) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -96,9 +98,9 @@ public class Empleado {
 
     public void setSalarioBase(Double salarioBase) {this.salarioBase = salarioBase;}
 
-    public boolean getEstado() {return estado;}
+    public EstadoEmpleado getEstado() {return estado;}
 
-    public void setEstado(boolean estado) {this.estado = estado;}
+    public void setEstado(EstadoEmpleado estado) {this.estado = estado;}
 
     public boolean compararRFC (String rfc){return rfc.equals(this.rfc);}
 
