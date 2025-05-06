@@ -13,7 +13,12 @@ import dto.HorarioLaboralDTO;
  * @author Benjamin Soto Coronado (253183)
  */
 public class HorarioLaboralMapper {
-    
+    /**
+     * Convierte un objeto HorarioLaboralDTO a HorarioLaboral.
+     * Pensado para nuevos registros (inserción).
+     * @param horarioLaboralDTO DTO a mapear.
+     * @return Entidad HorarioLaboral mapeada.
+     */
     public static HorarioLaboral toEntityNuevo(HorarioLaboralDTO horarioLaboralDTO){
         HorarioLaboral horarioLaboral = new HorarioLaboral();
         horarioLaboral.setDiaSemana(horarioLaboralDTO.getDiaSemana());
@@ -22,7 +27,13 @@ public class HorarioLaboralMapper {
         // Retorna la entidad mapeada.
         return horarioLaboral;
     }
-    
+    /**
+     * Convierte un objeto HorarioLaboralDTO a HorarioLaboral.
+     * Pensado para viejos registros o registros persistidos
+     * previamente (actualización).
+     * @param horarioLaboralDTO DTO a mapear.
+     * @return Entidad HorarioLaboral mapeada.
+     */
     public static HorarioLaboral toEntityViejo(HorarioLaboralDTO horarioLaboralDTO){
         HorarioLaboral horarioLaboral = new HorarioLaboral();
         // Falta el ID.
@@ -32,7 +43,11 @@ public class HorarioLaboralMapper {
         // Retorna la entidad mapeada.
         return horarioLaboral;
     }
-    
+    /**
+     * Convierte un objeto HorarioLaboral a HorarioLaboralDTO.
+     * @param horarioLaboral Entidad a mapear.
+     * @return Objeto HorarioLaboralDTO mapeado.
+     */
     public static HorarioLaboralDTO toDTO(HorarioLaboral horarioLaboral){
         HorarioLaboralDTO horarioLaboralDTO = new HorarioLaboralDTO();
         // Falta el ID.

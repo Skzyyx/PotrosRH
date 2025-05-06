@@ -19,7 +19,12 @@ import java.util.List;
  * @author Benjamin Soto Coronado (253183)
  */
 public class EmpleadoMapper {
-    
+    /**
+     * Convierte un objeto EmpleadoDTO a un objeto Empleado.
+     * Pensado para nuevos registros (inserción).
+     * @param empleadoDTO DTO a mapear.
+     * @return Entidad Empleado mapeada.
+     */
     public static Empleado toEntityNuevo(EmpleadoDTO empleadoDTO){
         Empleado empleado = new Empleado();
         empleado.setNombre(empleadoDTO.getNombre());
@@ -54,7 +59,13 @@ public class EmpleadoMapper {
         // Se retorna la entidad mapeada.
         return empleado;
     }
-    
+    /**
+     * Convierte un objeto EmpleadoDTO a un objeto Empleado.
+     * Pensado para viejos registros o registros persistidos
+     * previamente (actualización).
+     * @param empleadoDTO DTO a mapear.
+     * @return Entidad Empleado mapeada.
+     */
     public static Empleado toEntityViejo(EmpleadoDTO empleadoDTO){
         Empleado empleado = new Empleado();
         // Falta el ID.
@@ -90,7 +101,11 @@ public class EmpleadoMapper {
         // Se retorna la entidad mapeada.
         return empleado;
     }
-    
+    /**
+     * Convierte un objeto Empleado a un objeto EmpleadoDTO.
+     * @param empleado Entidad a mapear.
+     * @return Objeto EmpleadoDTO mapeado.
+     */
     public static EmpleadoDTO toDTO(Empleado empleado){
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
         // Falta el ID.
@@ -122,5 +137,4 @@ public class EmpleadoMapper {
         // Se retorna el objeto de transferencia mapeado.
         return empleadoDTO;
     }
-    
 }

@@ -21,16 +21,21 @@ import mappers.NominaMapper;
  * @author Benjamin Soto Coronado (253183)
  */
 public class NominaBO implements INominaBO {
-    
+    // Atributo de la misma clase (SingleTon).
     private static INominaBO instance;
+    // // Atributo DAO para operaciones CRUD con Nóminas.
     private static final INominaDAO nominaDAO = new NominaDAO();
-    
+    /**
+     * Constructor por defecto.
+     */
     private NominaBO() {}
-    
+    /**
+     * Método SingleTon de la clase.
+     * @return Instancia SingleTon de la clase.
+     */
     public static synchronized INominaBO getInstance() {
         if (instance == null) 
             instance = new NominaBO();
-        
         return instance;
     }
     
@@ -51,7 +56,6 @@ public class NominaBO implements INominaBO {
 
     /**
      * Genera una nómina para un empleado dado.
-     * 
      * @param empleado Objeto EmpleadoDTO con los datos del empleado.
      * @return NominaDTO con los datos de la nómina generada.
      * @throws ObjetosNegocioException si el empleado es nulo.
@@ -96,7 +100,6 @@ public class NominaBO implements INominaBO {
     
     /**
      * Calcula el ISR aplicando la tabla de tasas del SAT en base al ingreso mensual del empleado.
-     * 
      * @param ingresoTotal Monto total del salario a considerar.
      * @param diasPagados Número de días trabajados en el período de pago.
      * @return Monto del ISR calculado en base al salario y los días trabajados.

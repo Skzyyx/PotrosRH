@@ -100,20 +100,36 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         empleados.add(empleadoNeto);
         empleados.add(empleadoJose);
     }
-    
+    /**
+     * Valida el estado de un empleado.
+     * @param rfc RFC del empleado.
+     * @return VERDADERO si el empleado está activo, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto.
+     */
     @Override
     public boolean validarEstado(String rfc) throws AccesoDatosException {return true;}
-
+    /**
+     * Valida que el porcentaje de asistencia de un empleado sea
+     * igual o superior al 80%, correspondiente con su período
+     * de trabajo.
+     * @param rfc RFC del empleado.
+     * @return VERDADERO si el porcentaje de asistencia es igual o superior al 80%, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto.
+     */
     @Override
     public boolean validarPorcentajeAsistencias(String rfc) throws AccesoDatosException {return true;}
-
+    /**
+     * Obtiene un empleado de la base de datos.
+     * @param rfc RFC del empleado.
+     * @return Entidad empleado, correspondiente al RFC recibido.
+     * @throws AccesoDatosException Excepción del proyecto.
+     */
     @Override
     public Empleado obtenerEmpleado(String rfc) throws AccesoDatosException {
         // Buscar al empleado por RFC
         for (Empleado empleado : empleados) {
-            if (empleado.getRfc().equalsIgnoreCase(rfc)) {
+            if (empleado.getRfc().equalsIgnoreCase(rfc)) 
                 return empleado;
-            }
         }
 
         // Si no se encuentra el empleado, lanza una excepción

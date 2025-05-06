@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
 /**
- * 
+ * Objeto de negocio EmpleadoBO.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -26,22 +26,26 @@ import mappers.EmpleadoMapper;
  * @author Benjamin Soto Coronado (253183)
  */
 public class EmpleadoBO implements IEmpleadoBO{
-    
+    // Atributo de la misma clase (SingleTon).
     private static IEmpleadoBO instance;
+    // Atributo DAO para operaciones CRUD con Empleados.
     private static final IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
-    
+    /**
+     * Constructor por defecto.
+     */
     private EmpleadoBO (){}
-    
+    /**
+     * Método SingleTon de la clase.
+     * @return Instancia SingleTon de la clase.
+     */
     public static synchronized IEmpleadoBO getInstance() {
         if (instance == null) 
             instance = new EmpleadoBO();
-        
         return instance;
     }
     
     /**
      * Valida que el estado del empleado sea ACTIVO.
-     *
      * @param rfc RFC del empleado a evaluar.
      * @return {@code true si el RFC es válido.
      * @throws ObjetosNegocioException Si el RFC es nulo o está vacío.
