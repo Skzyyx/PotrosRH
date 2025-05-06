@@ -1,7 +1,9 @@
 package bo;
 
+import DAO.NominaDAO;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.INominaBO;
+import Interfaces.INominaDAO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.time.LocalDate;
@@ -19,6 +21,7 @@ import java.util.List;
 public class NominaBO implements INominaBO {
     
     private static INominaBO instance;
+    private static INominaDAO nominaDAO = new NominaDAO();
     
     private List<NominaDTO> nominas;
     
@@ -74,7 +77,7 @@ public class NominaBO implements INominaBO {
         if(nomina == null)
             throw new ObjetosNegocioException("No se aceptan nominas vacias.");
         
-        nominas.add(nomina);
+        //return nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina));
         return true;
     }
     

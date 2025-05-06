@@ -8,17 +8,20 @@ package bo;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
+import DAO.EmpleadoDAO;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import enums.EstadoEmpleado;
 import java.util.Arrays;
 import java.util.List;
 import Interfaces.IEmpleadoBO;
+import Interfaces.IEmpleadoDAO;
 import java.util.ArrayList;
 
 public class EmpleadoBO implements IEmpleadoBO{
     
     private static IEmpleadoBO instance;
+    private static IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
     
     private List<EmpleadoDTO> empleados;
     
