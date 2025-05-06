@@ -1,7 +1,9 @@
 package mappers;
 
+import Entidades.Direccion;
 import Entidades.Empleado;
 import dto.EmpleadoDTO;
+import enums.EstadoEmpleado;
 
 /**
  *
@@ -22,10 +24,63 @@ public class EmpleadoMapper {
         empleado.setCurp(empleadoDTO.getCurp());
         empleado.setEmail(empleadoDTO.getEmail());
         empleado.setTelefono(empleadoDTO.getTelefono());
+        //Queda pendiente
         empleado.setEstado(false);
         empleado.setDepartamento(empleadoDTO.getDepartamento());
+        empleado.setPuesto(empleadoDTO.getPuesto());
+        empleado.setSalarioBase(empleadoDTO.getSalarioBase());
+        
+        Direccion direccion = new Direccion();
+        direccion.setCalle(empleadoDTO.getCalle());
+        direccion.setColonia(empleadoDTO.getColonia());
+        direccion.setNumero(empleadoDTO.getNumero());
+        
+        empleado.setDireccion(direccion);
         
         return empleado;
+    }
+    
+    public static Empleado toEntityViejo(EmpleadoDTO empleadoDTO){
+        Empleado empleado = new Empleado();
+        empleado.setNombre(empleadoDTO.getNombre());
+        empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
+        empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
+        empleado.setRfc(empleadoDTO.getRfc());
+        empleado.setCurp(empleadoDTO.getCurp());
+        empleado.setEmail(empleadoDTO.getEmail());
+        empleado.setTelefono(empleadoDTO.getTelefono());
+        //Queda pendiente
+        empleado.setEstado(false);
+        empleado.setDepartamento(empleadoDTO.getDepartamento());
+        empleado.setPuesto(empleadoDTO.getPuesto());
+        empleado.setSalarioBase(empleadoDTO.getSalarioBase());
+        
+        Direccion direccion = new Direccion();
+        direccion.setCalle(empleadoDTO.getCalle());
+        direccion.setColonia(empleadoDTO.getColonia());
+        direccion.setNumero(empleadoDTO.getNumero());
+        
+        empleado.setDireccion(direccion);
+        
+        return empleado;
+    }
+    
+    public static EmpleadoDTO toDTOViejo(Empleado empleado){
+        EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+        empleadoDTO.setNombre(empleado.getNombre());
+        empleadoDTO.setApellidoPaterno(empleado.getApellidoPaterno());
+        empleadoDTO.setApellidoMaterno(empleado.getApellidoMaterno());
+        empleadoDTO.setRfc(empleado.getRfc());
+        empleadoDTO.setCurp(empleado.getCurp());
+        empleadoDTO.setEmail(empleado.getEmail());
+        empleadoDTO.setTelefono(empleado.getTelefono());
+        //Queda pendiente
+        empleadoDTO.setEstado(EstadoEmpleado.ACTIVO);
+        empleadoDTO.setDepartamento(empleado.getDepartamento());
+        empleadoDTO.setPuesto(empleado.getPuesto());
+        empleadoDTO.setSalarioBase(empleado.getSalarioBase());
+        
+        return empleadoDTO;
     }
     
 }

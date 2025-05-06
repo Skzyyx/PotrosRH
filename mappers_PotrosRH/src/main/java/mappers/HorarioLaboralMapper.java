@@ -1,4 +1,4 @@
-package enums;
+package mappers;
 
 /**
  *
@@ -8,4 +8,8 @@ package enums;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public enum EstadoEmpleado {ACTIVO, INACTIVO;}
+public class HorarioLaboralMapper {
+    
+    
+    
+}
