@@ -28,14 +28,26 @@ public class ControlFlujo {
     private static BusquedaEmpleado busquedaEmpleado;
     private static PrevisualizarEmpleado previsualizarEmpleado;
     private static PrevisualizarNomina previsualizarNomina;
-
+    
+    /**
+    * Muestra la pantalla del menú principal de la aplicación.
+    * 
+    * Si la instancia del menú principal aún no ha sido creada, se instancia.
+    * Luego, se cambia la pantalla actual para mostrar dicha vista.
+    */
     public static void mostrarMenuPrincipal() {
         if (menuPrincipal == null) {
             menuPrincipal = new MenuPrincipal();
         }
         cambiarPantalla(menuPrincipal);
     }
-
+    /**
+    * Muestra la pantalla de búsqueda de empleados.
+    * 
+    * Si la instancia de la pantalla de búsqueda aún no ha sido creada, se instancia.
+    * Antes de mostrarla, se limpia el campo de búsqueda para asegurar que esté vacío.
+    * Luego, se cambia la pantalla actual para mostrar esta vista.
+    */
     public static void mostrarBusquedaEmpleado() {
         if (busquedaEmpleado == null) {
             busquedaEmpleado = new BusquedaEmpleado();
@@ -43,7 +55,16 @@ public class ControlFlujo {
         busquedaEmpleado.limpiarCampo();
         cambiarPantalla(busquedaEmpleado);
     }
-
+    /**
+    * Muestra la pantalla de previsualización de un empleado.
+    * 
+    * Obtiene la información del empleado a partir de su RFC utilizando la capa de control.
+    * Si la instancia de la pantalla de previsualización no ha sido creada, se instancia.
+    * Luego, se asignan los datos del empleado a la vista y se muestra la pantalla correspondiente.
+    * 
+    * @param rfc Clave RFC del empleado que se desea previsualizar.
+    * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
+    */
     public static void mostrarPrevisualizarEmpleado(String rfc) throws PresentacionException {
 
         ControlNomina controlNomina = ControlNomina.getInstance();
@@ -55,7 +76,15 @@ public class ControlFlujo {
         previsualizarEmpleado.setDatosEmpleado(empleado);
         cambiarPantalla(previsualizarEmpleado);
     }
-
+    /**
+    * Muestra la pantalla de previsualización de una nómina generada.
+    * 
+    * Genera una nueva nómina utilizando la capa de control y muestra la vista correspondiente.
+    * Si la instancia de la pantalla de previsualización de nómina aún no ha sido creada, se instancia.
+    * Luego, se cargan los datos de la nómina en la vista y se cambia la pantalla actual.
+    * 
+    * @throws PresentacionException Si ocurre un error durante la generación de la nómina.
+    */
     public static void mostrarPrevisualizarNomina() throws PresentacionException {
         try {
             NominaDTO nomina = ControlNomina.getInstance().generarNomina();
@@ -71,7 +100,16 @@ public class ControlFlujo {
             throw new PresentacionException(ex.getMessage());
         }
     }
-
+    /**
+    * Cambia la vista actual del sistema mostrando el panel recibido como nuevo contenido.
+    * 
+    * El método limpia el contenido del panel contenedor principal y agrega el nuevo panel.
+    * Luego actualiza la interfaz gráfica para reflejar el cambio y guarda la referencia
+    * del panel que está siendo mostrado actualmente.
+    * 
+    * @param nuevoPanel Panel que se desea mostrar en la interfaz.
+    * @throws IllegalStateException Si el panel contenedor no ha sido inicializado previamente.
+    */
     private static void cambiarPantalla(JPanel nuevoPanel) {
         if (panelContenedor == null) {
             throw new IllegalStateException("El contenedor no ha sido inicializado.");
@@ -84,7 +122,14 @@ public class ControlFlujo {
 
         panelActual = nuevoPanel;
     }
-
+    /**
+    * Establece el panel contenedor principal para la interfaz gráfica.
+    * 
+    * Este método recibe un panel como parámetro y lo asigna como el contenedor
+    * principal en el cual se mostrarán las diferentes pantallas o vistas del sistema.
+    * 
+    * @param contenedor El panel que se debe establecer como contenedor principal.
+    */
     public static void setContenedor(JPanel contenedor) {
         panelContenedor = contenedor;
     }

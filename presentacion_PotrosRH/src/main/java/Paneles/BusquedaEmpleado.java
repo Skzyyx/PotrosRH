@@ -199,7 +199,14 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
-
+    /**
+    * Busca un empleado por su RFC.
+    * 
+    * Valida que el RFC tenga 13 caracteres y no esté vacío. Si el RFC es válido, 
+    * consulta al controlador de nómina y muestra la previsualización del empleado si existe.
+    * 
+    * @throws PresentacionException Si el RFC es inválido o no se encuentra al empleado.
+    */
     private void btnBuscar() throws PresentacionException {
         String rfc = txtRfc.getText();
         if (rfc.isEmpty()) {
@@ -215,7 +222,11 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         }
 
     }
-
+    /**
+    * Limpia el campo de texto del RFC.
+    * 
+    * Este método establece el contenido del campo de texto del RFC como vacío.
+    */
     public void limpiarCampo() {
         txtRfc.setText("");
     }

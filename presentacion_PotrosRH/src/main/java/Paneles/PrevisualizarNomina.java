@@ -582,7 +582,16 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {
         this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;
     }
-
+    /**
+    * Actualiza el bono del empleado y recalcula su salario bruto y neto.
+    * 
+    * Este método obtiene el RFC del empleado, el bono seleccionado y actualiza la información 
+    * del bono, salario bruto y salario neto en la interfaz de usuario. Si el RFC o el bono son 
+    * inválidos, el método simplemente retorna sin realizar cambios.
+    * 
+    * @throws PresentacionException Si ocurre un error al obtener los datos del empleado o 
+    * al realizar alguna operación relacionada con el bono.
+    */
     private void actualizarBono() {
         try {
             String rfc = lblRfcEmpleado.getText().trim();
@@ -615,7 +624,15 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+    * Actualiza los componentes de la interfaz con los datos de la nómina y el empleado.
+    * 
+    * Recibe un objeto NominaDTO y actualiza las etiquetas correspondientes con la 
+    * información del empleado (nombre, RFC, puesto, estado) y los detalles de la nómina 
+    * (horas trabajadas, horas extras, salario bruto, ISR y salario neto).
+    * 
+    * @param nomina Objeto NominaDTOcon los datos de la nómina.
+    */
     public void setDatosNomina(NominaDTO nomina) {
         this.nomina = nomina;
         EmpleadoDTO empleado = nomina.getEmpleado();

@@ -365,7 +365,15 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     public JLabel getPuestoEmpleado() {return puestoEmpleado;}
 
     public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
-
+    /**
+    * Actualiza los componentes de la interfaz con los datos del empleado.
+    * 
+    * Recibe un objeto EmpleadoDTO y actualiza las etiquetas correspondientes 
+    * con la información del empleado (nombre, apellido paterno, apellido materno, RFC, 
+    * puesto y estado).
+    * 
+    * @param empleado Objeto EmpleadoDTO con los datos del empleado.
+    */
     public void setDatosEmpleado(EmpleadoDTO empleado) {
         System.out.println(empleado.toString());
         nombreEmpleado.setText(empleado.getNombre());
