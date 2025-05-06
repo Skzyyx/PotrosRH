@@ -65,7 +65,7 @@ public class EmpleadoMapper {
         return empleado;
     }
     
-    public static EmpleadoDTO toDTOViejo(Empleado empleado){
+    public static EmpleadoDTO toDTO(Empleado empleado){
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
         empleadoDTO.setNombre(empleado.getNombre());
         empleadoDTO.setApellidoPaterno(empleado.getApellidoPaterno());

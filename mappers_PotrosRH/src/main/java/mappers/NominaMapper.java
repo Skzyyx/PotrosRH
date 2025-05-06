@@ -43,7 +43,7 @@ public class NominaMapper {
     
     public static NominaDTO toDTO(Nomina nomina){
         NominaDTO nominaDTO = new NominaDTO();
-        nominaDTO.setEmpleado(EmpleadoMapper.toDTOViejo(nomina.getEmpleado()));
+        nominaDTO.setEmpleado(EmpleadoMapper.toDTO(nomina.getEmpleado()));
         // faltan dias trabajados
         nominaDTO.setBono(nomina.getBono());
         // falta estado de cobro

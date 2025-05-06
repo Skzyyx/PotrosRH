@@ -19,7 +19,7 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>20</maven.compiler.release>
+        <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.negocio_validarempleado.Negocio_ValidarEmpleado</exec.mainClass>
     </properties>
 </project>
