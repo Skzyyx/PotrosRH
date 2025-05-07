@@ -4,16 +4,6 @@
  */
 package Pruebas;
 
-import Exceptions.GenerarNominaException;
-import Exceptions.ObjetosNegocioException;
-import Control.ControlGenerarNomina;
-import bo.NominaBO;
-import dto.EmpleadoDTO;
-import dto.NominaDTO;
-import enums.EstadoEmpleado;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author skyro
