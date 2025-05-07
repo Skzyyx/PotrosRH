@@ -1,6 +1,7 @@
 package Paneles;
 
 import Controles.ControlFlujo;
+import Excepciones.PresentacionException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -208,7 +209,7 @@ public class LogIn extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        ControlFlujo.mostrarMenuPrincipal();
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed

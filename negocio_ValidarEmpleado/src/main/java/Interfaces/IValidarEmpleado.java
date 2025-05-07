@@ -12,6 +12,5 @@ import dto.EmpleadoDTO;
  * @author Benjamin Soto Coronado (253183)
  */
 public interface IValidarEmpleado {
-    
-    public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException;
+    public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException;    
 }

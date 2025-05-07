@@ -38,5 +38,4 @@ public class ValidarEmpleado implements IValidarEmpleado {
         return esActivo && asistencia;
 
     }
-
 }
