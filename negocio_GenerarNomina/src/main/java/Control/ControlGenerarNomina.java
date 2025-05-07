@@ -1,4 +1,4 @@
-package GenerarNomina;
+package Control;
 
 import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
@@ -11,19 +11,22 @@ import dto.NominaDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Interface.ICorreo;
-import enums.EstadoEmpleado;
+import Interfaces.INominaBO;
 
 /**
- *
+ * Realiza validaciones de negocio y genera la nómina correspondiente
+ * al empleado recibido.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class GenerarNomina implements IGenerarNomina {
-    
-    private final NominaBO nominaBO = new NominaBO();
+public class ControlGenerarNomina implements IGenerarNomina {
+    /**
+     * Objeto BO de las nóminas.
+     */
+    private final INominaBO nominaBO = NominaBO.getInstance();
 
     /**
      * Genera la nómina de un empleado activo.
@@ -34,16 +37,17 @@ public class GenerarNomina implements IGenerarNomina {
      */
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
+        // Si el empleado es null
         if (empleado == null) 
             throw new GenerarNominaException("El empleado no puede ser nulo.");
-        
-        if(empleado.getEstado() == EstadoEmpleado.INACTIVO)
+        // Si el empleado está inactivo.
+        if(!empleado.getEstado().equals("ACTIVO"))
             throw new GenerarNominaException("El empleado debe de estar activo.");
         
         try {
-            return nominaBO.generarNomina(empleado);
+            return nominaBO.generarNomina(empleado); // Se genera la nómina y se regresa como un DTO.
         } catch (ObjetosNegocioException ex) {
-            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Error al generar la nómina: " + ex.getMessage());
         }
     }
@@ -57,17 +61,21 @@ public class GenerarNomina implements IGenerarNomina {
      */
     @Override
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
+        // Si la nómina está vacía.
         if(nomina == null)
             throw new GenerarNominaException("La nomina no puede ser nula.");
-        
+        // Sistema de correo electrónico.
         ICorreo sistemaCorreo = new Correo();
         try {
-            nominaBO.guardarNomina(nomina);
-            sistemaCorreo.enviarCorreo(nomina);
-            return true;
+            nominaBO.guardarNomina(nomina); // Se guarda la nómina.
+            sistemaCorreo.enviarCorreo(nomina); // Se envía el correo electrónico con la nómina generada.
+            return true; // Regresa true como confirmación de nómina generada con éxito.
         } catch (CorreoException ex) {
-            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GenerarNominaException(ex.getMessage(), ex);
         }
     }
 }

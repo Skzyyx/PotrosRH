@@ -9,9 +9,18 @@ package Excepciones;
  * @author Benjamin Soto Coronado (253183)
  */
 public class ObtenerEmpleadoException extends Exception {
-
+    /**
+    * Constructor que permite crear la excepción con un mensaje específico.
+    *
+    * @param message Mensaje descriptivo del error.
+    */
     public ObtenerEmpleadoException(String message) {super(message);}
-
+    /**
+    * Constructor que permite crear la excepción con un mensaje y una causa.
+    *
+    * @param message Mensaje descriptivo del error.
+    * @param cause Causa original del error (otra excepción).
+    */
     public ObtenerEmpleadoException(String message, Throwable cause) {super(message, cause);}
     
 }

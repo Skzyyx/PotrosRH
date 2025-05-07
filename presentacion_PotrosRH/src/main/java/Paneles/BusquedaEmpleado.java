@@ -25,20 +25,11 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  */
 public class BusquedaEmpleado extends javax.swing.JPanel {
 
-    private static BusquedaEmpleado instance;
-
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private BusquedaEmpleado() {
+    public BusquedaEmpleado() {
         initComponents();
-    }
-
-    public static BusquedaEmpleado getInstance() {
-        if (instance == null) {
-            instance = new BusquedaEmpleado();
-        }
-        return instance;
     }
 
     /**
@@ -208,15 +199,14 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
-
-    public JTextField getTxtRfc() {
-        return txtRfc;
-    }
-
-    public void setTxtRfc(JTextField txtRfc) {
-        this.txtRfc = txtRfc;
-    }
-
+    /**
+    * Busca un empleado por su RFC.
+    * 
+    * Valida que el RFC tenga 13 caracteres y no esté vacío. Si el RFC es válido, 
+    * consulta al controlador de nómina y muestra la previsualización del empleado si existe.
+    * 
+    * @throws PresentacionException Si el RFC es inválido o no se encuentra al empleado.
+    */
     private void btnBuscar() throws PresentacionException {
         String rfc = txtRfc.getText();
         if (rfc.isEmpty()) {
@@ -225,10 +215,22 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         if (rfc.length() != 13) {
             throw new PresentacionException("El RFC debe tener 13 caracteres.");
         }
-
-        if (ControlNomina.validarRFC(txtRfc.getText()) && ControlNomina.validarEmpleado(txtRfc.getText())) {
-            ControlFlujo.mostrarPrevisualizarEmpleado();
+        try {
+            if (ControlNomina.getInstance().obtenerEmpleado(rfc) != null) 
+                ControlFlujo.mostrarPrevisualizarEmpleado(rfc);
+            
+        } catch (Exception e) {
+            OptionPane.showErrorMessage(this, e.getMessage(), "Error");
         }
+        
 
+    }
+    /**
+    * Limpia el campo de texto del RFC.
+    * 
+    * Este método establece el contenido del campo de texto del RFC como vacío.
+    */
+    public void limpiarCampo() {
+        txtRfc.setText("");
     }
 }

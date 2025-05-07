@@ -3,13 +3,16 @@ package Controles;
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
 import Exceptions.GenerarNominaException;
-import GenerarNomina.GenerarNomina;
+import Control.ControlGenerarNomina;
 import Interfaces.IGenerarNomina;
 import Interfaces.IObtenerEmpleado;
-import ObtenerEmpleado.ObtenerEmpleado;
+import Excepciones.ValidarEmpleadoException;
+import Fachada.GenerarNomina;
+import Fachada.ObtenerEmpleado;
+import Fachada.ValidarEmpleado;
+import Interfaces.IValidarEmpleado;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
-import enums.EstadoEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,77 +26,130 @@ import java.util.logging.Logger;
  */
 public class ControlNomina {
 
-    private static EmpleadoDTO empleadoDTO;
-    private static NominaDTO nominaDTO;
+    private static ControlNomina instance;
     
-    private static IGenerarNomina gn = new GenerarNomina();
+    private EmpleadoDTO empleadoDTO;
+    private NominaDTO nominaDTO;
+    
+    private IGenerarNomina generarNomina = GenerarNomina.getInstance();
+    private IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
+    private IValidarEmpleado validarEmpleado = ValidarEmpleado.getInstance();
+    /**
+    * Constructor privado de la clase ControlNomina.
+    * 
+    * Este constructor inicializa las instancias de los objetos necesarios para 
+    * gestionar la creación y el manejo de nóminas. Es privado para garantizar 
+    * que la clase siga un patrón de diseño como el Singleton, evitando múltiples 
+    * instancias de la clase.
+    */
+    private ControlNomina() {
+        this.empleadoDTO = new EmpleadoDTO();
+        this.nominaDTO = new NominaDTO();
+        this.generarNomina = new ControlGenerarNomina();
 
-    public static boolean validarEmpleado(String rfc) throws PresentacionException {
-        
-        validarRFC(rfc);
-        EmpleadoDTO empleado = obtenerEmpleado(rfc);
-        
-        if (empleado == null) {
-            throw new PresentacionException("No se encontró al empleado.");
-        }
-        if (empleado.getEstado() == EstadoEmpleado.INACTIVO) {
-            throw new PresentacionException("No se puede generar una nómina a un empleado inactivo.");
-        }
-        return true;
     }
-
-    public static EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
-        EmpleadoDTO empleado = new EmpleadoDTO();
-        IObtenerEmpleado obtenerEmpleado = new ObtenerEmpleado();
+    /**
+    * Obtiene la instancia única de la clase ControlNomina.
+    * 
+    * Si la instancia no ha sido creada previamente, la crea y la devuelve.
+    * 
+    * @return La instancia única de la clase ControlNomina.
+    */
+    public static ControlNomina getInstance() {
+        if (instance == null) {
+            instance = new ControlNomina();
+        }
+        return instance;
+    }
+    /**
+    * Valida la existencia y los datos de un empleado a partir de su RFC.
+    * 
+    * Este método obtiene el empleado mediante el RFC proporcionado y luego valida 
+    * sus datos. Si ocurre un error durante el proceso, se lanzan excepciones específicas 
+    * que se capturan y se vuelven a lanzar como una PresentacionException.
+    * 
+    * @param rfc El RFC del empleado que se desea validar.
+    * 
+    * @return true si el empleado es válido, false si no lo es.
+    * 
+    * @throws PresentacionException Si ocurre un error al obtener o validar al empleado.
+    */
+    public boolean validarEmpleado(String rfc) throws PresentacionException {
         try {
-            empleado = obtenerEmpleado.obtenerEmpleado(rfc);
-            empleadoDTO = empleado;
+            EmpleadoDTO empleado = obtenerEmpleado.obtenerEmpleado(rfc);
+            return validarEmpleado.validarEmpleado(empleado);
+        } catch (ValidarEmpleadoException ex) {
+            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException("Error: " + ex.getMessage());
         } catch (ObtenerEmpleadoException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Error: " + ex.getMessage());
         }
-        return empleado;
     }
-
-    public static NominaDTO generarNomina() throws PresentacionException {
+    /**
+    * Obtiene un empleado a partir de su RFC.
+    * 
+    * Este método intenta obtener un objeto EmpleadoDTO utilizando el RFC proporcionado.
+    * Si ocurre un error durante el proceso de obtención, se lanza una excepción 
+    * PresentacionException con el mensaje correspondiente.
+    * 
+    * @param rfc El RFC del empleado que se desea obtener.
+    * 
+    * @return El objeto EmpleadoDTO correspondiente al RFC proporcionado.
+    * 
+    * @throws PresentacionException Si ocurre un error al obtener el empleado.
+    */
+    public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
         try {
-            nominaDTO = gn.generarNomina(empleadoDTO);
-        } catch (GenerarNominaException ex) {
+            EmpleadoDTO empleado = obtenerEmpleado.obtenerEmpleado(rfc);
+            empleadoDTO = empleado;
+            return empleado;
+        } catch (ObtenerEmpleadoException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PresentacionException("Error al generar la nómina: " + ex.getMessage());
-        }
-        return nominaDTO;
-    }
-    
-    public static boolean guardarNomina() throws PresentacionException {
-        IGenerarNomina gn = new GenerarNomina();
-        try {
-            return gn.guardarNomina(nominaDTO);
-        } catch (GenerarNominaException ex) {
-            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PresentacionException("Ocurrió un error al guardar la nomina.");
-        }
-    }
-
-    public static boolean validarRFC(String rfc) throws PresentacionException {
-        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
-        
-        if (rfc == null) {
-            throw new PresentacionException("El RFC no puede ser nulo.");
+            throw new PresentacionException("Error: " + ex.getMessage());
         }
         
-        if (!rfc.matches(regexRFC)) {
-            throw new PresentacionException("El formato del RFC es incorrecto.");
-        }
-        return true;
     }
-
-    public static EmpleadoDTO getEmpleadoDTO() {return empleadoDTO;}
-
-    public static void setEmpleadoDTO(EmpleadoDTO empleadoDTO) {ControlNomina.empleadoDTO = empleadoDTO;}
-
-    public static NominaDTO getNominaDTO() {return nominaDTO;}
-
-    public static void setNominaDTO(NominaDTO nominaDTO) {ControlNomina.nominaDTO = nominaDTO;}
-
+    /**
+    * Genera una nómina para el empleado actual.
+    * 
+    * Este método utiliza los datos del empleado actual para generar una nómina.
+    * Si ocurre un error durante el proceso de generación, se lanza una excepción 
+    * PresentacionException con el mensaje correspondiente.
+    * 
+    * @return El objeto NominaDTO generado para el empleado.
+    * 
+    * @throws PresentacionException Si ocurre un error al generar la nómina.
+    */
+    public NominaDTO generarNomina() throws PresentacionException {
+        try {
+            NominaDTO nomina  = generarNomina.generarNomina(empleadoDTO);
+            nominaDTO = nomina;
+            return nomina;
+        } catch (GenerarNominaException ex) {
+            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException("Error: " + ex.getMessage());
+        }
+    }
+    /**
+    * Guarda la nómina generada en el sistema.
+    * 
+    * Este método intenta guardar una nómina utilizando el objeto NominaDTO proporcionado.
+    * Si ocurre un error durante el proceso de guardado, se lanza una excepción 
+    * PresentacionException con el mensaje correspondiente.
+    * 
+    * @param nomina El objeto NominaDTO que contiene los datos de la nómina a guardar.
+    * 
+    * @return true si la nómina se guarda correctamente, false si ocurre algún error.
+    * 
+    * @throws PresentacionException Si ocurre un error al guardar la nómina.
+    */    
+    public boolean guardarNomina(NominaDTO nomina) throws PresentacionException {
+        try {
+            return generarNomina.guardarNomina(nominaDTO);
+        } catch (GenerarNominaException ex) {
+            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PresentacionException("Error: " + ex.getMessage());
+        }
+    }
 }

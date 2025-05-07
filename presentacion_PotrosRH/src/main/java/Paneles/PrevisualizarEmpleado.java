@@ -4,6 +4,7 @@ import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -25,19 +26,10 @@ import javax.swing.JOptionPane;
  */
 public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
-    private static PrevisualizarEmpleado instance;
-
     /**
      * Creates new form PrevisualisarEmpleado
      */
     public PrevisualizarEmpleado() {initComponents();}
-
-    public static PrevisualizarEmpleado getInstance() {
-        if (instance == null) {
-            instance = new PrevisualizarEmpleado();
-        }
-        return instance;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -306,12 +298,14 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
             try {
-                ControlNomina.generarNomina();
+                ControlNomina controlNomina = ControlNomina.getInstance();
+                controlNomina.generarNomina();
+                ControlFlujo.mostrarPrevisualizarNomina();
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
             }
-            ControlFlujo.mostrarPrevisualizarNomina();
+            
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
@@ -371,5 +365,23 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     public JLabel getPuestoEmpleado() {return puestoEmpleado;}
 
     public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
+    /**
+    * Actualiza los componentes de la interfaz con los datos del empleado.
+    * 
+    * Recibe un objeto EmpleadoDTO y actualiza las etiquetas correspondientes 
+    * con la información del empleado (nombre, apellido paterno, apellido materno, RFC, 
+    * puesto y estado).
+    * 
+    * @param empleado Objeto EmpleadoDTO con los datos del empleado.
+    */
+    public void setDatosEmpleado(EmpleadoDTO empleado) {
+        System.out.println(empleado.toString());
+        nombreEmpleado.setText(empleado.getNombre());
+        apellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+        apellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+        RFCEmpleado.setText(empleado.getRfc());
+        puestoEmpleado.setText(empleado.getPuesto());
+        estadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+    }
 
 }

@@ -5,3 +5,6 @@
 /infraestructura_SistemaCorreo/target/
 /bo_negocios/target/
 /negocio_ValidarEmpleado/target/
+/dominio_potrosRH/target/
+/dao_PotrosRH/target/
+/mappers_PotrosRH/target/

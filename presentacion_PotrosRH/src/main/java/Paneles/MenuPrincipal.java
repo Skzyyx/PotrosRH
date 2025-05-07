@@ -16,18 +16,11 @@ import javax.swing.JComponent;
  */
 public class MenuPrincipal extends javax.swing.JPanel {
 
-    private static MenuPrincipal instance;
-    
     /**
      * Creates new form MenuPrincipal
      */
-    private MenuPrincipal() {initComponents();}
-    
-    public static MenuPrincipal getInstance() {
-        if (instance == null) {
-            instance = new MenuPrincipal();
-        }
-        return instance;
+    public MenuPrincipal() {
+        initComponents();
     }
 
     /**
@@ -64,7 +57,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnDespedirEmpleado.setBackground(new java.awt.Color(44, 44, 44));
         btnDespedirEmpleado.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnDespedirEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        btnDespedirEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/DespedirEmpleado.png"))); // NOI18N
+        btnDespedirEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/DespedirEmpleado.png"))); // NOI18N
         btnDespedirEmpleado.setText("<html>Despedir<br>Empleado</html>");
         btnDespedirEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +68,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnNominas.setBackground(new java.awt.Color(44, 44, 44));
         btnNominas.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnNominas.setForeground(new java.awt.Color(255, 255, 255));
-        btnNominas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Nominas.png"))); // NOI18N
+        btnNominas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Nominas.png"))); // NOI18N
         btnNominas.setText("Nóminas");
         btnNominas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +79,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnAsistencias.setBackground(new java.awt.Color(44, 44, 44));
         btnAsistencias.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnAsistencias.setForeground(new java.awt.Color(255, 255, 255));
-        btnAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Asistencias.png"))); // NOI18N
+        btnAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Asistencias.png"))); // NOI18N
         btnAsistencias.setText("Asistencias");
         btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +90,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnExpedientes.setBackground(new java.awt.Color(44, 44, 44));
         btnExpedientes.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnExpedientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnExpedientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Expedientes.png"))); // NOI18N
+        btnExpedientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Expedientes.png"))); // NOI18N
         btnExpedientes.setText("Expedientes");
         btnExpedientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +101,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnReportarEmpleado.setBackground(new java.awt.Color(44, 44, 44));
         btnReportarEmpleado.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnReportarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        btnReportarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ReportarEmpleado.png"))); // NOI18N
+        btnReportarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/ReportarEmpleado.png"))); // NOI18N
         btnReportarEmpleado.setText("<html>Reportar<br>Empleado</html>");
         btnReportarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

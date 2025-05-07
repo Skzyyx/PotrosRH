@@ -5,6 +5,7 @@ import Controles.ControlNomina;
 import Enums.Bonos;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,18 +26,13 @@ import javax.swing.JOptionPane;
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
 
-    private static PrevisualizarNomina instance;
+    private NominaDTO nomina;
 
     /**
      * Creates new form PrevisualizarNomina
      */
-    public PrevisualizarNomina() {initComponents();}
-
-    public static PrevisualizarNomina getInstance() {
-        if (instance == null) {
-            instance = new PrevisualizarNomina();
-        }
-        return instance;
+    public PrevisualizarNomina() {
+        initComponents();
     }
 
     /**
@@ -434,11 +429,13 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         try {
-            NominaDTO nomina = ControlNomina.getNominaDTO();
             nomina.setBono(Double.parseDouble(lblBono.getText()));
-            ControlNomina.setNominaDTO(nomina);
-            if(ControlNomina.guardarNomina())
+            nomina.setSalarioNeto(Double.parseDouble(lblSalarioNetoEmpleado.getText()));
+
+            if (ControlNomina.getInstance().guardarNomina(nomina)) {
                 OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
+            }
+
             ControlFlujo.mostrarBusquedaEmpleado();
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
@@ -488,7 +485,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel lblSalarioBrutoEmpleado;
     private javax.swing.JLabel lblSalarioNetoEmpleado;
     // End of variables declaration//GEN-END:variables
-    
+
     public JLabel getLblApellidoMaternoEmpleado() {return lblApellidoMaternoEmpleado;}
 
     public void setLblApellidoMaternoEmpleado(JLabel lblApellidoMaternoEmpleado) {this.lblApellidoMaternoEmpleado = lblApellidoMaternoEmpleado;}
@@ -536,21 +533,71 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     public JLabel getLblSalarioNetoEmpleado() {return lblSalarioNetoEmpleado;}
 
     public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;}
-
+    /**
+    * Actualiza el bono del empleado y recalcula su salario bruto y neto.
+    * 
+    * Este método obtiene el RFC del empleado, el bono seleccionado y actualiza la información 
+    * del bono, salario bruto y salario neto en la interfaz de usuario. Si el RFC o el bono son 
+    * inválidos, el método simplemente retorna sin realizar cambios.
+    * 
+    * @throws PresentacionException Si ocurre un error al obtener los datos del empleado o 
+    * al realizar alguna operación relacionada con el bono.
+    */
     private void actualizarBono() {
-        String item = (String) bonoSelector.getSelectedItem();
-        
-        if (item.equals("NINGUNO") && ControlNomina.getEmpleadoDTO() == null) {
-            return;
+        try {
+            String rfc = lblRfcEmpleado.getText().trim();
+            String item = (String) bonoSelector.getSelectedItem();
+
+            if (rfc.equals(".")) 
+                return;
+            
+            
+            EmpleadoDTO empleado = ControlNomina.getInstance().obtenerEmpleado(rfc);
+            if (empleado == null) 
+                return;
+            
+
+            if (Bonos.valueOf(item) == null && ControlNomina.getInstance().obtenerEmpleado(rfc) == null) 
+                return;
+            
+            
+            Bonos bonoEnum = Bonos.valueOf(item);
+            double bono = bonoEnum.getCantidad();
+            lblBono.setText(String.valueOf(bono));
+
+            double salarioBruto = ControlNomina.getInstance().obtenerEmpleado(rfc).getSalarioBase() + bono;
+            lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
+
+            double isr = nomina.getIsr();
+            double salarioNeto = salarioBruto - isr;
+            lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
+        } catch (PresentacionException ex) {
+            Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
-        double bono = Bonos.valueOf(item).getCantidad();
-        lblBono.setText(String.valueOf(bono));
-        
-        double salarioBruto = ControlNomina.getEmpleadoDTO().getSalarioBase() + bono;
-        lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
-        
-        double isr = ControlNomina.getNominaDTO().getIsr();
-        double salarioNeto = salarioBruto - isr;
-        lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
+    }
+    /**
+    * Actualiza los componentes de la interfaz con los datos de la nómina y el empleado.
+    * 
+    * Recibe un objeto NominaDTO y actualiza las etiquetas correspondientes con la 
+    * información del empleado (nombre, RFC, puesto, estado) y los detalles de la nómina 
+    * (horas trabajadas, horas extras, salario bruto, ISR y salario neto).
+    * 
+    * @param nomina Objeto NominaDTOcon los datos de la nómina.
+    */
+    public void setDatosNomina(NominaDTO nomina) {
+        this.nomina = nomina;
+        EmpleadoDTO empleado = nomina.getEmpleado();
+        System.out.println(nomina.toString());
+        lblNombreEmpleado.setText(empleado.getNombre());
+        lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+        lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+        lblRfcEmpleado.setText(empleado.getRfc());
+        lblPuestoEmpleado.setText(empleado.getPuesto());
+        lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+        lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
+        lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
+        lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
+        lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
+        lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
     }
 }

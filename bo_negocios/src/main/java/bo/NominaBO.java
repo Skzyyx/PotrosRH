@@ -1,20 +1,43 @@
 package bo;
 
+import DAO.NominaDAO;
+import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.INominaBO;
+import Interfaces.INominaDAO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mappers.NominaMapper;
 
 /**
- *
+ * Objeto de negocio NominaBO.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class NominaBO {
+public class NominaBO implements INominaBO {
+    // Atributo de la misma clase (SingleTon).
+    private static INominaBO instance;
+    // // Atributo DAO para operaciones CRUD con Nóminas.
+    private static final INominaDAO nominaDAO = new NominaDAO();
+    /**
+     * Constructor por defecto.
+     */
+    private NominaBO() {}
+    /**
+     * Método SingleTon de la clase.
+     * @return Instancia SingleTon de la clase.
+     */
+    public static synchronized INominaBO getInstance() {
+        if (instance == null) 
+            instance = new NominaBO();
+        return instance;
+    }
     
     // Tabla del SAT (Límite Inferior, Cuota Fija, % Excedente)
     private final double[][] TABLA_ISR = {
@@ -31,37 +54,52 @@ public class NominaBO {
         {74835.47, 22159.88, 35.00}
     };
 
-    public NominaBO() {}
-
     /**
      * Genera una nómina para un empleado dado.
-     * 
      * @param empleado Objeto EmpleadoDTO con los datos del empleado.
      * @return NominaDTO con los datos de la nómina generada.
      * @throws ObjetosNegocioException si el empleado es nulo.
      */
+    @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
-        if (empleado == null) {
+        
+        if (empleado == null) 
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
-        }
-        NominaDTO nomina = new NominaDTO(empleado, 0, empleado.getSalarioBase(), calcularISR(empleado.getSalarioBase(), 14), 0, LocalDate.now(), 40, 5);
-        nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());
+        
+        NominaDTO nomina = new NominaDTO();
+        nomina.setEmpleado(empleado);
+        nomina.setBono(0.0);
+        nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
+        nomina.setDiasTrabajados(14);
+        nomina.setSalarioBruto(empleado.getSalarioBase());
+        nomina.setSalarioNeto(nomina.getEmpleado().getSalarioBase()- nomina.getIsr());
+        nomina.setFechaCorte(LocalDate.now());
+        nomina.setHorasTrabajadas(40.0);
+        nomina.setHorasExtra(5.0);
         return nomina;
     } 
     
     /**
      * Simula el guardado de una nómina en la base de datos.
-     * 
      * @param nomina Objeto NominaDTO que se desea guardar.
      * @return true si la nómina se guardó correctamente, false en caso contrario.
+     * @throws Exceptions.ObjetosNegocioException Excepción.
      */
-    public boolean guardarNomina(NominaDTO nomina) {
-        return new Random().nextBoolean();
+    @Override
+    public boolean guardarNomina(NominaDTO nomina) throws ObjetosNegocioException{
+        if(nomina == null)
+            throw new ObjetosNegocioException("No se aceptan nominas vacias.");
+        
+        try {
+            return nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
     }
     
     /**
      * Calcula el ISR aplicando la tabla de tasas del SAT en base al ingreso mensual del empleado.
-     * 
      * @param ingresoTotal Monto total del salario a considerar.
      * @param diasPagados Número de días trabajados en el período de pago.
      * @return Monto del ISR calculado en base al salario y los días trabajados.
