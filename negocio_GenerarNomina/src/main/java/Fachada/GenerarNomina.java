@@ -1,10 +1,13 @@
 package Fachada;
 
 import Control.ControlGenerarNomina;
+import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
 import Interfaces.IGenerarNomina;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase fachada que conecta con presentación e implementa
@@ -53,5 +56,12 @@ public class GenerarNomina implements IGenerarNomina {
      * @throws GenerarNominaException Si la nómina es nula o si ocurre un error al guardar la nómina o enviar el correo.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException {return control.guardarNomina(nomina);}
+    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException {
+        try {
+            return control.guardarNomina(nomina) && control.enviarCorreo(nomina);
+        } catch (CorreoException ex) {
+            Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
+            throw new GenerarNominaException(ex.getMessage());
+        }
+    }
 }

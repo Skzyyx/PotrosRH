@@ -4,18 +4,23 @@ import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IGenerarNomina;
-import SistemaCorreo.Correo;
 import bo.NominaBO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Interface.ICorreo;
 import Interfaces.INominaBO;
+import SistemaCorreo.SistemaCorreo;
+import SistemaCorreo.PlantillaCorreo;
+import SistemaCorreo.RepoPlantillaCorreo;
+import SistemaCorreo.TipoPlantillaCorreo;
+import java.util.Map;
+import Interface.ISistemaCorreo;
 
 /**
- * Realiza validaciones de negocio y genera la nómina correspondiente
- * al empleado recibido.
+ * Realiza validaciones de negocio y genera la nómina correspondiente al
+ * empleado recibido.
+ *
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -23,6 +28,7 @@ import Interfaces.INominaBO;
  * @author Benjamin Soto Coronado (253183)
  */
 public class ControlGenerarNomina implements IGenerarNomina {
+
     /**
      * Objeto BO de las nóminas.
      */
@@ -38,12 +44,14 @@ public class ControlGenerarNomina implements IGenerarNomina {
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
         // Si el empleado es null
-        if (empleado == null) 
+        if (empleado == null) {
             throw new GenerarNominaException("El empleado no puede ser nulo.");
+        }
         // Si el empleado está inactivo.
-        if(!empleado.getEstado().equals("ACTIVO"))
+        if (!empleado.getEstado().equals("ACTIVO")) {
             throw new GenerarNominaException("El empleado debe de estar activo.");
-        
+        }
+
         try {
             return nominaBO.generarNomina(empleado); // Se genera la nómina y se regresa como un DTO.
         } catch (ObjetosNegocioException ex) {
@@ -53,22 +61,24 @@ public class ControlGenerarNomina implements IGenerarNomina {
     }
 
     /**
-     * Guarda la nómina en la base de datos y envía un correo al empleado.
+     * Guarda la nómina en la base de datos.
      *
      * @param nomina Objeto NominaDTO con la información de la nómina.
      * @return `true` si el proceso fue exitoso, `false` en caso contrario.
      * @throws GenerarNominaException Si la nómina es nula o si ocurre un error.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException{
+    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException {
         // Si la nómina está vacía.
-        if(nomina == null)
+        if (nomina == null) {
             throw new GenerarNominaException("La nomina no puede ser nula.");
+        }
         // Sistema de correo electrónico.
-        ICorreo sistemaCorreo = new Correo();
+        //ICorreo sistemaCorreo = new Correo();
         try {
             nominaBO.guardarNomina(nomina); // Se guarda la nómina.
-            sistemaCorreo.enviarCorreo(nomina); // Se envía el correo electrónico con la nómina generada.
+            //sistemaCorreo.enviarCorreo(nomina); // Se envía el correo electrónico con la nómina generada.
+            enviarCorreo(nomina);
             return true; // Regresa true como confirmación de nómina generada con éxito.
         } catch (CorreoException ex) {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,5 +87,35 @@ public class ControlGenerarNomina implements IGenerarNomina {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException(ex.getMessage(), ex);
         }
+    }
+
+    /**
+     * Envia un correo al empleado con la información de su nómina.
+     *
+     * @param nomina Objeto NominaDTO con la información de la nómina.
+     * @return `true` si el proceso fue exitoso, `false` en caso contrario.
+     * @throws CorreoException Si ocurre un error al enviar el correo.
+     */
+    public boolean enviarCorreo(NominaDTO nomina) throws CorreoException {
+        ISistemaCorreo sistemaCorreo = new SistemaCorreo();
+        PlantillaCorreo plantilla = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.NOMINA);
+        EmpleadoDTO empleado = nomina.getEmpleado();
+
+        Map<String, Object> values = Map.of(
+                "nombreCompleto", String.join(" ",
+                        empleado.getNombre(),
+                        empleado.getApellidoPaterno(),
+                        empleado.getApellidoMaterno()
+                ),
+                "fechaCorte", nomina.getFechaCorte(),
+                "salarioBase", empleado.getSalarioBase(),
+                "bono", nomina.getBono(),
+                "salarioBruto", nomina.getSalarioBruto(),
+                "isr", nomina.getIsr(),
+                "salarioNeto", nomina.getSalarioNeto()
+        );
+
+        sistemaCorreo.sendEmail(empleado.getEmail(), plantilla, values);
+        return true;
     }
 }

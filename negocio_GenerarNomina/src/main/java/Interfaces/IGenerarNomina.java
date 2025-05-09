@@ -29,4 +29,5 @@ public interface IGenerarNomina {
      * @throws GenerarNominaException Si la nómina es nula o si ocurre un error al guardar la nómina o enviar el correo.
      */
     public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException;
+    
 }
