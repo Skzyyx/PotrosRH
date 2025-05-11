@@ -35,4 +35,6 @@ public interface IEmpleadoDAO {
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     public Empleado obtenerEmpleado(String rfc) throws AccesoDatosException;
+    
+    public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException;
 }

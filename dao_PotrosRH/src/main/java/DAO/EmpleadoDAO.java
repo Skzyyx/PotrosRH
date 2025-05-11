@@ -100,6 +100,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         empleados.add(empleadoNeto);
         empleados.add(empleadoJose);
     }
+    
     /**
      * Valida el estado de un empleado.
      * @param rfc RFC del empleado.
@@ -107,7 +108,10 @@ public class EmpleadoDAO implements IEmpleadoDAO {
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public boolean validarEstado(String rfc) throws AccesoDatosException {return true;}
+    public boolean validarEstado(String rfc) throws AccesoDatosException {
+        return true;
+    }
+    
     /**
      * Valida que el porcentaje de asistencia de un empleado sea
      * igual o superior al 80%, correspondiente con su período
@@ -117,7 +121,10 @@ public class EmpleadoDAO implements IEmpleadoDAO {
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public boolean validarPorcentajeAsistencias(String rfc) throws AccesoDatosException {return true;}
+    public boolean validarPorcentajeAsistencias(String rfc) throws AccesoDatosException {
+        return true;
+    }
+    
     /**
      * Obtiene un empleado de la base de datos.
      * @param rfc RFC del empleado.
@@ -134,5 +141,21 @@ public class EmpleadoDAO implements IEmpleadoDAO {
 
         // Si no se encuentra el empleado, lanza una excepción
         throw new AccesoDatosException("No se encontró un empleado con el RFC proporcionado");
+    }
+    
+    /**
+     * Actualiza la información de un empleado en la base de datos simulada
+     *
+     * @param empleado La entidad Empleado con la información actualizada
+     * @throws AccesoDatosException Si ocurre un error al actualizar el empleado o si no se encuentra
+     */
+    public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException {
+        for (int i = 0; i < empleados.size(); i++) {
+            if (empleados.get(i).getRfc().equalsIgnoreCase(empleado.getRfc())) {
+                empleados.set(i, empleado);
+                return;
+            }
+        }
+        throw new AccesoDatosException("No se encontró el empleado con el RFC proporcionado para actualizar.");
     }
 }

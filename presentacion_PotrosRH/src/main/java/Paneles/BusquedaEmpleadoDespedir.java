@@ -1,15 +1,11 @@
 package Paneles;
 
 import Controles.ControlFlujo;
-import Controles.ControlNomina;
 import Excepciones.PresentacionException;
-import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;

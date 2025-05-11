@@ -2,8 +2,11 @@ package Controles;
 
 import Excepciones.PresentacionException;
 import Paneles.BusquedaEmpleado;
+import Paneles.BusquedaEmpleadoDespedir;
+import Paneles.ConfirmacionDespido;
 import Paneles.MenuPrincipal;
 import Paneles.PrevisualizarEmpleado;
+import Paneles.PrevisualizarEmpleadoDespedir;
 import Paneles.PrevisualizarNomina;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
@@ -25,9 +28,14 @@ public class ControlFlujo {
     private static JPanel panelActual;
 
     private static MenuPrincipal menuPrincipal;
+    //CU: Nómina de empleado
     private static BusquedaEmpleado busquedaEmpleado;
     private static PrevisualizarEmpleado previsualizarEmpleado;
     private static PrevisualizarNomina previsualizarNomina;
+    //CU: Despedir Empleado
+    private static PrevisualizarEmpleadoDespedir previsualizarEmpleadoDespedir;
+    private static BusquedaEmpleadoDespedir busquedaEmpleadoDespedir;
+    private static ConfirmacionDespido confirmacionDespido;
     
     /**
     * Muestra la pantalla del menú principal de la aplicación.
@@ -41,6 +49,7 @@ public class ControlFlujo {
         }
         cambiarPantalla(menuPrincipal);
     }
+    
     /**
     * Muestra la pantalla de búsqueda de empleados.
     * 
@@ -55,6 +64,7 @@ public class ControlFlujo {
         busquedaEmpleado.limpiarCampo();
         cambiarPantalla(busquedaEmpleado);
     }
+    
     /**
     * Muestra la pantalla de previsualización de un empleado.
     * 
@@ -76,6 +86,7 @@ public class ControlFlujo {
         previsualizarEmpleado.setDatosEmpleado(empleado);
         cambiarPantalla(previsualizarEmpleado);
     }
+    
     /**
     * Muestra la pantalla de previsualización de una nómina generada.
     * 
@@ -100,6 +111,7 @@ public class ControlFlujo {
             throw new PresentacionException(ex.getMessage());
         }
     }
+    
     /**
     * Cambia la vista actual del sistema mostrando el panel recibido como nuevo contenido.
     * 
@@ -122,6 +134,7 @@ public class ControlFlujo {
 
         panelActual = nuevoPanel;
     }
+    
     /**
     * Establece el panel contenedor principal para la interfaz gráfica.
     * 
@@ -132,5 +145,41 @@ public class ControlFlujo {
     */
     public static void setContenedor(JPanel contenedor) {
         panelContenedor = contenedor;
+    }
+    
+    /**
+     * Muestra la pantalla de búsqueda de empleados para despedir.
+     *
+     * Si la instancia de la pantalla de búsqueda para despido aún no ha sido creada, se instancia.
+     * Antes de mostrarla, se limpia el campo de búsqueda.
+     * Luego, se cambia la pantalla actual para mostrar esta vista.
+     */
+    public static void mostrarBusquedaEmpleadoDespedir() {
+        if (busquedaEmpleadoDespedir == null) {
+            busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
+        }
+        busquedaEmpleadoDespedir.limpiarCampo();
+        cambiarPantalla(busquedaEmpleadoDespedir);
+    }
+    
+    /**
+     * Muestra la pantalla de previsualización del empleado que se va a despedir.
+     *
+     * Obtiene la información del empleado a partir de su RFC utilizando la capa de control de negocio.
+     * Si la instancia de la pantalla de previsualización para despido no ha sido creada, se instancia.
+     * Luego, se asignan los datos del empleado a la vista y se muestra la pantalla correspondiente.
+     *
+     * @param rfc Clave RFC del empleado que se desea previsualizar para despedir.
+     * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
+     */
+    public static void mostrarPrevisualizarEmpleadoDespedir(String rfc) throws PresentacionException {
+        ControlDespido controlDespido = new ControlDespido(); // Instancia del control de negocio
+        EmpleadoDTO empleado = controlDespido.buscarEmpleadoPorRFC(rfc); // Usamos el control de negocio
+
+        if (previsualizarEmpleadoDespedir == null) {
+            previsualizarEmpleadoDespedir = new PrevisualizarEmpleadoDespedir();
+        }
+        previsualizarEmpleadoDespedir.setDatosEmpleado(empleado);
+        cambiarPantalla(previsualizarEmpleadoDespedir);
     }
 }

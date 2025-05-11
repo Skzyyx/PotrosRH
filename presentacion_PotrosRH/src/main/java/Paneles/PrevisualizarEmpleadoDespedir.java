@@ -1,19 +1,13 @@
 package Paneles;
 
 import Controles.ControlFlujo;
-import Controles.ControlNomina;
-import Excepciones.PresentacionException;
-import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,7 +75,6 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         apellidoPaternoEmpleado = new javax.swing.JLabel();
         apellidoMaternoEmpleado = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        puestoEmpleado = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -150,9 +143,6 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel2.setText("Nombre:");
 
-        puestoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        puestoEmpleado.setText(".");
-
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel3.setText("Apellido paterno:");
 
@@ -197,10 +187,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
                             .addComponent(razonEmpleado)
                             .addComponent(apellidoPaternoEmpleado)
                             .addComponent(apellidoMaternoEmpleado)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(RFCEmpleado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(puestoEmpleado))
+                            .addComponent(RFCEmpleado)
                             .addComponent(numEmpleado)
                             .addComponent(nombreEmpleado))))
                 .addContainerGap(460, Short.MAX_VALUE))
@@ -236,9 +223,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(apellidoPaternoEmpleado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(apellidoMaternoEmpleado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(puestoEmpleado)))
+                        .addComponent(apellidoMaternoEmpleado)))
                 .addContainerGap(162, Short.MAX_VALUE))
         );
 
@@ -303,9 +288,11 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseClicked
+        //
     }//GEN-LAST:event_btnConfirmarMouseClicked
 
     private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
+        ControlFlujo.mostrarMenuPrincipal();
     }//GEN-LAST:event_btnVolverMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -334,40 +321,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel nombreEmpleado;
     private javax.swing.JLabel numEmpleado;
-    private javax.swing.JLabel puestoEmpleado;
     private javax.swing.JLabel razonEmpleado;
     // End of variables declaration//GEN-END:variables
-
-    public JLabel getRFCEmpleado() {return apellidoMaternoEmpleado;}
-
-    public void setRFCEmpleado(JLabel RFCEmpleado) {this.apellidoMaternoEmpleado = RFCEmpleado;}
-
-    public JLabel getApellidoMaternoEmpleado() {return apellidoPaternoEmpleado;}
-
-    public void setApellidoMaternoEmpleado(JLabel apellidoMaternoEmpleado) {this.apellidoPaternoEmpleado = apellidoMaternoEmpleado;}
-
-    public JLabel getApellidoPaternoEmpleado() {return nombreEmpleado;}
-
-    public void setApellidoPaternoEmpleado(JLabel apellidoPaternoEmpleado) {this.nombreEmpleado = apellidoPaternoEmpleado;}
-
-    public JButton getBtnCancelar() {return btnConfirmar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnConfirmar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnVolver;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnVolver = btnGenerar;}
-
-    public JLabel getEstadoEmpleado() {return RFCEmpleado;}
-
-    public void setEstadoEmpleado(JLabel estadoEmpleado) {this.RFCEmpleado = estadoEmpleado;}
-
-    public JLabel getNombreEmpleado() {return numEmpleado;}
-
-    public void setNombreEmpleado(JLabel nombreEmpleado) {this.numEmpleado = nombreEmpleado;}
-
-    public JLabel getPuestoEmpleado() {return puestoEmpleado;}
-
-    public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
 
 }
