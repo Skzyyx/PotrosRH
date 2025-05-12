@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\ConfirmacionDespido.java
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\MenuPrincipal.java
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarEmpleado.java
@@ -15,3 +16,23 @@ C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\BusquedaEmpleado.java
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarNomina.java
 C:\Users\JR\Documents\GitHub\POTROSRH VER_FINAL.1\PotrosRH\presentacion_PotrosRH\src\main\java\Excepciones\PresentacionException.java
+=======
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\OptionPane\OptionPane.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\MenuPrincipal.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\PrevisualizarEmpleadoDespedir.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\LogIn.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarNomina.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlFlujo.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\BusquedaEmpleadoDespedir.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Enums\Bonos.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Frame\CarcasaPaneles.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\BusquedaEmpleado.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Excepciones\PresentacionException.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarEmpleado.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\RegistroDatosGenerales.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\SubmenuReportesMalaConducta.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlDespido.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\ConfirmacionDespido.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlNomina.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Pruebas\Pruebas.java
+>>>>>>> Stashed changes
