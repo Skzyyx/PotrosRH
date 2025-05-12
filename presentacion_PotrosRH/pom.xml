@@ -14,6 +14,11 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>io.github.dj-raven</groupId>
+            <artifactId>swing-datetime-picker</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
@@ -38,6 +43,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>negocio_ValidarEmpleado</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>11.2.1</version>
         </dependency>
     </dependencies>
     <properties>
