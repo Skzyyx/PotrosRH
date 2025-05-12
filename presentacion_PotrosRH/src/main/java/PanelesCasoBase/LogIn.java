@@ -1,4 +1,4 @@
-package Paneles;
+package PanelesCasoBase;
 
 import Controles.ControlFlujo;
 import Excepciones.PresentacionException;

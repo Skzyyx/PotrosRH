@@ -1,10 +1,10 @@
 package Frame;
 
 import Controles.ControlFlujo;
-import Paneles.BusquedaEmpleado;
-import Paneles.MenuPrincipal;
-import Paneles.PrevisualizarEmpleado;
-import Paneles.PrevisualizarNomina;
+import PanelesCasoBase.BusquedaEmpleado;
+import PanelesCasoBase.MenuPrincipal;
+import PanelesCasoBase.PrevisualizarEmpleado;
+import PanelesCasoBase.PrevisualizarNomina;
 import javax.swing.JPanel;
 
 /**

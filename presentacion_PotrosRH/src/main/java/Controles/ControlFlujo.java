@@ -1,13 +1,13 @@
 package Controles;
 
 import Excepciones.PresentacionException;
-import Paneles.BusquedaEmpleado;
-import Paneles.BusquedaEmpleadoDespedir;
-import Paneles.ConfirmacionDespido;
-import Paneles.MenuPrincipal;
-import Paneles.PrevisualizarEmpleado;
-import Paneles.PrevisualizarEmpleadoDespedir;
-import Paneles.PrevisualizarNomina;
+import PanelesCasoBase.BusquedaEmpleado;
+import PanelesDespidos.BusquedaEmpleadoDespedir;
+import PanelesDespidos.ConfirmacionDespido;
+import PanelesCasoBase.MenuPrincipal;
+import PanelesCasoBase.PrevisualizarEmpleado;
+import PanelesDespidos.PrevisualizarEmpleadoDespedir;
+import PanelesCasoBase.PrevisualizarNomina;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import java.util.logging.Level;
