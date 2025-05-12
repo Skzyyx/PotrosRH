@@ -1,5 +1,6 @@
 package PanelesReportes;
 
+import Controles.ControlFlujo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -30,27 +31,30 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
         btnRegistrarReporte = new javax.swing.JButton();
         btnRevisarReporte = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
 
-        btnRegistrarReporte.setBackground(new java.awt.Color(44, 44, 44));
+        btnRegistrarReporte.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistrarReporte.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnRegistrarReporte.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarReporte.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC WHITE WOLF\\Documents\\GitHub\\PotrosRH\\presentacion_PotrosRH\\src\\main\\resources\\Images\\Reportes\\NuevoReporte.png")); // NOI18N
         btnRegistrarReporte.setText("Registrar Nuevo Reporte");
+        btnRegistrarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarReporteActionPerformed(evt);
             }
         });
 
-        btnRevisarReporte.setBackground(new java.awt.Color(44, 44, 44));
+        btnRevisarReporte.setBackground(new java.awt.Color(0, 0, 0));
         btnRevisarReporte.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnRevisarReporte.setForeground(new java.awt.Color(255, 255, 255));
         btnRevisarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Reportes/RevisarReporte.png"))); // NOI18N
         btnRevisarReporte.setText("Revisar Reporte");
+        btnRevisarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRevisarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRevisarReporteActionPerformed(evt);
@@ -59,6 +63,17 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 42)); // NOI18N
         jLabel1.setText("Reportes de mala conducta de empleados");
+
+        btnRegresar.setBackground(new java.awt.Color(255, 0, 0));
+        btnRegresar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,6 +90,10 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                         .addComponent(btnRevisarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +104,9 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRevisarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         btnRegistrarReporte.setBorderPainted(false);
@@ -118,6 +139,21 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
+        btnRegresar.setBorderPainted(false);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setOpaque(false);
+        btnRegresar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarReporteActionPerformed
@@ -128,9 +164,14 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRevisarReporteActionPerformed
 
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        ControlFlujo.mostrarMenuPrincipal();
+    }//GEN-LAST:event_btnRegresarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarReporte;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRevisarReporte;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

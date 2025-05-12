@@ -1,29 +1,15 @@
 package PanelesReportes;
 
-import PanelesCasoBase.*;
-import Controles.ControlFlujo;
-import Controles.ControlNomina;
-import Excepciones.PresentacionException;
-import OptionPane.OptionPane;
-import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.LocalDateTime;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
- * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class RegistroDatosGenerales extends javax.swing.JPanel {
 
@@ -51,7 +37,9 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         jTRFCReportante = new javax.swing.JTextField();
         jLRFCReportante = new javax.swing.JLabel();
         jLFechaIncidente = new javax.swing.JLabel();
-        datePicker1 = new raven.datetime.DatePicker();
+        jDPFechaIncidente = new raven.datetime.DatePicker();
+        jLHoraIncidente = new javax.swing.JLabel();
+        jTPHoraIncidente = new raven.datetime.TimePicker();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -73,7 +61,7 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             }
         });
 
-        btnSiguiente.setBackground(new java.awt.Color(44, 44, 44));
+        btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
         btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
@@ -126,8 +114,16 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         jLFechaIncidente.setForeground(new java.awt.Color(0, 0, 0));
         jLFechaIncidente.setText("Fecha de incidente*:");
 
-        datePicker1.setBackground(new java.awt.Color(0, 0, 0));
-        datePicker1.setForeground(new java.awt.Color(255, 255, 255));
+        jDPFechaIncidente.setBackground(new java.awt.Color(0, 0, 0));
+        jDPFechaIncidente.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLHoraIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLHoraIncidente.setForeground(new java.awt.Color(0, 0, 0));
+        jLHoraIncidente.setText("Hora de incidente*:");
+
+        jTPHoraIncidente.setBackground(new java.awt.Color(0, 0, 0));
+        jTPHoraIncidente.setForeground(new java.awt.Color(255, 255, 255));
+        jTPHoraIncidente.setColor(new java.awt.Color(0, 0, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,7 +152,11 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
                         .addGap(176, 176, 176)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLFechaIncidente)
-                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jDPFechaIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTPHoraIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLHoraIncidente))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,21 +171,27 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLRFCReportado, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLFechaIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLFechaIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLHoraIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTRFCReportado, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLRFCReportante, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTRFCReportante, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTRFCReportado, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLRFCReportante, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTRFCReportante, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDPFechaIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTPHoraIncidente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         btnCancelar.setBorderPainted(false);
@@ -227,35 +233,26 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteMouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
-        if (resultado == JOptionPane.YES_OPTION) {
-            try {
-                ControlNomina controlNomina = ControlNomina.getInstance();
-                controlNomina.generarNomina();
-                ControlFlujo.mostrarPrevisualizarNomina();
-            } catch (PresentacionException ex) {
-                Logger.getLogger(RegistroDatosGenerales.class.getName()).log(Level.SEVERE, null, ex);
-                OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
-            }
-            
-        }
+        
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ControlFlujo.mostrarBusquedaEmpleado();
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSiguiente;
-    private raven.datetime.DatePicker datePicker1;
+    private raven.datetime.DatePicker jDPFechaIncidente;
     private javax.swing.JLabel jLDatosGenerales;
     private javax.swing.JLabel jLFechaIncidente;
+    private javax.swing.JLabel jLHoraIncidente;
     private javax.swing.JLabel jLRFCReportado;
     private javax.swing.JLabel jLRFCReportante;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel2;
+    private raven.datetime.TimePicker jTPHoraIncidente;
     private javax.swing.JTextField jTRFCReportado;
     private javax.swing.JTextField jTRFCReportante;
     // End of variables declaration//GEN-END:variables
