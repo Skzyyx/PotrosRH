@@ -1,6 +1,7 @@
 package Controles;
 
 import Excepciones.PresentacionException;
+import Exceptions.ObjetosNegocioException;
 import PanelesCasoBase.BusquedaEmpleado;
 import PanelesDespidos.BusquedaEmpleadoDespedir;
 import PanelesDespidos.ConfirmacionDespido;
@@ -155,9 +156,7 @@ public class ControlFlujo {
      * Luego, se cambia la pantalla actual para mostrar esta vista.
      */
     public static void mostrarBusquedaEmpleadoDespedir() {
-        if (busquedaEmpleadoDespedir == null) {
-            busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
-        }
+        BusquedaEmpleadoDespedir busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
         busquedaEmpleadoDespedir.limpiarCampo();
         cambiarPantalla(busquedaEmpleadoDespedir);
     }
@@ -172,13 +171,11 @@ public class ControlFlujo {
      * @param rfc Clave RFC del empleado que se desea previsualizar para despedir.
      * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
      */
-    public static void mostrarPrevisualizarEmpleadoDespedir(String rfc) throws PresentacionException {
-        ControlDespido controlDespido = new ControlDespido(); // Instancia del control de negocio
-        EmpleadoDTO empleado = controlDespido.buscarEmpleadoPorRFC(rfc); // Usamos el control de negocio
+    public static void mostrarPrevisualizarEmpleadoDespedir(String rfc) throws ObjetosNegocioException {
+        ControlSubsistemaDespido subsistemaDespido = new ControlSubsistemaDespido();
+        EmpleadoDTO empleado = subsistemaDespido.buscarEmpleadoPorRFC(rfc);
 
-        if (previsualizarEmpleadoDespedir == null) {
-            previsualizarEmpleadoDespedir = new PrevisualizarEmpleadoDespedir();
-        }
+        PrevisualizarEmpleadoDespedir previsualizarEmpleadoDespedir = new PrevisualizarEmpleadoDespedir();
         previsualizarEmpleadoDespedir.setDatosEmpleado(empleado);
         cambiarPantalla(previsualizarEmpleadoDespedir);
     }

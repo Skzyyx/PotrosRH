@@ -1,45 +1,51 @@
 package Controles;
 
 import Excepciones.PresentacionException;
-import bo.EmpleadoBO;
-import dto.DespidoDTO;
+import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
-
+import java.time.LocalDate;
 
 /**
  *
  * @author Jesús Ernesto López Ibarra (252663)
  */
 public class ControlDespido {
-    
-    private final EmpleadoBO empleadoBO = EmpleadoBO.getInstance();
-    
-    public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws PresentacionException {
+
+    private final ControlSubsistemaDespido subsistemaDespido = new ControlSubsistemaDespido();
+
+    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws PresentacionException, ObjetosNegocioException {
         try {
-            // 1. Crear la entidad de Despido
-            DespidoDTO despido = new DespidoDTO();
-            despido.setRfcEmpleado(empleadoDTO.getRfc());
-            despido.setMotivo(motivo);
-            despido.setFechaDespido(new java.sql.Date(System.currentTimeMillis()));
+            return subsistemaDespido.buscarEmpleadoPorRFC(rfc);
+        } catch (ObjetosNegocioException e) {
+            throw new ObjetosNegocioException("Error al buscar empleado: " + e.getMessage());
+        }
+    }
 
-            // 2. Guardar el registro de despido en la base de datos (usando un DAODespido)
-            // TODO: Crear la clase DespidoDAO y su método guardarDespido
-            // DespidoDAO despidoDAO = new DespidoDAO();
-            // despidoDAO.guardarDespido(despido);
+    public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws ObjetosNegocioException {
+        // 1. Crear el DTO de Despido
+        dto.DespidoDTO despidoDTO = new dto.DespidoDTO();
+        despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
+        despidoDTO.setMotivo(motivo);
+        despidoDTO.setFechaDespido(LocalDate.now());
+        // 2. Llamar al subsistema de Despido para registrar el despido
+        // TODO: Crear método en ControlSubsistemaDespido para registrar el despido
+        // subsistemaDespido.registrarDespido(despidoDTO);
+        try {
+            // 3. Cambiar el estado del empleado a través del subsistema
+            subsistemaDespido.actualizarEstadoEmpleado(empleadoDTO.getRfc(), "INACTIVO");
+            
+            // 4. Enviar notificación por correo electrónico (esto podría ser otro subsistema o un servicio)
+            
+        } catch (ObjetosNegocioException e) {
+            throw new ObjetosNegocioException("Error al registrar despido: " + e.getMessage());
+        }
+    }
 
-            // 3. Cambiar el estado del empleado a "despedido"
-            EmpleadoDTO empleado = empleadoBO.obtenerEmpleado(empleadoDTO.getRfc());
-            if (empleado != null) {
-                empleado.setEstado("despedido");
-                empleadoBO.actualizarEmpleado(empleado);
-            } else {
-                throw new PresentacionException("No se encontró el empleado para actualizar su estado.");
-            }
-
-            // 4. Enviar notificación por correo electrónico
-            // ...
-        } catch (Exception e) {
-            throw new PresentacionException("Error al registrar el despido: " + e.getMessage());
+    public EmpleadoDTO actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws PresentacionException, ObjetosNegocioException {
+        try {
+            return subsistemaDespido.actualizarEstadoEmpleado(rfc, nuevoEstado);
+        } catch (ObjetosNegocioException e) {
+            throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + e.getMessage());
         }
     }
 }

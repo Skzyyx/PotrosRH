@@ -34,7 +34,7 @@ public class EmpleadoBO implements IEmpleadoBO{
      * @return Instancia SingleTon de la clase.
      */
     public static synchronized IEmpleadoBO getInstance() {
-        if (instance == null) 
+        if (instance == null)
             instance = new EmpleadoBO();
         return instance;
     }

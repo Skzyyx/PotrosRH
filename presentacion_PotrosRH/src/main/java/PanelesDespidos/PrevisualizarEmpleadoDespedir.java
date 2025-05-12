@@ -1,6 +1,7 @@
-package PanelesDespidos;
+    package PanelesDespidos;
 
 import Controles.ControlFlujo;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -19,19 +20,12 @@ import javax.swing.JLabel;
  */
 public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
 
-    private static PrevisualizarEmpleadoDespedir instance;
-
+    private EmpleadoDTO empleado;
     /**
      * Creates new form PrevisualisarEmpleado
      */
     public PrevisualizarEmpleadoDespedir() {initComponents();}
 
-    public static PrevisualizarEmpleadoDespedir getInstance() {
-        if (instance == null) {
-            instance = new PrevisualizarEmpleadoDespedir();
-        }
-        return instance;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,19 +63,19 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
             }
         };
         ;
-        jLabel6 = new javax.swing.JLabel();
-        numEmpleado = new javax.swing.JLabel();
-        nombreEmpleado = new javax.swing.JLabel();
-        apellidoPaternoEmpleado = new javax.swing.JLabel();
-        apellidoMaternoEmpleado = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        RFCEmpleado = new javax.swing.JLabel();
+        staticNumEmpleado = new javax.swing.JLabel();
+        lblnumEmpleado = new javax.swing.JLabel();
+        lblnombreEmpleado = new javax.swing.JLabel();
+        lblapellidoPaternoEmpleado = new javax.swing.JLabel();
+        lblapellidoMaternoEmpleado = new javax.swing.JLabel();
+        staticNombre = new javax.swing.JLabel();
+        staticApellidoPat = new javax.swing.JLabel();
+        staticApellidoMat = new javax.swing.JLabel();
+        staticRFC = new javax.swing.JLabel();
+        staticRazon = new javax.swing.JLabel();
+        lblRFCEmpleado = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        razonEmpleado = new javax.swing.JLabel();
+        txtrazonEmpleado = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -125,44 +119,41 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         jPanel1.setOpaque(false); // Hacer el panel transparente para que se vea el fondo redondeado
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Margen interno
 
-        jLabel6.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel6.setText("Num. Empleado:");
+        staticNumEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticNumEmpleado.setText("Num. Empleado:");
 
-        numEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        numEmpleado.setText(".");
+        lblnumEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblnumEmpleado.setText(".");
 
-        nombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        nombreEmpleado.setText(".");
+        lblnombreEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblnombreEmpleado.setText(".");
 
-        apellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        apellidoPaternoEmpleado.setText(".");
+        lblapellidoPaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblapellidoPaternoEmpleado.setText(".");
 
-        apellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        apellidoMaternoEmpleado.setText(".");
+        lblapellidoMaternoEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblapellidoMaternoEmpleado.setText(".");
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre:");
+        staticNombre.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticNombre.setText("Nombre:");
 
-        jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel3.setText("Apellido paterno:");
+        staticApellidoPat.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticApellidoPat.setText("Apellido paterno:");
 
-        jLabel4.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel4.setText("Apellido materno:");
+        staticApellidoMat.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticApellidoMat.setText("Apellido materno:");
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel5.setText("RFC:");
+        staticRFC.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticRFC.setText("RFC:");
 
-        jLabel7.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel7.setText("Razón:");
+        staticRazon.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        staticRazon.setText("Razón:");
 
-        RFCEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        RFCEmpleado.setText(".");
+        lblRFCEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblRFCEmpleado.setText(".");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel8.setText("Información del Empleado");
-
-        razonEmpleado.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        razonEmpleado.setText(".");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -176,55 +167,56 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(staticRazon)
+                            .addComponent(staticNombre)
+                            .addComponent(staticApellidoPat)
+                            .addComponent(staticApellidoMat)
+                            .addComponent(staticRFC)
+                            .addComponent(staticNumEmpleado))
                         .addGap(75, 75, 75)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(razonEmpleado)
-                            .addComponent(apellidoPaternoEmpleado)
-                            .addComponent(apellidoMaternoEmpleado)
-                            .addComponent(RFCEmpleado)
-                            .addComponent(numEmpleado)
-                            .addComponent(nombreEmpleado))))
-                .addContainerGap(460, Short.MAX_VALUE))
+                            .addComponent(lblapellidoPaternoEmpleado)
+                            .addComponent(lblapellidoMaternoEmpleado)
+                            .addComponent(lblRFCEmpleado)
+                            .addComponent(lblnumEmpleado)
+                            .addComponent(lblnombreEmpleado)
+                            .addComponent(txtrazonEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel8)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(staticRazon)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel8)
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(staticNumEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(staticNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(staticApellidoPat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(staticApellidoMat)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(staticRFC)
+                                    .addComponent(lblRFCEmpleado)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblnumEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblnombreEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblapellidoPaternoEmpleado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblapellidoMaternoEmpleado)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(RFCEmpleado))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(razonEmpleado)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(numEmpleado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreEmpleado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(apellidoPaternoEmpleado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(apellidoMaternoEmpleado)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                        .addComponent(txtrazonEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel1);
@@ -252,7 +244,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnConfirmar.setBorderPainted(false);
@@ -305,23 +297,39 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel RFCEmpleado;
-    private javax.swing.JLabel apellidoMaternoEmpleado;
-    private javax.swing.JLabel apellidoPaternoEmpleado;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel nombreEmpleado;
-    private javax.swing.JLabel numEmpleado;
-    private javax.swing.JLabel razonEmpleado;
+    private javax.swing.JLabel lblRFCEmpleado;
+    private javax.swing.JLabel lblapellidoMaternoEmpleado;
+    private javax.swing.JLabel lblapellidoPaternoEmpleado;
+    private javax.swing.JLabel lblnombreEmpleado;
+    private javax.swing.JLabel lblnumEmpleado;
+    private javax.swing.JLabel staticApellidoMat;
+    private javax.swing.JLabel staticApellidoPat;
+    private javax.swing.JLabel staticNombre;
+    private javax.swing.JLabel staticNumEmpleado;
+    private javax.swing.JLabel staticRFC;
+    private javax.swing.JLabel staticRazon;
+    private javax.swing.JTextField txtrazonEmpleado;
     // End of variables declaration//GEN-END:variables
 
+    public void setDatosEmpleado(EmpleadoDTO empleadoDTO) {
+        this.empleado = empleadoDTO;
+        // Actualizar las etiquetas con la información del empleado
+        lblnombreEmpleado.setText(empleadoDTO.getNombre());
+        lblapellidoPaternoEmpleado.setText(empleadoDTO.getApellidoPaterno());
+        lblapellidoMaternoEmpleado.setText(empleadoDTO.getApellidoMaterno());
+        lblRFCEmpleado.setText("RFC: " + empleadoDTO.getRfc());
+    }
+    
+    public String getMotivoDespido() {
+        return txtrazonEmpleado.getText();
+    }
+
+    public EmpleadoDTO getEmpleado() {
+        return empleado;
+    }
 }

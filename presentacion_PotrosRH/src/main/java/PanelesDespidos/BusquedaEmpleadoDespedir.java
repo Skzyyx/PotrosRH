@@ -21,21 +21,13 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  */
 public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
 
-    private static BusquedaEmpleadoDespedir instance;
-
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private BusquedaEmpleadoDespedir() {
+    public BusquedaEmpleadoDespedir() {
         initComponents();
     }
 
-    public static BusquedaEmpleadoDespedir getInstance() {
-        if (instance == null) {
-            instance = new BusquedaEmpleadoDespedir();
-        }
-        return instance;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,7 +199,14 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
         this.txtRfc = txtRfc;
     }
 
-    private void btnBuscar() throws PresentacionException {
+    private void btnBuscar() throws PresentacionException {}
 
+    /**
+     * Limpia el texto del campo de búsqueda de empleados para despedir.
+     */
+    public void limpiarCampo() {
+        if (txtRfc != null) {
+            txtRfc.setText("");
+        }
     }
 }
