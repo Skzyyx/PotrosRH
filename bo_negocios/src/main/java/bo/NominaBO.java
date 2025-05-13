@@ -23,7 +23,7 @@ import mappers.NominaMapper;
 public class NominaBO implements INominaBO {
     // Atributo de la misma clase (SingleTon).
     private static INominaBO instance;
-    // // Atributo DAO para operaciones CRUD con Nóminas.
+    // Atributo DAO para operaciones CRUD con Nóminas.
     private static final INominaDAO nominaDAO = new NominaDAO();
     /**
      * Constructor por defecto.

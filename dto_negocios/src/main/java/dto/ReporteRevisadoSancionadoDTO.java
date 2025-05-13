@@ -25,8 +25,11 @@ public class ReporteRevisadoSancionadoDTO extends ReporteRevisadoDTO{
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
+     * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
      * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
+     * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
+     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoSancionadoDTO(
             Set<String> normasVioladas, 
@@ -35,11 +38,23 @@ public class ReporteRevisadoSancionadoDTO extends ReporteRevisadoDTO{
             String descripcionOtraSancionImpuesta, 
             ReporteMalaConductaDTO reporteMalaConducta, 
             boolean infoCompleta, 
-            boolean tieneAntecedentesPrevios, 
+            boolean tieneAntecedentesPrevios,
+            String descripcionAntecedentesPrevios,
             Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas
+            String descripcionOtrasEntrevistasRealizadas,
+            Set<String> evidenciasRevisadas,
+            String descripcionOtrasEvidencias
     ) {
-        super(reporteMalaConducta, infoCompleta, tieneAntecedentesPrevios, entrevistasRealizadas, descripcionOtrasEntrevistasRealizadas);
+        super(
+                reporteMalaConducta, 
+                infoCompleta, 
+                tieneAntecedentesPrevios, 
+                descripcionAntecedentesPrevios, 
+                entrevistasRealizadas, 
+                descripcionOtrasEntrevistasRealizadas,
+                evidenciasRevisadas,
+                descripcionOtrasEvidencias
+        );
         this.normasVioladas = normasVioladas;
         this.nivelGravedad = nivelGravedad;
         this.sancionImpuesta = sancionImpuesta;

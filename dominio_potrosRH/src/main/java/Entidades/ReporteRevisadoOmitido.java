@@ -19,11 +19,33 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes
+     * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
      * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
+     * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
+     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
-    public ReporteRevisadoOmitido(String motivoOmision, ReporteMalaConducta reporteMalaConducta, boolean infoCompleta, boolean tieneAntecedentesPrevios, Set<String> entrevistasRealizadas, String descripcionOtrasEntrevistasRealizadas) {
-        super(reporteMalaConducta, infoCompleta, tieneAntecedentesPrevios, entrevistasRealizadas, descripcionOtrasEntrevistasRealizadas);
+    public ReporteRevisadoOmitido(
+            String motivoOmision, 
+            ReporteMalaConducta reporteMalaConducta, 
+            boolean infoCompleta, 
+            boolean tieneAntecedentesPrevios,
+            String descripcionAntecedentesPrevios,
+            Set<String> entrevistasRealizadas, 
+            String descripcionOtrasEntrevistasRealizadas,
+            Set<String> evidenciasRevisadas,
+            String descripcionOtrasEvidencias
+    ) {
+        super(
+                reporteMalaConducta, 
+                infoCompleta, 
+                tieneAntecedentesPrevios, 
+                descripcionAntecedentesPrevios, 
+                entrevistasRealizadas, 
+                descripcionOtrasEntrevistasRealizadas,
+                evidenciasRevisadas,
+                descripcionOtrasEvidencias
+        );
         this.motivoOmision = motivoOmision;
     }
     /**
