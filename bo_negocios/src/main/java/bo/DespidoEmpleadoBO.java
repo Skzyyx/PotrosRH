@@ -17,12 +17,10 @@ import mappers.EmpleadoMapper;
 public class DespidoEmpleadoBO {
     private final EmpleadoDAO empleadoDAO;
     private final DespidoDAO despidoDAO;
-    private final EmpleadoMapper empleadoMapper;
 
     public DespidoEmpleadoBO() {
         this.empleadoDAO = new EmpleadoDAO();
         this.despidoDAO = new DespidoDAO();
-        this.empleadoMapper = new EmpleadoMapper();
     }
 
     /**
@@ -49,7 +47,7 @@ public class DespidoEmpleadoBO {
      * @param nuevoEstado El nuevo estado que se desea asignar al empleado.
      * @return El DTO con la información actualizada del empleado.
      */
-    public boolean actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
+    public void actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
         Empleado empleado = empleadoDAO.obtenerEmpleado(rfc);
 
         if (empleado == null) {
@@ -60,7 +58,6 @@ public class DespidoEmpleadoBO {
             throw new ObjetosNegocioException("No se puede despedir un empleado que ya ha sido despedido.");
         }
         
-        return true;
-                //empleadoDAO.actualizarEmpleado(rfc, EstadoEmpleado.INACTIVO);
+        empleado.setEstado(EstadoEmpleado.INACTIVO);
     }
 }
