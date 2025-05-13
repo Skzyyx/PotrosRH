@@ -1,6 +1,7 @@
 package DAO;
 
 import Entidades.Despido;
+import Exceptions.AccesoDatosException;
 
 /**
  *
@@ -11,13 +12,20 @@ public class DespidoDAO {
     public DespidoDAO() {
     }
 
-    public void guardarDespido(Despido despido) {
-        // TODO: Implementar la lógica para guardar la información del despido en la base de datos
-        // (probablemente convertir el DespidoDTO a una entidad de Despido primero)
-        System.out.println("DespidoDAO: Guardar despido del empleado con RFC " + despido.getRfcEmpleado() +
-                           " con motivo: " + despido.getMotivo() +
-                           " en fecha: " + despido.getFechaDespido());
+    public void guardarDespido(Despido despido) throws AccesoDatosException {
+        try {
+            despidosCollection.insertOne(despido);
+            System.out.println("Despido guardado en la colección 'despidos'.");
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al guardar el despido en la colección 'despidos'.", e);
+        }
     }
-
-    // Otros métodos para interactuar con la tabla de despidos
+    
+    public Despido obtenerDespidoPorRFC(String rfcEmpleado) throws AccesoDatosException {
+        try {
+            return despidosCollection.find(eq("rfcEmpleado", rfcEmpleado)).first();
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al obtener el despido por RFC.", e);
+        }
+    }
 }

@@ -29,7 +29,7 @@ public class DespidoEmpleadoBO {
      *
      * @param despidoDTO El DTO con la información del despido.
      */
-    public void registrarDespido(DespidoDTO despidoDTO) {
+    public void registrarDespido(DespidoDTO despidoDTO) throws AccesoDatosException {
         Despido despidoEntity = new Despido(
             despidoDTO.getIdDespido(),
             despidoDTO.getRfcEmpleado(),
@@ -47,7 +47,7 @@ public class DespidoEmpleadoBO {
      * @param nuevoEstado El nuevo estado que se desea asignar al empleado.
      * @return El DTO con la información actualizada del empleado.
      */
-    public void actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
+    public void actualizarEstadoEmpleado(String rfc) throws ObjetosNegocioException, AccesoDatosException {
         Empleado empleado = empleadoDAO.obtenerEmpleado(rfc);
 
         if (empleado == null) {
