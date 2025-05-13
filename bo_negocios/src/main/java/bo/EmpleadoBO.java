@@ -142,4 +142,14 @@ public class EmpleadoBO implements IEmpleadoBO{
             throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + ex.getMessage(), ex);
         }
     }
+    
+    public EmpleadoDTO actualizarEstado(String rfc, String nuevoEstado) {
+        // Implementar la lógica para actualizar el estado de un empleado en la base de datos
+        System.out.println("EmpleadoDAO: Actualizar estado del empleado con RFC " + rfc + " a " + nuevoEstado);
+        // Simulación de la actualización y retorno de un DTO (deberías obtenerlo de la DB)
+        EmpleadoDTO empleadoActualizado = new EmpleadoDTO();
+            empleadoActualizado.setRfc(rfc);
+            empleadoActualizado.setEstado(nuevoEstado);
+            return empleadoActualizado;
+    }
 }
