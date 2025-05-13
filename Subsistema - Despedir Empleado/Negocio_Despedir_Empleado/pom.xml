@@ -26,6 +26,11 @@
             <artifactId>dto_negocios</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.mycompany.com</groupId>
+            <artifactId>infraestructura_SistemaCorreo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

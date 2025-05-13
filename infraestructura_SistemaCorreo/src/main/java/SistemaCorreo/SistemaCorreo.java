@@ -1,6 +1,5 @@
 package SistemaCorreo;
 
-
 import Excepciones.CorreoException;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
@@ -14,10 +13,6 @@ import java.util.Map;
 import java.util.Properties;
 import Interface.ISistemaCorreo;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 /**
  * Clase que se encarga del envío de correos electrónicos.
@@ -78,7 +73,4 @@ public class SistemaCorreo implements ISistemaCorreo {
         }
         return true;
     }
-    
-    
-    
 }
