@@ -5,7 +5,7 @@ import Entidades.Empleado;
 import Entidades.HorarioLaboral;
 import dto.EmpleadoDTO;
 import dto.HorarioLaboralDTO;
-import enums.EstadoEmpleado;
+import Enums.EstadoEmpleado;
 import java.util.ArrayList;
 import java.util.List;
 

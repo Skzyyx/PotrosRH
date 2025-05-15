@@ -8,7 +8,7 @@ import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IDespidoEmpleadoBO;
 import dto.DespidoDTO;
-import enums.EstadoEmpleado;
+import Enums.EstadoEmpleado;
 
 /**
  *

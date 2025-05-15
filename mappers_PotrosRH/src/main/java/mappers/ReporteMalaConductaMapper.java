@@ -2,7 +2,7 @@ package mappers;
 
 import Entidades.ReporteMalaConducta;
 import dto.ReporteMalaConductaDTO;
-import enums.EstadoReporte;
+import Enums.EstadoReporte;
 
 /**
  * Clase que mapea entidades ReporteMalaConducta a 

@@ -1,6 +1,6 @@
 package Entidades;
 
-import enums.EstadoEmpleado;
+import Enums.EstadoEmpleado;
 import java.util.List;
 
 /**

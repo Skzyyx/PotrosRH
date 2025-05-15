@@ -11,13 +11,12 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase para previsualizar los datos del empleado obtenido, antes
+ * de generar la nómina.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -104,11 +103,6 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerar.setText("Generar");
-        btnGenerar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGenerarMouseClicked(evt);
-            }
-        });
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
@@ -291,15 +285,11 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
     }//GEN-LAST:event_btnCancelarMouseClicked
 
-    private void btnGenerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseClicked
-    }//GEN-LAST:event_btnGenerarMouseClicked
-
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
             try {
-                ControlNomina controlNomina = ControlNomina.getInstance();
-                controlNomina.generarNomina();
+                ControlNomina.getInstance().generarNomina();
                 ControlFlujo.mostrarPrevisualizarNomina();
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
@@ -308,8 +298,20 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
             
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
-
+    /**
+     * Regresa a la búsqueda de empleados al hacer click
+     * en el botón cancelar.
+     * @param evt Evento.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // Limpia los campos.
+        nombreEmpleado.setText("");
+        apellidoPaternoEmpleado.setText("");
+        apellidoMaternoEmpleado.setText("");
+        RFCEmpleado.setText("");
+        puestoEmpleado.setText("");
+        estadoEmpleado.setText(String.valueOf(""));
+        // Regresa a la búsqueda de empleados.
         ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -334,37 +336,6 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel puestoEmpleado;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getRFCEmpleado() {return RFCEmpleado;}
-
-    public void setRFCEmpleado(JLabel RFCEmpleado) {this.RFCEmpleado = RFCEmpleado;}
-
-    public JLabel getApellidoMaternoEmpleado() {return apellidoMaternoEmpleado;}
-
-    public void setApellidoMaternoEmpleado(JLabel apellidoMaternoEmpleado) {this.apellidoMaternoEmpleado = apellidoMaternoEmpleado;}
-
-    public JLabel getApellidoPaternoEmpleado() {return apellidoPaternoEmpleado;}
-
-    public void setApellidoPaternoEmpleado(JLabel apellidoPaternoEmpleado) {this.apellidoPaternoEmpleado = apellidoPaternoEmpleado;}
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnGenerar;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnGenerar = btnGenerar;}
-
-    public JLabel getEstadoEmpleado() {return estadoEmpleado;}
-
-    public void setEstadoEmpleado(JLabel estadoEmpleado) {this.estadoEmpleado = estadoEmpleado;}
-
-    public JLabel getNombreEmpleado() {return nombreEmpleado;}
-
-    public void setNombreEmpleado(JLabel nombreEmpleado) {this.nombreEmpleado = nombreEmpleado;}
-
-    public JLabel getPuestoEmpleado() {return puestoEmpleado;}
-
-    public void setPuestoEmpleado(JLabel puestoEmpleado) {this.puestoEmpleado = puestoEmpleado;}
     /**
     * Actualiza los componentes de la interfaz con los datos del empleado.
     * 
@@ -383,5 +354,4 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         puestoEmpleado.setText(empleado.getPuesto());
         estadoEmpleado.setText(String.valueOf(empleado.getEstado()));
     }
-
 }

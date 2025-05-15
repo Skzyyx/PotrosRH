@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>com.mycompany.com</groupId>
-            <artifactId>dao_PotrosRH</artifactId>
+            <artifactId>persistencia_PotrosRH</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

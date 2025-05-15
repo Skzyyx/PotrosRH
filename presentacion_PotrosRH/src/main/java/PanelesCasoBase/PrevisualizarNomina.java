@@ -14,10 +14,9 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 /**
- *
+ * Clase para previsualizar los datos de la nómina generada.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -25,7 +24,7 @@ import javax.swing.JLabel;
  * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarNomina extends javax.swing.JPanel {
-
+    // Nómina a mostrar.
     private NominaDTO nomina;
 
     /**
@@ -120,11 +119,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setMaximumSize(new java.awt.Dimension(1820, 23));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -422,15 +416,11 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
+    
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         try {
-            nomina.setBono(Double.parseDouble(lblBono.getText()));
-            nomina.setSalarioNeto(Double.parseDouble(lblSalarioNetoEmpleado.getText()));
+            nomina.setBono(Double.valueOf(lblBono.getText()));
+            nomina.setSalarioNeto(Double.valueOf(lblSalarioNetoEmpleado.getText()));
 
             if (ControlNomina.getInstance().guardarNomina(nomina)) {
                 OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
@@ -486,53 +476,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     private javax.swing.JLabel lblSalarioNetoEmpleado;
     // End of variables declaration//GEN-END:variables
 
-    public JLabel getLblApellidoMaternoEmpleado() {return lblApellidoMaternoEmpleado;}
-
-    public void setLblApellidoMaternoEmpleado(JLabel lblApellidoMaternoEmpleado) {this.lblApellidoMaternoEmpleado = lblApellidoMaternoEmpleado;}
-
-    public JLabel getLblApellidoPaternoEmpleado() {return lblApellidoPaternoEmpleado;}
-
-    public void setLblApellidoPaternoEmpleado(JLabel lblApellidoPaternoEmpleado) {this.lblApellidoPaternoEmpleado = lblApellidoPaternoEmpleado;}
-
-    public JLabel getLblEstadoEmpleado() {return lblEstadoEmpleado;}
-
-    public void setLblEstadoEmpleado(JLabel lblEstadoEmpleado) {this.lblEstadoEmpleado = lblEstadoEmpleado;}
-
-    public JLabel getLblHorasExtraEmpleado() {return lblHorasExtraEmpleado;}
-
-    public void setLblHorasExtraEmpleado(JLabel lblHorasExtraEmpleado) {this.lblHorasExtraEmpleado = lblHorasExtraEmpleado;}
-
-    public JLabel getLblHorasTrabajadasEmpleado() {return lblHorasTrabajadasEmpleado;}
-
-    public void setLblHorasTrabajadasEmpleado(JLabel lblHorasTrabajadasEmpleado) {this.lblHorasTrabajadasEmpleado = lblHorasTrabajadasEmpleado;}
-
-    public JLabel getLblIsrEmpleado() {return lblIsrEmpleado;}
-
-    public void setLblIsrEmpleado(JLabel lblIsrEmpleado) {this.lblIsrEmpleado = lblIsrEmpleado;}
-
-    public JLabel getLblNombreEmpleado() {return lblNombreEmpleado;}
-
-    public void setLblNombreEmpleado(JLabel lblNombreEmpleado) {this.lblNombreEmpleado = lblNombreEmpleado;}
-
-    public JLabel getLblPuestoEmpleado() {return lblPuestoEmpleado;}
-
-    public void setLblPuestoEmpleado(JLabel lblPuestoEmpleado) {this.lblPuestoEmpleado = lblPuestoEmpleado;}
-
-    public JLabel getLblRfcEmpleado() {return lblRfcEmpleado;}
-
-    public void setLblRfcEmpleado(JLabel lblRfcEmpleado) {this.lblRfcEmpleado = lblRfcEmpleado;}
-
-    public JLabel getLblSalarioBrutoEmpleado() {return lblSalarioBrutoEmpleado;}
-
-    public void setLblSalarioBrutoEmpleado(JLabel lblSalarioBrutoEmpleado) {this.lblSalarioBrutoEmpleado = lblSalarioBrutoEmpleado;}
-
-    public JLabel getLblBono() {return lblBono;}
-
-    public void setLblBono(JLabel lblBono) {this.lblBono = lblBono;}
-
-    public JLabel getLblSalarioNetoEmpleado() {return lblSalarioNetoEmpleado;}
-
-    public void setLblSalarioNetoEmpleado(JLabel lblSalarioNetoEmpleado) {this.lblSalarioNetoEmpleado = lblSalarioNetoEmpleado;}
     /**
     * Actualiza el bono del empleado y recalcula su salario bruto y neto.
     * 

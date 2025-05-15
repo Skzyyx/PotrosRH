@@ -1,4 +1,4 @@
-package enums;
+package Enums;
 /**
  * Enum que encapsula los posibles estados de un empleado.
  * @author Leonardo Flores Leyva (252390)

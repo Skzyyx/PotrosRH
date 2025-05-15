@@ -1,4 +1,4 @@
-package enums;
+package Enums;
 
 /**
  * Enum para los tres niveles de gravedad de un 

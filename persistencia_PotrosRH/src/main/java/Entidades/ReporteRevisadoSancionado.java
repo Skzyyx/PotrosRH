@@ -1,6 +1,6 @@
 package Entidades;
 
-import enums.GravedadSancion;
+import Enums.GravedadSancion;
 import java.util.Set;
 
 /**

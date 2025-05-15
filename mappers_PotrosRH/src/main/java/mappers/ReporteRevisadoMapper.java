@@ -6,7 +6,7 @@ import Entidades.ReporteRevisadoSancionado;
 import dto.ReporteRevisadoDTO;
 import dto.ReporteRevisadoOmitidoDTO;
 import dto.ReporteRevisadoSancionadoDTO;
-import enums.GravedadSancion;
+import Enums.GravedadSancion;
 
 /**
  * Clase que mapea entidades ReporteRevisadoSancionado y ReporteRevisadoOmitido a 

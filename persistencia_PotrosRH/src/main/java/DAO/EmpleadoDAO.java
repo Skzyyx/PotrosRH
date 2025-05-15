@@ -5,7 +5,7 @@ import Entidades.Empleado;
 import Entidades.HorarioLaboral;
 import Exceptions.AccesoDatosException;
 import Interfaces.IEmpleadoDAO;
-import enums.EstadoEmpleado;
+import Enums.EstadoEmpleado;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,9 @@ import java.util.List;
 public class EmpleadoDAO implements IEmpleadoDAO {   
     // Lista de empleados que simula la BD.
     private final List<Empleado> empleados;
-
+    /**
+     * Constructor por defecto.
+     */
     public EmpleadoDAO() {
         // Se crea la lista de empleados.
         empleados = new ArrayList<>();
