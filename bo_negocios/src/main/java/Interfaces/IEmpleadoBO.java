@@ -27,14 +27,13 @@ public interface IEmpleadoBO {
      */
     public boolean validarPorcentajeAsistencias(String rfc) throws ObjetosNegocioException;
     /**
-     * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC. Si el RFC es
-     * inválido o el empleado no se encuentra en la lista, lanza una excepción.
-     * @param rfc RFC del empleado a buscar.
+     * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC.
+     * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
+     * @param empleado Objeto EmpleadoBO del cual se extrae su RFC.
      * @return {@link EmpleadoDTO} con la información del empleado encontrado.
-     * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no
-     * está registrado.
+     * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no está registrado.
      */
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObjetosNegocioException;
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException;
     
     public EmpleadoDTO actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException;
 }

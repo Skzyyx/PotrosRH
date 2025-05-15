@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Fachada;
 
 import Excepciones.ObtenerEmpleadoException;
@@ -10,17 +6,20 @@ import Control.ControlObtenerEmpleado;
 import dto.EmpleadoDTO;
 
 /**
- *
- * @author skyro
+ * Clase fachada que implementa la interfaz IObtenerEmpleado.
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class ObtenerEmpleado implements IObtenerEmpleado{
     
     private static ObtenerEmpleado instance;
-    private ControlObtenerEmpleado control;
-
-    private ObtenerEmpleado() {
-        this.control = new ControlObtenerEmpleado();
-    }
+    /**
+     * Constructor por defecto.
+     */
+    private ObtenerEmpleado() {}
     /**
     * Retorna la única instancia de ObtenerEmpleado.
     * 
@@ -37,17 +36,14 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     
     
     /**
-    * Obtiene un empleado a partir de su RFC.
-    *
-    * Delega la operación al ControlObtenerEmpleado.
-    *
-    * @param rfc RFC del empleado a buscar.
-    * @return Objeto EmpleadoDTO con los datos del empleado.
-    * @throws ObtenerEmpleadoException si el RFC es inválido o ocurre un error durante la obtención.
-    */
+     * Obtiene un empleado de la base de datos. Extrae su RFC para
+     * dicho fin.
+     * @param empleado Objeto DTO que debe contener el RFC del empleado a buscar.
+     * @return Empleado encontrado, devuelto como un DTO.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
     @Override
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {   
-        return control.obtenerEmpleado(rfc);
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObtenerEmpleadoException {   
+        return new ControlObtenerEmpleado().obtenerEmpleado(empleado);
     }
-    
 }

@@ -46,7 +46,9 @@ public class ControlReportes {
      */
     public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException{
         try {
-            return obtenerEmpleado.obtenerEmpleado(rfc);
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+            return obtenerEmpleado.obtenerEmpleado(empleado);
         } catch (ObtenerEmpleadoException e) {throw new PresentacionException(e.getMessage(), e);}
     }
     /**

@@ -86,23 +86,29 @@ public class EmpleadoBO implements IEmpleadoBO{
     /**
      * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC.
      * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
-     * @param rfc RFC del empleado a buscar.
+     * @param empleado Objeto EmpleadoBO del cual se extrae su RFC.
      * @return {@link EmpleadoDTO} con la información del empleado encontrado.
      * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no está registrado.
      */
     @Override
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObjetosNegocioException {
-        String regexRFC = "^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$";
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException {
+        
+        if(empleado == null)
+            throw new ObjetosNegocioException("El RFC no puede estar vacío.");
+        
+        // Se extrae el RFC del empleado.
+        String rfc = empleado.getRfc();
 
-        if (!(rfc != null && rfc.matches(regexRFC) && rfc.length() <= 13))
+        if (!(rfc != null && rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
         
         try {
-            return EmpleadoMapper.toDTO(empleadoDAO.obtenerEmpleado(rfc));
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new ObjetosNegocioException(ex.getMessage());
-        }
+            
+            Empleado empleadoPersistir = new Empleado();
+            empleadoPersistir.setRfc(rfc);
+            return EmpleadoMapper.toDTO(empleadoDAO.obtenerEmpleado(empleadoPersistir));
+            
+        } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage());}
     }
     
     /**
@@ -113,6 +119,7 @@ public class EmpleadoBO implements IEmpleadoBO{
      * @throws ObjetosNegocioException Si el RFC es nulo o vacío, o si el nuevo estado no es válido,
      * o si ocurre un error al actualizar el estado
      */
+    @Override
     public EmpleadoDTO actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException {
         if (rfc == null || rfc.trim().isEmpty()) {
             throw new ObjetosNegocioException("El RFC del empleado no puede ser nulo o vacío para actualizar el estado.");
@@ -128,8 +135,9 @@ public class EmpleadoBO implements IEmpleadoBO{
             } catch (IllegalArgumentException e) {
                 throw new ObjetosNegocioException("El estado '" + nuevoEstado + "' no es un estado de empleado válido.");
             }
-
-            Empleado empleado = empleadoDAO.obtenerEmpleado(rfc);
+            Empleado empleadoRFC = new Empleado();
+            empleadoRFC.setRfc(rfc);
+            Empleado empleado = empleadoDAO.obtenerEmpleado(empleadoRFC);
             if (empleado != null) {
                 empleado.setEstado(estado);
                 empleadoDAO.actualizarEmpleado(empleado);

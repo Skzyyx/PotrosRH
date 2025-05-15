@@ -30,11 +30,11 @@ public interface IEmpleadoDAO {
     public boolean validarPorcentajeAsistencias(String rfc) throws AccesoDatosException;
     /**
      * Obtiene un empleado de la base de datos.
-     * @param rfc RFC del empleado.
+     * @param empleado Empleado del cual se el extra su RFC, para buscarlo en la BD.
      * @return Entidad empleado, correspondiente al RFC recibido.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
-    public Empleado obtenerEmpleado(String rfc) throws AccesoDatosException;
+    public Empleado obtenerEmpleado(Empleado empleado) throws AccesoDatosException;
     
     public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException;
 }

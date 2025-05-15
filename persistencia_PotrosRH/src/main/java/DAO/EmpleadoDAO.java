@@ -129,16 +129,16 @@ public class EmpleadoDAO implements IEmpleadoDAO {
     
     /**
      * Obtiene un empleado de la base de datos.
-     * @param rfc RFC del empleado.
+     * @param empleado Empleado del cual se el extra su RFC, para buscarlo en la BD.
      * @return Entidad empleado, correspondiente al RFC recibido.
-     * @throws AccesoDatosException Excepción del proyecto.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     @Override
-    public Empleado obtenerEmpleado(String rfc) throws AccesoDatosException {
+    public Empleado obtenerEmpleado(Empleado empleado) throws AccesoDatosException {
         // Buscar al empleado por RFC
-        for (Empleado empleado : empleados) {
-            if (empleado.getRfc().equalsIgnoreCase(rfc)) 
-                return empleado;
+        for (Empleado empleadoEncontrado : empleados) {
+            if (empleadoEncontrado.getRfc().equalsIgnoreCase(empleado.getRfc())) 
+                return empleadoEncontrado;
         }
 
         // Si no se encuentra el empleado, lanza una excepción
@@ -151,6 +151,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
      * @param empleado La entidad Empleado con la información actualizada
      * @throws AccesoDatosException Si ocurre un error al actualizar el empleado o si no se encuentra
      */
+    @Override
     public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException {
         for (int i = 0; i < empleados.size(); i++) {
             if (empleados.get(i).getRfc().equalsIgnoreCase(empleado.getRfc())) {

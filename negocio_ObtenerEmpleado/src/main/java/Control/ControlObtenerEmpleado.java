@@ -17,36 +17,36 @@ import java.util.logging.Logger;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public class ControlObtenerEmpleado implements IObtenerEmpleado {
+public class ControlObtenerEmpleado {
 
     private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
     /**
-    * Obtiene los datos de un empleado a partir de su RFC.
-    *
-    * Valida que el RFC no esté vacío y cumpla con el formato oficial (4 letras, 6 números de fecha y 3 caracteres alfanuméricos).
-    * Si el RFC es válido, se solicita el empleado a la capa de negocio. 
-    * En caso de error, se lanza una excepción con el mensaje correspondiente.
-    *
-    * @param rfc El RFC del empleado a buscar.
-    * @return Un objeto EmpleadoDTO con la información del empleado.
-    * @throws ObtenerEmpleadoException Si el RFC es inválido o ocurre un error al obtener los datos.
+     * Obtiene los datos de un empleado a partir de su RFC.Valida que el RFC no esté vacío 
+     * y cumpla con el formato oficial (4 letras, 6 números de fecha y 3 caracteres alfanuméricos).Si el RFC es válido, se solicita el empleado a la capa de negocio.  
+     * En caso de error, se lanza una excepción con el mensaje correspondiente.
+     * @param empleado Objeto EmpleadoDTO, del cual se extrae el RFC del empleado a validar.
+     * @return Un objeto EmpleadoDTO con la información del empleado.
+     * @throws ObtenerEmpleadoException Si el RFC es inválido o ocurre un error al obtener los datos.
     */
-    @Override
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws ObtenerEmpleadoException {
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObtenerEmpleadoException {
+        
+        if(empleado == null)
+            throw new ObtenerEmpleadoException("El RFC no puede estar vacío.");
+        
+        // Se extrae el RFC del empleado.
+        String rfc = empleado.getRfc();
+        
+        if (rfc == null) 
+            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");       
         
         if (rfc.isEmpty()) 
-            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");
+            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");       
         
-        String regex = "^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$";
-        
-        if(!rfc.matches(regex))
-            throw new ObtenerEmpleadoException("RFC no válido");
+        if(!rfc.matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$"))
+            throw new ObtenerEmpleadoException("RFC con formato inválido.");
         
         try {
-            return empleadoBO.obtenerEmpleado(rfc);
-        } catch (ObjetosNegocioException ex) {
-            Logger.getLogger(ControlObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            throw new ObtenerEmpleadoException(ex.getMessage(), ex);
-        }
+            return empleadoBO.obtenerEmpleado(empleado);
+        } catch (ObjetosNegocioException ex) {throw new ObtenerEmpleadoException(ex.getMessage(), ex);}
     }
 }

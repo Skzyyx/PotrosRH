@@ -16,7 +16,9 @@ public class ControlSubsistemaDespido {
 
     public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws ObjetosNegocioException{
         try {
-            return empleadoBO.obtenerEmpleado(rfc);
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+            return empleadoBO.obtenerEmpleado(empleado);
         } catch (ObjetosNegocioException e) {
             throw new ObjetosNegocioException("Error al buscar empleado: " + e.getMessage(), e);
         }

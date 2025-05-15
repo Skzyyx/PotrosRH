@@ -1,6 +1,7 @@
 package Control;
 
 import Excepciones.CorreoException;
+import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interface.ISistemaCorreo;
 import Interfaces.IDespidoEmpleadoBO;
@@ -13,6 +14,8 @@ import bo.EmpleadoBO;
 import dto.EmpleadoDTO;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +30,7 @@ public class ControlSubsistema {
     public EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws CorreoException {
         try {
             empleadoBO.actualizarEstadoEmpleado(empleadoDTO.getRfc(), estado);
-            return empleadoBO.obtenerEmpleado(empleadoDTO.getRfc());
+            return empleadoBO.obtenerEmpleado(empleadoDTO);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al cambiar el estado del empleado: " + e.getMessage(), e);
         }
@@ -35,7 +38,9 @@ public class ControlSubsistema {
 
     public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException {
         try {
-            return empleadoBO.obtenerEmpleado(rfc);
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+            return empleadoBO.obtenerEmpleado(empleado);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al buscar empleado: " + e.getMessage(), e);
         }
@@ -46,7 +51,11 @@ public class ControlSubsistema {
         despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
         despidoDTO.setMotivo(motivo);
         despidoDTO.setFechaDespido(java.time.LocalDate.now());
-        despidoBO.registrarDespido(despidoDTO);
+        try {
+            despidoBO.registrarDespido(despidoDTO);
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(ControlSubsistema.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cambiarEstado(empleadoDTO, "INACTIVO");
         enviarCorreoDespido(empleadoDTO);
     }

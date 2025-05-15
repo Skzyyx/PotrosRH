@@ -76,15 +76,12 @@ public class ControlNomina {
     */
     public boolean validarEmpleado(String rfc) throws PresentacionException {
         try {
-            EmpleadoDTO empleado = obtenerEmpleado.obtenerEmpleado(rfc);
-            return validarEmpleado.validarEmpleado(empleado);
-        } catch (ValidarEmpleadoException ex) {
-            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PresentacionException("Error: " + ex.getMessage());
-        } catch (ObtenerEmpleadoException ex) {
-            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PresentacionException("Error: " + ex.getMessage());
-        }
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+            return validarEmpleado.validarEmpleado(obtenerEmpleado.obtenerEmpleado(empleado));
+            
+        } catch (ValidarEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());
+        } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
     /**
     * Obtiene un empleado a partir de su RFC.
@@ -92,23 +89,17 @@ public class ControlNomina {
     * Este método intenta obtener un objeto EmpleadoDTO utilizando el RFC proporcionado.
     * Si ocurre un error durante el proceso de obtención, se lanza una excepción 
     * PresentacionException con el mensaje correspondiente.
-    * 
     * @param rfc El RFC del empleado que se desea obtener.
-    * 
     * @return El objeto EmpleadoDTO correspondiente al RFC proporcionado.
-    * 
     * @throws PresentacionException Si ocurre un error al obtener el empleado.
     */
     public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
         try {
-            EmpleadoDTO empleado = obtenerEmpleado.obtenerEmpleado(rfc);
-            empleadoDTO = empleado;
-            return empleado;
-        } catch (ObtenerEmpleadoException ex) {
-            Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PresentacionException("Error: " + ex.getMessage());
-        }
-        
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+            empleadoDTO = obtenerEmpleado.obtenerEmpleado(empleado);;
+            return empleadoDTO;
+        } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
     /**
     * Genera una nómina para el empleado actual.
