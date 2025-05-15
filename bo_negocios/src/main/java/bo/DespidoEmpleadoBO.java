@@ -6,21 +6,33 @@ import Entidades.Despido;
 import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IDespidoEmpleadoBO;
 import dto.DespidoDTO;
 import enums.EstadoEmpleado;
-import mappers.EmpleadoMapper;
 
 /**
  *
  * @author Jesús Ernesto López Ibarra (252663)
  */
-public class DespidoEmpleadoBO {
+public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
     private final EmpleadoDAO empleadoDAO;
     private final DespidoDAO despidoDAO;
+    private static DespidoEmpleadoBO instance;
 
     public DespidoEmpleadoBO() {
         this.empleadoDAO = new EmpleadoDAO();
         this.despidoDAO = new DespidoDAO();
+    }
+
+    /**
+     * Método SingleTon de la clase.
+     * @return Instancia SingleTon de la clase.
+     */
+    public static synchronized DespidoEmpleadoBO getInstance() {
+        if (instance == null) {
+            instance = new DespidoEmpleadoBO();
+        }
+        return instance;
     }
 
     /**

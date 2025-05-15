@@ -3,6 +3,8 @@ package Control;
 import Excepciones.CorreoException;
 import Exceptions.ObjetosNegocioException;
 import Interface.ISistemaCorreo;
+import Interfaces.IDespidoEmpleadoBO;
+import Interfaces.IEmpleadoBO;
 import SistemaCorreo.PlantillaCorreo;
 import SistemaCorreo.RepoPlantillaCorreo;
 import SistemaCorreo.TipoPlantillaCorreo;
@@ -18,8 +20,8 @@ import java.util.Map;
  */
 public class ControlSubsistema {
 
-    private final EmpleadoBO empleadoBO = new EmpleadoBO();
-    private final DespidoEmpleadoBO despidoBO = new DespidoEmpleadoBO();
+    private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
+    private final IDespidoEmpleadoBO despidoBO = DespidoEmpleadoBO.getInstance();
     private final ISistemaCorreo sistemaCorreo = new SistemaCorreo.SistemaCorreo();
 
     public EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws CorreoException {
@@ -44,7 +46,7 @@ public class ControlSubsistema {
         despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
         despidoDTO.setMotivo(motivo);
         despidoDTO.setFechaDespido(java.time.LocalDate.now());
-        //despidoBO.registrarDespido(despidoDTO);
+        despidoBO.registrarDespido(despidoDTO);
         cambiarEstado(empleadoDTO, "INACTIVO");
         enviarCorreoDespido(empleadoDTO);
     }
