@@ -41,6 +41,7 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
      *
      * @param despidoDTO El DTO con la información del despido.
      */
+    @Override
     public void registrarDespido(DespidoDTO despidoDTO) throws AccesoDatosException {
         Despido despidoEntity = new Despido(
             despidoDTO.getIdDespido(),
@@ -59,8 +60,11 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
      * @param nuevoEstado El nuevo estado que se desea asignar al empleado.
      * @return El DTO con la información actualizada del empleado.
      */
+    @Override
     public void actualizarEstadoEmpleado(String rfc) throws ObjetosNegocioException, AccesoDatosException {
-        Empleado empleado = empleadoDAO.obtenerEmpleado(rfc);
+        Empleado empleado = new Empleado();
+        empleado.setRfc(rfc);
+        empleado = empleadoDAO.obtenerEmpleado(empleado);
 
         if (empleado == null) {
             throw new ObjetosNegocioException("Empleado no encontrado con el RFC: " + rfc);

@@ -33,8 +33,6 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
         }
         return instance;
     }
-    
-    
     /**
      * Obtiene un empleado de la base de datos. Extrae su RFC para
      * dicho fin.

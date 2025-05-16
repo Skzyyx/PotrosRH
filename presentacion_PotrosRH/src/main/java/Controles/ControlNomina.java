@@ -17,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que coordina las operaciones entre la capa de presentación
+ * y los subsistemas de negocio para la generación y la persistencia
+ * de nuevas nóminas de empleados.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -32,8 +34,8 @@ public class ControlNomina {
     private NominaDTO nominaDTO;
     
     private IGenerarNomina generarNomina = GenerarNomina.getInstance();
-    private IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
-    private IValidarEmpleado validarEmpleado = ValidarEmpleado.getInstance();
+    private final IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
+    private final IValidarEmpleado validarEmpleado = ValidarEmpleado.getInstance();
     /**
     * Constructor privado de la clase ControlNomina.
     * 
