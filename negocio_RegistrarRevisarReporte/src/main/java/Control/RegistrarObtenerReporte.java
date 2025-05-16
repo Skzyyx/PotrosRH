@@ -98,13 +98,13 @@ public class RegistrarObtenerReporte {
         if(reporte.getTestigos() != null && reporte.getTestigos().isEmpty())
             reporte.setTestigos(null);
         
-        if(reporte.getImpactoAccidente() == null)
+        if(reporte.getImpactoIncidente() == null)
             throw new ReporteException("ERROR: El reporte debe tener un impacto del incidente asociado.");
         
-        if(reporte.getImpactoAccidente().trim().isEmpty())
+        if(reporte.getImpactoIncidente().trim().isEmpty())
             throw new ReporteException("ERROR: El reporte debe tener un impacto del incidente asociado.");
         
-        if(reporte.getImpactoAccidente().length() > 150)
+        if(reporte.getImpactoIncidente().length() > 150)
             throw new ReporteException("ERROR: El impacto del incidente puede tener hasta un máximo de 150 caracteres.");
         
         if(reporte.getAccionesPrevias() != null && reporte.getAccionesPrevias().length() > 200)

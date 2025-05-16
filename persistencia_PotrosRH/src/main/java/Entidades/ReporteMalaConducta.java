@@ -3,6 +3,7 @@ package Entidades;
 import Enums.EstadoReporte;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import org.bson.types.ObjectId;
 
@@ -19,7 +20,7 @@ public class ReporteMalaConducta {
     private LocalDateTime fechaHoraIncidente;
     private String lugarIncidente;
     private String descripcionDetallada;
-    private Set<String> testigos;
+    private List<String> testigos;
     private String impactoIncidente;
     private String accionesPrevias;
     private LocalDate fechaRegistro;
@@ -49,7 +50,7 @@ public class ReporteMalaConducta {
             LocalDateTime fechaHoraIncidente, 
             String lugarIncidente, 
             String descripcionDetallada, 
-            Set<String> testigos, 
+            List<String> testigos, 
             String impactoIncidente, 
             String accionesPrevias, 
             LocalDate fechaRegistro, 
@@ -90,7 +91,7 @@ public class ReporteMalaConducta {
             LocalDateTime fechaHoraIncidente, 
             String lugarIncidente, 
             String descripcionDetallada, 
-            Set<String> testigos, 
+            List<String> testigos, 
             String impactoIncidente, 
             String accionesPrevias, 
             LocalDate fechaRegistro, 
@@ -148,7 +149,7 @@ public class ReporteMalaConducta {
      * Retorna los testigos del incidente.
      * @return Testigos del incidente.
      */
-    public Set<String> getTestigos() {return testigos;}
+    public List<String> getTestigos() {return testigos;}
     /**
      * Retorna el impacto del incidente.
      * @return Impacto del incidente.
@@ -208,7 +209,7 @@ public class ReporteMalaConducta {
      * Establece los testigos del incidente.
      * @param testigos Nuevos testigos del incidente.
      */
-    public void setTestigos(Set<String> testigos) {this.testigos = testigos;}
+    public void setTestigos(List<String> testigos) {this.testigos = testigos;}
     /**
      * Establece el impacto del incidente.
      * @param impactoAccidente Nuevo impacto del incidente.
