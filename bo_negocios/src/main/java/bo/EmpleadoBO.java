@@ -15,7 +15,7 @@ import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
-import Enums.EstadoEmpleado;
+import enums.EstadoEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;

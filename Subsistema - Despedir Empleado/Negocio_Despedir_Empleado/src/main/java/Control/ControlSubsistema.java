@@ -51,11 +51,7 @@ public class ControlSubsistema {
         despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
         despidoDTO.setMotivo(motivo);
         despidoDTO.setFechaDespido(java.time.LocalDate.now());
-        try {
-            despidoBO.registrarDespido(despidoDTO);
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(ControlSubsistema.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        despidoBO.registrarDespido(despidoDTO);
         cambiarEstado(empleadoDTO, "INACTIVO");
         enviarCorreoDespido(empleadoDTO);
     }
