@@ -1,41 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Fachada;
 
 import Control.ControlValidarEmpleado;
 import Excepciones.ValidarEmpleadoException;
 import Interfaces.IValidarEmpleado;
 import dto.EmpleadoDTO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author skyro
+ * Clase Fachada que implementa la interfaz del subsistema.
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class ValidarEmpleado implements IValidarEmpleado {
-
+    // Atributo SingleTon de la clase.
     private static ValidarEmpleado instance;
-    private static ControlValidarEmpleado control;
-
-    private ValidarEmpleado() {
-        this.control = new ControlValidarEmpleado();
-    }
-
+    /**
+     * Constructor por defecto.
+     */
+    private ValidarEmpleado() {}
+    /**
+     * Devuelve la instancia de esta clase.
+     * @return Instancia de la clase.
+     */
     public static synchronized IValidarEmpleado getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new ValidarEmpleado();
-        }
         return instance;
     }
-
+    /**
+     * Valida que un empleado esté activo y cumpla con un
+     * 80% de asistencias del período a ser pagado.
+     * @param empleado Empleado a validar, del cual se extrae su RFC.
+     * @return VERDADERO si el empleado cumple con las validaciones.
+     * @throws ValidarEmpleadoException Excepción del subsistema.
+     */
     @Override
     public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
-        boolean esActivo = control.validarEstado(empleado);
-        boolean asistencia = control.validarPorcentajeAsistencias(empleado.getRfc());
+        boolean esActivo = new ControlValidarEmpleado().validarEstado(empleado);
+        boolean asistencia = new ControlValidarEmpleado().validarPorcentajeAsistencias(empleado);
         return esActivo && asistencia;
-
     }
 }
