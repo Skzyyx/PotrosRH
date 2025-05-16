@@ -1,6 +1,7 @@
 package Entidades;
 
 import java.util.Set;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa la entidad ReporteRevisadoOmitido.
@@ -14,7 +15,7 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
      */
     public ReporteRevisadoOmitido() {}
     /**
-     * Constructor que recibe todos los atributos.
+     * Constructor que recibe todos los atributos, menos el ID.
      * @param motivoOmision Motivo de la omisión del reporte
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
@@ -37,6 +38,44 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
             String descripcionOtrasEvidencias
     ) {
         super(
+                reporteMalaConducta, 
+                infoCompleta, 
+                tieneAntecedentesPrevios, 
+                descripcionAntecedentesPrevios, 
+                entrevistasRealizadas, 
+                descripcionOtrasEntrevistasRealizadas,
+                evidenciasRevisadas,
+                descripcionOtrasEvidencias
+        );
+        this.motivoOmision = motivoOmision;
+    }
+    /**
+     * Constructor que recibe todos los atributos, incluido el ID.
+     * @param id ID del reporte omitido.
+     * @param motivoOmision Motivo de la omisión del reporte
+     * @param reporteMalaConducta Reporte de mala conducta asociado.
+     * @param infoCompleta Si es que tiene la información completa.
+     * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes
+     * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
+     * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
+     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
+     * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
+     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
+     */
+    public ReporteRevisadoOmitido(
+            ObjectId id,
+            String motivoOmision, 
+            ReporteMalaConducta reporteMalaConducta, 
+            boolean infoCompleta, 
+            boolean tieneAntecedentesPrevios,
+            String descripcionAntecedentesPrevios,
+            Set<String> entrevistasRealizadas, 
+            String descripcionOtrasEntrevistasRealizadas,
+            Set<String> evidenciasRevisadas,
+            String descripcionOtrasEvidencias
+    ) {
+        super(
+                id,
                 reporteMalaConducta, 
                 infoCompleta, 
                 tieneAntecedentesPrevios, 

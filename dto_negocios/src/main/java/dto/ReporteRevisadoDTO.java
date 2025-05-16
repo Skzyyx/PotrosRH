@@ -8,6 +8,7 @@ import java.util.Set;
  */
 public class ReporteRevisadoDTO {
     // Atributos de un reporte de mala conducta revisado.
+    private String id;
     private ReporteMalaConductaDTO reporteMalaConducta;
     private boolean infoCompleta;
     private boolean tieneAntecedentesPrevios;
@@ -21,7 +22,7 @@ public class ReporteRevisadoDTO {
      */
     public ReporteRevisadoDTO() {}
     /**
-     * Constructor con todos los atributos.
+     * Constructor con todos los atributos, menos el ID.
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
@@ -50,6 +51,44 @@ public class ReporteRevisadoDTO {
         this.evidenciasRevisadas = evidenciasRevisadas;
         this.descripcionOtrasEvidencias = descripcionOtrasEvidencias;
     }
+    /**
+     * Constructor con todos los atributos, incluido el ID.
+     * @param id ID del reporte revisado.
+     * @param reporteMalaConducta Reporte de mala conducta asociado.
+     * @param infoCompleta Si es que tiene la información completa.
+     * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
+     * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
+     * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
+     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
+     * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
+     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
+     */
+    public ReporteRevisadoDTO(
+            String id,
+            ReporteMalaConductaDTO reporteMalaConducta, 
+            boolean infoCompleta, 
+            boolean tieneAntecedentesPrevios,
+            String descripcionAntecedentesPrevios,
+            Set<String> entrevistasRealizadas, 
+            String descripcionOtrasEntrevistasRealizadas,
+            Set<String> evidenciasRevisadas,
+            String descripcionOtrasEvidencias
+    ) {
+        this.id = id;
+        this.reporteMalaConducta = reporteMalaConducta;
+        this.infoCompleta = infoCompleta;
+        this.tieneAntecedentesPrevios = tieneAntecedentesPrevios;
+        this.descripcionAntecedentesPrevios = descripcionAntecedentesPrevios;
+        this.entrevistasRealizadas = entrevistasRealizadas;
+        this.descripcionOtrasEntrevistasRealizadas = descripcionOtrasEntrevistasRealizadas;
+        this.evidenciasRevisadas = evidenciasRevisadas;
+        this.descripcionOtrasEvidencias = descripcionOtrasEvidencias;
+    }
+    /**
+     * Retorna el ID del reporte revisado.
+     * @return ID del reporte revisado.
+     */
+    public String getId() {return id;}
     /**
      * Retorna el reporte de mala conducta asociado.
      * @return Reporte de mala conducta asociado.
@@ -90,6 +129,11 @@ public class ReporteRevisadoDTO {
      * @return Descripción de otras evidencias revisadas.
      */
     public String getDescripcionOtrasEvidencias() {return descripcionOtrasEvidencias;}
+    /**
+     * Establece el ID del reporte revisado.
+     * @param id Nuevo ID del reporte revisado.
+     */
+    public void setId(String id) {this.id = id;}
     /**
      * Establece el reporte de mala conducta asociado.
      * @param reporteMalaConducta Nuevo reporte de mala conducta asociado.

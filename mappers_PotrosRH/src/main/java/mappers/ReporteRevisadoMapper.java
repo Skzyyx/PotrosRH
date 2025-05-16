@@ -7,6 +7,7 @@ import dto.ReporteRevisadoDTO;
 import dto.ReporteRevisadoOmitidoDTO;
 import dto.ReporteRevisadoSancionadoDTO;
 import Enums.GravedadSancion;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que mapea entidades ReporteRevisadoSancionado y ReporteRevisadoOmitido a 
@@ -123,6 +124,7 @@ public class ReporteRevisadoMapper {
      */
     private static ReporteRevisado toEntityViejo(ReporteRevisadoDTO viejoReporteDTO){
         ReporteRevisado reporteRevisado = new ReporteRevisado();
+        reporteRevisado.setId(new ObjectId(viejoReporteDTO.getId()));
         reporteRevisado.setReporteMalaConducta(ReporteMalaConductaMapper.toEntityViejo(viejoReporteDTO.getReporteMalaConducta()));
         reporteRevisado.setInfoCompleta(viejoReporteDTO.isInfoCompleta());
         reporteRevisado.setTieneAntecedentesPrevios(viejoReporteDTO.isTieneAntecedentesPrevios());
@@ -147,6 +149,7 @@ public class ReporteRevisadoMapper {
      */
     private static ReporteRevisadoDTO toDTO(ReporteRevisado viejoReporte){
         ReporteRevisadoDTO reporteRevisadoDTO = new ReporteRevisadoDTO();
+        reporteRevisadoDTO.setId(viejoReporte.getId().toHexString());
         reporteRevisadoDTO.setReporteMalaConducta(ReporteMalaConductaMapper.toDTO(viejoReporte.getReporteMalaConducta()));
         reporteRevisadoDTO.setInfoCompleta(viejoReporte.isInfoCompleta());
         reporteRevisadoDTO.setTieneAntecedentesPrevios(viejoReporte.isTieneAntecedentesPrevios());

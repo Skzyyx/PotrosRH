@@ -17,7 +17,7 @@ public class ReporteRevisadoSancionadoDTO extends ReporteRevisadoDTO{
      */
     public ReporteRevisadoSancionadoDTO() {}
     /**
-     * Constructor con todos los atributos.
+     * Constructor con todos los atributos, menos el ID.
      * @param normasVioladas Conjunto de normas violadas por el empleado.
      * @param nivelGravedad Nivel de gravedad del incidente.
      * @param sancionImpuesta Sanción impuesta al empleado.
@@ -46,6 +46,53 @@ public class ReporteRevisadoSancionadoDTO extends ReporteRevisadoDTO{
             String descripcionOtrasEvidencias
     ) {
         super(
+                reporteMalaConducta, 
+                infoCompleta, 
+                tieneAntecedentesPrevios, 
+                descripcionAntecedentesPrevios, 
+                entrevistasRealizadas, 
+                descripcionOtrasEntrevistasRealizadas,
+                evidenciasRevisadas,
+                descripcionOtrasEvidencias
+        );
+        this.normasVioladas = normasVioladas;
+        this.nivelGravedad = nivelGravedad;
+        this.sancionImpuesta = sancionImpuesta;
+        this.descripcionOtraSancionImpuesta = descripcionOtraSancionImpuesta;
+    }
+    /**
+     * Constructor con todos los atributos, incluido el ID.
+     * @param id ID del reporte sancionado.
+     * @param normasVioladas Conjunto de normas violadas por el empleado.
+     * @param nivelGravedad Nivel de gravedad del incidente.
+     * @param sancionImpuesta Sanción impuesta al empleado.
+     * @param descripcionOtraSancionImpuesta Descripción de la otra sanción impuesta al empleado.
+     * @param reporteMalaConducta Reporte de mala conducta asociado.
+     * @param infoCompleta Si es que tiene la información completa.
+     * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
+     * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
+     * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
+     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
+     * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
+     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
+     */
+    public ReporteRevisadoSancionadoDTO(
+            String id,
+            Set<String> normasVioladas, 
+            String nivelGravedad, 
+            String sancionImpuesta, 
+            String descripcionOtraSancionImpuesta, 
+            ReporteMalaConductaDTO reporteMalaConducta, 
+            boolean infoCompleta, 
+            boolean tieneAntecedentesPrevios,
+            String descripcionAntecedentesPrevios,
+            Set<String> entrevistasRealizadas, 
+            String descripcionOtrasEntrevistasRealizadas,
+            Set<String> evidenciasRevisadas,
+            String descripcionOtrasEvidencias
+    ) {
+        super(
+                id,
                 reporteMalaConducta, 
                 infoCompleta, 
                 tieneAntecedentesPrevios, 

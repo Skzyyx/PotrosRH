@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class ReporteMalaConductaDTO {
     // Atributos de un reporte de mala conducta.
+    private String id;
     private Long numeroSeguimiento;
     private EmpleadoDTO empleadoReportado;
     private EmpleadoDTO empleadoReportante;
@@ -26,7 +27,7 @@ public class ReporteMalaConductaDTO {
      */
     public ReporteMalaConductaDTO() {}
     /**
-     * Constructor con todos los atributos.
+     * Constructor con todos los atributos, menos el ID.
      * @param numeroSeguimiento Número de seguimiento del reporte.
      * @param empleadoReportado Empleado reportado del reporte.
      * @param empleadoReportante Empleado reportante del reporte.
@@ -64,6 +65,53 @@ public class ReporteMalaConductaDTO {
         this.fechaRegistro = fechaRegistro;
         this.estadoReporte = estadoReporte;
     }
+    /**
+     * Constructor con todos los atributos, incluido el ID.
+     * @param id ID del reporte.
+     * @param numeroSeguimiento Número de seguimiento del reporte.
+     * @param empleadoReportado Empleado reportado del reporte.
+     * @param empleadoReportante Empleado reportante del reporte.
+     * @param fechaHoraIncidente Fecha y hora del incidente.
+     * @param lugarIncidente Lugar del incidente.
+     * @param descripcionDetallada Descripción detallada del reporte.
+     * @param testigos Testigos del reporte.
+     * @param impactoIncidente Impacto de incidente
+     * @param accionesPrevias Acciones previas del empleado reportado.
+     * @param fechaRegistro Fecha de registro del reporte.
+     * @param estadoReporte Estado del reporte.
+     */
+    public ReporteMalaConductaDTO(
+            String id,
+            Long numeroSeguimiento, 
+            EmpleadoDTO empleadoReportado, 
+            EmpleadoDTO empleadoReportante, 
+            LocalDateTime fechaHoraIncidente, 
+            String lugarIncidente, 
+            String descripcionDetallada, 
+            Set<String> testigos, 
+            String impactoIncidente, 
+            String accionesPrevias, 
+            LocalDate fechaRegistro, 
+            String estadoReporte
+    ) {
+        this.id = id;
+        this.numeroSeguimiento = numeroSeguimiento;
+        this.empleadoReportado = empleadoReportado;
+        this.empleadoReportante = empleadoReportante;
+        this.fechaHoraIncidente = fechaHoraIncidente;
+        this.lugarIncidente = lugarIncidente;
+        this.descripcionDetallada = descripcionDetallada;
+        this.testigos = testigos;
+        this.impactoIncidente = impactoIncidente;
+        this.accionesPrevias = accionesPrevias;
+        this.fechaRegistro = fechaRegistro;
+        this.estadoReporte = estadoReporte;
+    }
+    /**
+     * Retorna el ID del reporte.
+     * @return ID del reporte.
+     */
+    public String getId() {return id;}
     /**
      * Retorna el número de seguimiento del reporte.
      * @return Número de seguimiento del reporte.
@@ -103,7 +151,7 @@ public class ReporteMalaConductaDTO {
      * Retorna el impacto del incidente.
      * @return Impacto del incidente.
      */
-    public String getImpactoAccidente() {return impactoIncidente;}
+    public String getImpactoIncidente() {return impactoIncidente;}
     /**
      * Retorna las acciones previas del empleado reportado.
      * @return Acciones previas del empleado reportado.
@@ -119,6 +167,11 @@ public class ReporteMalaConductaDTO {
      * @return Estado del reporte.
      */
     public String getEstadoReporte() {return estadoReporte;}
+    /**
+     * Establece el ID del reporte.
+     * @param id Nuevo ID del reporte.
+     */
+    public void setId(String id) {this.id = id;}
     /**
      * Establece el número de seguimiento del reporte.
      * @param numeroSeguimiento Nuevo número de seguimiento del reporte.
@@ -158,7 +211,7 @@ public class ReporteMalaConductaDTO {
      * Establece el impacto del incidente.
      * @param impactoAccidente Nuevo impacto del incidente.
      */
-    public void setImpactoAccidente(String impactoAccidente) {this.impactoIncidente = impactoAccidente;}
+    public void setImpactoIncidente(String impactoAccidente) {this.impactoIncidente = impactoAccidente;}
     /**
      * Establece las acciones previas del empleado reportado.
      * @param accionesPrevias Nuevas acciones previas del empleado reportado.
@@ -180,6 +233,12 @@ public class ReporteMalaConductaDTO {
      */
     @Override
     public String toString() {
-        return "ReporteMalaConducta{" + "numeroSeguimiento=" + numeroSeguimiento + ", empleadoReportado=" + empleadoReportado + ", empleadoReportante=" + empleadoReportante + ", fechaHoraIncidente=" + fechaHoraIncidente + ", lugarIncidente=" + lugarIncidente + ", fechaRegistro=" + fechaRegistro + ", estadoReporte=" + estadoReporte + '}';
+        return "ReporteMalaConducta{" + "numeroSeguimiento=" + numeroSeguimiento + 
+                ", empleadoReportado=" + empleadoReportado + 
+                ", empleadoReportante=" + empleadoReportante + 
+                ", fechaHoraIncidente=" + fechaHoraIncidente + 
+                ", lugarIncidente=" + lugarIncidente + 
+                ", fechaRegistro=" + fechaRegistro + 
+                ", estadoReporte=" + estadoReporte + '}';
     }
 }

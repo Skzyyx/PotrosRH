@@ -3,6 +3,7 @@ package mappers;
 import Entidades.ReporteMalaConducta;
 import dto.ReporteMalaConductaDTO;
 import Enums.EstadoReporte;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que mapea entidades ReporteMalaConducta a 
@@ -29,7 +30,7 @@ public class ReporteMalaConductaMapper {
             reporteMalaConducta.setTestigos(nuevoReporteDTO.getTestigos());
         
         reporteMalaConducta.setAccionesPrevias(nuevoReporteDTO.getAccionesPrevias());
-        reporteMalaConducta.setImpactoAccidente(nuevoReporteDTO.getImpactoAccidente());
+        reporteMalaConducta.setImpactoIncidente(nuevoReporteDTO.getImpactoIncidente());
         reporteMalaConducta.setFechaRegistro(nuevoReporteDTO.getFechaRegistro());
         reporteMalaConducta.setEstadoReporte(EstadoReporte.NO_REVISADO);
         
@@ -42,6 +43,7 @@ public class ReporteMalaConductaMapper {
      */
     public static ReporteMalaConducta toEntityViejo(ReporteMalaConductaDTO viejoReporteDTO){
         ReporteMalaConducta reporteMalaConducta = new ReporteMalaConducta();
+        reporteMalaConducta.setId(new ObjectId(viejoReporteDTO.getId()));
         reporteMalaConducta.setEmpleadoReportante(EmpleadoMapper.toEntityViejo(viejoReporteDTO.getEmpleadoReportante()));
         reporteMalaConducta.setEmpleadoReportado(EmpleadoMapper.toEntityViejo(viejoReporteDTO.getEmpleadoReportado()));
         reporteMalaConducta.setFechaHoraIncidente(viejoReporteDTO.getFechaHoraIncidente());
@@ -51,7 +53,7 @@ public class ReporteMalaConductaMapper {
             reporteMalaConducta.setTestigos(viejoReporteDTO.getTestigos());
         
         reporteMalaConducta.setAccionesPrevias(viejoReporteDTO.getAccionesPrevias());
-        reporteMalaConducta.setImpactoAccidente(viejoReporteDTO.getImpactoAccidente());
+        reporteMalaConducta.setImpactoIncidente(viejoReporteDTO.getImpactoIncidente());
         reporteMalaConducta.setFechaRegistro(viejoReporteDTO.getFechaRegistro());
         reporteMalaConducta.setEstadoReporte(EstadoReporte.valueOf(viejoReporteDTO.getEstadoReporte()));
         reporteMalaConducta.setNumeroSeguimiento(viejoReporteDTO.getNumeroSeguimiento());
@@ -65,6 +67,7 @@ public class ReporteMalaConductaMapper {
      */
     public static ReporteMalaConductaDTO toDTO(ReporteMalaConducta viejoReporte){
         ReporteMalaConductaDTO reporteMalaConductaDTO = new ReporteMalaConductaDTO();
+        reporteMalaConductaDTO.setId(viejoReporte.getId().toHexString());
         reporteMalaConductaDTO.setEmpleadoReportante(EmpleadoMapper.toDTO(viejoReporte.getEmpleadoReportante()));
         reporteMalaConductaDTO.setEmpleadoReportado(EmpleadoMapper.toDTO(viejoReporte.getEmpleadoReportado()));
         reporteMalaConductaDTO.setFechaHoraIncidente(viejoReporte.getFechaHoraIncidente());
@@ -74,7 +77,7 @@ public class ReporteMalaConductaMapper {
             reporteMalaConductaDTO.setTestigos(viejoReporte.getTestigos());
         
         reporteMalaConductaDTO.setAccionesPrevias(viejoReporte.getAccionesPrevias());
-        reporteMalaConductaDTO.setImpactoAccidente(viejoReporte.getImpactoAccidente());
+        reporteMalaConductaDTO.setImpactoIncidente(viejoReporte.getImpactoIncidente());
         reporteMalaConductaDTO.setFechaRegistro(viejoReporte.getFechaRegistro());
         reporteMalaConductaDTO.setEstadoReporte(viejoReporte.getEstadoReporte().toString());
         reporteMalaConductaDTO.setNumeroSeguimiento(viejoReporte.getNumeroSeguimiento());
