@@ -26,12 +26,10 @@ public class ControlDespido {
         }
         return instance;
     }
-
-    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws PresentacionException {
+    
+    public EmpleadoDTO buscarEmpleadoPorRFC(EmpleadoDTO empleadoDTO) throws PresentacionException {
         try {
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(rfc);
-            return obtenerEmpleado.obtenerEmpleado(empleado); // Usando la fachada de ObtenerEmpleado
+            return obtenerEmpleado.obtenerEmpleado(empleadoDTO);
         } catch (Exception e) {
             throw new PresentacionException("Error al buscar empleado: " + e.getMessage());
         }

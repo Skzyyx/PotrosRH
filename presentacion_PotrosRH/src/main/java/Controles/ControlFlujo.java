@@ -171,17 +171,11 @@ public class ControlFlujo {
      * @param rfc Clave RFC del empleado que se desea previsualizar para despedir.
      * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
      */
-    public static void mostrarPrevisualizarEmpleadoDespedir(String rfc) throws ObjetosNegocioException {
-//        ControlDespido subsistemaDespido = new ControlDespido();
-//        EmpleadoDTO empleado;
-//        try {
-//            empleado = subsistemaDespido.buscarEmpleadoPorRFC(rfc);
-//        } catch (PresentacionException ex) {
-//            Logger.getLogger(ControlFlujo.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        PrevisualizarEmpleadoDespedir previsualizarEmpleadoDespedir = new PrevisualizarEmpleadoDespedir();
-//        previsualizarEmpleadoDespedir.setDatosEmpleado(empleado);
-//        cambiarPantalla(previsualizarEmpleadoDespedir);
+    public static void mostrarPrevisualizarEmpleadoDespedir(EmpleadoDTO empleadoDTO) {
+        if (previsualizarEmpleadoDespedir == null) {
+            previsualizarEmpleadoDespedir = new PrevisualizarEmpleadoDespedir();
+        }
+        previsualizarEmpleadoDespedir.setDatosEmpleado(empleadoDTO);
+        cambiarPantalla(previsualizarEmpleadoDespedir);
     }
 }

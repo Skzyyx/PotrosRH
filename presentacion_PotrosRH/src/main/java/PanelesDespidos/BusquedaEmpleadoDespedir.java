@@ -181,18 +181,18 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String rfc = txtRfc.getText().trim();
-                if (!rfc.isEmpty()) {
-                    try {
-                        EmpleadoDTO empleado = controlDespido.buscarEmpleadoPorRFC(rfc);
-                        // Aquí debería mostrar la información del empleado en otro panel
-                        // para que el usuario confirme el despido y registre el motivo.
-                        ControlFlujo.mostrarPrevisualizarEmpleadoDespedir(empleado); // Ejemplo de navegación
-                    } catch (PresentacionException ex) {
-                        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Por favor, ingrese el RFC del empleado.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
-                }
+        if (!rfc.isEmpty()) {
+            EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+            empleadoDTO.setRfc(rfc);
+            try {
+                EmpleadoDTO empleadoEncontrado = controlDespido.buscarEmpleadoPorRFC(empleadoDTO);
+                ControlFlujo.mostrarPrevisualizarEmpleadoDespedir(empleadoEncontrado);
+            } catch (PresentacionException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el RFC del empleado.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
