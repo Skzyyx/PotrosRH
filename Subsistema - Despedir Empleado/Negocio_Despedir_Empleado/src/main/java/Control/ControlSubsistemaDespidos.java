@@ -6,6 +6,7 @@ import Exceptions.ObjetosNegocioException;
 import Interface.ISistemaCorreo;
 import Interfaces.IDespidoEmpleadoBO;
 import Interfaces.IEmpleadoBO;
+import Interfaz.IDespedirEmpleado;
 import SistemaCorreo.PlantillaCorreo;
 import SistemaCorreo.RepoPlantillaCorreo;
 import SistemaCorreo.TipoPlantillaCorreo;
@@ -21,13 +22,16 @@ import java.util.logging.Logger;
  *
  * @author Jesús Ernesto López Ibarra (252663)
  */
-public class ControlSubsistema {
+public class ControlSubsistemaDespidos implements IDespedirEmpleado{
 
     private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
     private final IDespidoEmpleadoBO despidoBO = DespidoEmpleadoBO.getInstance();
     private final ISistemaCorreo sistemaCorreo = new SistemaCorreo.SistemaCorreo();
 
     public EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws CorreoException {
+        if (empleadoDTO == null || empleadoDTO.getRfc() == null || empleadoDTO.getRfc().isEmpty() || estado == null || estado.isEmpty()) {
+            throw new CorreoException("Error: Datos incompletos para cambiar el estado del empleado.");
+        }
         try {
             empleadoBO.actualizarEstadoEmpleado(empleadoDTO.getRfc(), estado);
             return empleadoBO.obtenerEmpleado(empleadoDTO);
@@ -36,7 +40,10 @@ public class ControlSubsistema {
         }
     }
 
-    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException {
+    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException, ObjetosNegocioException {
+        if (rfc == null || rfc.isEmpty()) {
+            throw new ObjetosNegocioException("Error: El RFC no puede estar vacío para buscar un empleado.");
+        }
         try {
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
@@ -46,12 +53,19 @@ public class ControlSubsistema {
         }
     }
 
-    public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException {
+    public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException, ObjetosNegocioException {
+        if (empleadoDTO == null || empleadoDTO.getRfc() == null || empleadoDTO.getRfc().isEmpty() || motivo == null || motivo.isEmpty()) {
+            throw new ObjetosNegocioException("Error: Datos incompletos para registrar el despido.");
+        }
         dto.DespidoDTO despidoDTO = new dto.DespidoDTO();
         despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
         despidoDTO.setMotivo(motivo);
         despidoDTO.setFechaDespido(java.time.LocalDate.now());
-        despidoBO.registrarDespido(despidoDTO);
+        try {
+            despidoBO.registrarDespido(despidoDTO);
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cambiarEstado(empleadoDTO, "INACTIVO");
         enviarCorreoDespido(empleadoDTO);
     }

@@ -1,12 +1,15 @@
 package PanelesDespidos;
 
+import Controles.ControlDespido;
 import Controles.ControlFlujo;
 import Excepciones.PresentacionException;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
@@ -21,6 +24,8 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  */
 public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
 
+    private final ControlDespido controlDespido = ControlDespido.getInstance();
+    
     /**
      * Creates new form BusquedaRFCNomina
      */
@@ -175,12 +180,23 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        //a
+        String rfc = txtRfc.getText().trim();
+                if (!rfc.isEmpty()) {
+                    try {
+                        EmpleadoDTO empleado = controlDespido.buscarEmpleadoPorRFC(rfc);
+                        // Aquí debería mostrar la información del empleado en otro panel
+                        // para que el usuario confirme el despido y registre el motivo.
+                        ControlFlujo.mostrarPrevisualizarEmpleadoDespedir(empleado); // Ejemplo de navegación
+                    } catch (PresentacionException ex) {
+                        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese el RFC del empleado.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
+                }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
-        // TODO add your handling code here:
+        btnBuscarActionPerformed(evt);
     }//GEN-LAST:event_txtRfcActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,8 +214,6 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
     public void setTxtRfc(JTextField txtRfc) {
         this.txtRfc = txtRfc;
     }
-
-    private void btnBuscar() throws PresentacionException {}
 
     /**
      * Limpia el texto del campo de búsqueda de empleados para despedir.

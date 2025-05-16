@@ -1,14 +1,15 @@
     package PanelesDespidos;
 
+import Controles.ControlDespido;
 import Controles.ControlFlujo;
+import Excepciones.PresentacionException;
 import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,8 @@ import javax.swing.JLabel;
 public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
 
     private EmpleadoDTO empleado;
+    private final ControlDespido controlDespido = ControlDespido.getInstance();
+    
     /**
      * Creates new form PrevisualisarEmpleado
      */
@@ -284,15 +287,26 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConfirmarMouseClicked
 
     private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
-        ControlFlujo.mostrarMenuPrincipal();
+        ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        ControlFlujo.mostrarMenuPrincipal();
+        ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        //
+        String motivo = getMotivoDespido().trim();
+        if (!motivo.isEmpty()) {
+            try {
+                controlDespido.registrarDespido(empleado, motivo);
+                JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                ControlFlujo.mostrarMenuPrincipal(); // O donde quieras navegar después
+            } catch (PresentacionException ex) {
+                JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el motivo del despido.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
 
