@@ -10,12 +10,12 @@ package bo;
  */
 import DAO.EmpleadoDAO;
 import Entidades.Empleado;
+import Enums.EstadoEmpleado;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
-import enums.EstadoEmpleado;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;

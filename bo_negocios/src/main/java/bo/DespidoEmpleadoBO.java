@@ -4,11 +4,11 @@ import DAO.DespidoDAO;
 import DAO.EmpleadoDAO;
 import Entidades.Despido;
 import Entidades.Empleado;
+import Enums.EstadoEmpleado;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IDespidoEmpleadoBO;
 import dto.DespidoDTO;
-import enums.EstadoEmpleado;
 
 /**
  *
@@ -64,7 +64,7 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
     public void actualizarEstadoEmpleado(String rfc) throws ObjetosNegocioException, AccesoDatosException {
         Empleado empleado = new Empleado();
         empleado.setRfc(rfc);
-        empleado = empleadoDAO.obtenerEmpleado(rfc);
+        empleado = empleadoDAO.obtenerEmpleado(empleado);
 
         if (empleado == null) {
             throw new ObjetosNegocioException("Empleado no encontrado con el RFC: " + rfc);
