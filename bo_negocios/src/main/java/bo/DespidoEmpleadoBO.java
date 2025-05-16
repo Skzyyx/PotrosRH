@@ -57,7 +57,7 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
      * 
      * @param rfc El RFC del empleado cuyo estado se desea actualizar.
      * @param nuevoEstado El nuevo estado que se desea asignar al empleado.
-     * @return El DTO con la información actualizada del empleado.
+     * @return El DTO con la información actualizada del empleado. segun se arreglo esto lmao
      */
     @Override
     public void actualizarEstadoEmpleado(String rfc) throws ObjetosNegocioException, AccesoDatosException {
