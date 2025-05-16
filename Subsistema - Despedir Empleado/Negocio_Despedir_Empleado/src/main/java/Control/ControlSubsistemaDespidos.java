@@ -70,7 +70,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
         enviarCorreoDespido(empleadoDTO);
     }
 
-    private void enviarCorreoDespido(EmpleadoDTO empleadoDTO) throws CorreoException {
+    public void enviarCorreoDespido(EmpleadoDTO empleadoDTO) throws CorreoException {
         PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
         if (plantillaDespido != null) {
             Map<String, Object> valores = new HashMap<>();
