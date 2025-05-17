@@ -1,6 +1,7 @@
 package mappers;
 
 import Entidades.HorarioLaboral;
+import Enums.DiaSemana;
 import dto.HorarioLaboralDTO;
 
 /**
@@ -19,12 +20,12 @@ public class HorarioLaboralMapper {
      * @param horarioLaboralDTO DTO a mapear.
      * @return Entidad HorarioLaboral mapeada.
      */
-    public static HorarioLaboral toEntityNuevo(HorarioLaboralDTO horarioLaboralDTO){
+    public static HorarioLaboral toEntityNuevo(HorarioLaboralDTO horarioLaboralDTO) {
         HorarioLaboral horarioLaboral = new HorarioLaboral();
-        horarioLaboral.setDiaSemana(horarioLaboralDTO.getDiaSemana());
+        horarioLaboral.setDiaSemana(DiaSemana.valueOf(horarioLaboralDTO.getDiaSemana().trim().toUpperCase()));
         horarioLaboral.setHoraInicioTurno(horarioLaboralDTO.getHoraInicioTurno());
         horarioLaboral.setHoraFinTurno(horarioLaboralDTO.getHoraFinTurno());
-        // Retorna la entidad mapeada.
+        //Retorna la entidad mapeada
         return horarioLaboral;
     }
     /**
@@ -37,7 +38,7 @@ public class HorarioLaboralMapper {
     public static HorarioLaboral toEntityViejo(HorarioLaboralDTO horarioLaboralDTO){
         HorarioLaboral horarioLaboral = new HorarioLaboral();
         // Falta el ID.
-        horarioLaboral.setDiaSemana(horarioLaboralDTO.getDiaSemana());
+        horarioLaboral.setDiaSemana(DiaSemana.valueOf(horarioLaboralDTO.getDiaSemana().trim().toUpperCase()));
         horarioLaboral.setHoraInicioTurno(horarioLaboralDTO.getHoraInicioTurno());
         horarioLaboral.setHoraFinTurno(horarioLaboralDTO.getHoraFinTurno());
         // Retorna la entidad mapeada.
@@ -51,7 +52,7 @@ public class HorarioLaboralMapper {
     public static HorarioLaboralDTO toDTO(HorarioLaboral horarioLaboral){
         HorarioLaboralDTO horarioLaboralDTO = new HorarioLaboralDTO();
         // Falta el ID.
-        horarioLaboralDTO.setDiaSemana(horarioLaboral.getDiaSemana());
+        horarioLaboralDTO.setDiaSemana(horarioLaboral.getDiaSemana().name());
         horarioLaboralDTO.setHoraInicioTurno(horarioLaboral.getHoraInicioTurno());
         horarioLaboralDTO.setHoraFinTurno(horarioLaboral.getHoraFinTurno());
         // Se retorna el objeto de transferencia mapeado.

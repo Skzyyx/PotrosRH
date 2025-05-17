@@ -12,7 +12,7 @@ import java.time.LocalTime;
  */
 public class HorarioLaboralDTO {
     // Atributos de un horario laboral.
-    private Short diaSemana;
+    private String diaSemana;
     private LocalTime horaInicioTurno;
     private LocalTime horaFinTurno;
     /**
@@ -25,7 +25,7 @@ public class HorarioLaboralDTO {
      * @param horaInicioTurno Hora de inicio del turno del horario laboral.
      * @param horaFinTurno Hora de fin de turno del horario laboral.
      */
-    public HorarioLaboralDTO(short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
+    public HorarioLaboralDTO(String diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
         this.diaSemana = diaSemana;
         this.horaInicioTurno = horaInicioTurno;
         this.horaFinTurno = horaFinTurno;
@@ -34,12 +34,12 @@ public class HorarioLaboralDTO {
      * Retorna el día de la semana del horario laboral.
      * @return Día de la semana del horario laboral.
      */
-    public Short getDiaSemana() {return diaSemana;}
+    public String getDiaSemana() {return diaSemana;}
     /**
      * Establece el día de la semana del horario laboral.
      * @param diaSemana Nuevo día de la semana del horario laboral.
      */
-    public void setDiaSemana(Short diaSemana) {this.diaSemana = diaSemana;}
+    public void setDiaSemana(String diaSemana) {this.diaSemana = diaSemana;}
     /**
      * Retorna la hora de inicio del turno del horario laboral.
      * @return Hora de inicio del turno del horario laboral.
