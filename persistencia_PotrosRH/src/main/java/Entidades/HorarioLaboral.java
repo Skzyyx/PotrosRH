@@ -1,5 +1,6 @@
 package Entidades;
 
+import Enums.DiaSemana;
 import java.time.LocalTime;
 
 /**
@@ -12,7 +13,7 @@ import java.time.LocalTime;
  */
 public class HorarioLaboral {
     // Atributos de un horario laboral.
-    private Short diaSemana;
+    private DiaSemana diaSemana;
     private LocalTime horaInicioTurno;
     private LocalTime horaFinTurno;
     /**
@@ -25,7 +26,7 @@ public class HorarioLaboral {
      * @param horaInicioTurno Hora de inicio del turno del horario laboral.
      * @param horaFinTurno Hora de fin de turno del horario laboral.
      */
-    public HorarioLaboral(Short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
+    public HorarioLaboral(DiaSemana diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
         this.diaSemana = diaSemana;
         this.horaInicioTurno = horaInicioTurno;
         this.horaFinTurno = horaFinTurno;
@@ -34,12 +35,12 @@ public class HorarioLaboral {
      * Retorna el día de la semana del horario laboral.
      * @return Día de la semana del horario laboral.
      */
-    public Short getDiaSemana() {return diaSemana;}
+    public DiaSemana getDiaSemana() {return diaSemana;}
     /**
      * Establece el día de la semana del horario laboral.
      * @param diaSemana Nuevo día de la semana del horario laboral.
      */
-    public void setDiaSemana(Short diaSemana) {this.diaSemana = diaSemana;}
+    public void setDiaSemana(DiaSemana diaSemana) {this.diaSemana = diaSemana;}
     /**
      * Retorna la hora de inicio del turno del horario laboral.
      * @return Hora de inicio del turno del horario laboral.
