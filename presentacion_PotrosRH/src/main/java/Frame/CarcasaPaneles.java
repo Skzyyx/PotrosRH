@@ -1,6 +1,7 @@
 package Frame;
 
 import Controles.ControlFlujo;
+import Controles.ControlFlujoRegistro;
 import PanelesCasoBase.BusquedaEmpleado;
 import PanelesCasoBase.MenuPrincipal;
 import PanelesCasoBase.PrevisualizarEmpleado;
@@ -28,6 +29,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         ControlFlujo.setContenedor(contenedor);
+        ControlFlujoRegistro.setContenedor(contenedor);
         ControlFlujo.mostrarMenuPrincipal();
     }
 

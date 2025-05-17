@@ -3,6 +3,9 @@ package mappers;
 import Entidades.HorarioLaboral;
 import Enums.DiaSemana;
 import dto.HorarioLaboralDTO;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Clase que mapea entidades HorarioLaboral a HorarioLaboralDTO, 
@@ -59,4 +62,23 @@ public class HorarioLaboralMapper {
         return horarioLaboralDTO;
     }
     
+    public static Set<HorarioLaboral> toEntitySet(Set<HorarioLaboralDTO> dtos) {
+        Set<HorarioLaboral> horarios = new HashSet<>();
+        
+        for (HorarioLaboralDTO dto : dtos) {
+            horarios.add(toEntityViejo(dto));
+            
+        }
+        return horarios;
+    } 
+    
+    public static Set<HorarioLaboralDTO> toDTOSet(Set<HorarioLaboral> horarios) {
+        Set<HorarioLaboralDTO> dtos = new HashSet<>();
+        
+        for (HorarioLaboral horario : horarios) {
+            dtos.add(toDTO(horario));
+            
+        }
+        return dtos;
+    } 
 }

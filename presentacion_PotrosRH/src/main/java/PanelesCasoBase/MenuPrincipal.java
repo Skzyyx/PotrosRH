@@ -1,6 +1,7 @@
 package PanelesCasoBase;
 
 import Controles.ControlFlujo;
+import Controles.ControlFlujoRegistro;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -245,7 +246,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        // TODO add your handling code here:
+        ControlFlujoRegistro.mostrarMenuContrataciones();
     }//GEN-LAST:event_btnContratacionesActionPerformed
 
     private void btnDespedirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespedirEmpleadoActionPerformed
