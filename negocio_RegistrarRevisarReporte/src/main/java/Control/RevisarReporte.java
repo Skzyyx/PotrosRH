@@ -27,7 +27,7 @@ public class RevisarReporte {
      * @return VERDADERO si el registro fue exitoso, FALSO en caso contrario.
      * @throws ReporteException Excepción del subsistema.
      */
-    public boolean registrarReporteSancionado(ReporteRevisadoSancionadoDTO reporteSancionadoNuevo) throws ReporteException {
+    public ReporteRevisadoSancionadoDTO registrarReporteSancionado(ReporteRevisadoSancionadoDTO reporteSancionadoNuevo) throws ReporteException {
         
         if(reporteSancionadoNuevo == null)
             throw new ReporteException("ERROR: No se aceptan reportes sancionados nulos.");
@@ -72,7 +72,7 @@ public class RevisarReporte {
      * @return VERDADERO si el registro fue exitoso, FALSO en caso contrario.
      * @throws ReporteException Excepción del subsistema.
      */
-    public boolean registrarReporteOmitido(ReporteRevisadoOmitidoDTO reporteOmitidoNuevo) throws ReporteException {
+    public ReporteRevisadoOmitidoDTO registrarReporteOmitido(ReporteRevisadoOmitidoDTO reporteOmitidoNuevo) throws ReporteException {
         
         if(reporteOmitidoNuevo == null)
             throw new ReporteException("ERROR: No se aceptan reportes sancionados nulos.");

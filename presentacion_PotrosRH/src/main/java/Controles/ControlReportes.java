@@ -55,7 +55,7 @@ public class ControlReportes {
      * @return VERDADERO si el registro se realizón con éxito, FALSO en caso contrario.
      * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public boolean registrarReporte(ReporteMalaConductaDTO nuevoReporte) throws PresentacionException{
+    public ReporteMalaConductaDTO registrarReporte(ReporteMalaConductaDTO nuevoReporte) throws PresentacionException{
         try {
             return reportes.registrarReporteNuevo(nuevoReporte);
         } catch (ReporteException e) {throw new PresentacionException(e.getMessage(), e);}
@@ -63,14 +63,26 @@ public class ControlReportes {
     /**
      * Regresa una lista de reportes de mala conducta de un empleado particular, 
      * en una fecha específica del incidente ocurrido.
-     * @param rfcEmpleado RFC del empleado reportado.
+     * @param empleado Empleado con RFC.
      * @param fechaIncidente Fecha del incidente.
      * @return Lista de reportes de mala conducta.
      * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public List<ReporteMalaConductaDTO> obtenerReporte(String rfcEmpleado, LocalDate fechaIncidente) throws PresentacionException{
+    public List<ReporteMalaConductaDTO> obtenerReporteEmpleado(EmpleadoDTO empleado, LocalDate fechaIncidente) throws PresentacionException{
         try {
-            return reportes.obtenerReporte(rfcEmpleado, fechaIncidente);
+            return reportes.obtenerReporteEmpleado(empleado, fechaIncidente);
+        } catch (ReporteException e) {throw new PresentacionException(e.getMessage(), e);}
+    }
+    /**
+     * Obtiene una lista de reportes que coincidan con el RFC y la fecha
+     * del incidente recibidas.
+     * @param reporteSeguimiento Reporte con número de seguimiento.
+     * @return Lista de reportes obtenidos.
+     * @throws PresentacionException Excepción del subsistema.
+     */
+    public ReporteMalaConductaDTO obtenerReporteSeguimiento(ReporteMalaConductaDTO reporteSeguimiento) throws PresentacionException{
+        try {
+            return reportes.obtenerReporteSeguimiento(reporteSeguimiento);
         } catch (ReporteException e) {throw new PresentacionException(e.getMessage(), e);}
     }
     /**
@@ -81,7 +93,7 @@ public class ControlReportes {
      * @return VERDADERO si el registro se realizón con éxito, FALSO en caso contrario.
      * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public boolean registrarReporteSancionado(ReporteRevisadoSancionadoDTO reporteSancionado) throws PresentacionException{
+    public ReporteRevisadoSancionadoDTO registrarReporteSancionado(ReporteRevisadoSancionadoDTO reporteSancionado) throws PresentacionException{
         try {
             return reportes.registrarReporteSancionado(reporteSancionado);
         } catch (ReporteException e) {throw new PresentacionException(e.getMessage(), e);}
@@ -95,7 +107,7 @@ public class ControlReportes {
      * @return VERDADERO si el registro se realizón con éxito, FALSO en caso contrario.
      * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public boolean registrarReporteOmitido(ReporteRevisadoOmitidoDTO reporteOmitido) throws PresentacionException{
+    public ReporteRevisadoOmitidoDTO registrarReporteOmitido(ReporteRevisadoOmitidoDTO reporteOmitido) throws PresentacionException{
         try {
             return reportes.registrarReporteOmitido(reporteOmitido);
         } catch (ReporteException e) {throw new PresentacionException(e.getMessage(), e);}

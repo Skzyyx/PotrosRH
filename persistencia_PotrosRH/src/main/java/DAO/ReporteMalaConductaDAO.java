@@ -1,5 +1,6 @@
 package DAO;
 
+import Entidades.Empleado;
 import Entidades.ReporteMalaConducta;
 import Entidades.ReporteRevisadoOmitido;
 import Entidades.ReporteRevisadoSancionado;
@@ -21,18 +22,29 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public boolean registrarReporteNuevo(ReporteMalaConducta reporteNuevo) throws AccesoDatosException {
-        return true;
+    public ReporteMalaConducta registrarReporteNuevo(ReporteMalaConducta reporteNuevo) throws AccesoDatosException {
+        return null;
     }
     /**
      * Obtiene un reporte de mala conducta de la base de datos.
-     * @param rfcEmpleado RFC del empleado reportado asociado.
+     * @param empleado Empleado a buscar, asociado a un reporte de mala conducta.
      * @param fechaIncidente Fecha del incidente.
      * @return Lista de reportes coincidentes.
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public List<ReporteMalaConducta> obtenerReporte(String rfcEmpleado, LocalDate fechaIncidente) throws AccesoDatosException {
+    public List<ReporteMalaConducta> obtenerReporteEmpleado(Empleado empleado, LocalDate fechaIncidente) throws AccesoDatosException {
+        return null;
+    }
+    /**
+     * Obtiene una lista de reportes que coincidan con el RFC y la fecha
+     * del incidente recibidas.
+     * @param reporteSeguimiento Reporte con número de seguimiento.
+     * @return Reporte encontrado.
+     * @throws AccesoDatosException Excepción del proyecto.
+     */
+    @Override
+    public ReporteMalaConducta obtenerReporteSeguimiento(ReporteMalaConducta reporteSeguimiento) throws AccesoDatosException{
         return null;
     }
     /**
@@ -42,8 +54,8 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public boolean registrarReporteSancionado(ReporteRevisadoSancionado reporteSancionadoNuevo) throws AccesoDatosException {
-        return true;
+    public ReporteRevisadoSancionado registrarReporteSancionado(ReporteRevisadoSancionado reporteSancionadoNuevo) throws AccesoDatosException {
+        return null;
     }
     /**
      * Registra un nuevo reporte de mala conducta revisado y omitido.
@@ -52,7 +64,7 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
      * @throws AccesoDatosException Excepción del proyecto.
      */
     @Override
-    public boolean registrarReporteOmitido(ReporteRevisadoOmitido reporteOmitidoNuevo) throws AccesoDatosException {
-        return true;
+    public ReporteRevisadoOmitido registrarReporteOmitido(ReporteRevisadoOmitido reporteOmitidoNuevo) throws AccesoDatosException {
+        return null;
     }   
 }

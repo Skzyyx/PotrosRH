@@ -305,7 +305,7 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         // Se intenta registrar el nuevo reporte de mala conducta.
         try {
             // Si el registro fue exitoso.
-            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta)){
+            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta) != null){
                 // Se muestra un mensaje de confirmación y se regresa al menú de reportes.
                 OptionPane.showInfoMessage(this, "¡Reporte registrado con éxito y listo para ser revisado!", "¡Reporte registrado!");
                 ControlFlujo.mostrarSubmenuReportes();

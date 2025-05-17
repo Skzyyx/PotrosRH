@@ -4,6 +4,7 @@ import Exception.ReporteException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IReporteMalaConductaBO;
 import bo.ReporteMalaConductaBO;
+import dto.EmpleadoDTO;
 import dto.ReporteMalaConductaDTO;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,10 +27,10 @@ public class RegistrarObtenerReporte {
      * Valida que el nuevo reporte cumpla con todas las reglas de 
      * negocio, antes de ser registrado.
      * @param reporteNuevo Reporte de mala conducta a registrar.
-     * @return VERDADERO si el registro fue exitoso, FALSO en caso contrario.
+     * @return Reporte de mala conducta a registrar.
      * @throws ReporteException Excepción del subsistema.
      */
-    public boolean registrarReporteNuevo(ReporteMalaConductaDTO reporteNuevo) throws ReporteException {
+    public ReporteMalaConductaDTO registrarReporteNuevo(ReporteMalaConductaDTO reporteNuevo) throws ReporteException {
         
         if(reporteNuevo == null)
             throw new ReporteException("ERROR: El reporte no puede ser nulo.");
@@ -45,14 +46,32 @@ public class RegistrarObtenerReporte {
     /**
      * Obtiene una lista de reportes que coincidan con el RFC y la fecha
      * del incidente recibidas.
-     * @param rfcEmpleado RFC del empleado reportado.
+     * @param empleado Empleado a buscar, asociado a un reporte de mala conducta.
      * @param fechaIncidente Fecha del incidente.
      * @return Lista de reportes obtenidos.
      * @throws ReporteException Excepción del subsistema.
      */
-    public List<ReporteMalaConductaDTO> obtenerReporte(String rfcEmpleado, LocalDate fechaIncidente) throws ReporteException {
+    public List<ReporteMalaConductaDTO> obtenerReporteEmpleado(EmpleadoDTO empleado, LocalDate fechaIncidente) throws ReporteException {
+        
+        if(empleado == null)
+                throw new ReporteException("No se permite RFC vacío.");
+        try {             
+            return reporteBO.obtenerReporteEmpleado(empleado, fechaIncidente);
+        } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
+    }
+    /**
+     * Obtiene una lista de reportes que coincidan con el RFC y la fecha
+     * del incidente recibidas.
+     * @param reporteSeguimiento Reporte con número de seguimiento.
+     * @return Lista de reportes obtenidos.
+     * @throws ReporteException Excepción del subsistema.
+     */
+    public ReporteMalaConductaDTO obtenerReporteSeguimiento(ReporteMalaConductaDTO reporteSeguimiento) throws ReporteException{
+        
+        if(reporteSeguimiento == null)
+                throw new ReporteException("No se permite un número de seguimiento vacío");
         try {
-            return reporteBO.obtenerReporte(rfcEmpleado, fechaIncidente);
+            return reporteBO.obtenerReporteSeguimiento(reporteSeguimiento);
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }
     /**
