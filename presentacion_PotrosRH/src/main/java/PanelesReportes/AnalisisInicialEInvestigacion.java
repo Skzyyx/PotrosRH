@@ -412,21 +412,33 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // Se muestra el JDialog.
         if(!confirmacionMalaConducta.isVisible())
             confirmacionMalaConducta.setVisible(true);
+        // Se obtiene el estado de la confirmación del JDialog, que indica a qué botón se le hizo click.
         EstadoConfirmacionMalaConducta confirmacion = confirmacionMalaConducta.obtenerEstado();
+        // Si el estado es diferente de ANTERIOR.
         if(confirmacion != EstadoConfirmacionMalaConducta.ANTERIOR){
             switch (confirmacion) {
+               // Si el estado es igual a CANCELAR, se cancela todo el proceso y se regresa al submenú de Reportes.
                case CANCELAR -> {
                    int confirmacionCancelar = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
                    if(confirmacionCancelar == JOptionPane.YES_OPTION)
                        ControlFlujo.mostrarSubmenuReportes();
                }
+               // Si el estado es igual a NO, se carga el reporte con la información ingresada y se transfiere al panel de MotivoOmisionMalaConducta.
                case NO -> {
-                   
+                   try {
+                       cargarReporte();
+                       
+                   } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
                }
+               // Si el estado es igual a SI, se carga el reporte con la información ingresada y se transfiere al panel de DeterminacionCaso.
                default -> {
-                   
+                   try {
+                       cargarReporte();
+                        
+                   } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
                }
             }
         }
@@ -505,15 +517,16 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jCLOtrasEvidenciasItemStateChanged
     /**
-     * 
-     * @param reporte 
+     * Recibe el reporte de mala conducta a revisar, y lo añade al
+     * reporte revisado.
+     * @param reporte Reporte a revisar.
+     * @throws PresentacionException Excepción de la capa de Presentación.
      */
     public void setReporteMalaConducta(ReporteMalaConductaDTO reporte) throws PresentacionException{
         if(reporte != null)
             reporteRevisado.setReporteMalaConducta(reporte);
         else
             throw new PresentacionException("Error: El reporte no puede estar vacío.");
-        
     }
     /**
      * Asegura que solo el checkBox "No" pueda estar seleccionado, de
@@ -588,7 +601,7 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
                // Si el checkBox es el de otros.
                if (checkBox.equals(jCLOtrasEntrevistas)) {
                    // Añade la información del checkBox
-                   entrevistas.add(checkBox.getText().trim());
+                   entrevistas.add(checkBox.getText());
                    // Si el área de texto de las otras entrevistas realizadas está vacío.
                    if (jTAOtrasEntrevistas.getText().trim().isEmpty()) 
                        throw new PresentacionException("Por favor, ingrese la descripción de las otras entrevistas realizadas");
@@ -597,7 +610,7 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
                        reporteRevisado.setDescripcionOtrasEntrevistasRealizadas(jTAOtrasEntrevistas.getText().trim());
                // Si el checkBox seleccionado actual no es el de otros    
                } else
-                   entrevistas.add(checkBox.getText().trim());
+                   entrevistas.add(checkBox.getText());
            }
        }
        // Se añade el conjunto de entrevistas realizadas al reporte revisado.
@@ -613,16 +626,16 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
                // Si el checkBox es el de otros.
                if (checkBox.equals(jCLOtrasEvidencias)) {
                    // Añade la información del checkBox
-                   evidencias.add(checkBox.getText().trim());
+                   evidencias.add(checkBox.getText());
                    // Si el área de texto de las otras evidencias revisadas está vacío.
                    if (jTAOtrasEvidencias.getText().trim().isEmpty()) 
-                       throw new PresentacionException("Por favor, ingrese la descripción de las otras entrevistas realizadas");
+                       throw new PresentacionException("Por favor, ingrese la descripción de las otras evidencias revisadas.");
                    // Si no, agrega la descripción de las otras evidencias revisadas.
                     else 
                        reporteRevisado.setDescripcionOtrasEvidencias(jTAOtrasEvidencias.getText().trim());
                // Si el checkBox seleccionado actual no es el de otros    
                } else
-                   evidencias.add(checkBox.getText().trim());
+                   evidencias.add(checkBox.getText());
            }
        }
        // Se añade el conjunto de evidencias revisadas al reporte revisado.

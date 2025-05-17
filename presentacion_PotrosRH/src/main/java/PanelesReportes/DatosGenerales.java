@@ -1,6 +1,7 @@
 package PanelesReportes;
 
 import Controles.ControlFlujo;
+import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
 import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
@@ -21,13 +22,12 @@ public class DatosGenerales extends javax.swing.JPanel {
     // Modelo de la lista de tetigos
     private final DefaultListModel modeloLista = new DefaultListModel();
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
      */
     public DatosGenerales() {
         initComponents();
         jListTestigos.setModel(modeloLista);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -419,25 +419,29 @@ public class DatosGenerales extends javax.swing.JPanel {
      * Reemplaza el reporte de este panel por
      * el reporte recibido.
      * @param reporte Reporte en transferencia.
+     * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public void cargarReporte(ReporteMalaConductaDTO reporte){
+    public void cargarReporte(ReporteMalaConductaDTO reporte) throws PresentacionException{
         if(reporte != null){
             reporteMalaConducta = reporte;
             /*
                 Las siguientes validaciones son únicamente para garantizar que el sistema no truene, en caso de que algún dato del reporte
-                sea null (lo cual no debería pasar, ya que se debió haber obtenido un reportye completo). Además, hay algunos campos
+                sea null (lo cual no debería pasar, ya que se debió haber obtenido un reporte completo). Además, hay algunos campos
                 opcionales, como las acciones previas, que no se persisten en la BD si no se ingresó su información.
             */
             
             // Nombre del empleado reportado.
             if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getNombre() != null)
                 jTFNombreEmpleado.setText(reporteMalaConducta.getEmpleadoReportado().getNombre());
+            
             // Departamento del empleado reportado.
             if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getDepartamento() != null)
                 jTFDepartamento.setText(reporteMalaConducta.getEmpleadoReportado().getDepartamento());
+            
             // Puesto del empleado reportado.
             if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getPuesto() != null)
                 jTFPuesto.setText(reporteMalaConducta.getEmpleadoReportado().getPuesto());
+            
             // Fecha y hora del incidente.
             if(reporteMalaConducta.getFechaHoraIncidente() != null){
                 String fechaHoraIncidente = String.format(
@@ -454,12 +458,15 @@ public class DatosGenerales extends javax.swing.JPanel {
             // Nombre del empleado reportante.
             if(reporteMalaConducta.getEmpleadoReportante() != null && reporteMalaConducta.getEmpleadoReportante().getNombre() != null)
                 jTFReportadoPor.setText(reporteMalaConducta.getEmpleadoReportante().getNombre());
+            
             // Cargo del empleado reportante.
             if(reporteMalaConducta.getEmpleadoReportante() != null && reporteMalaConducta.getEmpleadoReportante().getPuesto() != null)
                 jTFCargoReportante.setText(reporteMalaConducta.getEmpleadoReportante().getPuesto());
+            
             // Lugar del incidente.
             if(reporteMalaConducta.getLugarIncidente() != null)
                 jTFLugarIncidente.setText(reporteMalaConducta.getLugarIncidente());
+            
             // Testigos (si es que hubieron).
             if(reporteMalaConducta.getTestigos() != null && !reporteMalaConducta.getTestigos().isEmpty()){
                 for (int i = 0; i < reporteMalaConducta.getTestigos().size(); i++) {
@@ -470,10 +477,12 @@ public class DatosGenerales extends javax.swing.JPanel {
             // Impacto del incidente.
             if(reporteMalaConducta.getImpactoIncidente() != null)
                 jTAImpactoIncidente.setText(reporteMalaConducta.getImpactoIncidente());
+            
             // Acciones previas del empleado reportado (si es que se ingresó tal información, ya que es opcional).
             if(reporteMalaConducta.getAccionesPrevias() != null)
                 jTAccionesPrevias.setText(reporteMalaConducta.getAccionesPrevias());
-        }
+        } else
+            throw new PresentacionException("El reporte está vacío.");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

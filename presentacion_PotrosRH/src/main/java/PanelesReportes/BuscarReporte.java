@@ -231,18 +231,18 @@ public class BuscarReporte extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
             EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(jTEmpleado.getText());
+            empleado.setRfc(jTEmpleado.getText().trim());
             try {
                 reportesEncontrados = ControlReportes.getInstance().obtenerReporteEmpleado(empleado, jDPFechaIncidente.getSelectedDate());
-                
+                cargarLista();
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
         } else{
             ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
-            reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText()));
+            reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText().trim()));
             try {
                 reporte = ControlReportes.getInstance().obtenerReporteSeguimiento(reporte);
                 reportesEncontrados.add(reporte);
-                
+                cargarLista();
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -288,7 +288,8 @@ public class BuscarReporte extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if(reportesEncontrados != null && !reportesEncontrados.isEmpty() && jListResultados.getSelectedIndex() != -1){
             ReporteMalaConductaDTO reporte = reportesEncontrados.get(jListResultados.getSelectedIndex());
-        }
+        } else
+            OptionPane.showErrorMessage(this, "Por favor, seleccione el reporte a revisar", "Reporte no seleccionado");
     }//GEN-LAST:event_btnSiguienteActionPerformed
     /**
      * Carga la lista con los reportes encontrados.

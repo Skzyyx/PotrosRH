@@ -4,7 +4,6 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
@@ -13,15 +12,13 @@ import javax.swing.SwingUtilities;
  * @author Leonardo Flores Leyva (252390)
  */
 public class DeterminacionCaso extends javax.swing.JPanel {
-    
-    private final ConfirmacionMalaConducta confirmacionMalaConducta;
-    
+       
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
      */
     public DeterminacionCaso() {
         initComponents();
-        confirmacionMalaConducta = new ConfirmacionMalaConducta((Frame) SwingUtilities.getWindowAncestor(this), true);
+        
     }
 
     /**
@@ -70,11 +67,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -102,11 +94,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("Anterior");
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAnterior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAnteriorMouseClicked(evt);
-            }
-        });
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -330,11 +317,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSiguienteMouseClicked(evt);
-            }
-        });
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -357,12 +339,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnteriorMouseClicked
-    }//GEN-LAST:event_btnAnteriorMouseClicked
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         
@@ -408,10 +384,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCLAdvertenciaEscritaActionPerformed
 
-    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSiguienteMouseClicked
-
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -444,13 +416,4 @@ public class DeterminacionCaso extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAOtraAccionCorrectiva;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnAnterior;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnAnterior = btnGenerar;}
-
 }

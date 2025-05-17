@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 public class ConfirmacionMalaConducta extends javax.swing.JDialog {
     /**
      * Estados de la respuesta elegida, dependiendo del
-     * botón del que se hizo click.
+     * botón al que se hizo click.
      */
     private EstadoConfirmacionMalaConducta estadoConfirmacion;
     /**

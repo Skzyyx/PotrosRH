@@ -1,29 +1,37 @@
 package PanelesReportes;
 
-import java.awt.Frame;
+import Controles.ControlCampos;
+import Controles.ControlFlujo;
+import Controles.ControlReportes;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.ReporteRevisadoDTO;
+import dto.ReporteRevisadoOmitidoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 /**
- *
+ * Panel para la recepción del motivo de la omisión de la mala
+ * conducta del empleado reportado.
  * @author Leonardo Flores Leyva (252390)
  */
 public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
-    
-    private final ConfirmacionMalaConducta confirmacionMalaConducta;
-    
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Reporte revisado a registrar como reporte omitido.
+     */
+    private ReporteRevisadoDTO reporteRevisado = new ReporteRevisadoDTO();
+    /**
+     * Constructor por defecto.
      */
     public MotivoOmisionMalaConducta() {
         initComponents();
-        confirmacionMalaConducta = new ConfirmacionMalaConducta((Frame) SwingUtilities.getWindowAncestor(this), true);
+        ControlCampos.limiteCaracteresAreaTexto(jTAMotiviOmision, 1000);
+        btnConfirmar.setVisible(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +48,7 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         jLDeterminacionCaso = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAMotiviOmision = new javax.swing.JTextArea();
-        btnSiguiente = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -53,11 +61,6 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -85,11 +88,6 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("Anterior");
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAnterior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAnteriorMouseClicked(evt);
-            }
-        });
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -135,26 +133,26 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         jTAMotiviOmision.setLineWrap(true);
         jTAMotiviOmision.setRows(5);
         jTAMotiviOmision.setWrapStyleWord(true);
+        jTAMotiviOmision.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTAMotiviOmisionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTAMotiviOmision);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 1170, 390));
 
-        btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
-        btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
-        btnSiguiente.setText("Siguiente");
-        btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSiguienteMouseClicked(evt);
-            }
-        });
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 628, 146, 55));
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 628, 146, 55));
         btnAnterior.setBorderPainted(false);
         btnAnterior.setContentAreaFilled(false);
         btnAnterior.setOpaque(false);
@@ -172,46 +170,73 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnteriorMouseClicked
-    }//GEN-LAST:event_btnAnteriorMouseClicked
-
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         
     }//GEN-LAST:event_btnAnteriorActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSiguienteMouseClicked
-
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSiguienteActionPerformed
-
+    /**
+     * Botón Confirmar. Registra el nuevo reporte revisado omitido,
+     * con el motivo de la omisión ingresada.
+     * @param evt Click.
+     */
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        if(!jTAMotiviOmision.getText().trim().isEmpty()){
+            ReporteRevisadoOmitidoDTO reporteOmitido = (ReporteRevisadoOmitidoDTO) reporteRevisado;
+            try {
+                reporteOmitido.setMotivoOmision(jTAMotiviOmision.getText().trim());
+                if(ControlReportes.getInstance().registrarReporteOmitido(reporteOmitido) != null){
+                    OptionPane.showInfoMessage(this, "¡Reporte revisado registrado con éxito!", "Reporte revisado exitosamente");
+                    ControlFlujo.mostrarSubmenuReportes();
+                }
+                else
+                    OptionPane.showInfoMessage(this, "Ha ocurrido un error al intentar registrar el reporte revisado.", "Fracaso en registro de reporte revisado");
+            } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
+        } else
+            OptionPane.showErrorMessage(this, "ERROR: Ingrese el motivo de la omisión del reporte.", "Sin motivo de omisión");
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+    /**
+     * KeyListener para cada ocasión que se escribe algo en el 
+     * área de texto del motivo del la omisión. Si el texto
+     * está vacío, se esconde el botón de confirmar. En 
+     * cambio, si el texto no está vacío, se muestra el
+     * botón de confirmar.
+     * @param evt Tecla escrita.
+     */
+    private void jTAMotiviOmisionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAMotiviOmisionKeyTyped
+        if(jTAMotiviOmision.getText().trim().isEmpty())
+            btnConfirmar.setVisible(false);
+        else
+            btnConfirmar.setVisible(true);
+    }//GEN-LAST:event_jTAMotiviOmisionKeyTyped
+    /**
+     * Añade el reporte revisado recibido, asegurándose que
+     * no esté vacío.
+     * @param reporte Reporte Revisado a añadir.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public void setReporte(ReporteRevisadoDTO reporte) throws PresentacionException{
+        if(reporte != null)
+            reporteRevisado = reporte;
+         else
+            throw new PresentacionException("El reporte no puede estar vacío.");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel jLDeterminacionCaso;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAMotiviOmision;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnAnterior;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnAnterior = btnGenerar;}
-
 }
