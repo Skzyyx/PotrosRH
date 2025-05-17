@@ -1,22 +1,43 @@
 package PanelesReportes;
 
+import Controles.ControlCampos;
+import Controles.ControlFlujo;
+import Controles.ControlReportes;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
+import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 
 /**
- *
+ * Panel para la búsqueda del reporte de mala conducta
+ * a validar, ya sea por RFC del empleado reportado o
+ * por el número de seguimiento.
  * @author Leonardo Flores Leyva (252390)
  */
 public class BuscarReporte extends javax.swing.JPanel {
-    
+    // Lista de reportes encontrados.
+    private List<ReporteMalaConductaDTO> reportesEncontrados = new ArrayList<>();
+    // Modelo de la lista para cargar sus registros
+    private final DefaultListModel modeloLista = new DefaultListModel();
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
      */
-    public BuscarReporte() {initComponents();}
+    public BuscarReporte() {
+        initComponents();
+        ControlCampos.limiteCaracteresCampoTexto(jTNumSeguimiento, 13);
+        ControlCampos.configurarCamposCantidades(jTNumSeguimiento);
+        jTEmpleado.setVisible(false);
+        jDPFechaIncidente.setVisible(false);
+        jListResultados.setModel(modeloLista);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,12 +53,17 @@ public class BuscarReporte extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLBusquedaReporte = new javax.swing.JLabel();
         jLResultados = new javax.swing.JLabel();
-        jLRFCEmpleado = new javax.swing.JLabel();
-        jTEmpleado = new javax.swing.JTextField();
+        jLFiltroBusqueda = new javax.swing.JLabel();
+        jTNumSeguimiento = new javax.swing.JTextField();
         jLFechaIncidente = new javax.swing.JLabel();
         jDPFechaIncidente = new raven.datetime.DatePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListResultados = new javax.swing.JList<>();
+        jCBFiltroBusqueda = new javax.swing.JComboBox<>();
+        jLNumSeguimiento = new javax.swing.JLabel();
+        jLRFCEmpleado = new javax.swing.JLabel();
+        jTEmpleado = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -49,17 +75,12 @@ public class BuscarReporte extends javax.swing.JPanel {
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegresarMouseClicked(evt);
-            }
-        });
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 611, 137, 55));
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 610, 137, 55));
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
         btnRegresar.setOpaque(false);
@@ -81,17 +102,12 @@ public class BuscarReporte extends javax.swing.JPanel {
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseClicked(evt);
-            }
-        });
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 611, 146, 55));
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 610, 146, 55));
         btnBuscar.setBorderPainted(false);
         btnBuscar.setContentAreaFilled(false);
         btnBuscar.setOpaque(false);
@@ -122,71 +138,198 @@ public class BuscarReporte extends javax.swing.JPanel {
         jLResultados.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jLResultados.setForeground(new java.awt.Color(255, 255, 255));
         jLResultados.setText("Resultados:");
-        add(jLResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(583, 132, 259, 49));
+        add(jLResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 259, 49));
+
+        jLFiltroBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLFiltroBusqueda.setForeground(new java.awt.Color(0, 0, 0));
+        jLFiltroBusqueda.setText("Filtro:");
+        add(jLFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 90, 49));
+
+        jTNumSeguimiento.setBackground(new java.awt.Color(255, 255, 255));
+        jTNumSeguimiento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTNumSeguimiento.setForeground(new java.awt.Color(0, 0, 0));
+        jTNumSeguimiento.setBorder(null);
+        jTNumSeguimiento.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        add(jTNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 334, 47));
+
+        jLFechaIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLFechaIncidente.setForeground(new java.awt.Color(0, 0, 0));
+        jLFechaIncidente.setText("Fecha de incidente*:");
+        add(jLFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, 49));
+
+        jDPFechaIncidente.setBackground(new java.awt.Color(0, 0, 0));
+        jDPFechaIncidente.setForeground(new java.awt.Color(255, 255, 255));
+        add(jDPFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+
+        jListResultados.setBackground(new java.awt.Color(255, 255, 255));
+        jListResultados.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane2.setViewportView(jListResultados);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 500, -1));
+
+        jCBFiltroBusqueda.setBackground(new java.awt.Color(255, 255, 255));
+        jCBFiltroBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCBFiltroBusqueda.setForeground(new java.awt.Color(0, 0, 0));
+        jCBFiltroBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RFC", "N° Seguimiento" }));
+        jCBFiltroBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCBFiltroBusqueda.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBFiltroBusquedaItemStateChanged(evt);
+            }
+        });
+        add(jCBFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 170, 50));
+
+        jLNumSeguimiento.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jLNumSeguimiento.setForeground(new java.awt.Color(0, 0, 0));
+        jLNumSeguimiento.setText("RFC del empleado*:");
+        add(jLNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 334, 49));
 
         jLRFCEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLRFCEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         jLRFCEmpleado.setText("RFC del empleado*:");
-        add(jLRFCEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 146, 334, 49));
+        add(jLRFCEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 334, 49));
 
         jTEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         jTEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         jTEmpleado.setBorder(null);
         jTEmpleado.setMargin(new java.awt.Insets(2, 15, 2, 6));
-        add(jTEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 201, 334, 47));
+        add(jTEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 334, 47));
 
-        jLFechaIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLFechaIncidente.setForeground(new java.awt.Color(0, 0, 0));
-        jLFechaIncidente.setText("Fecha de incidente*:");
-        add(jLFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 276, -1, 49));
-
-        jDPFechaIncidente.setBackground(new java.awt.Color(0, 0, 0));
-        jDPFechaIncidente.setForeground(new java.awt.Color(255, 255, 255));
-        add(jDPFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 331, -1, -1));
-
-        jListResultados.setBackground(new java.awt.Color(255, 255, 255));
-        jListResultados.setForeground(new java.awt.Color(0, 0, 0));
-        jScrollPane2.setViewportView(jListResultados);
-
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 500, -1));
+        btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
+        btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 611, 146, 55));
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setOpaque(false);
+        btnBuscar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-    }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-    }//GEN-LAST:event_btnBuscarMouseClicked
-
+    /**
+     * Busca y obtiene el o los reportes, ya sea por RFC o por el
+     * número de seguimiento.
+     * @param evt Click.
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+        if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(jTEmpleado.getText());
+            try {
+                reportesEncontrados = ControlReportes.getInstance().obtenerReporteEmpleado(empleado, jDPFechaIncidente.getSelectedDate());
+                
+            } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
+        } else{
+            ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
+            reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText()));
+            try {
+                reporte = ControlReportes.getInstance().obtenerReporteSeguimiento(reporte);
+                reportesEncontrados.add(reporte);
+                
+            } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    /**
+     * Botón Regresar. Regresa al submenú de reportes.
+     * @param evt Click.
+     */
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+        ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-
+    /**
+     * Muestra el tipo de búsqueda, de acuerdo a la opción elegida.
+     * @param evt Click.
+     */
+    private void jCBFiltroBusquedaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBFiltroBusquedaItemStateChanged
+        if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
+            jTNumSeguimiento.setText("");
+            jTNumSeguimiento.setVisible(false);
+            jLNumSeguimiento.setVisible(false);
+            
+            jTEmpleado.setVisible(true);
+            jLRFCEmpleado.setVisible(true);
+            jLFechaIncidente.setVisible(true);
+            jDPFechaIncidente.setVisible(true);
+        } else{
+            jTEmpleado.setText("");
+            jTEmpleado.setVisible(false);
+            jLRFCEmpleado.setVisible(false);
+            jLFechaIncidente.setVisible(false);
+            jDPFechaIncidente.setVisible(false);
+            jDPFechaIncidente.setSelectedDate(LocalDate.now());
+            
+            jTNumSeguimiento.setText("");
+            jTNumSeguimiento.setVisible(true);
+            jLNumSeguimiento.setVisible(true);
+        }
+    }//GEN-LAST:event_jCBFiltroBusquedaItemStateChanged
+    /**
+     * Botón Siguiente. Obtiene el reporte de mala conducta elegido y lo
+     * transfiere a la pantalla de datos generales.
+     * @param evt Click.
+     */
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if(reportesEncontrados != null && !reportesEncontrados.isEmpty() && jListResultados.getSelectedIndex() != -1){
+            ReporteMalaConductaDTO reporte = reportesEncontrados.get(jListResultados.getSelectedIndex());
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+    /**
+     * Carga la lista con los reportes encontrados.
+     */
+    private void cargarLista(){
+        if(reportesEncontrados != null && !reportesEncontrados.isEmpty()){
+            for (int i = 0; i < reportesEncontrados.size(); i++) {
+                ReporteMalaConductaDTO reporte = reportesEncontrados.get(i);
+                String reporteEncontrado = String.format(
+                        "%s %s %s %d/%d/%d %d:%d:%d", 
+                        reporte.getEmpleadoReportado().getNombre(),
+                        reporte.getEmpleadoReportado().getApellidoPaterno(),
+                        reporte.getEmpleadoReportado().getApellidoMaterno(),
+                        reporte.getFechaHoraIncidente().getDayOfMonth(),
+                        reporte.getFechaHoraIncidente().getMonthValue(),
+                        reporte.getFechaHoraIncidente().getYear(),
+                        reporte.getFechaHoraIncidente().getHour(),
+                        reporte.getFechaHoraIncidente().getMinute(),
+                        reporte.getFechaHoraIncidente().getSecond()
+                );
+                modeloLista.add(i, reporteEncontrado);
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JComboBox<String> jCBFiltroBusqueda;
     private raven.datetime.DatePicker jDPFechaIncidente;
     private javax.swing.JLabel jLBusquedaReporte;
     private javax.swing.JLabel jLFechaIncidente;
+    private javax.swing.JLabel jLFiltroBusqueda;
+    private javax.swing.JLabel jLNumSeguimiento;
     private javax.swing.JLabel jLRFCEmpleado;
     private javax.swing.JLabel jLResultados;
     private javax.swing.JList<String> jListResultados;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTEmpleado;
+    private javax.swing.JTextField jTNumSeguimiento;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnRegresar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnRegresar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnBuscar;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnBuscar = btnGenerar;}
-
 }

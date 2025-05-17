@@ -1,21 +1,32 @@
 package PanelesReportes;
 
+import Controles.ControlFlujo;
+import OptionPane.OptionPane;
+import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
- *
+ * Panel para la muestra de los datos del reporte de mala
+ * conducta a revisar.
  * @author Leonardo Flores Leyva (252390)
  */
 public class DatosGenerales extends javax.swing.JPanel {
-    
+    // Reporte de mala conducta a mostrar.
+    private ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
+    // Modelo de la lista de tetigos
+    private final DefaultListModel modeloLista = new DefaultListModel();
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public DatosGenerales() {initComponents();}
+    public DatosGenerales() {
+        initComponents();
+        jListTestigos.setModel(modeloLista);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,11 +77,6 @@ public class DatosGenerales extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -82,11 +88,6 @@ public class DatosGenerales extends javax.swing.JPanel {
         btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciar.setText("Iniciar");
         btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnIniciar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnIniciarMouseClicked(evt);
-            }
-        });
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
@@ -285,9 +286,7 @@ public class DatosGenerales extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLDescripcionDetallada)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLDescripcionDetallada))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(364, 364, 364)
@@ -398,22 +397,85 @@ public class DatosGenerales extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarMouseClicked
-    }//GEN-LAST:event_btnIniciarMouseClicked
-
+    /**
+     * Botón Iniciar. Transfiere el reporte de mala conducta a la
+     * pantalla de Análisis Inicial e Investigación.
+     * @param evt Click.
+     */
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         
     }//GEN-LAST:event_btnIniciarActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-
+    /**
+     * Reemplaza el reporte de este panel por
+     * el reporte recibido.
+     * @param reporte Reporte en transferencia.
+     */
+    public void cargarReporte(ReporteMalaConductaDTO reporte){
+        if(reporte != null){
+            reporteMalaConducta = reporte;
+            /*
+                Las siguientes validaciones son únicamente para garantizar que el sistema no truene, en caso de que algún dato del reporte
+                sea null (lo cual no debería pasar, ya que se debió haber obtenido un reportye completo). Además, hay algunos campos
+                opcionales, como las acciones previas, que no se persisten en la BD si no se ingresó su información.
+            */
+            
+            // Nombre del empleado reportado.
+            if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getNombre() != null)
+                jTFNombreEmpleado.setText(reporteMalaConducta.getEmpleadoReportado().getNombre());
+            // Departamento del empleado reportado.
+            if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getDepartamento() != null)
+                jTFDepartamento.setText(reporteMalaConducta.getEmpleadoReportado().getDepartamento());
+            // Puesto del empleado reportado.
+            if(reporteMalaConducta.getEmpleadoReportado() != null && reporteMalaConducta.getEmpleadoReportado().getPuesto() != null)
+                jTFPuesto.setText(reporteMalaConducta.getEmpleadoReportado().getPuesto());
+            // Fecha y hora del incidente.
+            if(reporteMalaConducta.getFechaHoraIncidente() != null){
+                String fechaHoraIncidente = String.format(
+                        "%d/%d/%d %d:%d:%d", 
+                        reporteMalaConducta.getFechaHoraIncidente().getDayOfMonth(),
+                        reporteMalaConducta.getFechaHoraIncidente().getMonthValue(),
+                        reporteMalaConducta.getFechaHoraIncidente().getYear(),
+                        reporteMalaConducta.getFechaHoraIncidente().getHour(),
+                        reporteMalaConducta.getFechaHoraIncidente().getMinute(),
+                        reporteMalaConducta.getFechaHoraIncidente().getSecond()
+                );
+                jTFechaHoraIncidente.setText(fechaHoraIncidente);
+            }
+            // Nombre del empleado reportante.
+            if(reporteMalaConducta.getEmpleadoReportante() != null && reporteMalaConducta.getEmpleadoReportante().getNombre() != null)
+                jTFReportadoPor.setText(reporteMalaConducta.getEmpleadoReportante().getNombre());
+            // Cargo del empleado reportante.
+            if(reporteMalaConducta.getEmpleadoReportante() != null && reporteMalaConducta.getEmpleadoReportante().getPuesto() != null)
+                jTFCargoReportante.setText(reporteMalaConducta.getEmpleadoReportante().getPuesto());
+            // Lugar del incidente.
+            if(reporteMalaConducta.getLugarIncidente() != null)
+                jTFLugarIncidente.setText(reporteMalaConducta.getLugarIncidente());
+            // Testigos (si es que hubieron).
+            if(reporteMalaConducta.getTestigos() != null && !reporteMalaConducta.getTestigos().isEmpty()){
+                for (int i = 0; i < reporteMalaConducta.getTestigos().size(); i++) {
+                    String testigo = reporteMalaConducta.getTestigos().get(i);
+                    modeloLista.add(i, testigo);
+                }
+            }
+            // Impacto del incidente.
+            if(reporteMalaConducta.getImpactoIncidente() != null)
+                jTAImpactoIncidente.setText(reporteMalaConducta.getImpactoIncidente());
+            // Acciones previas del empleado reportado (si es que se ingresó tal información, ya que es opcional).
+            if(reporteMalaConducta.getAccionesPrevias() != null)
+                jTAccionesPrevias.setText(reporteMalaConducta.getAccionesPrevias());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIniciar;
@@ -446,13 +508,4 @@ public class DatosGenerales extends javax.swing.JPanel {
     private javax.swing.JTextField jTFReportadoPor;
     private javax.swing.JTextField jTFechaHoraIncidente;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnIniciar;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnIniciar = btnGenerar;}
-
 }
