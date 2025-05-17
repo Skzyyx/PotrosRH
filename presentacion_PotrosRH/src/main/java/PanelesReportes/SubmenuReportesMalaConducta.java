@@ -13,7 +13,8 @@ import javax.swing.JComponent;
 public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
 
     /**
-     * Creates new form MenuPrincipal
+     * Constructor por defecto.
+     * Inicializa todas las configuraciones necesarias.
      */
     public SubmenuReportesMalaConducta() {initComponents();}
 

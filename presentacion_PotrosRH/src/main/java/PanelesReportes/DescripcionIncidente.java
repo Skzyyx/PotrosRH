@@ -2,8 +2,6 @@ package PanelesReportes;
 
 import Controles.ControlCampos;
 import Controles.ControlFlujo;
-import Controles.ControlReportes;
-import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
 import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
@@ -15,18 +13,16 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Panel para el ingreso de la descripción del 
+ * incidente.
  * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
- * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class DescripcionIncidente extends javax.swing.JPanel {
     // Reporte que se llenará con los nuevos datos.
     private ReporteMalaConductaDTO reporteMalaConducta;
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
+     * Inicializa todas las configuraciones necesarias.
      */
     public DescripcionIncidente() {
         initComponents();

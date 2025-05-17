@@ -1,29 +1,50 @@
 package PanelesReportes;
 
+import Controles.ControlCampos;
 import Controles.ControlFlujo;
+import Controles.ControlReportes;
+import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
 import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Panel para el ingreso del impacto del incidente.
  * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
- * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class ImpactoIncidente extends javax.swing.JPanel {
+    // Lista de CheckBox de la pantalla
+    private final List<JCheckBox> checkBoxes = new ArrayList<>();
+    // CheckBox seleccionado.
+    private JCheckBox checkBoxSeleccionado;
     // Reporte que se llenará con los nuevos datos.
     private ReporteMalaConductaDTO reporteMalaConducta;
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
+     * Inicializa todas las configuraciones necesarias.
      */
-    public ImpactoIncidente() {initComponents();}
+    public ImpactoIncidente() {
+        initComponents();
+        ControlCampos.limiteCaracteresAreaTexto(jTAOtros, 1000);
+        
+        checkBoxes.add(jCLGeneroConflictos);
+        checkBoxes.add(jCLIncumplioNormas);
+        checkBoxes.add(jCLAfectoProductividad);
+        checkBoxes.add(jCLOtro);
+        
+        validarCheckBoxes(jCLGeneroConflictos);
+        validarCheckBoxes(jCLIncumplioNormas);
+        validarCheckBoxes(jCLAfectoProductividad);
+        validarCheckBoxes(jCLOtro);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +70,7 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         jCLIncumplioNormas = new javax.swing.JCheckBox();
         jCLGeneroConflictos = new javax.swing.JCheckBox();
         jCLAfectoProductividad = new javax.swing.JCheckBox();
-        jCLAfectoProductividad1 = new javax.swing.JCheckBox();
+        jCLOtro = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -145,11 +166,11 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         jCLAfectoProductividad.setText("Afectó la productividad");
         jCLAfectoProductividad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jCLAfectoProductividad1.setBackground(new java.awt.Color(255, 255, 255));
-        jCLAfectoProductividad1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLAfectoProductividad1.setForeground(new java.awt.Color(0, 0, 0));
-        jCLAfectoProductividad1.setText("Otros (especificar)");
-        jCLAfectoProductividad1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLOtro.setBackground(new java.awt.Color(255, 255, 255));
+        jCLOtro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCLOtro.setForeground(new java.awt.Color(0, 0, 0));
+        jCLOtro.setText("Otro (especificar)");
+        jCLOtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,7 +188,7 @@ public class ImpactoIncidente extends javax.swing.JPanel {
                             .addComponent(jCLIncumplioNormas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCLGeneroConflictos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jCLAfectoProductividad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCLAfectoProductividad1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCLOtro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -219,7 +240,7 @@ public class ImpactoIncidente extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addComponent(jCLAfectoProductividad, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jCLAfectoProductividad1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCLOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(118, Short.MAX_VALUE))))
@@ -271,21 +292,59 @@ public class ImpactoIncidente extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Enviar. Se intenta registrar el nuevo reporte de mala
+     * conducta (se espera que contenga toda la información completa).
+     * @param evt Click.
+     */
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        
+        // Se obtiene la información recibida.
+        reporteMalaConducta.setImpactoIncidente(checkBoxSeleccionado.getText());
+        if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().isEmpty())
+            reporteMalaConducta.setAccionesPrevias(jTAccionesPrevias.getText());
+        // Se intenta registrar el nuevo reporte de mala conducta.
+        try {
+            // Si el registro fue exitoso.
+            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta)){
+                // Se muestra un mensaje de confirmación y se regresa al menú de reportes.
+                OptionPane.showInfoMessage(this, "¡Reporte registrado con éxito y listo para ser revisado!", "¡Reporte registrado!");
+                ControlFlujo.mostrarSubmenuReportes();
+            }
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error en registro de reporte");}
     }//GEN-LAST:event_btnEnviarActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar toda la operación?", "Confirmación de cancelación");
         if(confirmacion == JOptionPane.YES_OPTION)
             ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Botón Anterior. Regresa a la descripción del incidente.
+     * @param evt Click.
+     */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
     }//GEN-LAST:event_btnAnteriorActionPerformed
-
+    /**
+     * Valida que solo el check box recibido sea el
+     * único seleccionado.
+     * @param checkBox CheckBox.
+     */
+    private void validarCheckBoxes(JCheckBox checkBox){
+        checkBox.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                checkBoxSeleccionado = checkBox;
+                for(JCheckBox actual : checkBoxes){
+                    if(actual.isSelected() && !actual.equals(checkBox))
+                        actual.setSelected(false);
+                }
+            }
+        });
+    }
+    
     /**
      * Reemplaza el reporte de este panel por
      * el reporte recibido.
@@ -301,9 +360,9 @@ public class ImpactoIncidente extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JCheckBox jCLAfectoProductividad;
-    private javax.swing.JCheckBox jCLAfectoProductividad1;
     private javax.swing.JCheckBox jCLGeneroConflictos;
     private javax.swing.JCheckBox jCLIncumplioNormas;
+    private javax.swing.JCheckBox jCLOtro;
     private javax.swing.JLabel jLAccionesPrevias;
     private javax.swing.JLabel jLAccionesPreviasOpcional;
     private javax.swing.JLabel jLImpactoIncidente;

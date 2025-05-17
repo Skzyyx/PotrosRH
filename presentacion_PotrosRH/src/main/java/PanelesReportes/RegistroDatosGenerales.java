@@ -24,7 +24,8 @@ import javax.swing.JOptionPane;
 public class RegistroDatosGenerales extends javax.swing.JPanel {
 
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Constructor por defecto.
+     * Inicializa todas las configuraciones necesarias.
      */
     public RegistroDatosGenerales() {
         initComponents();
