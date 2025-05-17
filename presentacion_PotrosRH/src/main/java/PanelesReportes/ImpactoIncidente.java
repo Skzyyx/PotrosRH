@@ -65,11 +65,6 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -81,11 +76,6 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         btnEnviar.setForeground(new java.awt.Color(255, 255, 255));
         btnEnviar.setText("Enviar");
         btnEnviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEnviar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEnviarMouseClicked(evt);
-            }
-        });
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
@@ -114,11 +104,6 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("Anterior");
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAnterior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAnteriorMouseClicked(evt);
-            }
-        });
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -292,12 +277,6 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnviarMouseClicked
-    }//GEN-LAST:event_btnEnviarMouseClicked
-
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         
     }//GEN-LAST:event_btnEnviarActionPerformed
@@ -305,10 +284,6 @@ public class ImpactoIncidente extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnteriorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnteriorMouseClicked
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:

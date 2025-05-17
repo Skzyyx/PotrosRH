@@ -15,9 +15,7 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
     /**
      * Creates new form MenuPrincipal
      */
-    public SubmenuReportesMalaConducta() {
-        initComponents();
-    }
+    public SubmenuReportesMalaConducta() {initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,7 +155,7 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarReporteActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarRegistroDatosGenerales();
     }//GEN-LAST:event_btnRegistrarReporteActionPerformed
 
     private void btnRevisarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarReporteActionPerformed
@@ -167,7 +165,6 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         ControlFlujo.mostrarMenuPrincipal();
     }//GEN-LAST:event_btnRegresarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarReporte;

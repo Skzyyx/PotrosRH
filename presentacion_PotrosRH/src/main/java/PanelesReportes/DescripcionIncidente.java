@@ -1,6 +1,7 @@
 package PanelesReportes;
 
 import Controles.ControlCampos;
+import Controles.ControlFlujo;
 import Controles.ControlReportes;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
@@ -73,11 +74,6 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -302,9 +298,6 @@ public class DescripcionIncidente extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
     /**
      * Botón siguiente. Agrega la nueva información
      * al reporte de mala conducta y lo registra en la 
@@ -324,19 +317,12 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         if(jTestigo3.getText() != null && !jTestigo3.getText().trim().isEmpty())
             testigos.add(jTestigo3.getText());
         
-        try {
-            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta)){
-                OptionPane.showInfoMessage(this, "Reporte registrado con éxito y listo para ser revisado.", "EXITO EN REGISTRO");
-                reporteMalaConducta = null;
-                jTLugarIncidente.setText("");
-                jTADescripcionDetallada.setText("");
-                jTestigo1.setText("");
-                jTestigo2.setText("");
-                jTestigo3.setText("");
-            }
-        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "Error: " + e.getMessage(), "¡ERROR EN REGISTRO DE REPORTE!");}
+        ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         reporteMalaConducta = null;
         jTLugarIncidente.setText("");
@@ -344,11 +330,15 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         jTestigo1.setText("");
         jTestigo2.setText("");
         jTestigo3.setText("");
-        
+        ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Botón Anterior. Regresa a la pantalla del
+     * registro de datos generales del reporte.
+     * @param evt Click.
+     */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarRegistroDatosGenerales();
     }//GEN-LAST:event_btnAnteriorActionPerformed
     /**
      * Reemplaza el reporte de este panel por

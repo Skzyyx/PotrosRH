@@ -125,6 +125,13 @@ public class ControlFlujo {
      * conducta.
      */
     public static void mostrarSubmenuReportes(){
+        // Convierte a null los paneles del registro de un reporte, para que 
+        // la información que contenían estos se elimine, con el fin de que
+        // no quede nada donde no debe.
+        registroDatosGenerales = null;
+        descripcionIncidente = null;
+        impactoIncidente = null;
+        
         if(submenuReportesMalaConducta == null)
             submenuReportesMalaConducta = new SubmenuReportesMalaConducta();
         cambiarPantalla(submenuReportesMalaConducta);

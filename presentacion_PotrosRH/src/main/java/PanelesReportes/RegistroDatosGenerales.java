@@ -1,6 +1,7 @@
 package PanelesReportes;
 
 import Controles.ControlCampos;
+import Controles.ControlFlujo;
 import Controles.ControlReportes;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
@@ -12,11 +13,11 @@ import java.awt.RenderingHints;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 
 /**
- *
+ * Panel para el ingreso del RFC del empleado reportante
+ * y reportado, y la fecha y hora del incidente.
  * @author Leonardo Flores Leyva (252390)
  */
 public class RegistroDatosGenerales extends javax.swing.JPanel {
@@ -62,11 +63,6 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -78,11 +74,6 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSiguienteMouseClicked(evt);
-            }
-        });
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -238,12 +229,6 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
-    }//GEN-LAST:event_btnSiguienteMouseClicked
-
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         ControlReportes controlReportes = ControlReportes.getInstance();
         try {
@@ -264,13 +249,17 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             reporteMalaConducta.setEmpleadoReportante(empleadoReportante);
             reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
             
-            
+            ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
             
         } catch (PresentacionException e) {OptionPane.showErrorMessage(this, e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        jTRFCReportado.setText("");
+        jTRFCReportante.setText("");
+        jDPFechaIncidente.setSelectedDate(LocalDate.now());
+        jTPHoraIncidente.setSelectedTime(LocalTime.now());
+        ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
@@ -289,13 +278,4 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
     private javax.swing.JTextField jTRFCReportado;
     private javax.swing.JTextField jTRFCReportante;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnSiguiente;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnSiguiente = btnGenerar;}
-
 }
