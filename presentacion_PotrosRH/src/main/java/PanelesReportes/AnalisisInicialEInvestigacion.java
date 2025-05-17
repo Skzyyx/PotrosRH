@@ -1,27 +1,93 @@
 package PanelesReportes;
 
+import Controles.ControlCampos;
+import Controles.ControlFlujo;
+import Enums.EstadoConfirmacionMalaConducta;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.ReporteMalaConductaDTO;
+import dto.ReporteRevisadoDTO;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JButton;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ * Panel para la recepción del análisis inicial e
+ * investigación de la revisión del reporte
+ * obtenido.
  * @author Leonardo Flores Leyva (252390)
  */
 public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
-    
-    private final ConfirmacionMalaConducta confirmacionMalaConducta;
-    
     /**
-     * Creates new form PrevisualisarEmpleado
+     * Reporte revisado.
+     */
+    private final ReporteRevisadoDTO reporteRevisado;
+    /**
+     * JDialog para la confirmación de la mala
+     * conducta del empleado reportado.
+     */
+    private final ConfirmacionMalaConducta confirmacionMalaConducta = new ConfirmacionMalaConducta((Frame) SwingUtilities.getWindowAncestor(this), true);
+    /**
+     * Lista de checkboxes de entrevistas realizadas.
+     */
+    private final List<JCheckBox> entrevistasRealizadas = new ArrayList<>();
+    /**
+     * Lista de checkboxes de evidencias revisadas.
+     */
+    private final List<JCheckBox> evidenciasRevisadas = new ArrayList<>();
+    /**
+     * CheckBox seleccionado del Análisis Inicial.
+     */
+    private JCheckBox checkBoxInfoSeleccionado;
+    /**
+     * CheckBox seleccionado de los antecedentes del empleado reportado.
+     */
+    private JCheckBox checkBoxAntecedentesSeleccionado;
+    /**
+     * Constructor por defecto.
      */
     public AnalisisInicialEInvestigacion() {
         initComponents();
-        confirmacionMalaConducta = new ConfirmacionMalaConducta((Frame) SwingUtilities.getWindowAncestor(this), true);
+        
+        ControlCampos.limiteCaracteresAreaTexto(jTAAntecedentes, 1000);
+        ControlCampos.limiteCaracteresAreaTexto(jTAOtrasEntrevistas, 1000);
+        ControlCampos.limiteCaracteresAreaTexto(jTAOtrasEvidencias, 1000);
+        
+        reporteRevisado = new ReporteRevisadoDTO();
+        
+        checkBoxInfoSeleccionado = jCLSiInfoCompleta;
+        checkBoxAntecedentesSeleccionado = jCLNoAntecedentes;
+        
+        entrevistasRealizadas.add(jCLEmpleadoInvolucrado);
+        entrevistasRealizadas.add(jCLTestigos);
+        entrevistasRealizadas.add(jCLSupervisor);
+        entrevistasRealizadas.add(jCLOtrasEntrevistas);
+        
+        evidenciasRevisadas.add(jCLDocumentosInternos);
+        evidenciasRevisadas.add(jCLCorreos);
+        evidenciasRevisadas.add(jCLGrabaciones);
+        evidenciasRevisadas.add(jCLOtrasEvidencias);
+        
+        jLAntecedentes.setVisible(false);
+        jTAAntecedentes.setVisible(false);
+        
+        jLOtrasEntrevistasRealizadas.setVisible(false);
+        jTAOtrasEntrevistas.setVisible(false);
+        
+        jLOtrasEvidenciasRevisadas.setVisible(false);
+        jTAOtrasEvidencias.setVisible(false);
+        
+        jCLNoInfoCompleta.setSelected(true);
+        jCLNoAntecedentes.setSelected(true);
     }
 
     /**
@@ -38,20 +104,20 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
         jLAnalisisInicial = new javax.swing.JLabel();
-        jLInformacionCompleta = new javax.swing.JLabel();
+        jLAntecedentes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAOtrasEvidencias = new javax.swing.JTextArea();
         jLAccionesPrevias = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTAOtrosAntecedentes = new javax.swing.JTextArea();
+        jTAAntecedentes = new javax.swing.JTextArea();
         jCLNoAntecedentes = new javax.swing.JCheckBox();
         jCLSiAntecedentes = new javax.swing.JCheckBox();
         jLOtrasEvidenciasRevisadas = new javax.swing.JLabel();
-        jCLOtros = new javax.swing.JCheckBox();
+        jCLOtrasEntrevistas = new javax.swing.JCheckBox();
         jCLNoInfoCompleta = new javax.swing.JCheckBox();
         jLInformacionCompleta2 = new javax.swing.JLabel();
         jLInformacionCompleta3 = new javax.swing.JLabel();
-        jCLSiInfoCompleta1 = new javax.swing.JCheckBox();
+        jCLSiInfoCompleta = new javax.swing.JCheckBox();
         jCLEmpleadoInvolucrado = new javax.swing.JCheckBox();
         jCLTestigos = new javax.swing.JCheckBox();
         jCLSupervisor = new javax.swing.JCheckBox();
@@ -61,7 +127,7 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLCorreos = new javax.swing.JCheckBox();
         jCLGrabaciones = new javax.swing.JCheckBox();
         jLEvidenciasRevisadas = new javax.swing.JLabel();
-        jLOtrasEntrevistasRealizadas1 = new javax.swing.JLabel();
+        jLOtrasEntrevistasRealizadas = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTAOtrasEntrevistas = new javax.swing.JTextArea();
 
@@ -75,11 +141,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -107,11 +168,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSiguienteMouseClicked(evt);
-            }
-        });
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -150,10 +206,10 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jLAnalisisInicial.setText("Análisis Inicial:");
         add(jLAnalisisInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 334, 49));
 
-        jLInformacionCompleta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLInformacionCompleta.setForeground(new java.awt.Color(0, 0, 0));
-        jLInformacionCompleta.setText("Describa los antecedentes:");
-        add(jLInformacionCompleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 400, 49));
+        jLAntecedentes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLAntecedentes.setForeground(new java.awt.Color(0, 0, 0));
+        jLAntecedentes.setText("Describa los antecedentes:");
+        add(jLAntecedentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 400, 49));
 
         jTAOtrasEvidencias.setBackground(new java.awt.Color(255, 255, 255));
         jTAOtrasEvidencias.setColumns(20);
@@ -171,14 +227,14 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jLAccionesPrevias.setText("Investigación:");
         add(jLAccionesPrevias, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, 49));
 
-        jTAOtrosAntecedentes.setBackground(new java.awt.Color(255, 255, 255));
-        jTAOtrosAntecedentes.setColumns(20);
-        jTAOtrosAntecedentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTAOtrosAntecedentes.setForeground(new java.awt.Color(0, 0, 0));
-        jTAOtrosAntecedentes.setLineWrap(true);
-        jTAOtrosAntecedentes.setRows(5);
-        jTAOtrosAntecedentes.setWrapStyleWord(true);
-        jScrollPane2.setViewportView(jTAOtrosAntecedentes);
+        jTAAntecedentes.setBackground(new java.awt.Color(255, 255, 255));
+        jTAAntecedentes.setColumns(20);
+        jTAAntecedentes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTAAntecedentes.setForeground(new java.awt.Color(0, 0, 0));
+        jTAAntecedentes.setLineWrap(true);
+        jTAAntecedentes.setRows(5);
+        jTAAntecedentes.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(jTAAntecedentes);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 400, 230));
 
@@ -188,9 +244,9 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLNoAntecedentes.setText("No");
         jCLNoAntecedentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLNoAntecedentes.setIconTextGap(10);
-        jCLNoAntecedentes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLNoAntecedentesActionPerformed(evt);
+        jCLNoAntecedentes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLNoAntecedentesItemStateChanged(evt);
             }
         });
         add(jCLNoAntecedentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 80, 40));
@@ -201,6 +257,11 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLSiAntecedentes.setText("Sí");
         jCLSiAntecedentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLSiAntecedentes.setIconTextGap(10);
+        jCLSiAntecedentes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLSiAntecedentesItemStateChanged(evt);
+            }
+        });
         add(jCLSiAntecedentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 80, 40));
 
         jLOtrasEvidenciasRevisadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -208,18 +269,18 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jLOtrasEvidenciasRevisadas.setText("Describa las otras evidencias revisadas:");
         add(jLOtrasEvidenciasRevisadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 430, 380, 30));
 
-        jCLOtros.setBackground(new java.awt.Color(255, 255, 255));
-        jCLOtros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLOtros.setForeground(new java.awt.Color(0, 0, 0));
-        jCLOtros.setText("Otros");
-        jCLOtros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCLOtros.setIconTextGap(10);
-        jCLOtros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLOtrosActionPerformed(evt);
+        jCLOtrasEntrevistas.setBackground(new java.awt.Color(255, 255, 255));
+        jCLOtrasEntrevistas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCLOtrasEntrevistas.setForeground(new java.awt.Color(0, 0, 0));
+        jCLOtrasEntrevistas.setText("Otras");
+        jCLOtrasEntrevistas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLOtrasEntrevistas.setIconTextGap(10);
+        jCLOtrasEntrevistas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLOtrasEntrevistasItemStateChanged(evt);
             }
         });
-        add(jCLOtros, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 310, 40));
+        add(jCLOtrasEntrevistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 310, 40));
 
         jCLNoInfoCompleta.setBackground(new java.awt.Color(255, 255, 255));
         jCLNoInfoCompleta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -227,9 +288,9 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLNoInfoCompleta.setText("No");
         jCLNoInfoCompleta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLNoInfoCompleta.setIconTextGap(10);
-        jCLNoInfoCompleta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLNoInfoCompletaActionPerformed(evt);
+        jCLNoInfoCompleta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLNoInfoCompletaItemStateChanged(evt);
             }
         });
         add(jCLNoInfoCompleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 80, 40));
@@ -244,13 +305,18 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jLInformacionCompleta3.setText("¿El reporte tiene la información completa*?");
         add(jLInformacionCompleta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 390, 49));
 
-        jCLSiInfoCompleta1.setBackground(new java.awt.Color(255, 255, 255));
-        jCLSiInfoCompleta1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLSiInfoCompleta1.setForeground(new java.awt.Color(0, 0, 0));
-        jCLSiInfoCompleta1.setText("Sí");
-        jCLSiInfoCompleta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCLSiInfoCompleta1.setIconTextGap(10);
-        add(jCLSiInfoCompleta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 80, 40));
+        jCLSiInfoCompleta.setBackground(new java.awt.Color(255, 255, 255));
+        jCLSiInfoCompleta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jCLSiInfoCompleta.setForeground(new java.awt.Color(0, 0, 0));
+        jCLSiInfoCompleta.setText("Sí");
+        jCLSiInfoCompleta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLSiInfoCompleta.setIconTextGap(10);
+        jCLSiInfoCompleta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLSiInfoCompletaItemStateChanged(evt);
+            }
+        });
+        add(jCLSiInfoCompleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 80, 40));
 
         jCLEmpleadoInvolucrado.setBackground(new java.awt.Color(255, 255, 255));
         jCLEmpleadoInvolucrado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -258,11 +324,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLEmpleadoInvolucrado.setText("Empleado involucrado");
         jCLEmpleadoInvolucrado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLEmpleadoInvolucrado.setIconTextGap(10);
-        jCLEmpleadoInvolucrado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLEmpleadoInvolucradoActionPerformed(evt);
-            }
-        });
         add(jCLEmpleadoInvolucrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, 310, 40));
 
         jCLTestigos.setBackground(new java.awt.Color(255, 255, 255));
@@ -271,11 +332,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLTestigos.setText("Testigo(s)");
         jCLTestigos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLTestigos.setIconTextGap(10);
-        jCLTestigos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLTestigosActionPerformed(evt);
-            }
-        });
         add(jCLTestigos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 310, 40));
 
         jCLSupervisor.setBackground(new java.awt.Color(255, 255, 255));
@@ -284,11 +340,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLSupervisor.setText("Supervisor");
         jCLSupervisor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLSupervisor.setIconTextGap(10);
-        jCLSupervisor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLSupervisorActionPerformed(evt);
-            }
-        });
         add(jCLSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 310, 40));
 
         jLEntrevistasRealizadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -302,9 +353,9 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLOtrasEvidencias.setText("Otros");
         jCLOtrasEvidencias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLOtrasEvidencias.setIconTextGap(10);
-        jCLOtrasEvidencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLOtrasEvidenciasActionPerformed(evt);
+        jCLOtrasEvidencias.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLOtrasEvidenciasItemStateChanged(evt);
             }
         });
         add(jCLOtrasEvidencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 380, 310, 40));
@@ -315,11 +366,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLDocumentosInternos.setText("Documentos internos");
         jCLDocumentosInternos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLDocumentosInternos.setIconTextGap(10);
-        jCLDocumentosInternos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLDocumentosInternosActionPerformed(evt);
-            }
-        });
         add(jCLDocumentosInternos, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, 310, 40));
 
         jCLCorreos.setBackground(new java.awt.Color(255, 255, 255));
@@ -328,11 +374,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLCorreos.setText("Correos electrónicos");
         jCLCorreos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLCorreos.setIconTextGap(10);
-        jCLCorreos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLCorreosActionPerformed(evt);
-            }
-        });
         add(jCLCorreos, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 280, 310, 40));
 
         jCLGrabaciones.setBackground(new java.awt.Color(255, 255, 255));
@@ -341,11 +382,6 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jCLGrabaciones.setText("Grabaciones");
         jCLGrabaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLGrabaciones.setIconTextGap(10);
-        jCLGrabaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLGrabacionesActionPerformed(evt);
-            }
-        });
         add(jCLGrabaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 330, 310, 40));
 
         jLEvidenciasRevisadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -353,10 +389,10 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
         jLEvidenciasRevisadas.setText("Entrevistas realizadas*:");
         add(jLEvidenciasRevisadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 180, 200, 49));
 
-        jLOtrasEntrevistasRealizadas1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLOtrasEntrevistasRealizadas1.setForeground(new java.awt.Color(0, 0, 0));
-        jLOtrasEntrevistasRealizadas1.setText("Describa las otras entrevistas realizadas:");
-        add(jLOtrasEntrevistasRealizadas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 380, 30));
+        jLOtrasEntrevistasRealizadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLOtrasEntrevistasRealizadas.setForeground(new java.awt.Color(0, 0, 0));
+        jLOtrasEntrevistasRealizadas.setText("Describa las otras entrevistas realizadas:");
+        add(jLOtrasEntrevistasRealizadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 380, 30));
 
         jTAOtrasEntrevistas.setBackground(new java.awt.Color(255, 255, 255));
         jTAOtrasEntrevistas.setColumns(20);
@@ -369,62 +405,233 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 350, 230));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
-    }//GEN-LAST:event_btnSiguienteMouseClicked
-
+    /**
+     * Botón Siguiente. Muestra el JDialog, para la confirmación de la
+     * mala conducta del empleado reportado, y dependiendo de la respuesta,
+     * realiza una u otra acción.
+     * @param evt Click.
+     */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        
+        if(!confirmacionMalaConducta.isVisible())
+            confirmacionMalaConducta.setVisible(true);
+        EstadoConfirmacionMalaConducta confirmacion = confirmacionMalaConducta.obtenerEstado();
+        if(confirmacion != EstadoConfirmacionMalaConducta.ANTERIOR){
+            switch (confirmacion) {
+               case CANCELAR -> {
+                   int confirmacionCancelar = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
+                   if(confirmacionCancelar == JOptionPane.YES_OPTION)
+                       ControlFlujo.mostrarSubmenuReportes();
+               }
+               case NO -> {
+                   
+               }
+               default -> {
+                   
+               }
+            }
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jCLNoAntecedentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLNoAntecedentesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLNoAntecedentesActionPerformed
-
-    private void jCLNoInfoCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLNoInfoCompletaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLNoInfoCompletaActionPerformed
-
-    private void jCLOtrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLOtrosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLOtrosActionPerformed
-
-    private void jCLEmpleadoInvolucradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLEmpleadoInvolucradoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLEmpleadoInvolucradoActionPerformed
-
-    private void jCLTestigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLTestigosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLTestigosActionPerformed
-
-    private void jCLSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLSupervisorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLSupervisorActionPerformed
-
-    private void jCLOtrasEvidenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLOtrasEvidenciasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLOtrasEvidenciasActionPerformed
-
-    private void jCLDocumentosInternosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLDocumentosInternosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLDocumentosInternosActionPerformed
-
-    private void jCLCorreosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLCorreosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLCorreosActionPerformed
-
-    private void jCLGrabacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLGrabacionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLGrabacionesActionPerformed
-
-
+    /**
+     * Asegura que solo el checkBox "Sí" pueda estar seleccionado, de
+     * los checkBoxes de la información cokmpleta.
+     * @param evt Click.
+     */
+    private void jCLSiInfoCompletaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLSiInfoCompletaItemStateChanged
+        validarCheckBoxInfoCompleta();
+    }//GEN-LAST:event_jCLSiInfoCompletaItemStateChanged
+    /**
+     * Asegura que solo el checkBox "No" pueda estar seleccionado, de
+     * los checkBoxes de la información cokmpleta.
+     * @param evt Click.
+     */
+    private void jCLNoInfoCompletaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLNoInfoCompletaItemStateChanged
+        validarCheckBoxInfoCompleta();
+    }//GEN-LAST:event_jCLNoInfoCompletaItemStateChanged
+    /**
+     * Asegura que solo un CheckBox de los antecedentes previos del
+     * empleado reportado pueda estar seleccionado. Si el checkBox
+     * seleccionado es el "Sí", se muestra el área de texto para 
+     * la descripción de los antecedentes.
+     * @param evt Click.
+     */
+    private void jCLSiAntecedentesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLSiAntecedentesItemStateChanged
+        validarCheckBoxAntecedentes();
+    }//GEN-LAST:event_jCLSiAntecedentesItemStateChanged
+    /**
+     * Asegura que solo el checkBox "Sí" pueda estar seleccionado, de
+     * los checkBoxes de los antecedentes.
+     * @param evt Click.
+     */
+    private void jCLNoAntecedentesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLNoAntecedentesItemStateChanged
+        validarCheckBoxAntecedentes();
+    }//GEN-LAST:event_jCLNoAntecedentesItemStateChanged
+    /**
+     * Si el checkBox "Otros", del apartado de Entrevistas realizadas, está
+     * seleccionado, se muestra el área de texto para la descripción de 
+     * otras entrevistas realizadas.
+     * @param evt Click.
+     */
+    private void jCLOtrasEntrevistasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLOtrasEntrevistasItemStateChanged
+        if(jCLOtrasEntrevistas.isSelected()){
+            jLEntrevistasRealizadas.setVisible(true);
+            jTAOtrasEntrevistas.setVisible(true);
+        } else{
+            jLEntrevistasRealizadas.setVisible(false);
+            jTAOtrasEntrevistas.setVisible(false);
+        }
+    }//GEN-LAST:event_jCLOtrasEntrevistasItemStateChanged
+    /**
+     * Si el checkBox "Otros", del apartado de Evidencias revisadas, está
+     * seleccionado, se muestra el área de texto para la descripción de 
+     * otras evidencias revisadas.
+     * @param evt Click.
+     */
+    private void jCLOtrasEvidenciasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLOtrasEvidenciasItemStateChanged
+        if(jCLOtrasEvidencias.isSelected()){
+            jLEvidenciasRevisadas.setVisible(true);
+            jTAOtrasEvidencias.setVisible(true);
+        } else{
+            jLEvidenciasRevisadas.setVisible(false);
+            jTAOtrasEvidencias.setVisible(false);
+        }
+    }//GEN-LAST:event_jCLOtrasEvidenciasItemStateChanged
+    /**
+     * 
+     * @param reporte 
+     */
+    public void setReporteMalaConducta(ReporteMalaConductaDTO reporte) throws PresentacionException{
+        if(reporte != null)
+            reporteRevisado.setReporteMalaConducta(reporte);
+        else
+            throw new PresentacionException("Error: El reporte no puede estar vacío.");
+        
+    }
+    /**
+     * Asegura que solo el checkBox "No" pueda estar seleccionado, de
+     * los checkBoxes de los antecedentes.
+     * @param evt Click.
+     */
+    private void validarCheckBoxInfoCompleta(){
+        if(jCLSiInfoCompleta.isSelected()){
+            if(jCLNoInfoCompleta.isSelected())
+                jCLNoInfoCompleta.setSelected(false);
+            checkBoxInfoSeleccionado = jCLSiInfoCompleta;
+        } else{
+            if(!jCLNoInfoCompleta.isSelected())
+                jCLNoInfoCompleta.setSelected(true);
+            checkBoxInfoSeleccionado = jCLNoInfoCompleta;
+        }
+    }
+    /**
+     * Asegura que solo un CheckBox de los antecedentes previos del
+     * empleado reportado pueda estar seleccionado. Si el checkBox
+     * seleccionado es el "Sí", se muestra el área de texto para 
+     * la descripción de los antecedentes.
+     * @param evt Click.
+     */
+    private void validarCheckBoxAntecedentes(){
+        if(jCLSiAntecedentes.isSelected()){
+            if(jCLNoAntecedentes.isSelected())
+               jCLNoAntecedentes.setSelected(false);
+            checkBoxAntecedentesSeleccionado = jCLSiAntecedentes;
+            jLAntecedentes.setVisible(true);
+            jTAAntecedentes.setVisible(true);
+        } else{
+            if(!jCLNoAntecedentes.isSelected())
+                jCLNoAntecedentes.setSelected(true);
+            checkBoxAntecedentesSeleccionado = jCLNoAntecedentes;
+            jLAntecedentes.setVisible(false);
+            jTAAntecedentes.setVisible(false);
+        }
+    }
+    /**
+     * Carga el reporte revisado con la información ingresada.
+     * @return ReporteRevisado.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    private ReporteRevisadoDTO cargarReporte() throws PresentacionException{
+       // Añade al reporte si tiene antecedentes previos. 
+       if(checkBoxAntecedentesSeleccionado.equals(jCLSiAntecedentes)){
+           // Si el área de texto de la descripción de los antecedentes está vacío.
+           if(jTAAntecedentes.getText().trim().isEmpty())
+               throw new PresentacionException("Por favor, ingrese la descripción de los antecedentes previos.");
+           
+            else{
+               reporteRevisado.setTieneAntecedentesPrevios(true);
+               reporteRevisado.setDescripcionAntecedentesPrevios(jTAAntecedentes.getText().trim());
+           }
+       } else
+           reporteRevisado.setTieneAntecedentesPrevios(false); 
+       
+       // Añade al reporte si se tiene la información completa.
+       if(checkBoxInfoSeleccionado.equals(jCLSiInfoCompleta))
+          reporteRevisado.setInfoCompleta(true);
+       else
+          reporteRevisado.setInfoCompleta(false);
+       
+       // Conjunto de entrevistas realizadas.
+       Set<String> entrevistas = new HashSet<>();
+       
+       // Agrega la información de los checklists seleccionados de las entrevistas
+       for(JCheckBox checkBox: entrevistasRealizadas){
+           // Solo añade el contenido de los checkBox seleccionados.
+           if(checkBox.isSelected()){
+               // Si el checkBox es el de otros.
+               if (checkBox.equals(jCLOtrasEntrevistas)) {
+                   // Añade la información del checkBox
+                   entrevistas.add(checkBox.getText().trim());
+                   // Si el área de texto de las otras entrevistas realizadas está vacío.
+                   if (jTAOtrasEntrevistas.getText().trim().isEmpty()) 
+                       throw new PresentacionException("Por favor, ingrese la descripción de las otras entrevistas realizadas");
+                   // Si no, agrega la descripción de las otras entrevistas realizadas.
+                    else 
+                       reporteRevisado.setDescripcionOtrasEntrevistasRealizadas(jTAOtrasEntrevistas.getText().trim());
+               // Si el checkBox seleccionado actual no es el de otros    
+               } else
+                   entrevistas.add(checkBox.getText().trim());
+           }
+       }
+       // Se añade el conjunto de entrevistas realizadas al reporte revisado.
+       reporteRevisado.setEntrevistasRealizadas(entrevistas);
+       
+       // Conjunto de evidencias revisadas.
+       Set<String> evidencias = new HashSet<>();
+       
+       // Agrega la información de los checklists seleccionados de las evidencias
+       for(JCheckBox checkBox: evidenciasRevisadas){
+           // Solo añade el contenido de los checkBox seleccionados.
+           if(checkBox.isSelected()){
+               // Si el checkBox es el de otros.
+               if (checkBox.equals(jCLOtrasEvidencias)) {
+                   // Añade la información del checkBox
+                   evidencias.add(checkBox.getText().trim());
+                   // Si el área de texto de las otras evidencias revisadas está vacío.
+                   if (jTAOtrasEvidencias.getText().trim().isEmpty()) 
+                       throw new PresentacionException("Por favor, ingrese la descripción de las otras entrevistas realizadas");
+                   // Si no, agrega la descripción de las otras evidencias revisadas.
+                    else 
+                       reporteRevisado.setDescripcionOtrasEvidencias(jTAOtrasEvidencias.getText().trim());
+               // Si el checkBox seleccionado actual no es el de otros    
+               } else
+                   evidencias.add(checkBox.getText().trim());
+           }
+       }
+       // Se añade el conjunto de evidencias revisadas al reporte revisado.
+       reporteRevisado.setEvidenciasRevisadas(evidencias);
+       
+       // Regresa el reporte listo para ser transferido.
+       return reporteRevisado; 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSiguiente;
@@ -434,37 +641,28 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCLGrabaciones;
     private javax.swing.JCheckBox jCLNoAntecedentes;
     private javax.swing.JCheckBox jCLNoInfoCompleta;
+    private javax.swing.JCheckBox jCLOtrasEntrevistas;
     private javax.swing.JCheckBox jCLOtrasEvidencias;
-    private javax.swing.JCheckBox jCLOtros;
     private javax.swing.JCheckBox jCLSiAntecedentes;
-    private javax.swing.JCheckBox jCLSiInfoCompleta1;
+    private javax.swing.JCheckBox jCLSiInfoCompleta;
     private javax.swing.JCheckBox jCLSupervisor;
     private javax.swing.JCheckBox jCLTestigos;
     private javax.swing.JLabel jLAccionesPrevias;
     private javax.swing.JLabel jLAnalisisInicial;
+    private javax.swing.JLabel jLAntecedentes;
     private javax.swing.JLabel jLEntrevistasRealizadas;
     private javax.swing.JLabel jLEvidenciasRevisadas;
-    private javax.swing.JLabel jLInformacionCompleta;
     private javax.swing.JLabel jLInformacionCompleta2;
     private javax.swing.JLabel jLInformacionCompleta3;
-    private javax.swing.JLabel jLOtrasEntrevistasRealizadas1;
+    private javax.swing.JLabel jLOtrasEntrevistasRealizadas;
     private javax.swing.JLabel jLOtrasEvidenciasRevisadas;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTAAntecedentes;
     private javax.swing.JTextArea jTAOtrasEntrevistas;
     private javax.swing.JTextArea jTAOtrasEvidencias;
-    private javax.swing.JTextArea jTAOtrosAntecedentes;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnSiguiente;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnSiguiente = btnGenerar;}
-
 }

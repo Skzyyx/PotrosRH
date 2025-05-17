@@ -7,17 +7,20 @@ import java.awt.RenderingHints;
 import javax.swing.JComponent;
 
 /**
- *
+ * JDialog para la confirmación de la mala conducta del
+ * empleado.
  * @author Leonardo Flores Leyva (252390)
  */
 public class ConfirmacionMalaConducta extends javax.swing.JDialog {
-    
+    /**
+     * Estados de la respuesta elegida, dependiendo del
+     * botón del que se hizo click.
+     */
     private EstadoConfirmacionMalaConducta estadoConfirmacion;
-    
     /**
      * Creates new form ConfirmacionMalaConducta
-     * @param parent
-     * @param modal
+     * @param parent Frame.
+     * @param modal Modo.
      */
     public ConfirmacionMalaConducta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,7 +47,6 @@ public class ConfirmacionMalaConducta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(640, 360));
         setMinimumSize(new java.awt.Dimension(640, 360));
-        setPreferredSize(new java.awt.Dimension(640, 360));
 
         jPanel1.setBackground(new java.awt.Color(17, 119, 202));
         jPanel1.setMaximumSize(new java.awt.Dimension(640, 360));
@@ -207,38 +209,56 @@ public class ConfirmacionMalaConducta extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Cancelar. Se cambia el estado de este JDialog a CANCELAR.
+     * Se deja de mostrar el jDialog.
+     * @param evt Click.
+     */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         if(estadoConfirmacion != EstadoConfirmacionMalaConducta.CANCELAR)
             estadoConfirmacion = EstadoConfirmacionMalaConducta.CANCELAR;
         setVisible(false);
     }//GEN-LAST:event_btnCancelarMouseClicked
-
+    /**
+     * Botón Anterior. Se cambia el estado de este JDialog a ANTERIOR.
+     * Se deja de mostrar el jDialog.
+     * @param evt Click.
+     */
     private void btnAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnteriorMouseClicked
         if(estadoConfirmacion != EstadoConfirmacionMalaConducta.ANTERIOR)
             estadoConfirmacion = EstadoConfirmacionMalaConducta.ANTERIOR;
         setVisible(false);
     }//GEN-LAST:event_btnAnteriorMouseClicked
-
+    /**
+     * Botón Sí. Se cambia el estado de este JDialog a SI.
+     * Se deja de mostrar el jDialog.
+     * @param evt Click.
+     */
     private void btnSiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiMouseClicked
         if(estadoConfirmacion != EstadoConfirmacionMalaConducta.SI)
             estadoConfirmacion = EstadoConfirmacionMalaConducta.SI;
         setVisible(false);
     }//GEN-LAST:event_btnSiMouseClicked
-
+    /**
+     * Botón No. Se cambia el estado de este JDialog a NO.
+     * Se deja de mostrar el jDialog.
+     * @param evt Click.
+     */
     private void btnNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNoMouseClicked
         if (estadoConfirmacion != EstadoConfirmacionMalaConducta.NO) 
             estadoConfirmacion = EstadoConfirmacionMalaConducta.NO;
         setVisible(false);
     }//GEN-LAST:event_btnNoMouseClicked
-    
+    /**
+     * Regresa el estado del JDialog.
+     * @return Estado del JDialog (CANCELAR, ANTERIOR, SI, NO).
+     */
     public EstadoConfirmacionMalaConducta obtenerEstado(){
         if(estadoConfirmacion != null)
             return estadoConfirmacion;
         else
             return EstadoConfirmacionMalaConducta.ANTERIOR;
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnCancelar;

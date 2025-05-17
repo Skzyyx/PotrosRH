@@ -151,12 +151,12 @@ public class ControlFlujo {
         cambiarPantalla(registroDatosGenerales);
     }
     /**
-     * Muestra el panel de la descripción del incidente.
-     * Pide un reporte de mala conducta, que se espera
+     * Muestra el panel de la descripción del incidente.Pide un reporte de mala conducta, que se espera}
      * que contenga los datos generales.
      * @param reporteMalaConducta Reporte de mala conducta incompleto.
+     * @throws PresentacionException Excepción de la capa de presentación.
      */
-    public static void mostrarDescripcionIncidente(ReporteMalaConductaDTO reporteMalaConducta){
+    public static void mostrarDescripcionIncidente(ReporteMalaConductaDTO reporteMalaConducta) throws PresentacionException{
         if(descripcionIncidente == null)
             descripcionIncidente = new DescripcionIncidente();
         descripcionIncidente.setReporte(reporteMalaConducta);
@@ -169,7 +169,7 @@ public class ControlFlujo {
      * los datos generales.
      * @param reporteMalaConducta Reporte de mala conducta incompleto.
      */
-    public static void mostrarImpactoIncidente(ReporteMalaConductaDTO reporteMalaConducta){
+    public static void mostrarImpactoIncidente(ReporteMalaConductaDTO reporteMalaConducta) throws PresentacionException{
         if(impactoIncidente == null)
             impactoIncidente = new ImpactoIncidente();
         impactoIncidente.setReporte(reporteMalaConducta);

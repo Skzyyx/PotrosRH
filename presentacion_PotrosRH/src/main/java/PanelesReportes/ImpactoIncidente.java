@@ -12,6 +12,8 @@ import java.awt.RenderingHints;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -326,7 +328,9 @@ public class ImpactoIncidente extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
+        try {
+            ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
+        } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnAnteriorActionPerformed
     /**
      * Valida que solo el check box recibido sea el
@@ -349,10 +353,13 @@ public class ImpactoIncidente extends javax.swing.JPanel {
      * Reemplaza el reporte de este panel por
      * el reporte recibido.
      * @param reporte Reporte en transferencia.
+     * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public void setReporte(ReporteMalaConductaDTO reporte){
+    public void setReporte(ReporteMalaConductaDTO reporte) throws PresentacionException{
         if(reporte != null)
             reporteMalaConducta = reporte;
+        else
+            throw new PresentacionException("El reporte no puede estar vacío.");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

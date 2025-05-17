@@ -2,6 +2,7 @@ package PanelesReportes;
 
 import Controles.ControlCampos;
 import Controles.ControlFlujo;
+import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
 import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
@@ -9,6 +10,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -314,7 +317,9 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         if(jTestigo3.getText() != null && !jTestigo3.getText().trim().isEmpty())
             testigos.add(jTestigo3.getText());
         
-        ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
+        try {
+            ControlFlujo.mostrarImpactoIncidente(reporteMalaConducta);
+        } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
     /**
      * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
@@ -337,10 +342,13 @@ public class DescripcionIncidente extends javax.swing.JPanel {
      * Reemplaza el reporte de este panel por
      * el reporte recibido.
      * @param reporte Reporte en transferencia.
+     * @throws PresentacionException Excepción de la capa de presentación.
      */
-    public void setReporte(ReporteMalaConductaDTO reporte){
+    public void setReporte(ReporteMalaConductaDTO reporte) throws PresentacionException{
         if(reporte != null)
             reporteMalaConducta = reporte;
+        else
+            throw new PresentacionException("El reporte no puede estar vacío.");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -257,8 +257,7 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
             // Se transfiere el nuevo reporte a la pantalla de la descripción del incidente.
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
-            
-        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, e.getMessage(), "ERROR");}
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
     /**
      * Botón Cancelar. Si se confirma la cancelación, se
