@@ -37,4 +37,6 @@ public interface IEmpleadoDAO {
     public Empleado obtenerEmpleado(Empleado empleado) throws AccesoDatosException;
     
     public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException;
+    
+    public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException;
 }

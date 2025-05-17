@@ -2,6 +2,7 @@ package Entidades;
 
 import Enums.EstadoEmpleado;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa a un Empleado.
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class Empleado {
     // Atributos de un empleado.
+    private ObjectId id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -211,6 +213,16 @@ public class Empleado {
      * @return VERDADERO si ambos RFCs coinciden, FALSO en caso contrario.
      */
     public boolean compararRFC (String rfc){return rfc.equals(this.rfc);}
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
+    
     /**
      * Regresa una cadena con la información relevante del empleado.
      * @return Cadena con la información relevante del empleado.
@@ -218,7 +230,8 @@ public class Empleado {
     @Override
     public String toString() {return 
             String.format(
-                    "%s %s %s, %s, %s, %s, %s", 
+                    "%s, %s %s %s, %s, %s, %s, %s", 
+                    getId(),
                     getNombre(), 
                     getApellidoPaterno(), 
                     getApellidoMaterno(), 
