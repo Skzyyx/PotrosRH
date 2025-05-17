@@ -12,7 +12,6 @@ import java.time.LocalTime;
  */
 public class HorarioLaboralDTO {
     // Atributos de un horario laboral.
-    private EmpleadoDTO empleado;
     private Short diaSemana;
     private LocalTime horaInicioTurno;
     private LocalTime horaFinTurno;
@@ -22,27 +21,15 @@ public class HorarioLaboralDTO {
     public HorarioLaboralDTO() {}
     /**
      * Constructor que recibe los atributos.
-     * @param empleado Empleado asociado al horario laboral.
      * @param diaSemana Día de la semana del horario laboral.
      * @param horaInicioTurno Hora de inicio del turno del horario laboral.
      * @param horaFinTurno Hora de fin de turno del horario laboral.
      */
-    public HorarioLaboralDTO(EmpleadoDTO empleado, short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
-        this.empleado = empleado;
+    public HorarioLaboralDTO(short diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
         this.diaSemana = diaSemana;
         this.horaInicioTurno = horaInicioTurno;
         this.horaFinTurno = horaFinTurno;
     }
-    /**
-     * Retorna el empleado asociado al horario laboral.
-     * @return Empleado asociado al horario laboral.
-     */
-    public EmpleadoDTO getEmpleado() {return empleado;}
-    /**
-     * Establece el empleado asociado al horario laboral.
-     * @param empleado Nuevo empleado asociado al horario laboral.
-     */
-    public void setEmpleado(EmpleadoDTO empleado) {this.empleado = empleado;}
     /**
      * Retorna el día de la semana del horario laboral.
      * @return Día de la semana del horario laboral.
@@ -80,8 +67,7 @@ public class HorarioLaboralDTO {
     @Override
     public String toString() {
         return String.format(
-                "%s, %d, %d/%d/%d, %d/%d/%d", 
-                getEmpleado().getNombre(),
+                "%d, %d/%d/%d, %d/%d/%d", 
                 getDiaSemana(),
                 getHoraInicioTurno().getHour(),
                 getHoraInicioTurno().getMinute(),
