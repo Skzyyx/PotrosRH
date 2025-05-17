@@ -54,33 +54,33 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
     }
 
     public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException, ObjetosNegocioException {
-        if (empleadoDTO == null || empleadoDTO.getRfc() == null || empleadoDTO.getRfc().isEmpty() || motivo == null || motivo.isEmpty()) {
-            throw new ObjetosNegocioException("Error: Datos incompletos para registrar el despido.");
-        }
-        dto.DespidoDTO despidoDTO = new dto.DespidoDTO();
-        despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
-        despidoDTO.setMotivo(motivo);
-        despidoDTO.setFechaDespido(java.time.LocalDate.now());
-        try {
-            despidoBO.registrarDespido(despidoDTO);
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cambiarEstado(empleadoDTO, "INACTIVO");
-        enviarCorreoDespido(empleadoDTO);
+//        if (empleadoDTO == null || empleadoDTO.getRfc() == null || empleadoDTO.getRfc().isEmpty() || motivo == null || motivo.isEmpty()) {
+//            throw new ObjetosNegocioException("Error: Datos incompletos para registrar el despido.");
+//        }
+//        dto.DespidoDTO despidoDTO = new dto.DespidoDTO();
+//        despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
+//        despidoDTO.setMotivo(motivo);
+//        despidoDTO.setFechaDespido(java.time.LocalDate.now());
+//        try {
+//            despidoBO.registrarDespido(despidoDTO);
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        cambiarEstado(empleadoDTO, "INACTIVO");
+//        enviarCorreoDespido(empleadoDTO);
     }
 
     public void enviarCorreoDespido(EmpleadoDTO empleadoDTO) throws CorreoException {
-        PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
-        if (plantillaDespido != null) {
-            Map<String, Object> valores = new HashMap<>();
-            valores.put("nombre", empleadoDTO.getNombre() + " " + empleadoDTO.getApellidoPaterno()
-            + " " + empleadoDTO.getApellidoMaterno());
-            valores.put("fechaDespido", java.time.LocalDate.now().toString()); // Formateamos la fecha
-            sistemaCorreo.sendEmail(empleadoDTO.getEmail(), plantillaDespido, valores);
-            System.out.println("Correo de despido enviado a: " + empleadoDTO.getEmail());
-        } else {
-            System.err.println("No se encontró la plantilla de correo para DESPIDO.");
-        }
+//        PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
+//        if (plantillaDespido != null) {
+//            Map<String, Object> valores = new HashMap<>();
+//            valores.put("nombre", empleadoDTO.getNombre() + " " + empleadoDTO.getApellidoPaterno()
+//            + " " + empleadoDTO.getApellidoMaterno());
+//            valores.put("fechaDespido", java.time.LocalDate.now().toString()); // Formateamos la fecha
+//            sistemaCorreo.sendEmail(empleadoDTO.getEmail(), plantillaDespido, valores);
+//            System.out.println("Correo de despido enviado a: " + empleadoDTO.getEmail());
+//        } else {
+//            System.err.println("No se encontró la plantilla de correo para DESPIDO.");
+//        }
     }
 }

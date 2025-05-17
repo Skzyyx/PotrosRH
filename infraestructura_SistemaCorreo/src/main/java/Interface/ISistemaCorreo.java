@@ -3,6 +3,7 @@ package Interface;
 
 import Excepciones.CorreoException;
 import SistemaCorreo.PlantillaCorreo;
+import dto.CorreoDTO;
 import java.util.Map;
 
 /*
@@ -23,12 +24,10 @@ public interface ISistemaCorreo {
     /**
      * Envía un correo electrónico con los detalles del recibo de nómina de un empleado.
      * 
-     * @param correo Correo electrónico al que se enviará.
-     * @param template Plantilla del tipo de correo.
-     * @param values Conjunto de variables y valores a reemplazar.
+     * @param correo DTO que contiene los datos necesarios para enviar el correo.
      * @throws CorreoException Si ocurre un error al enviar el correo.
      * 
      * @return true si se logra el envío.
      */
-    boolean sendEmail(String correo, PlantillaCorreo template, Map<String, Object> values) throws CorreoException;
+    boolean sendEmail(CorreoDTO correo) throws CorreoException;
 }

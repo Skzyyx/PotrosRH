@@ -16,6 +16,7 @@ import SistemaCorreo.RepoPlantillaCorreo;
 import SistemaCorreo.TipoPlantillaCorreo;
 import java.util.Map;
 import Interface.ISistemaCorreo;
+import dto.CorreoDTO;
 
 /**
  * Realiza validaciones de negocio y genera la nómina correspondiente al
@@ -77,12 +78,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
         //ICorreo sistemaCorreo = new Correo();
         try {
             nominaBO.guardarNomina(nomina); // Se guarda la nómina.
-            //sistemaCorreo.enviarCorreo(nomina); // Se envía el correo electrónico con la nómina generada.
-            enviarCorreo(nomina);
             return true; // Regresa true como confirmación de nómina generada con éxito.
-        } catch (CorreoException ex) {
-            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
-            throw new GenerarNominaException("Ocurrió un error al enviar el correo.");
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException(ex.getMessage(), ex);
@@ -94,28 +90,39 @@ public class ControlGenerarNomina implements IGenerarNomina {
      *
      * @param nomina Objeto NominaDTO con la información de la nómina.
      * @return `true` si el proceso fue exitoso, `false` en caso contrario.
-     * @throws CorreoException Si ocurre un error al enviar el correo.
+     * @throws GenerarNominaException Si ocurre un error al enviar el correo.
      */
-    public boolean enviarCorreo(NominaDTO nomina) throws CorreoException {
-        ISistemaCorreo sistemaCorreo = new SistemaCorreo();
-        PlantillaCorreo plantilla = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.NOMINA);
-        EmpleadoDTO empleado = nomina.getEmpleado();
-
-        Map<String, Object> values = Map.of(
-                "nombreCompleto", String.join(" ",
-                        empleado.getNombre(),
-                        empleado.getApellidoPaterno(),
-                        empleado.getApellidoMaterno()
-                ),
-                "fechaCorte", nomina.getFechaCorte(),
-                "salarioBase", empleado.getSalarioBase(),
-                "bono", nomina.getBono(),
-                "salarioBruto", nomina.getSalarioBruto(),
-                "isr", nomina.getIsr(),
-                "salarioNeto", nomina.getSalarioNeto()
-        );
-
-        sistemaCorreo.sendEmail(empleado.getEmail(), plantilla, values);
-        return true;
+    public boolean enviarCorreo(NominaDTO nomina) throws GenerarNominaException {
+        try {
+            EmpleadoDTO empleado = nomina.getEmpleado();
+            
+            ISistemaCorreo sistemaCorreo = new SistemaCorreo();
+            
+            CorreoDTO dto = new CorreoDTO();
+            dto.setCorreoReceptor(empleado.getEmail());
+            dto.setPlantillaCorreo("NOMINA");
+            
+            Map<String, Object> values = Map.of(
+                    "nombreCompleto", String.join(" ",
+                            empleado.getNombre(),
+                            empleado.getApellidoPaterno(),
+                            empleado.getApellidoMaterno()
+                    ),
+                    "fechaCorte", nomina.getFechaCorte(),
+                    "salarioBase", empleado.getSalarioBase(),
+                    "bono", nomina.getBono(),
+                    "salarioBruto", nomina.getSalarioBruto(),
+                    "isr", nomina.getIsr(),
+                    "salarioNeto", nomina.getSalarioNeto()
+            );
+            
+            dto.setValues(values);
+            
+            sistemaCorreo.sendEmail(dto);
+            return true;
+        } catch (CorreoException ex) {
+            Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new GenerarNominaException("Ocurrió un error al intentar enviar el correo.");
+        }
     }
 }

@@ -146,7 +146,5 @@ public class Candidato {
         sb.append(", habilidadesClave=").append(habilidadesClave);
         sb.append('}');
         return sb.toString();
-    }
-    
-    
+    }   
 }

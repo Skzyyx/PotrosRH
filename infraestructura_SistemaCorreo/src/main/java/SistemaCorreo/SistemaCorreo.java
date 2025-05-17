@@ -12,6 +12,7 @@ import jakarta.mail.internet.MimeMessage;
 import java.util.Map;
 import java.util.Properties;
 import Interface.ISistemaCorreo;
+import dto.CorreoDTO;
 
 
 /**
@@ -27,22 +28,21 @@ public class SistemaCorreo implements ISistemaCorreo {
     /**
      * Envía un correo electrónico con los detalles del recibo de nómina de un empleado.
      * 
-     * @param correo Correo electrónico al que se enviará.
-     * @param template Plantilla del tipo de correo.
-     * @param values Conjunto de variables y valores a reemplazar.
+     * @param correo DTO que contiene los datos necesarios para enviar el correo.
      * @throws CorreoException Si ocurre un error al enviar el correo.
      * 
      * @return true si se logra el envío.
      */
     @Override
-    public boolean sendEmail(String correo, PlantillaCorreo template, Map<String, Object> values) throws CorreoException{
+    public boolean sendEmail(CorreoDTO correo) throws CorreoException{
         
         final String remitente = "potrosrh@gmail.com"; // tu correo
         final String claveApp = "xadiaotujovdlnuo"; // no tu contraseña normal
         
-        String destinatario = correo;
-        String asunto = template.getSubject(values);
-        String cuerpo = template.getBody(values);
+        String destinatario = correo.getCorreoReceptor();
+        PlantillaCorreo plantilla = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.valueOf(correo.getPlantillaCorreo()));
+        String asunto = plantilla.getSubject(correo.getValues());
+        String cuerpo = plantilla.getBody(correo.getValues());
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");

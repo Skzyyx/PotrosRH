@@ -75,16 +75,16 @@ public class DespidoEmpleadoFachada implements IDespedirEmpleado {
     }
 
     private void enviarCorreoDespido(EmpleadoDTO empleadoDTO) throws CorreoException {
-        PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
-        if (plantillaDespido != null) {
-            Map<String, Object> valores = new HashMap<>();
-            valores.put("nombre", empleadoDTO.getNombre() + " " + empleadoDTO.getApellidoPaterno()
-                    + " " + empleadoDTO.getApellidoMaterno());
-            valores.put("fechaDespido", java.time.LocalDate.now().toString()); // Formateamos la fecha
-            sistemaCorreo.sendEmail(empleadoDTO.getEmail(), plantillaDespido, valores);
-            System.out.println("Correo de despido enviado a: " + empleadoDTO.getEmail());
-        } else {
-            System.err.println("No se encontró la plantilla de correo para DESPIDO.");
-        }
+//        PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
+//        if (plantillaDespido != null) {
+//            Map<String, Object> valores = new HashMap<>();
+//            valores.put("nombre", empleadoDTO.getNombre() + " " + empleadoDTO.getApellidoPaterno()
+//                    + " " + empleadoDTO.getApellidoMaterno());
+//            valores.put("fechaDespido", java.time.LocalDate.now().toString()); // Formateamos la fecha
+//            sistemaCorreo.sendEmail(empleadoDTO.getEmail(), plantillaDespido, valores);
+//            System.out.println("Correo de despido enviado a: " + empleadoDTO.getEmail());
+//        } else {
+//            System.err.println("No se encontró la plantilla de correo para DESPIDO.");
+//        }
     }
 }
