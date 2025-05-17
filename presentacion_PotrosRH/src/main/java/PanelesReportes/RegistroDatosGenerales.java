@@ -1,9 +1,16 @@
 package PanelesReportes;
 
+import Controles.ControlReportes;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
+import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
@@ -233,7 +240,28 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSiguienteMouseClicked
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        
+        ControlReportes controlReportes = ControlReportes.getInstance();
+        try {
+            
+            EmpleadoDTO empleadoReportado = new EmpleadoDTO();
+            empleadoReportado.setRfc(jTRFCReportado.getText());
+            empleadoReportado = controlReportes.obtenerEmpleado(empleadoReportado);
+            
+            EmpleadoDTO empleadoReportante = new EmpleadoDTO();
+            empleadoReportante.setRfc(jTRFCReportante.getText());
+            empleadoReportante = controlReportes.obtenerEmpleado(empleadoReportado);
+            
+            LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
+            LocalTime horaIncidente = jTPHoraIncidente.getSelectedTime();
+            
+            ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
+            reporteMalaConducta.setEmpleadoReportado(empleadoReportado);
+            reporteMalaConducta.setEmpleadoReportante(empleadoReportante);
+            reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
+            
+            
+            
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

@@ -40,14 +40,12 @@ public class ControlReportes {
     }
     /**
      * Obtiene un empleado para ser incluido en el reporte (reportado o reportante).
-     * @param rfc RFC del empleado a buscar.
+     * @param empleado Empleado a buscar, a partir de su RFC.
      * @return Empleado encontrado a partir de su RFC.
      * @throws PresentacionException Excepción de la capa de Presentación.
      */
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException{
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws PresentacionException{
         try {
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(rfc);
             return obtenerEmpleado.obtenerEmpleado(empleado);
         } catch (ObtenerEmpleadoException e) {throw new PresentacionException(e.getMessage(), e);}
     }
