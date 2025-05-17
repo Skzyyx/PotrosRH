@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  * Panel para el ingreso del RFC del empleado reportante
@@ -228,38 +229,45 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Siguiente. Se obtiene la información ingresada y transfiere un
+     * nuevo ReporteMalaConductaDTO a la pantalla de la descripción del
+     * incidente.
+     * @param evt Click.
+     */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         ControlReportes controlReportes = ControlReportes.getInstance();
         try {
-            
+            // Se busca y se obtiene el empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
             empleadoReportado.setRfc(jTRFCReportado.getText());
             empleadoReportado = controlReportes.obtenerEmpleado(empleadoReportado);
-            
+            // Se busca y se obtiene el empleado reportante.
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
             empleadoReportante.setRfc(jTRFCReportante.getText());
             empleadoReportante = controlReportes.obtenerEmpleado(empleadoReportado);
-            
+            // Se obtiene la fecha y la hora seleccionadas.
             LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
             LocalTime horaIncidente = jTPHoraIncidente.getSelectedTime();
-            
+            // Se crea un nuevo ReporteMalaConductaDTO, con toda la información ingresada.
             ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
             reporteMalaConducta.setEmpleadoReportado(empleadoReportado);
             reporteMalaConducta.setEmpleadoReportante(empleadoReportante);
             reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
-            
+            // Se transfiere el nuevo reporte a la pantalla de la descripción del incidente.
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
             
         } catch (PresentacionException e) {OptionPane.showErrorMessage(this, e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+    /**
+     * Botón Cancelar. Si se confirma la cancelación, se
+     * regresa al submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        jTRFCReportado.setText("");
-        jTRFCReportante.setText("");
-        jDPFechaIncidente.setSelectedDate(LocalDate.now());
-        jTPHoraIncidente.setSelectedTime(LocalTime.now());
-        ControlFlujo.mostrarSubmenuReportes();
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar toda la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

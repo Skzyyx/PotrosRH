@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -324,13 +325,9 @@ public class DescripcionIncidente extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        reporteMalaConducta = null;
-        jTLugarIncidente.setText("");
-        jTADescripcionDetallada.setText("");
-        jTestigo1.setText("");
-        jTestigo2.setText("");
-        jTestigo3.setText("");
-        ControlFlujo.mostrarSubmenuReportes();
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar toda la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
     /**
      * Botón Anterior. Regresa a la pantalla del
