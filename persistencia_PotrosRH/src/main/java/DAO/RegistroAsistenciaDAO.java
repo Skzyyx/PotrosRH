@@ -4,6 +4,7 @@ import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import Interfaces.IRegistroAsistenciaDAO;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Clase para métodos de Persistencia con entidades RegistroAsistencia.
@@ -49,5 +50,14 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     @Override
     public LocalDate obtenerFechaPrimerDiaTrabajo(Empleado empleado) throws AccesoDatosException {
         return null;
+    }
+    
+    @Override
+    public boolean registrarEntrada(Empleado empleado,LocalDate fechaAsistencia,LocalTime horaEntrada)throws AccesoDatosException{
+        return true;
+    }
+    @Override
+    public boolean registrarSalida(Empleado empleado,LocalDate FechaAsistencia,LocalTime horaSalida)throws AccesoDatosException{
+        return true;
     }
 }

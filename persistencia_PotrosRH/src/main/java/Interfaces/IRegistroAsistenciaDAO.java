@@ -3,6 +3,7 @@ package Interfaces;
 import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Interfaz para clases RegistroAsistenciasDAO.
@@ -40,4 +41,8 @@ public interface IRegistroAsistenciaDAO {
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     public LocalDate obtenerFechaPrimerDiaTrabajo(Empleado empleado) throws AccesoDatosException;
+    
+    public boolean registrarEntrada(Empleado empleado,LocalDate fechaAsistencia,LocalTime horaEntrada)throws AccesoDatosException;
+    
+    public boolean registrarSalida(Empleado empleado,LocalDate FechaAsistencia,LocalTime horaSalida)throws AccesoDatosException;
 }

@@ -21,4 +21,17 @@ public enum DiaSemana {
     public int getNumero() {
         return numero;
     }
+    
+        public static DiaSemana fromDayOfWeek(java.time.DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+            case MONDAY:    return LUNES;
+            case TUESDAY:   return MARTES;
+            case WEDNESDAY: return MIERCOLES;
+            case THURSDAY:  return JUEVES;
+            case FRIDAY:    return VIERNES;
+            case SATURDAY:  return SABADO;
+            case SUNDAY:    return DOMINGO;
+            default:        return null;
+        }
+    }
 }
