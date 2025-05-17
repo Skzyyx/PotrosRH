@@ -1,4 +1,4 @@
-package Control;
+package Controles;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -11,7 +11,7 @@ import javax.swing.text.PlainDocument;
  * https://www.tutorialspoint.com/how-can-we-limit-the-number-of-characters-inside-a-jtextfield-in-java#:~:text=A%20JTextFeld%20is%20one%20of,by%20using%20a%20PlainDocument%20class.
  * @author Leonardo Flores Leyva - 252390
  */
-public class JTextFieldLimit extends PlainDocument {
+public class JTextLimit extends PlainDocument {
     /**
      * Límite de caracteres.
      */
@@ -20,7 +20,7 @@ public class JTextFieldLimit extends PlainDocument {
      * Constructor que recibe el límite de caracteres.
      * @param limit Límite de caracteres.
      */
-    public JTextFieldLimit(int limit) {
+    public JTextLimit(int limit) {
         super();
         this.limit = limit;
     }
@@ -30,7 +30,7 @@ public class JTextFieldLimit extends PlainDocument {
      * @param limit Límite de caracteres.
      * @param upper La verdad no sé para qué se usa.
      */
-    public JTextFieldLimit(int limit, boolean upper) {
+    public JTextLimit(int limit, boolean upper) {
         super();
         this.limit = limit;
     }

@@ -1,10 +1,10 @@
 package Controles;
 
-import Control.JTextFieldLimit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Arrays;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -83,9 +83,20 @@ public class ControlCampos {
      * @param campo Campo a configurar.
      * @param limite Límite de caracteres a asignar.
      */
-    public static void limiteCaracteres(JTextField campo, int limite){
+    public static void limiteCaracteresCampoTexto(JTextField campo, int limite){
         if(limite >= 0)
-            campo.setDocument(new JTextFieldLimit(limite));
+            campo.setDocument(new JTextLimit(limite));
+    }
+    /**
+     * Aplica un límite de caracteres a un área de texto.
+     * Ideal para no superar el espacio deseado en la base
+     * de datos.
+     * @param campo Campo a configurar.
+     * @param limite Límite de caracteres a asignar.
+     */
+    public static void limiteCaracteresAreaTexto(JTextArea campo, int limite){
+        if(limite >= 0)
+            campo.setDocument(new JTextLimit(limite));
     }
     /**
      * Valida que un campo de texto no esté vacío.

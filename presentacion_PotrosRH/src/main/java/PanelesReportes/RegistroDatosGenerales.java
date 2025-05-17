@@ -1,5 +1,6 @@
 package PanelesReportes;
 
+import Controles.ControlCampos;
 import Controles.ControlReportes;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
@@ -23,7 +24,11 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public RegistroDatosGenerales() {initComponents();}
+    public RegistroDatosGenerales() {
+        initComponents();
+        ControlCampos.limiteCaracteresCampoTexto(jTRFCReportado, 13);
+        ControlCampos.limiteCaracteresCampoTexto(jTRFCReportante, 13);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

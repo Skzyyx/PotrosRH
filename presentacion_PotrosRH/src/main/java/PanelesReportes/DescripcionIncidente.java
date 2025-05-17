@@ -1,17 +1,16 @@
 package PanelesReportes;
 
-import Controles.ControlFlujo;
-import Controles.ControlNomina;
+import Controles.ControlCampos;
+import Controles.ControlReportes;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,11 +21,20 @@ import javax.swing.JOptionPane;
  * @author Benjamin Soto Coronado (253183)
  */
 public class DescripcionIncidente extends javax.swing.JPanel {
-    
+    // Reporte que se llenará con los nuevos datos.
+    private ReporteMalaConductaDTO reporteMalaConducta;
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public DescripcionIncidente() {initComponents();}
+    public DescripcionIncidente() {
+        initComponents();
+        reporteMalaConducta = new ReporteMalaConductaDTO();
+        ControlCampos.limiteCaracteresCampoTexto(jTLugarIncidente, 100);
+        ControlCampos.limiteCaracteresCampoTexto(jTestigo1, 100);
+        ControlCampos.limiteCaracteresCampoTexto(jTestigo2, 100);
+        ControlCampos.limiteCaracteresCampoTexto(jTestigo3, 100);
+        ControlCampos.limiteCaracteresAreaTexto(jTADescripcionDetallada, 1000);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +55,7 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         jLRFCReportante = new javax.swing.JLabel();
         btnAnterior = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTADescripcionDetallada = new javax.swing.JTextArea();
         jLTestigos = new javax.swing.JLabel();
         jTestigo1 = new javax.swing.JTextField();
         jLTestigo1 = new javax.swing.JLabel();
@@ -81,11 +89,6 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSiguienteMouseClicked(evt);
-            }
-        });
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -124,25 +127,20 @@ public class DescripcionIncidente extends javax.swing.JPanel {
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("Anterior");
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAnterior.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAnteriorMouseClicked(evt);
-            }
-        });
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
             }
         });
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTADescripcionDetallada.setBackground(new java.awt.Color(255, 255, 255));
+        jTADescripcionDetallada.setColumns(20);
+        jTADescripcionDetallada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTADescripcionDetallada.setForeground(new java.awt.Color(0, 0, 0));
+        jTADescripcionDetallada.setLineWrap(true);
+        jTADescripcionDetallada.setRows(5);
+        jTADescripcionDetallada.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTADescripcionDetallada);
 
         jLTestigos.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLTestigos.setForeground(new java.awt.Color(0, 0, 0));
@@ -307,38 +305,61 @@ public class DescripcionIncidente extends javax.swing.JPanel {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
     }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void btnSiguienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSiguienteMouseClicked
-    }//GEN-LAST:event_btnSiguienteMouseClicked
-
+    /**
+     * Botón siguiente. Agrega la nueva información
+     * al reporte de mala conducta y lo registra en la 
+     * base de datos.
+     * @param evt Click.
+     */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
-        if (resultado == JOptionPane.YES_OPTION) {
-            try {
-                ControlNomina controlNomina = ControlNomina.getInstance();
-                controlNomina.generarNomina();
-                ControlFlujo.mostrarPrevisualizarNomina();
-            } catch (PresentacionException ex) {
-                Logger.getLogger(DescripcionIncidente.class.getName()).log(Level.SEVERE, null, ex);
-                OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
+        reporteMalaConducta.setLugarIncidente(jTLugarIncidente.getText());
+        reporteMalaConducta.setDescripcionDetallada(jTADescripcionDetallada.getText());
+        List<String> testigos = new ArrayList<>();
+        if(jTestigo1.getText() != null && !jTestigo1.getText().trim().isEmpty())
+            testigos.add(jTestigo1.getText());
+        
+        if(jTestigo2.getText() != null && !jTestigo2.getText().trim().isEmpty())
+            testigos.add(jTestigo2.getText());
+        
+        if(jTestigo3.getText() != null && !jTestigo3.getText().trim().isEmpty())
+            testigos.add(jTestigo3.getText());
+        
+        try {
+            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta)){
+                OptionPane.showInfoMessage(this, "Reporte registrado con éxito y listo para ser revisado.", "EXITO EN REGISTRO");
+                reporteMalaConducta = null;
+                jTLugarIncidente.setText("");
+                jTADescripcionDetallada.setText("");
+                jTestigo1.setText("");
+                jTestigo2.setText("");
+                jTestigo3.setText("");
             }
-            
-        }
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "Error: " + e.getMessage(), "¡ERROR EN REGISTRO DE REPORTE!");}
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        reporteMalaConducta = null;
+        jTLugarIncidente.setText("");
+        jTADescripcionDetallada.setText("");
+        jTestigo1.setText("");
+        jTestigo2.setText("");
+        jTestigo3.setText("");
         
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnteriorMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAnteriorMouseClicked
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAnteriorActionPerformed
-
-
+    /**
+     * Reemplaza el reporte de este panel por
+     * el reporte recibido.
+     * @param reporte Reporte en transferencia.
+     */
+    public void setReporte(ReporteMalaConductaDTO reporte){
+        if(reporte != null)
+            reporteMalaConducta = reporte;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnCancelar;
@@ -353,19 +374,10 @@ public class DescripcionIncidente extends javax.swing.JPanel {
     private javax.swing.JLabel jLugarIncidente;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTADescripcionDetallada;
     private javax.swing.JTextField jTLugarIncidente;
     private javax.swing.JTextField jTestigo1;
     private javax.swing.JTextField jTestigo2;
     private javax.swing.JTextField jTestigo3;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnSiguiente;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnSiguiente = btnGenerar;}
-
 }

@@ -4,6 +4,7 @@ import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -22,7 +23,8 @@ import javax.swing.JOptionPane;
  * @author Benjamin Soto Coronado (253183)
  */
 public class ImpactoIncidente extends javax.swing.JPanel {
-
+    // Reporte que se llenará con los nuevos datos.
+    private ReporteMalaConductaDTO reporteMalaConducta;
     /**
      * Creates new form PrevisualisarEmpleado
      */
@@ -312,7 +314,16 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
-
+    /**
+     * Reemplaza el reporte de este panel por
+     * el reporte recibido.
+     * @param reporte Reporte en transferencia.
+     */
+    public void setReporte(ReporteMalaConductaDTO reporte){
+        if(reporte != null)
+            reporteMalaConducta = reporte;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnCancelar;
@@ -331,13 +342,4 @@ public class ImpactoIncidente extends javax.swing.JPanel {
     private javax.swing.JTextArea jTAOtros;
     private javax.swing.JTextArea jTAccionesPrevias;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnCancelar() {return btnCancelar;}
-
-    public void setBtnCancelar(JButton btnCancelar) {this.btnCancelar = btnCancelar;}
-
-    public JButton getBtnGenerar() {return btnEnviar;}
-
-    public void setBtnGenerar(JButton btnGenerar) {this.btnEnviar = btnGenerar;}
-
 }

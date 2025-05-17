@@ -1,7 +1,6 @@
 package Controles;
 
 import Excepciones.PresentacionException;
-import Exceptions.ObjetosNegocioException;
 import PanelesCasoBase.BusquedaEmpleado;
 import PanelesDespidos.BusquedaEmpleadoDespedir;
 import PanelesDespidos.ConfirmacionDespido;
@@ -9,8 +8,13 @@ import PanelesCasoBase.MenuPrincipal;
 import PanelesCasoBase.PrevisualizarEmpleado;
 import PanelesDespidos.PrevisualizarEmpleadoDespedir;
 import PanelesCasoBase.PrevisualizarNomina;
+import PanelesReportes.DescripcionIncidente;
+import PanelesReportes.ImpactoIncidente;
+import PanelesReportes.RegistroDatosGenerales;
+import PanelesReportes.SubmenuReportesMalaConducta;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import dto.ReporteMalaConductaDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -37,7 +41,11 @@ public class ControlFlujo {
     private static PrevisualizarEmpleadoDespedir previsualizarEmpleadoDespedir;
     private static BusquedaEmpleadoDespedir busquedaEmpleadoDespedir;
     private static ConfirmacionDespido confirmacionDespido;
-    
+    // CU: Reportes de mala conducta
+    private static SubmenuReportesMalaConducta submenuReportesMalaConducta;
+    private static RegistroDatosGenerales registroDatosGenerales;
+    private static DescripcionIncidente descripcionIncidente;
+    private static ImpactoIncidente impactoIncidente;
     /**
     * Muestra la pantalla del menú principal de la aplicación.
     * 
@@ -112,6 +120,49 @@ public class ControlFlujo {
             throw new PresentacionException(ex.getMessage());
         }
     }
+    /**
+     * Muestra el submenú de reportes de mala
+     * conducta.
+     */
+    public static void mostrarSubmenuReportes(){
+        if(submenuReportesMalaConducta == null)
+            submenuReportesMalaConducta = new SubmenuReportesMalaConducta();
+        cambiarPantalla(submenuReportesMalaConducta);
+    }
+    /**
+     * Muestra el panel para el registro de datos generales del
+     * reporte de mala conducta.
+     */
+    public static void mostrarRegistroDatosGenerales(){
+        if(registroDatosGenerales == null)
+            registroDatosGenerales = new RegistroDatosGenerales();
+        cambiarPantalla(registroDatosGenerales);
+    }
+    /**
+     * Muestra el panel de la descripción del incidente.
+     * Pide un reporte de mala conducta, que se espera
+     * que contenga los datos generales.
+     * @param reporteMalaConducta Reporte de mala conducta incompleto.
+     */
+    public static void mostrarDescripcionIncidente(ReporteMalaConductaDTO reporteMalaConducta){
+        if(descripcionIncidente == null)
+            descripcionIncidente = new DescripcionIncidente();
+        descripcionIncidente.setReporte(reporteMalaConducta);
+        cambiarPantalla(descripcionIncidente);
+    }
+    /**
+     * Muestra el panel del impacto del incidente.
+     * Pide un reporte de mala conducta, que se espera
+     * que contenga la descripción del incidente y
+     * los datos generales.
+     * @param reporteMalaConducta Reporte de mala conducta incompleto.
+     */
+    public static void mostrarImpactoIncidente(ReporteMalaConductaDTO reporteMalaConducta){
+        if(impactoIncidente == null)
+            impactoIncidente = new ImpactoIncidente();
+        impactoIncidente.setReporte(reporteMalaConducta);
+        cambiarPantalla(impactoIncidente);
+    }
     
     /**
     * Cambia la vista actual del sistema mostrando el panel recibido como nuevo contenido.
@@ -178,4 +229,6 @@ public class ControlFlujo {
         previsualizarEmpleadoDespedir.setDatosEmpleado(empleadoDTO);
         cambiarPantalla(previsualizarEmpleadoDespedir);
     }
+    
+    
 }
