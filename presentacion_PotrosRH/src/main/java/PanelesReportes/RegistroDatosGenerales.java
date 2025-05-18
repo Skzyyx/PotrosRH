@@ -121,6 +121,7 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
 
         jDPFechaIncidente.setBackground(new java.awt.Color(0, 0, 0));
         jDPFechaIncidente.setForeground(new java.awt.Color(255, 255, 255));
+        jDPFechaIncidente.setColor(new java.awt.Color(204, 204, 0));
 
         jLHoraIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLHoraIncidente.setForeground(new java.awt.Color(0, 0, 0));
@@ -242,28 +243,40 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             // Si el campo del RFC del empleado reportado está vacío.
             if(!(jTRFCReportado.getText() != null && !jTRFCReportado.getText().trim().isEmpty()))
                 throw new PresentacionException("Ingrese el RFC del empleado reportado.");
+            
+            // Si el campo del RFC del empleado reportante está vacío.
+            if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
+                throw new PresentacionException("Ingrese el RFC del empleado reportado.");
+            
+            // Si no se ha seleccionado una fecha del incidente.
+            if(jDPFechaIncidente.getSelectedDate() == null)
+                throw new PresentacionException("Seleccion una fecha del incidente.");
+            
+            // Si la fecha seleccionada está después de la actual.
+            if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
+                throw new PresentacionException("Seleccione una fecha anterior a la actual.");
+            
+            // Si no se ha seleccionado una hora del incidente.
+            if(jTPHoraIncidente.getSelectedTime() == null)
+                throw new PresentacionException("Seleccione una hora del incidente.");
+            
+            // Si la hora está después de la actual
+            if(jTPHoraIncidente.getSelectedTime().isAfter(LocalTime.now()))
+                throw new PresentacionException("Seleccione una hora anterior a la actual");
+            
             // Se busca y se obtiene el empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
             empleadoReportado.setRfc(jTRFCReportado.getText());
             empleadoReportado = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
             
-            // Si el campo del RFC del empleado reportante está vacío.
-            if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
-                throw new PresentacionException("Ingrese el RFC del empleado reportado.");
             // Se busca y se obtiene el empleado reportante.
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
             empleadoReportante.setRfc(jTRFCReportante.getText());
             empleadoReportante = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
             
-            // Si la fecha seleccionada está después de la actual.
-            if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
-                throw new PresentacionException("Seleccione una fecha anterior a la actual.");
             // Se obtiene la fecha seleccionada.
             LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
             
-            // Si la hora está después de la actual
-            if(jTPHoraIncidente.getSelectedTime().isAfter(LocalTime.now()))
-                throw new PresentacionException("Seleccione una hora anterior a la actual");
             // Se obtiene la hora seleccionada.
             LocalTime horaIncidente = jTPHoraIncidente.getSelectedTime();
             

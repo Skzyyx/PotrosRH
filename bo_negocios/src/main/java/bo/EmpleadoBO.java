@@ -108,19 +108,13 @@ public class EmpleadoBO implements IEmpleadoBO{
     @Override
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException {
         
-        if(empleado == null)
+        if(!(empleado != null && empleado.getRfc() != null &&!empleado.getRfc().isEmpty()))
             throw new ObjetosNegocioException("El RFC no puede estar vacío.");
-        
-        // Se extrae el RFC del empleado.
-        String rfc = empleado.getRfc();
-        
-        if (!(rfc != null && rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
-            throw new ObjetosNegocioException("RFC no válido");
         
         try {
             
             Empleado empleadoPersistir = new Empleado();
-            empleadoPersistir.setRfc(rfc);
+            empleadoPersistir.setRfc(empleado.getRfc());
             empleadoPersistir = empleadoDAO.obtenerEmpleado(empleadoPersistir);
             return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
             

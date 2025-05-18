@@ -51,16 +51,16 @@ public class Dao_PotrosRH {
         IEmpleadoDAO emDAO = new EmpleadoDAO();
         
         Candidato c = new Candidato();
-        c.setNombre("Jose Luis");
-        c.setApellidoPaterno("Islas");
-        c.setApellidoMaterno("Molina");
-        c.setRfc("12334ASDQWE");
-        c.setEmail("JISLASMOLINA@GMAIL.COM");
-        c.setTelefono("1231231231");
-        c.setEdad(18);
-        c.setExperiencia("Experiencia");
-        c.setNivelEstudio("NivelEstudio");
-        c.setHabilidadesClave("HabilidadClave");
+        c.setNombre("Jesús Ernesto");
+        c.setApellidoPaterno("López");
+        c.setApellidoMaterno("Ibarra");
+        c.setRfc("LOIJ920315XYZ");
+        c.setEmail("jesus.lopez252663@potros.itson.edu.mx");
+        c.setTelefono("6441786590");
+        c.setEdad(19);
+        c.setExperiencia("3 años como Ingeniero en Software.");
+        c.setNivelEstudio("Universidad.");
+        c.setHabilidadesClave("Machine Learning.");
         
         try {
             c = cDAO.registrarCandidato(c);
@@ -91,11 +91,11 @@ public class Dao_PotrosRH {
         
         Empleado em = new Empleado();
         List<HorarioLaboral> horarios = new ArrayList();
-        horarios.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
+        horarios.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
         
         em.setHorariosLaborales(horarios);
         em.setNombre(c.getNombre());
@@ -104,12 +104,12 @@ public class Dao_PotrosRH {
         em.setRfc(c.getRfc());
         em.setEmail(c.getEmail());
         em.setTelefono(c.getTelefono());
-        em.setCurp("CURP123123ASDD");
-        em.setDepartamento("Departamento");
+        em.setCurp("CURPNETO1234");
+        em.setDepartamento("Producción");
         em.setDireccion(new Direccion("Calle", "123", "Colonia"));
         em.setEstado(EstadoEmpleado.ACTIVO);
-        em.setPuesto("Puesto");
-        em.setSalarioBase(2500.00);
+        em.setPuesto("Desarrollador");
+        em.setSalarioBase(4000.00);
             
         try {
             emDAO.registrarEmpleado(em);
@@ -120,24 +120,24 @@ public class Dao_PotrosRH {
         System.out.println(em.toString());
         
         Set<HorarioLaboral> horarios2 = new HashSet();
-        horarios2.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(8, 0), LocalTime.of(16, 0)));
+        horarios2.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios2.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios2.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios2.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+        horarios2.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
         
         Contrato co = new Contrato();
-        co.setDepartamento("Departamento");
+        co.setDepartamento("Producción");
         co.setEmpleadoId(e.getId());
         co.setEvaluacion(e);
         co.setFechaInicio(LocalDate.of(2025, 05, 16));
         co.setFechaFin(LocalDate.of(2026, 05, 16));
         co.setHorarios(horarios2);
         co.setEmpleadoId(em.getId());
-        co.setLugarTrabajo("LugarTrabajo");
+        co.setLugarTrabajo("Obregón");
         co.setModoPago(ModoPago.EFECTIVO);
         co.setPeriodoPago(PeriodoPago.SEMANAL);
-        co.setPuesto("Puesto");
+        co.setPuesto("Desarrollador");
         co.setSueldo(em.getSalarioBase());
         co.setTipoContrato(TipoContrato.PERIODO);
         

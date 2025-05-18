@@ -30,20 +30,14 @@ public class ControlObtenerEmpleado {
     */
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObtenerEmpleadoException {
         
-        if(empleado == null)
+        if(!(empleado != null && empleado.getRfc() != null &&!empleado.getRfc().isEmpty()))
             throw new ObtenerEmpleadoException("El RFC no puede estar vacío.");
         
         // Se extrae el RFC del empleado.
-        String rfc = empleado.getRfc();
+        String rfc = empleado.getRfc();   
         
-        if (rfc == null) 
-            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");       
-        
-        if (rfc.isEmpty()) 
-            throw new ObtenerEmpleadoException("El rfc no puede estar vacío.");       
-        
-        if(!rfc.matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$"))
-            throw new ObtenerEmpleadoException("RFC con formato inválido.");
+        if (!(rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
+            throw new ObtenerEmpleadoException("RFC no válido");
         
         try {
             EmpleadoDTO empleadoEncontrado = empleadoBO.obtenerEmpleado(empleado);
