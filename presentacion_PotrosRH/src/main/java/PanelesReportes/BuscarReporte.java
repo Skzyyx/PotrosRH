@@ -133,39 +133,39 @@ public class BuscarReporte extends javax.swing.JPanel {
         jLBusquedaReporte.setText("Búsqueda de reporte:");
         jLBusquedaReporte.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 5, true));
         jLBusquedaReporte.setOpaque(true);
-        add(jLBusquedaReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 44, -1, 55));
+        add(jLBusquedaReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 55));
 
         jLResultados.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jLResultados.setForeground(new java.awt.Color(255, 255, 255));
         jLResultados.setText("Resultados:");
-        add(jLResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, 259, 49));
+        add(jLResultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 90, 259, 49));
 
         jLFiltroBusqueda.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLFiltroBusqueda.setForeground(new java.awt.Color(0, 0, 0));
         jLFiltroBusqueda.setText("Filtro:");
-        add(jLFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 90, 49));
+        add(jLFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 90, 49));
 
         jTNumSeguimiento.setBackground(new java.awt.Color(255, 255, 255));
         jTNumSeguimiento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTNumSeguimiento.setForeground(new java.awt.Color(0, 0, 0));
         jTNumSeguimiento.setBorder(null);
         jTNumSeguimiento.setMargin(new java.awt.Insets(2, 15, 2, 6));
-        add(jTNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 334, 47));
+        add(jTNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 334, 47));
 
         jLFechaIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLFechaIncidente.setForeground(new java.awt.Color(0, 0, 0));
         jLFechaIncidente.setText("Fecha de incidente*:");
-        add(jLFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, 49));
+        add(jLFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, 49));
 
         jDPFechaIncidente.setBackground(new java.awt.Color(0, 0, 0));
         jDPFechaIncidente.setForeground(new java.awt.Color(255, 255, 255));
-        add(jDPFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        add(jDPFechaIncidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
 
         jListResultados.setBackground(new java.awt.Color(255, 255, 255));
         jListResultados.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(jListResultados);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 500, -1));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 500, -1));
 
         jCBFiltroBusqueda.setBackground(new java.awt.Color(255, 255, 255));
         jCBFiltroBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -177,24 +177,24 @@ public class BuscarReporte extends javax.swing.JPanel {
                 jCBFiltroBusquedaItemStateChanged(evt);
             }
         });
-        add(jCBFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 170, 50));
+        add(jCBFiltroBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 170, 50));
 
         jLNumSeguimiento.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLNumSeguimiento.setForeground(new java.awt.Color(0, 0, 0));
         jLNumSeguimiento.setText("RFC del empleado*:");
-        add(jLNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 334, 49));
+        add(jLNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 334, 49));
 
         jLRFCEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLRFCEmpleado.setForeground(new java.awt.Color(0, 0, 0));
-        jLRFCEmpleado.setText("RFC del empleado*:");
-        add(jLRFCEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 334, 49));
+        jLRFCEmpleado.setText("Número de seguimiento*:");
+        add(jLRFCEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 334, 49));
 
         jTEmpleado.setBackground(new java.awt.Color(255, 255, 255));
         jTEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         jTEmpleado.setBorder(null);
         jTEmpleado.setMargin(new java.awt.Insets(2, 15, 2, 6));
-        add(jTEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 334, 47));
+        add(jTEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 334, 47));
 
         btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
         btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -230,18 +230,34 @@ public class BuscarReporte extends javax.swing.JPanel {
      */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(jTEmpleado.getText().trim());
             try {
+                EmpleadoDTO empleado = new EmpleadoDTO();
+                // Valida que haya un RFC a buscar.
+                if(jTEmpleado.getText().trim().isEmpty())
+                    throw new PresentacionException("Por favor, ingrese el RFC a buscar");
+                // Agrega el RFC al EmpleadoDTO.
+                empleado.setRfc(jTEmpleado.getText().trim());
+                // Valida que la fecha del incidente 
+                if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
+                    throw new PresentacionException("La fecha del incidente no puede estar después de la fecha actual.");
+                // Busca los reportes asociados al RFC del empleado y los almacena en la lista de reportes encontrados.
                 reportesEncontrados = ControlReportes.getInstance().obtenerReporteEmpleado(empleado, jDPFechaIncidente.getSelectedDate());
+                // Carga la lista de reportes obtenidos.
                 cargarLista();
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
         } else{
-            ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
-            reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText().trim()));
             try {
+                ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
+                // Valida que se haya ingresado un número de seguimiento.
+                if(jTNumSeguimiento.getText().trim().isEmpty())
+                    throw new PresentacionException("Por favor, ingrese un número de seguimiento.");
+                // Se extrae el número de seguimiento ingresado.
+                reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText().trim()));
+                // Se busca el reporte asociado al número de seguimiento.
                 reporte = ControlReportes.getInstance().obtenerReporteSeguimiento(reporte);
+                // Se añade el reporte obtenido a la lista de reportes obtenidos, aunque sólo se puede obtener uno.
                 reportesEncontrados.add(reporte);
+                // Carga la lista de reportes obtenidos.
                 cargarLista();
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
         }
@@ -271,11 +287,10 @@ public class BuscarReporte extends javax.swing.JPanel {
             jTEmpleado.setText("");
             jTEmpleado.setVisible(false);
             jLRFCEmpleado.setVisible(false);
+            jDPFechaIncidente.setSelectedDate(LocalDate.now());
             jLFechaIncidente.setVisible(false);
             jDPFechaIncidente.setVisible(false);
-            jDPFechaIncidente.setSelectedDate(LocalDate.now());
             
-            jTNumSeguimiento.setText("");
             jTNumSeguimiento.setVisible(true);
             jLNumSeguimiento.setVisible(true);
         }

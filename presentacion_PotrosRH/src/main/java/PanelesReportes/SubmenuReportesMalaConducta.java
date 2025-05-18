@@ -154,15 +154,28 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Registrar Reporte de Mala Conducta.
+     * Entra a la sección de registro de un nuevo
+     * reporte de mala conducta.
+     * @param evt Click.
+     */
     private void btnRegistrarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarReporteActionPerformed
         ControlFlujo.mostrarRegistroDatosGenerales();
     }//GEN-LAST:event_btnRegistrarReporteActionPerformed
-
+    /**
+     * Botón Revisar Reporte de Mala Conducta.
+     * Entra a la sección de revisión de reportes de
+     * mala conducta.
+     * @param evt Click.
+     */
     private void btnRevisarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarReporteActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarBuscarReporte();
     }//GEN-LAST:event_btnRevisarReporteActionPerformed
-
+    /**
+     * Botón Regresar. Regresa al menú principal.
+     * @param evt Click.
+     */
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
         ControlFlujo.mostrarMenuPrincipal();
     }//GEN-LAST:event_btnRegresarMouseClicked
