@@ -298,12 +298,16 @@ public class ImpactoIncidente extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // Se obtiene la información recibida.
-        reporteMalaConducta.setImpactoIncidente(checkBoxSeleccionado.getText());
-        if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().isEmpty())
-            reporteMalaConducta.setAccionesPrevias(jTAccionesPrevias.getText());
         // Se intenta registrar el nuevo reporte de mala conducta.
         try {
+            if(checkBoxSeleccionado == null)
+                throw new PresentacionException("Por favor, seleccione el impacto del incidente");
+            else // Se obtiene el impacto del incidente seleccionado.
+                reporteMalaConducta.setImpactoIncidente(checkBoxSeleccionado.getText());
+            
+            if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().isEmpty())
+                reporteMalaConducta.setAccionesPrevias(jTAccionesPrevias.getText().trim());
+            
             // Si el registro fue exitoso.
             if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta) != null){
                 // Se muestra un mensaje de confirmación y se regresa al menú de reportes.
@@ -343,6 +347,15 @@ public class ImpactoIncidente extends javax.swing.JPanel {
                     if(actual.isSelected() && !actual.equals(checkBox))
                         actual.setSelected(false);
                 }
+            } else{
+                // Si se deselecciona el impacto del incidente, se convierte a null el atributo checlBoxSeleccionado.
+                boolean hayCheckBoxSeleccionado = false;
+                for(JCheckBox actual : checkBoxes){
+                    if(actual.isSelected())
+                        hayCheckBoxSeleccionado = true;
+                }
+                if(!hayCheckBoxSeleccionado)
+                    checkBoxSeleccionado = null;
             }
         });
     }

@@ -1,24 +1,74 @@
 package PanelesReportes;
 
-import java.awt.Frame;
+import Controles.ControlFlujo;
+import Controles.ControlReportes;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.ReporteRevisadoDTO;
+import dto.ReporteRevisadoSancionadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 /**
- *
+ * Panel para el ingreso de la información, respecto a
+ * la determinación del caso del reporte.
  * @author Leonardo Flores Leyva (252390)
  */
 public class DeterminacionCaso extends javax.swing.JPanel {
-       
+    /**
+     * Reporte revisado a registrar como reporte sancionado
+     */
+    private ReporteRevisadoDTO reporteRevisado = new ReporteRevisadoDTO();
+    /**
+     * Lista de normas checkBoxes de las normas violadas.
+     */
+    private final List<JCheckBox> normasVioladas = new ArrayList<>();
+    /**
+     * Lista de normas checkBoxes de las posibles sanciones a aplica.
+     */
+    private final List<JCheckBox> sanciones = new ArrayList<>();
+    /**
+     * Lista de normas checkBoxes de los posibles niveles de gravedad.
+     */
+    private final List<JCheckBox> nivelesGravedad = new ArrayList<>();
+    /**
+     * CheckBox seleccionado de las sanciones.
+     */
+    private JCheckBox sancionSeleccionada;
+    /**
+     * CheckBox seleccionado de los niveles de gravedad.
+     */
+    private JCheckBox nivelSeleccionado;
     /**
      * Constructor por defecto.
      */
     public DeterminacionCaso() {
         initComponents();
+        normasVioladas.add(jCLPoliticaPrivacidad);
+        normasVioladas.add(jCLRespetoTolerancia);
+        normasVioladas.add(jCLDesobediencia);
+        normasVioladas.add(jCLDivulgacionConfidencial);
         
+        validarCheckBoxesSanciones(jCLPoliticaPrivacidad);
+        validarCheckBoxesSanciones(jCLRespetoTolerancia);
+        validarCheckBoxesSanciones(jCLDesobediencia);
+        validarCheckBoxesSanciones(jCLDivulgacionConfidencial);
+        
+        validarCheckBoxesNivelesGravedad(jCLLeve);
+        validarCheckBoxesNivelesGravedad(jCLModerado);
+        validarCheckBoxesNivelesGravedad(jCLGrave);
+        
+        jLOtraAccionCorrectiva.setVisible(false);
+        jTAOtraAccionCorrectiva.setVisible(false);
     }
 
     /**
@@ -39,7 +89,7 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jTAOtraAccionCorrectiva = new javax.swing.JTextArea();
         jLOtraAccionCorrectiva = new javax.swing.JLabel();
         jLAccionCorrectiva = new javax.swing.JLabel();
-        jCLSiDivulgacionConfidencial = new javax.swing.JCheckBox();
+        jCLDivulgacionConfidencial = new javax.swing.JCheckBox();
         jCLLeve = new javax.swing.JCheckBox();
         jCLModerado = new javax.swing.JCheckBox();
         jCLGrave = new javax.swing.JCheckBox();
@@ -48,13 +98,13 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLOtraAccionCorrectiva = new javax.swing.JCheckBox();
         jCLSuspensionTemporal = new javax.swing.JCheckBox();
         jCLPoliticaPrivacidad = new javax.swing.JCheckBox();
-        jCLSRespetoTolerancia = new javax.swing.JCheckBox();
-        jCLSDesobediencia = new javax.swing.JCheckBox();
+        jCLRespetoTolerancia = new javax.swing.JCheckBox();
+        jCLDesobediencia = new javax.swing.JCheckBox();
         jLNormasVioladas = new javax.swing.JLabel();
         jLNivelGravedad = new javax.swing.JLabel();
         jCLDespido = new javax.swing.JCheckBox();
         jCLAdvertenciaEscrita = new javax.swing.JCheckBox();
-        btnSiguiente = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -153,13 +203,13 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jLAccionCorrectiva.setText("Acción correctiva o sanción aplicada:");
         add(jLAccionCorrectiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 440, 49));
 
-        jCLSiDivulgacionConfidencial.setBackground(new java.awt.Color(255, 255, 255));
-        jCLSiDivulgacionConfidencial.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLSiDivulgacionConfidencial.setForeground(new java.awt.Color(0, 0, 0));
-        jCLSiDivulgacionConfidencial.setText("Divulgación de información confidencial");
-        jCLSiDivulgacionConfidencial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCLSiDivulgacionConfidencial.setIconTextGap(10);
-        add(jCLSiDivulgacionConfidencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 330, 40));
+        jCLDivulgacionConfidencial.setBackground(new java.awt.Color(255, 255, 255));
+        jCLDivulgacionConfidencial.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jCLDivulgacionConfidencial.setForeground(new java.awt.Color(0, 0, 0));
+        jCLDivulgacionConfidencial.setText("Divulgación de información confidencial");
+        jCLDivulgacionConfidencial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLDivulgacionConfidencial.setIconTextGap(10);
+        add(jCLDivulgacionConfidencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 330, 40));
 
         jCLLeve.setBackground(new java.awt.Color(255, 255, 255));
         jCLLeve.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -167,11 +217,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLLeve.setText("Leve");
         jCLLeve.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLLeve.setIconTextGap(10);
-        jCLLeve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLLeveActionPerformed(evt);
-            }
-        });
         add(jCLLeve, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 210, 40));
 
         jCLModerado.setBackground(new java.awt.Color(255, 255, 255));
@@ -180,11 +225,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLModerado.setText("Moderado");
         jCLModerado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLModerado.setIconTextGap(10);
-        jCLModerado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLModeradoActionPerformed(evt);
-            }
-        });
         add(jCLModerado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 210, 40));
 
         jCLGrave.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,11 +233,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLGrave.setText("Grave");
         jCLGrave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLGrave.setIconTextGap(10);
-        jCLGrave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLGraveActionPerformed(evt);
-            }
-        });
         add(jCLGrave, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 630, 210, 40));
 
         jCLCapacitacionObligatoria.setBackground(new java.awt.Color(255, 255, 255));
@@ -206,11 +241,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLCapacitacionObligatoria.setText("Capacitación obligatoria");
         jCLCapacitacionObligatoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLCapacitacionObligatoria.setIconTextGap(10);
-        jCLCapacitacionObligatoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLCapacitacionObligatoriaActionPerformed(evt);
-            }
-        });
         add(jCLCapacitacionObligatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 310, 40));
 
         jCLAdvertenciaVerbal.setBackground(new java.awt.Color(255, 255, 255));
@@ -219,11 +249,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLAdvertenciaVerbal.setText("Advertencia verbal");
         jCLAdvertenciaVerbal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLAdvertenciaVerbal.setIconTextGap(10);
-        jCLAdvertenciaVerbal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLAdvertenciaVerbalActionPerformed(evt);
-            }
-        });
         add(jCLAdvertenciaVerbal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 310, 40));
 
         jCLOtraAccionCorrectiva.setBackground(new java.awt.Color(255, 255, 255));
@@ -245,11 +270,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLSuspensionTemporal.setText("Suspensión temporal");
         jCLSuspensionTemporal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLSuspensionTemporal.setIconTextGap(10);
-        jCLSuspensionTemporal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLSuspensionTemporalActionPerformed(evt);
-            }
-        });
         add(jCLSuspensionTemporal, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 310, 40));
 
         jCLPoliticaPrivacidad.setBackground(new java.awt.Color(255, 255, 255));
@@ -260,21 +280,21 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLPoliticaPrivacidad.setIconTextGap(10);
         add(jCLPoliticaPrivacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 330, 40));
 
-        jCLSRespetoTolerancia.setBackground(new java.awt.Color(255, 255, 255));
-        jCLSRespetoTolerancia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLSRespetoTolerancia.setForeground(new java.awt.Color(0, 0, 0));
-        jCLSRespetoTolerancia.setText("Respeto y tolerancia");
-        jCLSRespetoTolerancia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCLSRespetoTolerancia.setIconTextGap(10);
-        add(jCLSRespetoTolerancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 330, 40));
+        jCLRespetoTolerancia.setBackground(new java.awt.Color(255, 255, 255));
+        jCLRespetoTolerancia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jCLRespetoTolerancia.setForeground(new java.awt.Color(0, 0, 0));
+        jCLRespetoTolerancia.setText("Respeto y tolerancia");
+        jCLRespetoTolerancia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLRespetoTolerancia.setIconTextGap(10);
+        add(jCLRespetoTolerancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 330, 40));
 
-        jCLSDesobediencia.setBackground(new java.awt.Color(255, 255, 255));
-        jCLSDesobediencia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLSDesobediencia.setForeground(new java.awt.Color(0, 0, 0));
-        jCLSDesobediencia.setText("Desobediencia");
-        jCLSDesobediencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jCLSDesobediencia.setIconTextGap(10);
-        add(jCLSDesobediencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 330, 40));
+        jCLDesobediencia.setBackground(new java.awt.Color(255, 255, 255));
+        jCLDesobediencia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jCLDesobediencia.setForeground(new java.awt.Color(0, 0, 0));
+        jCLDesobediencia.setText("Desobediencia");
+        jCLDesobediencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLDesobediencia.setIconTextGap(10);
+        add(jCLDesobediencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 330, 40));
 
         jLNormasVioladas.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLNormasVioladas.setForeground(new java.awt.Color(0, 0, 0));
@@ -292,11 +312,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLDespido.setText("Despido");
         jCLDespido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLDespido.setIconTextGap(10);
-        jCLDespido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLDespidoActionPerformed(evt);
-            }
-        });
         add(jCLDespido, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 310, 40));
 
         jCLAdvertenciaEscrita.setBackground(new java.awt.Color(255, 255, 255));
@@ -305,24 +320,19 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLAdvertenciaEscrita.setText("Advertencia escrita");
         jCLAdvertenciaEscrita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLAdvertenciaEscrita.setIconTextGap(10);
-        jCLAdvertenciaEscrita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCLAdvertenciaEscritaActionPerformed(evt);
-            }
-        });
         add(jCLAdvertenciaEscrita, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 310, 40));
 
-        btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
-        btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
-        btnSiguiente.setText("Siguiente");
-        btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
+        btnConfirmar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 628, 146, 55));
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 628, 146, 55));
         btnAnterior.setBorderPainted(false);
         btnAnterior.setContentAreaFilled(false);
         btnAnterior.setOpaque(false);
@@ -339,72 +349,171 @@ public class DeterminacionCaso extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Regresa al panel del análisis inicial e investigación.
+     * @param evt 
+     */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         
     }//GEN-LAST:event_btnAnteriorActionPerformed
-
+    /**
+     * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+        int confirmacion = OptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar la operación?", "Confirmación de cancelación");
+        if(confirmacion == JOptionPane.YES_OPTION)
+            ControlFlujo.mostrarSubmenuReportes();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jCLLeveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLLeveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLLeveActionPerformed
-
-    private void jCLModeradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLModeradoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLModeradoActionPerformed
-
-    private void jCLGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLGraveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLGraveActionPerformed
-
-    private void jCLCapacitacionObligatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLCapacitacionObligatoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLCapacitacionObligatoriaActionPerformed
-
-    private void jCLAdvertenciaVerbalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLAdvertenciaVerbalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLAdvertenciaVerbalActionPerformed
-
+    /**
+     * Muestra el área de texto para la descripción de otro tipo de
+     * sanción, si es que el checkBox "Otro" es seleccionado.
+     * @param evt Click.
+     */
     private void jCLOtraAccionCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLOtraAccionCorrectivaActionPerformed
-        // TODO add your handling code here:
+        if(jCLOtraAccionCorrectiva.isSelected()){
+            jLOtraAccionCorrectiva.setVisible(true);
+            jTAOtraAccionCorrectiva.setVisible(true);
+        } else{
+            jLOtraAccionCorrectiva.setVisible(false);
+            jTAOtraAccionCorrectiva.setVisible(false);
+        }
     }//GEN-LAST:event_jCLOtraAccionCorrectivaActionPerformed
-
-    private void jCLSuspensionTemporalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLSuspensionTemporalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLSuspensionTemporalActionPerformed
-
-    private void jCLDespidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLDespidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLDespidoActionPerformed
-
-    private void jCLAdvertenciaEscritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLAdvertenciaEscritaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCLAdvertenciaEscritaActionPerformed
-
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSiguienteActionPerformed
-
-
+    /**
+     * Registra el reporte sancionado y regresa al submenú
+     * de reportes.
+     * @param evt Click.
+     */
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        try {
+            // El reporte revisado se convierte a un reporte revisado sancionado.
+            ReporteRevisadoSancionadoDTO reporteSancionado = (ReporteRevisadoSancionadoDTO) reporteRevisado;
+            
+            // Se crea un nuevo conjunto de normas violadas, que almacena todas las seleccionadas.
+            Set<String> normas = new HashSet<>();
+            // Se recorre la lista de checkBoxes de las normas violadas.
+            for(JCheckBox norma: normasVioladas){
+                if(norma.isSelected())
+                    normas.add(norma.getText());
+            }
+            // Si ningún checkBox de las normas violadas ha sido seleccionado.
+            if(normas.isEmpty())
+                throw new PresentacionException("Por favor, elija una norma violada por el empleado reportado.");
+            else // Se agregan las normas seleccionadas
+                reporteSancionado.setNormasVioladas(normas);
+            
+            // Se comprueba que existe un nivel de gravedad seleccionado.
+            if(nivelSeleccionado == null)
+                throw new PresentacionException("Por favor, seleccione un nivel de gravedad del incidente.");
+            else // Se agrega el nivel de gravedad en mayúsculas.
+                reporteSancionado.setNivelGravedad(nivelSeleccionado.getText().toUpperCase());
+            
+            // Se comprueba que existe una sanción aplicada.
+            if(sancionSeleccionada == null)
+                throw new PresentacionException("Por favor, seleccione una sanción a aplicar.");
+            // Si la sanción seleccionada es la de "Otra"
+            else if (sancionSeleccionada.equals(jCLOtraAccionCorrectiva)){
+                // Se verifica se haya ingresado una descripción del otro tipo de sanción impuesta.
+                if(jTAOtraAccionCorrectiva.getText().trim().isEmpty())
+                    throw new PresentacionException("Por favor, ingrese la descripción de la otra sanción correctiva a aplicar.");
+                // Se agrega el tipo de sanción y la descripción del otro tipo de sanción impuesta al reporte sancionado.
+                else{
+                    reporteSancionado.setSancionImpuesta(sancionSeleccionada.getText());
+                    reporteSancionado.setDescripcionOtraSancionImpuesta(jTAOtraAccionCorrectiva.getText().trim());
+                }
+            // Se agrega el tipo de sanción impuesta al reporte sancionado.
+            } else
+                reporteSancionado.setSancionImpuesta(sancionSeleccionada.getText());
+            // Intenta registrar el reporte sancionado.
+            if(ControlReportes.getInstance().registrarReporteSancionado(reporteSancionado) != null){
+                OptionPane.showInfoMessage(this, "¡Reporte revisado registrado con éxito!", "Revisión exitosa");
+                ControlFlujo.mostrarSubmenuReportes();
+            } else
+                OptionPane.showInfoMessage(this, "Ha ocurrido un error al intentar registrar el reporte sancionado.", "Error en registro");
+            
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+    
+    /**
+     * Valida que solo el checkBox de las sanciones recibido 
+     * sea el único seleccionado.
+     * @param checkBox CheckBox.
+     */
+    private void validarCheckBoxesSanciones(JCheckBox checkBox){
+        checkBox.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                sancionSeleccionada = checkBox;
+                for(JCheckBox actual : sanciones){
+                    if(actual.isSelected() && !actual.equals(checkBox))
+                        actual.setSelected(false);
+                }
+            } else{
+                // Si se deselecciona la sancion, se convierte a null el atributo sancionSeleccionada.
+                boolean haySancionSeleccionada = false;
+                for(JCheckBox actual : sanciones){
+                    if(actual.isSelected())
+                        haySancionSeleccionada = true;
+                }
+                if(!haySancionSeleccionada)
+                    sancionSeleccionada = null;
+            }
+        });
+    }
+    /**
+     * Valida que solo el checkBox de los niveles de gravedad
+     * recibido sea el único seleccionado.
+     * @param checkBox CheckBox.
+     */
+    private void validarCheckBoxesNivelesGravedad(JCheckBox checkBox){
+        checkBox.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                nivelSeleccionado = checkBox;
+                for(JCheckBox actual : nivelesGravedad){
+                    if(actual.isSelected() && !actual.equals(checkBox))
+                        actual.setSelected(false);
+                }
+            } else{
+                // Si se deselecciona el nivel de gravedad, se convierte a null el atributo nivelSeleccionado.
+                boolean hayNivelSeleccionado = false;
+                for(JCheckBox actual : nivelesGravedad){
+                    if(actual.isSelected())
+                        hayNivelSeleccionado = true;
+                }
+                if(!hayNivelSeleccionado)
+                    nivelSeleccionado = null;
+            }
+        });
+    }
+    
+    /**
+     * Añade el reporte revisado recibido, asegurándose que
+     * no esté vacío.
+     * @param reporte Reporte Revisado a añadir.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public void setReporte(ReporteRevisadoDTO reporte) throws PresentacionException{
+        if(reporte != null)
+            reporteRevisado = reporte;
+         else
+            throw new PresentacionException("El reporte no puede estar vacío.");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JCheckBox jCLAdvertenciaEscrita;
     private javax.swing.JCheckBox jCLAdvertenciaVerbal;
     private javax.swing.JCheckBox jCLCapacitacionObligatoria;
+    private javax.swing.JCheckBox jCLDesobediencia;
     private javax.swing.JCheckBox jCLDespido;
+    private javax.swing.JCheckBox jCLDivulgacionConfidencial;
     private javax.swing.JCheckBox jCLGrave;
     private javax.swing.JCheckBox jCLLeve;
     private javax.swing.JCheckBox jCLModerado;
     private javax.swing.JCheckBox jCLOtraAccionCorrectiva;
     private javax.swing.JCheckBox jCLPoliticaPrivacidad;
-    private javax.swing.JCheckBox jCLSDesobediencia;
-    private javax.swing.JCheckBox jCLSRespetoTolerancia;
-    private javax.swing.JCheckBox jCLSiDivulgacionConfidencial;
+    private javax.swing.JCheckBox jCLRespetoTolerancia;
     private javax.swing.JCheckBox jCLSuspensionTemporal;
     private javax.swing.JLabel jLAccionCorrectiva;
     private javax.swing.JLabel jLDeterminacionCaso;
