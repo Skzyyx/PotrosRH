@@ -288,6 +288,9 @@ public class BuscarReporte extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if(reportesEncontrados != null && !reportesEncontrados.isEmpty() && jListResultados.getSelectedIndex() != -1){
             ReporteMalaConductaDTO reporte = reportesEncontrados.get(jListResultados.getSelectedIndex());
+            try {
+                ControlFlujo.mostrarDatosGenerales(reporte);
+            } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
         } else
             OptionPane.showErrorMessage(this, "Por favor, seleccione el reporte a revisar", "Reporte no seleccionado");
     }//GEN-LAST:event_btnSiguienteActionPerformed

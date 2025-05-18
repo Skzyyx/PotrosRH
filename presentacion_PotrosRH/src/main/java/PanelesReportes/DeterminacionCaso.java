@@ -351,10 +351,12 @@ public class DeterminacionCaso extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Regresa al panel del análisis inicial e investigación.
-     * @param evt 
+     * @param evt Click.
      */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        
+        try {
+            ControlFlujo.mostrarAnalisisIncialEInvestigacion(reporteRevisado.getReporteMalaConducta());
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnAnteriorActionPerformed
     /**
      * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.

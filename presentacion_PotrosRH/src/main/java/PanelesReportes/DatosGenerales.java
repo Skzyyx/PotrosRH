@@ -403,7 +403,9 @@ public class DatosGenerales extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        
+        try {
+            ControlFlujo.mostrarAnalisisIncialEInvestigacion(reporteMalaConducta);
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnIniciarActionPerformed
     /**
      * Botón Cancelar. Regresa al Submenú de Reportes de Mala Conducta.

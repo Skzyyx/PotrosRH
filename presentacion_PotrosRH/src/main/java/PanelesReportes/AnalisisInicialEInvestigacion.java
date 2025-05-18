@@ -429,15 +429,13 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
                // Si el estado es igual a NO, se carga el reporte con la información ingresada y se transfiere al panel de MotivoOmisionMalaConducta.
                case NO -> {
                    try {
-                       cargarReporte();
-                       
+                       ControlFlujo.mostrarMotivoOmisionMalaConducta(cargarReporte());
                    } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
                }
                // Si el estado es igual a SI, se carga el reporte con la información ingresada y se transfiere al panel de DeterminacionCaso.
                default -> {
                    try {
-                       cargarReporte();
-                        
+                       ControlFlujo.mostrarDeterminacionCaso(cargarReporte());
                    } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
                }
             }
