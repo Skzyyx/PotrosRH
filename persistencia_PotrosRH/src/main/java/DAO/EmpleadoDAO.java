@@ -37,7 +37,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
 
     private static final Logger LOG = Logger.getLogger(ContratoDAO.class.getName());
     // Lista de empleados que simula la BD.
-//    private final List<Empleado> empleados;
+    // private final List<Empleado> empleados;
 
     private final MongoCollection<Empleado> empleadosCollection;
 
@@ -80,7 +80,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
 //        empleadoNeto.setNombre("Jesús Ernesto");
 //        empleadoNeto.setApellidoPaterno("López");
 //        empleadoNeto.setApellidoMaterno("Ibarra");
-//        empleadoNeto.setEmail("leonardoflores29088@gmail.com");
+//        empleadoNeto.setEmail("jesus.lopez252663@potros.itson.edu.mx");
 //        empleadoNeto.setRfc("LOIJ920315XYZ");
 //        empleadoNeto.setCurp("CURPNETO1234");
 //        empleadoNeto.setDireccion(new Direccion("Furbo", "Real Madrid", "123"));
@@ -162,14 +162,20 @@ public class EmpleadoDAO implements IEmpleadoDAO {
      */
     @Override
     public Empleado obtenerEmpleado(Empleado empleado) throws AccesoDatosException {
-        // Buscar al empleado por RFC
-//        for (Empleado empleadoEncontrado : empleados) {
-//            if (empleadoEncontrado.getRfc().equalsIgnoreCase(empleado.getRfc())) 
+//        try {
+//            Bson filtro = Filters.eq("rfc", empleado.getRfc());
+//            Empleado empleadoEncontrado = empleadosCollection.find(filtro).first();
+//
+//            if (empleadoEncontrado != null) {
 //                return empleadoEncontrado;
+//            } else {
+//                throw new AccesoDatosException("No se encontró un empleado con el RFC proporcionado");
+//            }
+//        } catch (MongoException e) {
+//            LOG.log(Level.WARNING, "Error al obtener empleado por RFC: {0}", e.getMessage());
+//            throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
 //        }
-
-        // Si no se encuentra el empleado, lanza una excepción
-        throw new AccesoDatosException("No se encontró un empleado con el RFC proporcionado");
+        return null;
     }
 
     /**

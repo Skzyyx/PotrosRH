@@ -15,7 +15,7 @@ public class Subsistema_Despedir_Empleado {
         ControlSubsistemaDespidos controlDespidos = new ControlSubsistemaDespidos();
         EmpleadoDTO empleadoPrueba = new EmpleadoDTO();
 
-        empleadoPrueba.setRfc("RFCPrueba123");
+        empleadoPrueba.setRfc("LOIJ920315XYZ");
         empleadoPrueba.setNombre("Jesús Ernesto");
         empleadoPrueba.setApellidoPaterno("López");
         empleadoPrueba.setApellidoMaterno("Perez");

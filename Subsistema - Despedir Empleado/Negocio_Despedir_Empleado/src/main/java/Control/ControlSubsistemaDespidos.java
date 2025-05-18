@@ -56,7 +56,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
     }
 
     /**
-     * Busca un empleado por su RFC.
+     * Busca un empleado por su RFC
      *
      * @param rfc El RFC del empleado a buscar
      * @return El DTO del empleado encontrado
@@ -144,11 +144,9 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
                     + " " + empleadoDTO.getApellidoMaterno());
             valores.put("fechaDespido", java.time.LocalDate.now().toString());
 
-            String cuerpo = plantillaDespido.getBody(valores);
-
             CorreoDTO correoDTO = new CorreoDTO();
             correoDTO.setCorreoReceptor(empleadoDTO.getEmail());
-            correoDTO.setPlantillaCorreo(cuerpo);
+            correoDTO.setPlantillaCorreo("DESPIDO");
             correoDTO.setValues(valores);
 
             return correoDTO;
