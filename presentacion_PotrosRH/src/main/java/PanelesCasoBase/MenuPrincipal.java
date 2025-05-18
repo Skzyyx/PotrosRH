@@ -49,6 +49,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnContrataciones.setForeground(new java.awt.Color(255, 255, 255));
         btnContrataciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Contrataciones.png"))); // NOI18N
         btnContrataciones.setText("Contrataciones");
+        btnContrataciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContrataciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContratacionesActionPerformed(evt);
@@ -60,6 +61,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnDespedirEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         btnDespedirEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/DespedirEmpleado.png"))); // NOI18N
         btnDespedirEmpleado.setText("<html>Despedir<br>Empleado</html>");
+        btnDespedirEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDespedirEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDespedirEmpleadoActionPerformed(evt);
@@ -71,6 +73,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnNominas.setForeground(new java.awt.Color(255, 255, 255));
         btnNominas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Nominas.png"))); // NOI18N
         btnNominas.setText("Nóminas");
+        btnNominas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNominas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNominasActionPerformed(evt);
@@ -82,6 +85,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnAsistencias.setForeground(new java.awt.Color(255, 255, 255));
         btnAsistencias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Asistencias.png"))); // NOI18N
         btnAsistencias.setText("Asistencias");
+        btnAsistencias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAsistencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenciasActionPerformed(evt);
@@ -93,6 +97,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnExpedientes.setForeground(new java.awt.Color(255, 255, 255));
         btnExpedientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Expedientes.png"))); // NOI18N
         btnExpedientes.setText("Expedientes");
+        btnExpedientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExpedientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExpedientesActionPerformed(evt);
@@ -104,6 +109,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnReportarEmpleado.setForeground(new java.awt.Color(255, 255, 255));
         btnReportarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/ReportarEmpleado.png"))); // NOI18N
         btnReportarEmpleado.setText("<html>Reportar<br>Empleado</html>");
+        btnReportarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportarEmpleadoActionPerformed(evt);

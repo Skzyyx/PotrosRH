@@ -44,6 +44,8 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         validarCheckBoxes(jCLIncumplioNormas);
         validarCheckBoxes(jCLAfectoProductividad);
         validarCheckBoxes(jCLOtro);
+        
+        jTAOtros.setVisible(false);
     }
 
     /**
@@ -175,6 +177,11 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         jCLOtro.setText("Otro (especificar)");
         jCLOtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLOtro.setOpaque(true);
+        jCLOtro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCLOtroItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -352,6 +359,18 @@ public class ImpactoIncidente extends javax.swing.JPanel {
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
         } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnAnteriorActionPerformed
+    /**
+     * Se supone que debe mostrar el área de texto solo
+     * cuando el checkBox de Otro está seleccionado, pero
+     * no funciona como espero. Algo se me escapa.
+     * @param evt Seleccionado.
+     */
+    private void jCLOtroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCLOtroItemStateChanged
+        if(jCLOtro.isSelected()){
+            jTAOtros.setVisible(true);
+        } else
+            jTAOtros.setVisible(false);
+    }//GEN-LAST:event_jCLOtroItemStateChanged
     /**
      * Valida que solo el check box recibido sea el
      * único seleccionado.

@@ -10,9 +10,7 @@ import dto.ReporteMalaConductaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -129,7 +127,7 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
 
         jTPHoraIncidente.setBackground(new java.awt.Color(0, 0, 0));
         jTPHoraIncidente.setForeground(new java.awt.Color(255, 255, 255));
-        jTPHoraIncidente.setColor(new java.awt.Color(0, 0, 255));
+        jTPHoraIncidente.setColor(new java.awt.Color(204, 204, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -246,23 +244,18 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             
             // Si el campo del RFC del empleado reportante está vacío.
             if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
-                throw new PresentacionException("Ingrese el RFC del empleado reportado.");
+                throw new PresentacionException("Ingrese el RFC del empleado reportante.");
             
             // Si no se ha seleccionado una fecha del incidente.
             if(jDPFechaIncidente.getSelectedDate() == null)
                 throw new PresentacionException("Seleccion una fecha del incidente.");
             
-            // Si la fecha seleccionada está después de la actual.
-            if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
-                throw new PresentacionException("Seleccione una fecha anterior a la actual.");
-            
             // Si no se ha seleccionado una hora del incidente.
             if(jTPHoraIncidente.getSelectedTime() == null)
                 throw new PresentacionException("Seleccione una hora del incidente.");
             
-            // Si la hora está después de la actual
-            if(jTPHoraIncidente.getSelectedTime().isAfter(LocalTime.now()))
-                throw new PresentacionException("Seleccione una hora anterior a la actual");
+            // Se obtiene la fecha seleccionada.
+            LocalDateTime fechaHoraSeleccionada = LocalDateTime.of(jDPFechaIncidente.getSelectedDate(), jTPHoraIncidente.getSelectedTime());
             
             // Se obtiene el RFC del empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
@@ -272,11 +265,9 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
             empleadoReportante.setRfc(jTRFCReportante.getText());
             
-            // Se obtiene la fecha seleccionada.
-            LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
-            
-            // Se obtiene la hora seleccionada.
-            LocalTime horaIncidente = jTPHoraIncidente.getSelectedTime();
+            // Se se ha seleccionado una fecha y hora posterior a la actual.
+            if(fechaHoraSeleccionada.isAfter(LocalDateTime.now()))
+                throw new PresentacionException("Seleccione una fecha y hora anterior a la actual.");
             
             // Se crea un nuevo ReporteMalaConductaDTO, con toda la información ingresada.
             ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
@@ -285,7 +276,7 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             // Se busca el empleado reportante y se agrega al reporte.
             reporteMalaConducta.setEmpleadoReportante(ControlReportes.getInstance().obtenerEmpleado(empleadoReportante));
             // Se fusionan la fecha y hora del incidente y se agrega al reporte.
-            reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
+            reporteMalaConducta.setFechaHoraIncidente(fechaHoraSeleccionada);
             // Se transfiere el nuevo reporte a la pantalla de la descripción del incidente.
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
         } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}

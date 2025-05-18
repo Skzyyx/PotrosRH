@@ -95,6 +95,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/Contrataciones.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Contrataciones"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContratacionesActionPerformed"/>
@@ -118,6 +121,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/DespedirEmpleado.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Despedir&lt;br&gt;Empleado&lt;/html&gt;"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDespedirEmpleadoActionPerformed"/>
@@ -141,6 +147,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/Nominas.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="N&#xf3;minas"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNominasActionPerformed"/>
@@ -164,6 +173,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/Asistencias.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Asistencias"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenciasActionPerformed"/>
@@ -187,6 +199,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/Expedientes.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Expedientes"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExpedientesActionPerformed"/>
@@ -210,6 +225,9 @@
           <Image iconType="3" name="/Images/MenuPrincipal/ReportarEmpleado.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Reportar&lt;br&gt;Empleado&lt;/html&gt;"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportarEmpleadoActionPerformed"/>
