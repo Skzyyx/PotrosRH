@@ -302,10 +302,20 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         try {
             if(checkBoxSeleccionado == null)
                 throw new PresentacionException("Por favor, seleccione el impacto del incidente");
+            
+            // Si el checkBox seleccionado es "Otro".
+            else if(checkBoxSeleccionado.equals(jCLOtro)){
+                // Si el área de texto del otro tipo de impacto del incidente está vacía.
+                if(!(jTAOtros.getText() != null && !jTAOtros.getText().trim().isEmpty()))
+                    throw new PresentacionException("Por favor, ingrese la descripción del otro tipo de impacto del incidente");
+                // Se obtiene la descripción del otro impacto del incidente recibido.
+                reporteMalaConducta.setImpactoIncidente(jTAOtros.getText().trim());
+            }
             else // Se obtiene el impacto del incidente seleccionado.
                 reporteMalaConducta.setImpactoIncidente(checkBoxSeleccionado.getText());
             
-            if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().isEmpty())
+            // Si la descripción de las acciones previas del empleado reportado no está vacía, se agrega al reporte.
+            if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().trim().isEmpty())
                 reporteMalaConducta.setAccionesPrevias(jTAccionesPrevias.getText().trim());
             
             // Si el registro fue exitoso.
@@ -331,6 +341,10 @@ public class ImpactoIncidente extends javax.swing.JPanel {
      */
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         try {
+            // Se eliminan del reporte la información de este panel.
+            reporteMalaConducta.setImpactoIncidente(null);
+            reporteMalaConducta.setAccionesPrevias(null);
+            // Se transfiere el reporte al panel de la descripción del incidente.
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
         } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnAnteriorActionPerformed

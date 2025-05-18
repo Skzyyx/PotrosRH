@@ -34,32 +34,23 @@ public class RevisarReporte {
         
         verificarReporteRevisado(reporteSancionadoNuevo);
         
-        if(reporteSancionadoNuevo.getNormasVioladas() == null)
+        if(!(reporteSancionadoNuevo.getNormasVioladas() != null && !reporteSancionadoNuevo.getNormasVioladas().isEmpty()))
             throw new ReporteException("ERROR: Debe seleccionar al menos una norma violada por el empleado.");
         
-        if(reporteSancionadoNuevo.getNormasVioladas().isEmpty())
-            throw new ReporteException("ERROR: Debe seleccionar al menos una norma violada por el empleado.");
-        
-        if(reporteSancionadoNuevo.getNivelGravedad()== null)
-            throw new ReporteException("ERROR: Debe seleccionar el nivel de gravedad del incidente.");
-        
-        if(reporteSancionadoNuevo.getNivelGravedad().trim().isEmpty())
+        if(!(reporteSancionadoNuevo.getNivelGravedad()== null && !reporteSancionadoNuevo.getNivelGravedad().trim().isEmpty()))
             throw new ReporteException("ERROR: Debe seleccionar el nivel de gravedad del incidente.");
         
         if(
               !(
-                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("Leve") || 
-                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("Moderado") ||
-                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("Grave")
+                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("LEVE") || 
+                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("MODERADO") ||
+                reporteSancionadoNuevo.getNivelGravedad().toUpperCase().equals("GRAVE")
                 )
         )
             throw new ReporteException("ERROR: Debe seleccionar un nivel de gravedad equivalente a Leve, Moderado o Grave.");
         
-        if(reporteSancionadoNuevo.getSancionImpuesta() == null)
-            throw new ReporteException("ERROR: Debe seleccionar la sanción impuesta al empleado.");
-        
-        if(reporteSancionadoNuevo.getSancionImpuesta().trim().isEmpty())
-            throw new ReporteException("ERROR: Debe seleccionar la sanción impuesta al empleado.");
+        if(!(reporteSancionadoNuevo.getSancionImpuesta() != null && !reporteSancionadoNuevo.getSancionImpuesta().trim().isEmpty()))
+            throw new ReporteException("ERROR: Debe haber seleccionado la sanción impuesta al empleado.");
         
         try {
             return reporteBO.registrarReporteSancionado(reporteSancionadoNuevo);
@@ -79,7 +70,7 @@ public class RevisarReporte {
         
         verificarReporteRevisado(reporteOmitidoNuevo);
         
-        if(reporteOmitidoNuevo.getMotivoOmision() == null)
+        if(!(reporteOmitidoNuevo.getMotivoOmision() != null && !reporteOmitidoNuevo.getMotivoOmision().trim().isEmpty()))
             throw new ReporteException("ERROR: El motivo de la omisión no puede ser nulo.");
         
         try {
@@ -96,23 +87,14 @@ public class RevisarReporte {
         if(reporte.getReporteMalaConducta() == null)
             throw new ReporteException("ERROR: El reporte revisado debe contar con un reporte de mala conducta asociado.");
         
-        if(reporte.isTieneAntecedentesPrevios() && reporte.getDescripcionAntecedentesPrevios() == null)
+        if(reporte.isTieneAntecedentesPrevios() && !(reporte.getDescripcionAntecedentesPrevios() != null && !reporte.getDescripcionAntecedentesPrevios().trim().isEmpty()))
             throw new ReporteException("ERROR: Ingrese la descripción de los antecedentes previos.");
         
-        if(reporte.isTieneAntecedentesPrevios() && reporte.getDescripcionAntecedentesPrevios().trim().isEmpty())
-            throw new ReporteException("ERROR: Ingrese la descripción de los antecedentes previos.");
-        
-        if(reporte.getEntrevistasRealizadas() == null)
+        if(!(reporte.getEntrevistasRealizadas() != null && !reporte.getEntrevistasRealizadas().isEmpty()))
             throw new ReporteException("ERROR: Se debe haber entrevistado por lo menos a una persona.");
         
-        if(reporte.getEntrevistasRealizadas().isEmpty())
-            throw new ReporteException("ERROR: Se debe haber entrevistado por lo menos a una persona.");
-        
-        if(reporte.getEvidenciasRevisadas() == null)
-            throw new ReporteException("ERROR: Se debe haber revisado al menos una evidencia.");
-        
-        if(reporte.getEvidenciasRevisadas().isEmpty())
-            throw new ReporteException("ERROR: Se debe haber revisado al menos una evidencia.");
+        if(!(reporte.getEvidenciasRevisadas() != null && !reporte.getEvidenciasRevisadas().isEmpty()))
+            throw new ReporteException("ERROR: Debe haber al menos un tipo de evidencia revisada.");
         
     }
 }

@@ -305,19 +305,36 @@ public class DescripcionIncidente extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        reporteMalaConducta.setLugarIncidente(jTLugarIncidente.getText());
-        reporteMalaConducta.setDescripcionDetallada(jTADescripcionDetallada.getText());
-        List<String> testigos = new ArrayList<>();
-        if(jTestigo1.getText() != null && !jTestigo1.getText().trim().isEmpty())
-            testigos.add(jTestigo1.getText());
-        
-        if(jTestigo2.getText() != null && !jTestigo2.getText().trim().isEmpty())
-            testigos.add(jTestigo2.getText());
-        
-        if(jTestigo3.getText() != null && !jTestigo3.getText().trim().isEmpty())
-            testigos.add(jTestigo3.getText());
-        
         try {
+            // Verifica qie se haya ingresado el lugar del incidente.
+            if(!(jTLugarIncidente.getText() != null && !jTLugarIncidente.getText().trim().isEmpty()))
+                throw new PresentacionException("Ingrese el lugar del incidente.");
+            // Se añade el lugar del incidente al reporte.
+            reporteMalaConducta.setLugarIncidente(jTLugarIncidente.getText());
+            
+            // Verifica qie se haya ingresado el lugar del incidente.
+            if(!(jTADescripcionDetallada.getText() != null && !jTADescripcionDetallada.getText().trim().isEmpty()))
+                throw new PresentacionException("Ingrese la descripción detallada del incidente.");
+            // Se añade la descripción detallada del incidente al reporte.
+            reporteMalaConducta.setDescripcionDetallada(jTADescripcionDetallada.getText());
+            
+            // Se crea una nueva lista de testigos.
+            List<String> testigos = new ArrayList<>();
+            
+            // Si el testigo 1 no está vacío.
+            if(jTestigo1.getText() != null && !jTestigo1.getText().trim().isEmpty())
+                testigos.add(jTestigo1.getText());
+            // Si el testigo 2 no está vacío.
+            if(jTestigo2.getText() != null && !jTestigo2.getText().trim().isEmpty())
+                testigos.add(jTestigo2.getText());
+            // Si el testigo 3 no está vacío.
+            if(jTestigo3.getText() != null && !jTestigo3.getText().trim().isEmpty())
+                testigos.add(jTestigo3.getText());
+            
+            // Se añade la lista de testigos.
+            reporteMalaConducta.setTestigos(testigos);
+            
+            // Se transfiere el reporte al panel del impacto del incidente.
             ControlFlujo.mostrarImpactoIncidente(reporteMalaConducta);
         } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnSiguienteActionPerformed

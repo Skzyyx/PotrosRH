@@ -26,14 +26,18 @@ public class ReporteMalaConductaMapper {
         reporteMalaConducta.setFechaHoraIncidente(nuevoReporteDTO.getFechaHoraIncidente());
         reporteMalaConducta.setLugarIncidente(nuevoReporteDTO.getLugarIncidente());
         reporteMalaConducta.setDescripcionDetallada(nuevoReporteDTO.getDescripcionDetallada());
+        
         if(nuevoReporteDTO.getTestigos() != null && !nuevoReporteDTO.getTestigos().isEmpty())
             reporteMalaConducta.setTestigos(nuevoReporteDTO.getTestigos());
         
-        reporteMalaConducta.setAccionesPrevias(nuevoReporteDTO.getAccionesPrevias());
         reporteMalaConducta.setImpactoIncidente(nuevoReporteDTO.getImpactoIncidente());
+        
+        if(nuevoReporteDTO.getAccionesPrevias() != null && !nuevoReporteDTO.getAccionesPrevias().trim().isEmpty())
+            reporteMalaConducta.setAccionesPrevias(nuevoReporteDTO.getAccionesPrevias());
+        
         reporteMalaConducta.setFechaRegistro(nuevoReporteDTO.getFechaRegistro());
         reporteMalaConducta.setEstadoReporte(EstadoReporte.NO_REVISADO);
-        
+        // Se retorna la entidad mapeada.
         return reporteMalaConducta;
     }
     /**
@@ -49,11 +53,15 @@ public class ReporteMalaConductaMapper {
         reporteMalaConducta.setFechaHoraIncidente(viejoReporteDTO.getFechaHoraIncidente());
         reporteMalaConducta.setLugarIncidente(viejoReporteDTO.getLugarIncidente());
         reporteMalaConducta.setDescripcionDetallada(viejoReporteDTO.getDescripcionDetallada());
+        
         if(viejoReporteDTO.getTestigos() != null && !viejoReporteDTO.getTestigos().isEmpty())
             reporteMalaConducta.setTestigos(viejoReporteDTO.getTestigos());
         
-        reporteMalaConducta.setAccionesPrevias(viejoReporteDTO.getAccionesPrevias());
         reporteMalaConducta.setImpactoIncidente(viejoReporteDTO.getImpactoIncidente());
+        
+        if(viejoReporteDTO.getAccionesPrevias() != null && !viejoReporteDTO.getAccionesPrevias().trim().isEmpty())
+            reporteMalaConducta.setAccionesPrevias(viejoReporteDTO.getAccionesPrevias());
+        
         reporteMalaConducta.setFechaRegistro(viejoReporteDTO.getFechaRegistro());
         reporteMalaConducta.setEstadoReporte(EstadoReporte.valueOf(viejoReporteDTO.getEstadoReporte()));
         reporteMalaConducta.setNumeroSeguimiento(viejoReporteDTO.getNumeroSeguimiento());
@@ -73,11 +81,15 @@ public class ReporteMalaConductaMapper {
         reporteMalaConductaDTO.setFechaHoraIncidente(viejoReporte.getFechaHoraIncidente());
         reporteMalaConductaDTO.setLugarIncidente(viejoReporte.getLugarIncidente());
         reporteMalaConductaDTO.setDescripcionDetallada(viejoReporte.getDescripcionDetallada());
+        
         if(viejoReporte.getTestigos() != null && !viejoReporte.getTestigos().isEmpty())
             reporteMalaConductaDTO.setTestigos(viejoReporte.getTestigos());
         
-        reporteMalaConductaDTO.setAccionesPrevias(viejoReporte.getAccionesPrevias());
         reporteMalaConductaDTO.setImpactoIncidente(viejoReporte.getImpactoIncidente());
+        
+        if(viejoReporte.getAccionesPrevias() != null && !viejoReporte.getAccionesPrevias().trim().isEmpty())
+            reporteMalaConductaDTO.setAccionesPrevias(viejoReporte.getAccionesPrevias());
+        
         reporteMalaConductaDTO.setFechaRegistro(viejoReporte.getFechaRegistro());
         reporteMalaConductaDTO.setEstadoReporte(viejoReporte.getEstadoReporte().toString());
         reporteMalaConductaDTO.setNumeroSeguimiento(viejoReporte.getNumeroSeguimiento());

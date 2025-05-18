@@ -237,19 +237,36 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        ControlReportes controlReportes = ControlReportes.getInstance();
+
         try {
+            // Si el campo del RFC del empleado reportado está vacío.
+            if(!(jTRFCReportado.getText() != null && !jTRFCReportado.getText().trim().isEmpty()))
+                throw new PresentacionException("Ingrese el RFC del empleado reportado.");
             // Se busca y se obtiene el empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
             empleadoReportado.setRfc(jTRFCReportado.getText());
-            empleadoReportado = controlReportes.obtenerEmpleado(empleadoReportado);
+            empleadoReportado = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
+            
+            // Si el campo del RFC del empleado reportante está vacío.
+            if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
+                throw new PresentacionException("Ingrese el RFC del empleado reportado.");
             // Se busca y se obtiene el empleado reportante.
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
             empleadoReportante.setRfc(jTRFCReportante.getText());
-            empleadoReportante = controlReportes.obtenerEmpleado(empleadoReportado);
-            // Se obtiene la fecha y la hora seleccionadas.
+            empleadoReportante = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
+            
+            // Si la fecha seleccionada está después de la actual.
+            if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
+                throw new PresentacionException("Seleccione una fecha anterior a la actual.");
+            // Se obtiene la fecha seleccionada.
             LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
+            
+            // Si la hora está después de la actual
+            if(jTPHoraIncidente.getSelectedTime().isAfter(LocalTime.now()))
+                throw new PresentacionException("Seleccione una hora anterior a la actual");
+            // Se obtiene la hora seleccionada.
             LocalTime horaIncidente = jTPHoraIncidente.getSelectedTime();
+            
             // Se crea un nuevo ReporteMalaConductaDTO, con toda la información ingresada.
             ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
             reporteMalaConducta.setEmpleadoReportado(empleadoReportado);

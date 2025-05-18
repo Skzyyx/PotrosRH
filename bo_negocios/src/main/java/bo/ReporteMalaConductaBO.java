@@ -101,9 +101,9 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
         
         ReporteMalaConducta reporte = new ReporteMalaConducta();
         reporte.setNumeroSeguimiento(reporteSeguimiento.getNumeroSeguimiento());
-        
         try {
-            return ReporteMalaConductaMapper.toDTO(reportesDAO.obtenerReporteSeguimiento(reporte));
+            reporte = reportesDAO.obtenerReporteSeguimiento(reporte);
+            return reporte != null ? ReporteMalaConductaMapper.toDTO(reporte) : null;
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }
     /**
