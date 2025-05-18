@@ -328,5 +328,8 @@ public class ControlFlujo {
         cambiarPantalla(previsualizarEmpleadoDespedir);
     }
     
-    
+    public static void mostrarPanelConfirmacionDespido(EmpleadoDTO empleado, String razon) {
+        confirmacionDespido.setDatosDespido(empleado, razon);
+        cambiarPantalla(confirmacionDespido);
+    }
 }

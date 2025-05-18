@@ -250,7 +250,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnContratacionesActionPerformed
 
     private void btnDespedirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespedirEmpleadoActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnDespedirEmpleadoActionPerformed
 
     private void btnNominasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNominasActionPerformed

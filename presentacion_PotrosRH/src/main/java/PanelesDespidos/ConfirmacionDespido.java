@@ -1,19 +1,15 @@
 package PanelesDespidos;
 
+import Control.ControlSubsistemaDespidos;
 import Controles.ControlFlujo;
-import Controles.ControlNomina;
-import Excepciones.PresentacionException;
-import OptionPane.OptionPane;
+import Excepciones.CorreoException;
+import Exceptions.ObjetosNegocioException;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.geom.RoundRectangle2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicTextFieldUI;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +22,9 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
 public class ConfirmacionDespido extends javax.swing.JPanel {
 
     private static ConfirmacionDespido instance;
+    private final ControlSubsistemaDespidos controlDespidos = new ControlSubsistemaDespidos();
+    private EmpleadoDTO empleadoADespedir;
+    private String razonDespido;
 
     /**
      * Creates new form BusquedaRFCNomina
@@ -41,6 +40,13 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
         return instance;
     }
 
+    public void setDatosDespido(EmpleadoDTO empleado, String razon) {
+        this.empleadoADespedir = empleado;
+        this.razonDespido = razon;
+        btnEstoySeguro.setSelected(false);
+        btnNoEstoySeguro.setSelected(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,9 +181,22 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-
-        ControlFlujo.mostrarMenuPrincipal();
-
+        if (btnEstoySeguro.isSelected()) {
+            try {
+                controlDespidos.registrarDespido(empleadoADespedir, razonDespido);
+                JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                ControlFlujo.mostrarMenuPrincipal(); // Regresar al menú principal después del despido
+            } catch (CorreoException ex) {
+                JOptionPane.showMessageDialog(this, "Error al enviar el correo de despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (ObjetosNegocioException ex) {
+                JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (btnNoEstoySeguro.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Despido cancelado.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
+            ControlFlujo.mostrarMenuPrincipal();
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, confirme si está seguro del despido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnEstoySeguroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstoySeguroActionPerformed

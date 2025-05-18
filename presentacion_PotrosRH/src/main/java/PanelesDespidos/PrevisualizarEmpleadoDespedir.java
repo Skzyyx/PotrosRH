@@ -300,7 +300,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
             try {
                 controlDespido.registrarDespido(empleado, motivo);
                 JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                ControlFlujo.mostrarMenuPrincipal(); // O donde quieras navegar después
+                ControlFlujo.mostrarMenuPrincipal();
             } catch (PresentacionException ex) {
                 JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
