@@ -282,10 +282,10 @@ public class DescripcionIncidente extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
-        btnSiguiente.setBorderPainted(false);
-        btnSiguiente.setContentAreaFilled(false);
-        btnSiguiente.setOpaque(false);
-        btnSiguiente.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnAnterior.setBorderPainted(false);
+        btnAnterior.setContentAreaFilled(false);
+        btnAnterior.setOpaque(false);
+        btnAnterior.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -309,12 +309,14 @@ public class DescripcionIncidente extends javax.swing.JPanel {
             // Verifica qie se haya ingresado el lugar del incidente.
             if(!(jTLugarIncidente.getText() != null && !jTLugarIncidente.getText().trim().isEmpty()))
                 throw new PresentacionException("Ingrese el lugar del incidente.");
-            // Se añade el lugar del incidente al reporte.
-            reporteMalaConducta.setLugarIncidente(jTLugarIncidente.getText());
             
             // Verifica qie se haya ingresado el lugar del incidente.
             if(!(jTADescripcionDetallada.getText() != null && !jTADescripcionDetallada.getText().trim().isEmpty()))
                 throw new PresentacionException("Ingrese la descripción detallada del incidente.");
+            
+            // Se añade el lugar del incidente al reporte.
+            reporteMalaConducta.setLugarIncidente(jTLugarIncidente.getText());
+            
             // Se añade la descripción detallada del incidente al reporte.
             reporteMalaConducta.setDescripcionDetallada(jTADescripcionDetallada.getText());
             

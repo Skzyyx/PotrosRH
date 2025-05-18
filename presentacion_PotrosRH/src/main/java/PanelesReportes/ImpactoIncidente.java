@@ -153,24 +153,28 @@ public class ImpactoIncidente extends javax.swing.JPanel {
         jCLIncumplioNormas.setForeground(new java.awt.Color(0, 0, 0));
         jCLIncumplioNormas.setText("Incumplió las normas de la empresa");
         jCLIncumplioNormas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLIncumplioNormas.setOpaque(true);
 
         jCLGeneroConflictos.setBackground(new java.awt.Color(255, 255, 255));
         jCLGeneroConflictos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCLGeneroConflictos.setForeground(new java.awt.Color(0, 0, 0));
         jCLGeneroConflictos.setText("Generó conflictos internos");
         jCLGeneroConflictos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLGeneroConflictos.setOpaque(true);
 
         jCLAfectoProductividad.setBackground(new java.awt.Color(255, 255, 255));
         jCLAfectoProductividad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCLAfectoProductividad.setForeground(new java.awt.Color(0, 0, 0));
         jCLAfectoProductividad.setText("Afectó la productividad");
         jCLAfectoProductividad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLAfectoProductividad.setOpaque(true);
 
         jCLOtro.setBackground(new java.awt.Color(255, 255, 255));
         jCLOtro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCLOtro.setForeground(new java.awt.Color(0, 0, 0));
         jCLOtro.setText("Otro (especificar)");
         jCLOtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCLOtro.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -46,7 +46,11 @@ public class ControlReportes {
      */
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws PresentacionException{
         try {
-            return obtenerEmpleado.obtenerEmpleado(empleado);
+            EmpleadoDTO empleadoEncontrado = obtenerEmpleado.obtenerEmpleado(empleado);
+            // Se asegura que el empleado sigue activo en la empresa.
+            if(!empleadoEncontrado.getEstado().equals("ACTIVO"))
+                throw new PresentacionException("El empleado no está activo.");
+            return empleadoEncontrado;
         } catch (ObtenerEmpleadoException e) {throw new PresentacionException(e.getMessage(), e);}
     }
     /**

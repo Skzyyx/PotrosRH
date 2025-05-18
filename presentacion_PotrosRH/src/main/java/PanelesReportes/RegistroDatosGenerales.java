@@ -264,15 +264,13 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             if(jTPHoraIncidente.getSelectedTime().isAfter(LocalTime.now()))
                 throw new PresentacionException("Seleccione una hora anterior a la actual");
             
-            // Se busca y se obtiene el empleado reportado.
+            // Se obtiene el RFC del empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
             empleadoReportado.setRfc(jTRFCReportado.getText());
-            empleadoReportado = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
             
-            // Se busca y se obtiene el empleado reportante.
+            // Se se obtiene el RFC del empleado reportante.
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
             empleadoReportante.setRfc(jTRFCReportante.getText());
-            empleadoReportante = ControlReportes.getInstance().obtenerEmpleado(empleadoReportado);
             
             // Se obtiene la fecha seleccionada.
             LocalDate fechaIncidente = jDPFechaIncidente.getSelectedDate();
@@ -282,8 +280,11 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             
             // Se crea un nuevo ReporteMalaConductaDTO, con toda la información ingresada.
             ReporteMalaConductaDTO reporteMalaConducta = new ReporteMalaConductaDTO();
-            reporteMalaConducta.setEmpleadoReportado(empleadoReportado);
-            reporteMalaConducta.setEmpleadoReportante(empleadoReportante);
+            // Se busca el empleado reportado y se agrega al reporte
+            reporteMalaConducta.setEmpleadoReportado(ControlReportes.getInstance().obtenerEmpleado(empleadoReportado));
+            // Se busca el empleado reportante y se agrega al reporte.
+            reporteMalaConducta.setEmpleadoReportante(ControlReportes.getInstance().obtenerEmpleado(empleadoReportante));
+            // Se fusionan la fecha y hora del incidente y se agrega al reporte.
             reporteMalaConducta.setFechaHoraIncidente(LocalDateTime.of(fechaIncidente, horaIncidente));
             // Se transfiere el nuevo reporte a la pantalla de la descripción del incidente.
             ControlFlujo.mostrarDescripcionIncidente(reporteMalaConducta);
