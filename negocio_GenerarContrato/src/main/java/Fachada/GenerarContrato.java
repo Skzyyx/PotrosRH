@@ -26,8 +26,9 @@ public class GenerarContrato implements IGenerarContrato{
     @Override
     public ContratoDTO registrarContrato(ContratoDTO contrato) throws GenerarContratoException {
         try {
-            contrato =  control.registrarContrato(contrato);            
-            control.enviarContrato(contrato);
+            contrato =  control.registrarContrato(contrato);
+            
+//            control.enviarContrato(contrato);
             return contrato;
         } catch (GenerarContratoException ex) {
             Logger.getLogger(GenerarContrato.class.getName()).log(Level.SEVERE, null, ex.getMessage());

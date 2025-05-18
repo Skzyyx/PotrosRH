@@ -30,4 +30,6 @@ public interface ISistemaCorreo {
      * @return true si se logra el envío.
      */
     boolean sendEmail(CorreoDTO correo) throws CorreoException;
+    
+    boolean sendEmail(CorreoDTO correo, byte[] bytesPdf) throws CorreoException;
 }
