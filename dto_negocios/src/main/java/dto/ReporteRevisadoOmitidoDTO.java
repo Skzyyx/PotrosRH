@@ -31,20 +31,16 @@ public class ReporteRevisadoOmitidoDTO extends ReporteRevisadoDTO{
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 reporteMalaConducta, 
                 infoCompleta, 
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
-                entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                entrevistasRealizadas,
+                evidenciasRevisadas
         );
         this.motivoOmision = motivoOmision;
     }
@@ -68,10 +64,8 @@ public class ReporteRevisadoOmitidoDTO extends ReporteRevisadoDTO{
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 id,
@@ -79,10 +73,8 @@ public class ReporteRevisadoOmitidoDTO extends ReporteRevisadoDTO{
                 infoCompleta, 
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
-                entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                entrevistasRealizadas,
+                evidenciasRevisadas
         );
         this.motivoOmision = motivoOmision;
     }

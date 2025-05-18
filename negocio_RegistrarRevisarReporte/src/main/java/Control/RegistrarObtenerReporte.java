@@ -6,6 +6,7 @@ import Interfaces.IReporteMalaConductaBO;
 import bo.ReporteMalaConductaBO;
 import dto.EmpleadoDTO;
 import dto.ReporteMalaConductaDTO;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,11 +38,19 @@ public class RegistrarObtenerReporte {
             throw new ReporteException("ERROR: El reporte no puede ser nulo.");
         
         verificarReporteRevisado(reporteNuevo);
-        // Se agrega la fecha de hoy como fecha de registro del nuevo reporte.
-        reporteNuevo.setFechaRegistro(LocalDate.now());
         
         try {
+            // Se agrega la fecha de hoy como fecha de registro del nuevo reporte.
+            reporteNuevo.setFechaRegistro(LocalDate.now());
+            
+            do // Genera un nuevo número de seguimiento y lo asigna al nuevo reporte.
+                reporteNuevo.setNumeroSeguimiento(new SecureRandom().nextLong(9999999999L));
+            // Mientras no haya otro reporte con el mismo número de seguimiento (demasiado poco probable, pero no vaya a ser).
+            while (reporteBO.obtenerReporteSeguimiento(reporteNuevo) != null);
+            
+            // Ejecuta el registro del nuevo reporte, y devuelve el mismo recién registrado.
             return reporteBO.registrarReporteNuevo(reporteNuevo);
+            
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }
     /**
@@ -54,18 +63,21 @@ public class RegistrarObtenerReporte {
      */
     public List<ReporteMalaConductaDTO> obtenerReporteEmpleado(EmpleadoDTO empleado, LocalDate fechaIncidente) throws ReporteException {
         
-        if(empleado == null)
-                throw new ReporteException("No se permite RFC vacío.");
+        if(!(empleado != null && empleado.getRfc().isEmpty()))
+                throw new ReporteException("No se permite un RFC vacío.");
+        
         try {
             List<ReporteMalaConductaDTO> reportesNoRevisados = new ArrayList<>();
             for(ReporteMalaConductaDTO reporte: reporteBO.obtenerReporteEmpleado(empleado, fechaIncidente)){
                 if(reporte.getEstadoReporte().equals("NO_REVISADO"))
                     reportesNoRevisados.add(reporte);
             }
+            
             if(!reportesNoRevisados.isEmpty())
                 return reportesNoRevisados;
             else
                 throw new ReporteException("No existen reportes sin revisar asociados al empleado.");
+            
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }
     /**
@@ -77,16 +89,22 @@ public class RegistrarObtenerReporte {
      */
     public ReporteMalaConductaDTO obtenerReporteSeguimiento(ReporteMalaConductaDTO reporteSeguimiento) throws ReporteException{
         
-        if(reporteSeguimiento == null)
+        if(!(reporteSeguimiento != null && reporteSeguimiento.getNumeroSeguimiento() != null))
                 throw new ReporteException("No se permite un número de seguimiento vacío");
+        
         try {
+            
             ReporteMalaConductaDTO reporteNoRevisado = reporteBO.obtenerReporteSeguimiento(reporteSeguimiento);
+            
             if(reporteNoRevisado == null)
                 throw new ReporteException("No se encontró ningún reporte con el número de seguimiento recibido.");
+            
             else if(reporteNoRevisado.getEstadoReporte().equals("REVISADO"))
                 throw new ReporteException("El reporte ya ha sido revisado anteriormente.");
+            
             else
                 return reporteNoRevisado;
+            
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }
     /**

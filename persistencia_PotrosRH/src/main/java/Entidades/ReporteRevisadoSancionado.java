@@ -13,7 +13,6 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
     private Set<String> normasVioladas;
     private GravedadSancion nivelGravedad;
     private String sancionImpuesta;
-    private String descripcionOtraSancionImpuesta;
     /**
      * Contructor por defecto.
      */
@@ -23,44 +22,35 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
      * @param normasVioladas Conjunto de normas violadas por el empleado.
      * @param nivelGravedad Nivel de gravedad del incidente.
      * @param sancionImpuesta Sanción impuesta al empleado.
-     * @param descripcionOtraSancionImpuesta Descripción de la otra sanción impuesta al empleado.
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoSancionado(
             Set<String> normasVioladas, 
             GravedadSancion nivelGravedad, 
-            String sancionImpuesta, 
-            String descripcionOtraSancionImpuesta, 
+            String sancionImpuesta,
             ReporteMalaConducta reporteMalaConducta, 
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 reporteMalaConducta, 
                 infoCompleta, 
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
-                entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                entrevistasRealizadas,
+                evidenciasRevisadas
         );
         this.normasVioladas = normasVioladas;
         this.nivelGravedad = nivelGravedad;
         this.sancionImpuesta = sancionImpuesta;
-        this.descripcionOtraSancionImpuesta = descripcionOtraSancionImpuesta;
     }
     /**
      * Constructor con todos los atributos, incluido el ID.
@@ -68,30 +58,24 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
      * @param normasVioladas Conjunto de normas violadas por el empleado.
      * @param nivelGravedad Nivel de gravedad del incidente.
      * @param sancionImpuesta Sanción impuesta al empleado.
-     * @param descripcionOtraSancionImpuesta Descripción de la otra sanción impuesta al empleado.
      * @param reporteMalaConducta Reporte de mala conducta asociado.
      * @param infoCompleta Si es que tiene la información completa.
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoSancionado(
             ObjectId id,
             Set<String> normasVioladas, 
             GravedadSancion nivelGravedad, 
-            String sancionImpuesta, 
-            String descripcionOtraSancionImpuesta, 
+            String sancionImpuesta,
             ReporteMalaConducta reporteMalaConducta, 
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 id,
@@ -99,15 +83,12 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
                 infoCompleta, 
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
-                entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                entrevistasRealizadas,
+                evidenciasRevisadas
         );
         this.normasVioladas = normasVioladas;
         this.nivelGravedad = nivelGravedad;
         this.sancionImpuesta = sancionImpuesta;
-        this.descripcionOtraSancionImpuesta = descripcionOtraSancionImpuesta;
     }
     /**
      * Retorna el conjunto de normas violadas por el empleado.
@@ -125,11 +106,6 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
      */
     public String getSancionImpuesta() {return sancionImpuesta;}
     /**
-     * Retorna la descripción de la otra sanción impuesta al empleado.
-     * @return Descripción de la otra sanción impuesta al empleado.
-     */
-    public String getDescripcionOtraSancionImpuesta() {return descripcionOtraSancionImpuesta;}
-    /**
      * Establece el conjunto de normas violadas por el empleado.
      * @param normasVioladas Nuevo conjunto de normas violadas por el empleado.
      */
@@ -144,11 +120,6 @@ public class ReporteRevisadoSancionado extends ReporteRevisado{
      * @param sancionImpuesta Nueva sanción impuesta al empleado.
      */
     public void setSancionImpuesta(String sancionImpuesta) {this.sancionImpuesta = sancionImpuesta;}
-    /**
-     * Establece la descripción de la otra sanción impuesta al empleado.
-     * @param descripcionOtraSancionImpuesta Nueva descripción de la otra sanción impuesta al empleado.
-     */
-    public void setDescripcionOtraSancionImpuesta(String descripcionOtraSancionImpuesta) {this.descripcionOtraSancionImpuesta = descripcionOtraSancionImpuesta;}
     /**
      * Retorna una cadena con la información relevante del reporte sancionado.
      * @return Cadena con la información relevante del reporte sancionado.

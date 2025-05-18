@@ -4,7 +4,7 @@ import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 
 /**
- *
+ * Interfaz que declara los métodos de EmpleadoBO.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)

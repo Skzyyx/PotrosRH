@@ -46,7 +46,11 @@ public class ControlObtenerEmpleado {
             throw new ObtenerEmpleadoException("RFC con formato inválido.");
         
         try {
-            return empleadoBO.obtenerEmpleado(empleado);
+            EmpleadoDTO empleadoEncontrado = empleadoBO.obtenerEmpleado(empleado);
+            if(empleadoEncontrado == null)
+                throw new ObtenerEmpleadoException("No existe un empleado registrado con el RFC recibido.");
+            else
+                return empleadoEncontrado;
         } catch (ObjetosNegocioException ex) {throw new ObtenerEmpleadoException(ex.getMessage(), ex);}
     }
 }

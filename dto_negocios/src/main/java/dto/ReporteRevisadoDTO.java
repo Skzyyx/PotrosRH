@@ -14,9 +14,7 @@ public class ReporteRevisadoDTO {
     private boolean tieneAntecedentesPrevios;
     private String descripcionAntecedentesPrevios;
     private Set<String> entrevistasRealizadas;
-    private String descripcionOtrasEntrevistasRealizadas;
     private Set<String> evidenciasRevisadas;
-    private String descripcionOtrasEvidencias;
     /**
      * Constructor por defecto.
      */
@@ -28,28 +26,22 @@ public class ReporteRevisadoDTO {
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoDTO(
             ReporteMalaConductaDTO reporteMalaConducta, 
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         this.reporteMalaConducta = reporteMalaConducta;
         this.infoCompleta = infoCompleta;
         this.tieneAntecedentesPrevios = tieneAntecedentesPrevios;
         this.descripcionAntecedentesPrevios = descripcionAntecedentesPrevios;
         this.entrevistasRealizadas = entrevistasRealizadas;
-        this.descripcionOtrasEntrevistasRealizadas = descripcionOtrasEntrevistasRealizadas;
         this.evidenciasRevisadas = evidenciasRevisadas;
-        this.descripcionOtrasEvidencias = descripcionOtrasEvidencias;
     }
     /**
      * Constructor con todos los atributos, incluido el ID.
@@ -59,9 +51,7 @@ public class ReporteRevisadoDTO {
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes previos del empleado.
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoDTO(
             String id,
@@ -69,10 +59,8 @@ public class ReporteRevisadoDTO {
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         this.id = id;
         this.reporteMalaConducta = reporteMalaConducta;
@@ -80,9 +68,7 @@ public class ReporteRevisadoDTO {
         this.tieneAntecedentesPrevios = tieneAntecedentesPrevios;
         this.descripcionAntecedentesPrevios = descripcionAntecedentesPrevios;
         this.entrevistasRealizadas = entrevistasRealizadas;
-        this.descripcionOtrasEntrevistasRealizadas = descripcionOtrasEntrevistasRealizadas;
         this.evidenciasRevisadas = evidenciasRevisadas;
-        this.descripcionOtrasEvidencias = descripcionOtrasEvidencias;
     }
     /**
      * Retorna el ID del reporte revisado.
@@ -115,20 +101,10 @@ public class ReporteRevisadoDTO {
      */
     public Set<String> getEntrevistasRealizadas() {return entrevistasRealizadas;}
     /**
-     * Retorna la descripción de otras entrevistas realizadas.
-     * @return Descripción de otras entrevistas realizadas.
-     */
-    public String getDescripcionOtrasEntrevistasRealizadas() {return descripcionOtrasEntrevistasRealizadas;}
-    /**
      * Retorna el conjunto de evidencias revisadas para el reporte.
      * @return Conjunto de evidencias revisadas para el reporte.
      */
     public Set<String> getEvidenciasRevisadas() {return evidenciasRevisadas;}
-    /**
-     * Retorna la descripción de otras evidencias revisadas.
-     * @return Descripción de otras evidencias revisadas.
-     */
-    public String getDescripcionOtrasEvidencias() {return descripcionOtrasEvidencias;}
     /**
      * Establece el ID del reporte revisado.
      * @param id Nuevo ID del reporte revisado.
@@ -162,21 +138,10 @@ public class ReporteRevisadoDTO {
      */
     public void setEntrevistasRealizadas(Set<String> entrevistasRealizadas) {this.entrevistasRealizadas = entrevistasRealizadas;}
     /**
-     * Establece la descripción de otras entrevistas realizadas.
-     * @param descripcionOtrasEntrevistasRealizadas Nueva descripción de otras
-     * entrevistas realizadas.
-     */
-    public void setDescripcionOtrasEntrevistasRealizadas(String descripcionOtrasEntrevistasRealizadas) {this.descripcionOtrasEntrevistasRealizadas = descripcionOtrasEntrevistasRealizadas;}
-    /**
      * Establece el conjunto de evidencias revisadas para el reporte.
      * @param evidenciasRevisadas Nuevo conjunto de evidencias revisadas para el reporte.
      */
     public void setEvidenciasRevisadas(Set<String> evidenciasRevisadas) {this.evidenciasRevisadas = evidenciasRevisadas;}
-    /**
-     * Establece la descripción de otras evidencias revisadas.
-     * @param descripcionOtrasEvidencias Nueva descripción de otras evidencias revisadas.
-     */
-    public void setDescripcionOtrasEvidencias(String descripcionOtrasEvidencias) {this.descripcionOtrasEvidencias = descripcionOtrasEvidencias;}
     /**
      * Retorna una cadena con la información relevante del reporte revisado.
      * @return Cadena con la información relevante del reporte revisado.

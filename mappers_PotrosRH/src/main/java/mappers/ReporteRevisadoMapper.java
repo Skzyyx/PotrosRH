@@ -25,8 +25,6 @@ public class ReporteRevisadoMapper {
         reporteRevisadoSancionado.setNormasVioladas(reporteSancionadoNuevoDTO.getNormasVioladas());
         reporteRevisadoSancionado.setNivelGravedad(GravedadSancion.valueOf(reporteSancionadoNuevoDTO.getNivelGravedad()));
         reporteRevisadoSancionado.setSancionImpuesta(reporteSancionadoNuevoDTO.getSancionImpuesta());
-        if(reporteSancionadoNuevoDTO.getDescripcionOtraSancionImpuesta() != null)
-            reporteRevisadoSancionado.setDescripcionOtraSancionImpuesta(reporteSancionadoNuevoDTO.getDescripcionOtraSancionImpuesta());
         
         return reporteRevisadoSancionado;
     }
@@ -40,8 +38,6 @@ public class ReporteRevisadoMapper {
         reporteRevisadoSancionado.setNormasVioladas(reporteSancionadoViejoDTO.getNormasVioladas());
         reporteRevisadoSancionado.setNivelGravedad(GravedadSancion.valueOf(reporteSancionadoViejoDTO.getNivelGravedad()));
         reporteRevisadoSancionado.setSancionImpuesta(reporteSancionadoViejoDTO.getSancionImpuesta());
-        if(reporteSancionadoViejoDTO.getDescripcionOtraSancionImpuesta() != null)
-            reporteRevisadoSancionado.setDescripcionOtraSancionImpuesta(reporteSancionadoViejoDTO.getDescripcionOtraSancionImpuesta());
         
         return reporteRevisadoSancionado;
     }
@@ -55,8 +51,6 @@ public class ReporteRevisadoMapper {
         reporteRevisadoSancionadoDTO.setNormasVioladas(reporteSancionado.getNormasVioladas());
         reporteRevisadoSancionadoDTO.setNivelGravedad(reporteSancionado.getNivelGravedad().toString());
         reporteRevisadoSancionadoDTO.setSancionImpuesta(reporteSancionado.getSancionImpuesta());
-        if(reporteSancionado.getDescripcionOtraSancionImpuesta() != null)
-            reporteRevisadoSancionadoDTO.setDescripcionOtraSancionImpuesta(reporteSancionado.getDescripcionOtraSancionImpuesta());
         
         return reporteRevisadoSancionadoDTO;
     }
@@ -103,16 +97,12 @@ public class ReporteRevisadoMapper {
         reporteRevisado.setReporteMalaConducta(ReporteMalaConductaMapper.toEntityViejo(nuevoReporteDTO.getReporteMalaConducta()));
         reporteRevisado.setInfoCompleta(nuevoReporteDTO.isInfoCompleta());
         reporteRevisado.setTieneAntecedentesPrevios(nuevoReporteDTO.isTieneAntecedentesPrevios());
-        if(nuevoReporteDTO.getDescripcionAntecedentesPrevios() != null)
+        
+        if(nuevoReporteDTO.getDescripcionAntecedentesPrevios() != null && !nuevoReporteDTO.getDescripcionAntecedentesPrevios().isEmpty())
             reporteRevisado.setDescripcionAntecedentesPrevios(nuevoReporteDTO.getDescripcionAntecedentesPrevios());
         
         reporteRevisado.setEntrevistasRealizadas(nuevoReporteDTO.getEntrevistasRealizadas());
-        if(nuevoReporteDTO.getDescripcionOtrasEntrevistasRealizadas() != null)
-            reporteRevisado.setDescripcionOtrasEntrevistasRealizadas(nuevoReporteDTO.getDescripcionOtrasEntrevistasRealizadas());
-        
         reporteRevisado.setEvidenciasRevisadas(nuevoReporteDTO.getEvidenciasRevisadas());
-        if(nuevoReporteDTO.getDescripcionOtrasEvidencias() != null)
-            reporteRevisado.setDescripcionOtrasEvidencias(nuevoReporteDTO.getDescripcionOtrasEvidencias());
         
         return reporteRevisado;
     }
@@ -128,16 +118,12 @@ public class ReporteRevisadoMapper {
         reporteRevisado.setReporteMalaConducta(ReporteMalaConductaMapper.toEntityViejo(viejoReporteDTO.getReporteMalaConducta()));
         reporteRevisado.setInfoCompleta(viejoReporteDTO.isInfoCompleta());
         reporteRevisado.setTieneAntecedentesPrevios(viejoReporteDTO.isTieneAntecedentesPrevios());
-        if(viejoReporteDTO.getDescripcionAntecedentesPrevios() != null)
+        
+        if(viejoReporteDTO.getDescripcionAntecedentesPrevios() != null && !viejoReporteDTO.getDescripcionAntecedentesPrevios().isEmpty())
             reporteRevisado.setDescripcionAntecedentesPrevios(viejoReporteDTO.getDescripcionAntecedentesPrevios());
         
         reporteRevisado.setEntrevistasRealizadas(viejoReporteDTO.getEntrevistasRealizadas());
-        if(viejoReporteDTO.getDescripcionOtrasEntrevistasRealizadas() != null)
-            reporteRevisado.setDescripcionOtrasEntrevistasRealizadas(viejoReporteDTO.getDescripcionOtrasEntrevistasRealizadas());
-        
         reporteRevisado.setEvidenciasRevisadas(viejoReporteDTO.getEvidenciasRevisadas());
-        if(viejoReporteDTO.getDescripcionOtrasEvidencias() != null)
-            reporteRevisado.setDescripcionOtrasEvidencias(viejoReporteDTO.getDescripcionOtrasEvidencias());
         
         return reporteRevisado;
     }
@@ -153,16 +139,12 @@ public class ReporteRevisadoMapper {
         reporteRevisadoDTO.setReporteMalaConducta(ReporteMalaConductaMapper.toDTO(viejoReporte.getReporteMalaConducta()));
         reporteRevisadoDTO.setInfoCompleta(viejoReporte.isInfoCompleta());
         reporteRevisadoDTO.setTieneAntecedentesPrevios(viejoReporte.isTieneAntecedentesPrevios());
-        if(viejoReporte.getDescripcionAntecedentesPrevios() != null)
+        
+        if(viejoReporte.getDescripcionAntecedentesPrevios() != null && !viejoReporte.getDescripcionAntecedentesPrevios().isEmpty())
             reporteRevisadoDTO.setDescripcionAntecedentesPrevios(viejoReporte.getDescripcionAntecedentesPrevios());
         
         reporteRevisadoDTO.setEntrevistasRealizadas(viejoReporte.getEntrevistasRealizadas());
-        if(viejoReporte.getDescripcionOtrasEntrevistasRealizadas() != null)
-            reporteRevisadoDTO.setDescripcionOtrasEntrevistasRealizadas(viejoReporte.getDescripcionOtrasEntrevistasRealizadas());
-        
         reporteRevisadoDTO.setEvidenciasRevisadas(viejoReporte.getEvidenciasRevisadas());
-        if(viejoReporte.getDescripcionOtrasEvidencias() != null)
-            reporteRevisadoDTO.setDescripcionOtrasEvidencias(viejoReporte.getDescripcionOtrasEvidencias());
         
         return reporteRevisadoDTO;
     }

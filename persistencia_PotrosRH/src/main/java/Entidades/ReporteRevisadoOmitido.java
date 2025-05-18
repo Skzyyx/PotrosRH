@@ -22,9 +22,7 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoOmitido(
             String motivoOmision, 
@@ -32,10 +30,8 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 reporteMalaConducta, 
@@ -43,9 +39,7 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
                 entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                evidenciasRevisadas
         );
         this.motivoOmision = motivoOmision;
     }
@@ -58,9 +52,7 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
      * @param tieneAntecedentesPrevios Si es que se cuentan con antecedentes
      * @param descripcionAntecedentesPrevios Descripción de los antecedentes previos.
      * @param entrevistasRealizadas Entrevistas realizadas para el reporte.
-     * @param descripcionOtrasEntrevistasRealizadas Descripción de otras entrevistas realizadas.
      * @param evidenciasRevisadas Conjunto de evidencias revisadas para el reporte.
-     * @param descripcionOtrasEvidencias Descripción de otras evidencias revisadas.
      */
     public ReporteRevisadoOmitido(
             ObjectId id,
@@ -69,10 +61,8 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
             boolean infoCompleta, 
             boolean tieneAntecedentesPrevios,
             String descripcionAntecedentesPrevios,
-            Set<String> entrevistasRealizadas, 
-            String descripcionOtrasEntrevistasRealizadas,
-            Set<String> evidenciasRevisadas,
-            String descripcionOtrasEvidencias
+            Set<String> entrevistasRealizadas,
+            Set<String> evidenciasRevisadas
     ) {
         super(
                 id,
@@ -80,10 +70,8 @@ public class ReporteRevisadoOmitido extends ReporteRevisado{
                 infoCompleta, 
                 tieneAntecedentesPrevios, 
                 descripcionAntecedentesPrevios, 
-                entrevistasRealizadas, 
-                descripcionOtrasEntrevistasRealizadas,
-                evidenciasRevisadas,
-                descripcionOtrasEvidencias
+                entrevistasRealizadas,
+                evidenciasRevisadas
         );
         this.motivoOmision = motivoOmision;
     }

@@ -39,11 +39,11 @@ public class EmpleadoDAO implements IEmpleadoDAO {
     // Lista de empleados que simula la BD.
     // private final List<Empleado> empleados;
 
-    private final MongoCollection<Empleado> empleadosCollection;
+    private final MongoCollection<Empleado> empleados;
 
     public EmpleadoDAO() {
         MongoDatabase database = Conexion.getDatabase();
-        this.empleadosCollection = database.getCollection("empleados", Empleado.class);
+        this.empleados = database.getCollection("empleados", Empleado.class);
     }
 
 //    /**
@@ -162,20 +162,12 @@ public class EmpleadoDAO implements IEmpleadoDAO {
      */
     @Override
     public Empleado obtenerEmpleado(Empleado empleado) throws AccesoDatosException {
-//        try {
-//            Bson filtro = Filters.eq("rfc", empleado.getRfc());
-//            Empleado empleadoEncontrado = empleadosCollection.find(filtro).first();
-//
-//            if (empleadoEncontrado != null) {
-//                return empleadoEncontrado;
-//            } else {
-//                throw new AccesoDatosException("No se encontró un empleado con el RFC proporcionado");
-//            }
-//        } catch (MongoException e) {
-//            LOG.log(Level.WARNING, "Error al obtener empleado por RFC: {0}", e.getMessage());
-//            throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
-//        }
-        return null;
+        try {
+            return empleados.find(Filters.eq("rfc", empleado.getRfc())).first();
+        } catch (MongoException e) {
+            LOG.log(Level.WARNING, "Error al obtener empleado por RFC: {0}", e.getMessage());
+            throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
+        }
     }
 
     /**
@@ -202,7 +194,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
 
             Bson match = Aggregates.match(Filters.eq("candidato.rfc", empleado.getRfc()));
 
-            AggregateIterable<Empleado> resultado = empleadosCollection.aggregate(Arrays.asList(
+            AggregateIterable<Empleado> resultado = empleados.aggregate(Arrays.asList(
                     match
             ));
 
@@ -210,7 +202,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
                 throw new AccesoDatosException("Ya existe un candidato con el rfc '" + empleado.getRfc() + "'.");
             }
             
-            empleadosCollection.insertOne(empleado);
+            empleados.insertOne(empleado);
 
             return empleado;
         } catch (MongoException e) {

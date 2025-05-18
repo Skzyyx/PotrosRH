@@ -419,10 +419,8 @@ public class DeterminacionCaso extends javax.swing.JPanel {
                 if(jTAOtraAccionCorrectiva.getText().trim().isEmpty())
                     throw new PresentacionException("Por favor, ingrese la descripción de la otra sanción correctiva a aplicar.");
                 // Se agrega el tipo de sanción y la descripción del otro tipo de sanción impuesta al reporte sancionado.
-                else{
-                    reporteSancionado.setSancionImpuesta(sancionSeleccionada.getText());
-                    reporteSancionado.setDescripcionOtraSancionImpuesta(jTAOtraAccionCorrectiva.getText().trim());
-                }
+                reporteSancionado.setSancionImpuesta(jTAOtraAccionCorrectiva.getText().trim());
+                
             // Se agrega el tipo de sanción impuesta al reporte sancionado.
             } else
                 reporteSancionado.setSancionImpuesta(sancionSeleccionada.getText());

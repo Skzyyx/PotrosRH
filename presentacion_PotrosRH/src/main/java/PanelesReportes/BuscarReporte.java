@@ -231,15 +231,18 @@ public class BuscarReporte extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
             try {
-                EmpleadoDTO empleado = new EmpleadoDTO();
                 // Valida que haya un RFC a buscar.
                 if(jTEmpleado.getText().trim().isEmpty())
                     throw new PresentacionException("Por favor, ingrese el RFC a buscar");
+                // Nuevo EmpleadoDTO.
+                EmpleadoDTO empleado = new EmpleadoDTO();
                 // Agrega el RFC al EmpleadoDTO.
                 empleado.setRfc(jTEmpleado.getText().trim());
-                // Valida que la fecha del incidente 
+                
+                // Valida que la fecha del incidente no esté después de la fecha actual.
                 if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
                     throw new PresentacionException("La fecha del incidente no puede estar después de la fecha actual.");
+                
                 // Busca los reportes asociados al RFC del empleado y los almacena en la lista de reportes encontrados.
                 reportesEncontrados = ControlReportes.getInstance().obtenerReporteEmpleado(empleado, jDPFechaIncidente.getSelectedDate());
                 // Carga la lista de reportes obtenidos.
@@ -247,14 +250,17 @@ public class BuscarReporte extends javax.swing.JPanel {
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
         } else{
             try {
-                ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
                 // Valida que se haya ingresado un número de seguimiento.
                 if(jTNumSeguimiento.getText().trim().isEmpty())
                     throw new PresentacionException("Por favor, ingrese un número de seguimiento.");
+                // Nuevo reporte de mala conducta.
+                ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
                 // Se extrae el número de seguimiento ingresado.
                 reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText().trim()));
+                
                 // Se busca el reporte asociado al número de seguimiento.
                 reporte = ControlReportes.getInstance().obtenerReporteSeguimiento(reporte);
+                
                 // Se añade el reporte obtenido a la lista de reportes obtenidos, aunque sólo se puede obtener uno.
                 reportesEncontrados.add(reporte);
                 // Carga la lista de reportes obtenidos.
@@ -307,7 +313,7 @@ public class BuscarReporte extends javax.swing.JPanel {
                 ControlFlujo.mostrarDatosGenerales(reporte);
             } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "ERROR");}
         } else
-            OptionPane.showErrorMessage(this, "Por favor, seleccione el reporte a revisar", "Reporte no seleccionado");
+            OptionPane.showErrorMessage(this, "Por favor, busque el reporte a revisar o seleccionelo en la lista de reportes encontrados.", "Reporte no seleccionado");
     }//GEN-LAST:event_btnSiguienteActionPerformed
     /**
      * Carga la lista con los reportes encontrados.

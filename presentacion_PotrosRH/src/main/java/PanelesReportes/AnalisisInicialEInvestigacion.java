@@ -386,7 +386,7 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
 
         jLEvidenciasRevisadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLEvidenciasRevisadas.setForeground(new java.awt.Color(0, 0, 0));
-        jLEvidenciasRevisadas.setText("Entrevistas realizadas*:");
+        jLEvidenciasRevisadas.setText("Evidencias revisadas*:");
         add(jLEvidenciasRevisadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 180, 200, 49));
 
         jLOtrasEntrevistasRealizadas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -598,14 +598,13 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
            if(checkBox.isSelected()){
                // Si el checkBox es el de otros.
                if (checkBox.equals(jCLOtrasEntrevistas)) {
-                   // Añade la información del checkBox
-                   entrevistas.add(checkBox.getText());
                    // Si el área de texto de las otras entrevistas realizadas está vacío.
                    if (jTAOtrasEntrevistas.getText().trim().isEmpty()) 
                        throw new PresentacionException("Por favor, ingrese la descripción de las otras entrevistas realizadas");
                    // Si no, agrega la descripción de las otras entrevistas realizadas.
-                    else 
-                       reporteRevisado.setDescripcionOtrasEntrevistasRealizadas(jTAOtrasEntrevistas.getText().trim());
+                   else 
+                       // Añade la información del área de texto de las otras entrevistas.
+                       entrevistas.add(jTAOtrasEntrevistas.getText().trim());
                // Si el checkBox seleccionado actual no es el de otros    
                } else
                    entrevistas.add(checkBox.getText());
@@ -623,14 +622,13 @@ public class AnalisisInicialEInvestigacion extends javax.swing.JPanel {
            if(checkBox.isSelected()){
                // Si el checkBox es el de otros.
                if (checkBox.equals(jCLOtrasEvidencias)) {
-                   // Añade la información del checkBox
-                   evidencias.add(checkBox.getText());
                    // Si el área de texto de las otras evidencias revisadas está vacío.
                    if (jTAOtrasEvidencias.getText().trim().isEmpty()) 
                        throw new PresentacionException("Por favor, ingrese la descripción de las otras evidencias revisadas.");
                    // Si no, agrega la descripción de las otras evidencias revisadas.
-                    else 
-                       reporteRevisado.setDescripcionOtrasEvidencias(jTAOtrasEvidencias.getText().trim());
+                   else 
+                      // Añade la información del área de texto de las otras evidencias.
+                      evidencias.add(jTAOtrasEvidencias.getText().trim());
                // Si el checkBox seleccionado actual no es el de otros    
                } else
                    evidencias.add(checkBox.getText());

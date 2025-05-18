@@ -52,7 +52,12 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
     @Override
     public ReporteMalaConductaDTO registrarReporteNuevo(ReporteMalaConductaDTO reporteNuevo) throws ObjetosNegocioException{
         try {
+            
+            if(reporteNuevo == null)
+                throw new ObjetosNegocioException("El reporte está vacío.");
+            
             return ReporteMalaConductaMapper.toDTO(reportesDAO.registrarReporteNuevo(ReporteMalaConductaMapper.toEntityNuevo(reporteNuevo)));
+            
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }
     /**
@@ -84,6 +89,7 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
                 return reportesObtenidosMapeados;
             } else
                 return null;
+            
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }
     /**
@@ -101,9 +107,11 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
         
         ReporteMalaConducta reporte = new ReporteMalaConducta();
         reporte.setNumeroSeguimiento(reporteSeguimiento.getNumeroSeguimiento());
+        
         try {
             reporte = reportesDAO.obtenerReporteSeguimiento(reporte);
             return reporte != null ? ReporteMalaConductaMapper.toDTO(reporte) : null;
+            
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }
     /**
@@ -116,7 +124,12 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
     @Override
     public ReporteRevisadoSancionadoDTO registrarReporteSancionado(ReporteRevisadoSancionadoDTO reporteSancionadoNuevo) throws ObjetosNegocioException {
         try {
+            
+            if(reporteSancionadoNuevo == null)
+                throw new ObjetosNegocioException("El reporte sancionado está vacío.");
+            
             return ReporteRevisadoMapper.toDTOSancionado(reportesDAO.registrarReporteSancionado(ReporteRevisadoMapper.toEntityNuevoSancionado(reporteSancionadoNuevo)));
+            
         } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage(), ex);}
     }
     /**
@@ -129,7 +142,12 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
     @Override
     public ReporteRevisadoOmitidoDTO registrarReporteOmitido(ReporteRevisadoOmitidoDTO reporteOmitidoNuevo) throws ObjetosNegocioException {
         try {
+            
+            if(reporteOmitidoNuevo == null)
+                throw new ObjetosNegocioException("El reporte omitido está vacío.");
+            
             return ReporteRevisadoMapper.toDTOOmitido(reportesDAO.registrarReporteOmitido(ReporteRevisadoMapper.toEntityNuevoOmitido(reporteOmitidoNuevo)));
+            
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }
 }

@@ -19,7 +19,14 @@ import Interfaces.IEmpleadoDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
-
+/**
+ * Implementa la interfaz IEmpleadoBO y sus métodos.
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
+ */
 public class EmpleadoBO implements IEmpleadoBO{
     // Atributo de la misma clase (SingleTon).
     private static IEmpleadoBO instance;
@@ -106,7 +113,7 @@ public class EmpleadoBO implements IEmpleadoBO{
         
         // Se extrae el RFC del empleado.
         String rfc = empleado.getRfc();
-
+        
         if (!(rfc != null && rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
             throw new ObjetosNegocioException("RFC no válido");
         
@@ -114,7 +121,8 @@ public class EmpleadoBO implements IEmpleadoBO{
             
             Empleado empleadoPersistir = new Empleado();
             empleadoPersistir.setRfc(rfc);
-            return EmpleadoMapper.toDTO(empleadoDAO.obtenerEmpleado(empleadoPersistir));
+            empleadoPersistir = empleadoDAO.obtenerEmpleado(empleadoPersistir);
+            return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
             
         } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage());}
     }

@@ -53,6 +53,7 @@ public class RevisarReporte {
             throw new ReporteException("ERROR: Debe haber seleccionado la sanción impuesta al empleado.");
         
         try {
+            reporteSancionadoNuevo.getReporteMalaConducta().setEstadoReporte("REVISADO");
             return reporteBO.registrarReporteSancionado(reporteSancionadoNuevo);
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
         
@@ -74,6 +75,7 @@ public class RevisarReporte {
             throw new ReporteException("ERROR: El motivo de la omisión no puede ser nulo.");
         
         try {
+            reporteOmitidoNuevo.getReporteMalaConducta().setEstadoReporte("REVISADO");
             return reporteBO.registrarReporteOmitido(reporteOmitidoNuevo);
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }
