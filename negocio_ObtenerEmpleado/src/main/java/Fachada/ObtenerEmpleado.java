@@ -44,4 +44,15 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObtenerEmpleadoException {   
         return new ControlObtenerEmpleado().obtenerEmpleado(empleado);
     }
+    /**
+     * Obtiene un empleado activo de la base de datos. 
+     * Extrae su RFC para dicho fin.
+     * @param empleado Objeto DTO que debe contener el RFC del empleado a buscar.
+     * @return Empleado encontrado, devuelto como un DTO.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    @Override
+    public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
+        return new ControlObtenerEmpleado().obtenerEmpleadoActivo(empleado);
+    }
 }

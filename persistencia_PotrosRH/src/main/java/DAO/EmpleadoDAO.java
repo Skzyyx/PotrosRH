@@ -1,13 +1,10 @@
 package DAO;
 
 import Conexion.Conexion;
-import Entidades.Direccion;
 import Entidades.Empleado;
-import Entidades.Evaluacion;
-import Entidades.HorarioLaboral;
+import Enums.EstadoEmpleado;
 import Exceptions.AccesoDatosException;
 import Interfaces.IEmpleadoDAO;
-import Enums.EstadoEmpleado;
 import com.mongodb.MongoException;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
@@ -15,15 +12,10 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
-import com.mongodb.client.result.InsertOneResult;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 /**
  * Clase para métodos de Persistencia con entidades Empleado.
@@ -170,7 +162,26 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
         }
     }
-
+    /**
+     * Obtiene un empleado activo de la base de datos.
+     * @param empleado Empleado del cual se el extra su RFC, para buscarlo en la BD.
+     * @return Entidad empleado, correspondiente al RFC recibido.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
+     */
+    @Override
+    public Empleado obtenerEmpleadoActivo(Empleado empleado) throws AccesoDatosException{
+        try {
+            // Filtro para el RFC
+            Bson filtroRFC = Filters.eq("rfc", empleado.getRfc());
+            // Filtro para el estado del empleado.
+            Bson filtroEstado = Filters.eq("estado", EstadoEmpleado.ACTIVO);
+            // Ejecuta la consulta y devuelve el empleado obtenido.
+            return empleados.find(Filters.and(filtroRFC, filtroEstado)).first();
+        } catch (MongoException e) {
+            LOG.log(Level.WARNING, "Error al obtener empleado activo por RFC: {0}", e.getMessage());
+            throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
+        }
+    }
     /**
      * Actualiza la información de un empleado en la base de datos simulada
      *

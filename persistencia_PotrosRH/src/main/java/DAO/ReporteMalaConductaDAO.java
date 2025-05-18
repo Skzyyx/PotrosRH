@@ -13,6 +13,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.conversions.Bson;
@@ -71,8 +72,20 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
         try {
             // Filtro para el RFC.
             Bson filtroRFC = Filters.eq("empleadoReportado.rfc", empleado.getRfc());
+            // Filtro para el comienzo del día de la fecha recibida.
+            Bson filtroFechaInicio = Filters.gte(
+                    "fechaHoraIncidente", 
+                    LocalDateTime.of(fechaIncidente.getYear(), fechaIncidente.getMonthValue(), fechaIncidente.getDayOfMonth(), 0, 0, 0)
+            );
+            // Filtro para el fin del día de la fecha recibida.
+            Bson filtroFechaFin = Filters.lte(
+                    "fechaHoraIncidente", 
+                    LocalDateTime.of(fechaIncidente.getYear(), fechaIncidente.getMonthValue(), fechaIncidente.getDayOfMonth(), 23, 59, 59)
+            );
+            // Fltro para buscar el reporte en todo el día (necesario ya que el atributo es fecha y hora).
+            Bson filtroFecha = Filters.and(filtroFechaInicio, filtroFechaFin);
             // Ejecuta la consulta y regresa una lista con los reportes obtenidos.
-            return reportes.find(filtroRFC).into(new ArrayList<>());
+            return reportes.find(Filters.and(filtroRFC, filtroFecha)).into(new ArrayList<>());
         } catch (Exception e) {throw new AccesoDatosException("Error al consultar el reporte del empleado.", e);}
     }
     /**

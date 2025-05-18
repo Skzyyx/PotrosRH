@@ -120,7 +120,28 @@ public class EmpleadoBO implements IEmpleadoBO{
             
         } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage());}
     }
-    
+    /**
+     * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC, cuyo estado sea ACTIVO.
+     * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
+     * @param empleado Objeto EmpleadoBO del cual se extrae su RFC.
+     * @return {@link EmpleadoDTO} con la información del empleado encontrado.
+     * @throws ObjetosNegocioException Si el RFC es inválido o el empleado no está registrado.
+     */
+    @Override
+    public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObjetosNegocioException{
+        
+        if(!(empleado != null && empleado.getRfc() != null &&!empleado.getRfc().isEmpty()))
+            throw new ObjetosNegocioException("El RFC no puede estar vacío.");
+        
+        try {
+            
+            Empleado empleadoPersistir = new Empleado();
+            empleadoPersistir.setRfc(empleado.getRfc());
+            empleadoPersistir = empleadoDAO.obtenerEmpleadoActivo(empleadoPersistir);
+            return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
+            
+        } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage());}
+    }
     /**
      * Actualiza el estado de un empleado
      * @param rfc RFC del empleado a actualizar

@@ -25,4 +25,12 @@ public interface IObtenerEmpleado {
      * @throws ObtenerEmpleadoException Excepción del subsistema.
      */
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
+    /**
+     * Obtiene un empleado activo de la base de datos. 
+     * Extrae su RFC para dicho fin.
+     * @param empleado Objeto DTO que debe contener el RFC del empleado a buscar.
+     * @return Empleado encontrado, devuelto como un DTO.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
 }
