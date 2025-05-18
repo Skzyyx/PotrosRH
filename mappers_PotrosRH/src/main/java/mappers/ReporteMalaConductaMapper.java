@@ -37,6 +37,7 @@ public class ReporteMalaConductaMapper {
         
         reporteMalaConducta.setFechaRegistro(nuevoReporteDTO.getFechaRegistro());
         reporteMalaConducta.setEstadoReporte(EstadoReporte.NO_REVISADO);
+        reporteMalaConducta.setNumeroSeguimiento(nuevoReporteDTO.getNumeroSeguimiento());
         // Se retorna la entidad mapeada.
         return reporteMalaConducta;
     }

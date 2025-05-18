@@ -280,10 +280,10 @@ public class ImpactoIncidente extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
-        btnEnviar.setBorderPainted(false);
-        btnEnviar.setContentAreaFilled(false);
-        btnEnviar.setOpaque(false);
-        btnEnviar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnAnterior.setBorderPainted(false);
+        btnAnterior.setContentAreaFilled(false);
+        btnAnterior.setOpaque(false);
+        btnAnterior.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();

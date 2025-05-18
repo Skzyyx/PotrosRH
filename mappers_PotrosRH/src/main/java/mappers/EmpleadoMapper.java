@@ -8,6 +8,7 @@ import dto.HorarioLaboralDTO;
 import Enums.EstadoEmpleado;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que mapea entidades Empleado a EmpleadolDTO, 
@@ -69,7 +70,7 @@ public class EmpleadoMapper {
      */
     public static Empleado toEntityViejo(EmpleadoDTO empleadoDTO){
         Empleado empleado = new Empleado();
-        // Falta el ID.
+        empleado.setId(new ObjectId(empleadoDTO.getId()));
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
