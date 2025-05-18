@@ -14,6 +14,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.InsertOneResult;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -208,6 +209,16 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         } catch (MongoException e) {
             LOG.log(Level.WARNING, e.getMessage());
             throw new AccesoDatosException("Ocurrió un error al intentar registrar la evaluación.");
+        }
+    }
+    
+    public void actualizarEstado(String rfc, String nuevoEstado) throws AccesoDatosException {
+        try {
+            empleados.updateOne(Filters.eq("rfc", rfc), Updates.set("estado", nuevoEstado));
+            LOG.log(Level.INFO, "Estado del empleado con RFC {0} actualizado a {1}", new Object[]{rfc, nuevoEstado});
+        } catch (MongoException e) {
+            LOG.log(Level.WARNING, "Error al actualizar el estado del empleado con RFC {0}: {1}", new Object[]{rfc, e.getMessage()});
+            throw new AccesoDatosException("Ocurrió un error al actualizar el estado del empleado en la base de datos.");
         }
     }
 }

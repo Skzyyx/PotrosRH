@@ -39,4 +39,6 @@ public interface IEmpleadoDAO {
     public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException;
     
     public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException;
+    
+    public void actualizarEstado(String rfc, String nuevoEstado) throws AccesoDatosException;
 }

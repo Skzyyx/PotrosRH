@@ -48,7 +48,11 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
             throw new CorreoException("Error: Datos incompletos para cambiar el estado del empleado.");
         }
         try {
-            empleadoBO.actualizarEstadoEmpleado(empleadoDTO.getRfc(), "INACTIVO");
+            try {
+                empleadoBO.actualizarEstadoEmpleadoD(empleadoDTO.getRfc(), "INACTIVO");
+            } catch (AccesoDatosException ex) {
+                Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return empleadoBO.obtenerEmpleado(empleadoDTO);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al cambiar el estado del empleado: " + e.getMessage(), e);
