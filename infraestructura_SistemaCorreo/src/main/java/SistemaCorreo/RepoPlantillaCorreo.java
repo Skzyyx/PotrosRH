@@ -15,7 +15,7 @@ public class RepoPlantillaCorreo {
         ),
         TipoPlantillaCorreo.DESPIDO, new PlantillaCorreo(
             "Notificación de término de contrato",
-            "Hola {{nombre}}, lamentamos informarte que tu contrato ha sido terminado a partir del {{fechaDespido}}."
+            "Hola {{nombre}}, lamentamos informarte que tu contrato ha sido terminado a partir del {{fechaDespido}}, la razon de esto es {{razonDespido}}."
         ),
         TipoPlantillaCorreo.NOMINA, new PlantillaCorreo(
             "Resumen de nómina de {{nombreCompleto}}",

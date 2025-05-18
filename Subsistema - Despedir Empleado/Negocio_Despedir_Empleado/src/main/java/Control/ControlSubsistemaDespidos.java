@@ -48,7 +48,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
             throw new CorreoException("Error: Datos incompletos para cambiar el estado del empleado.");
         }
         try {
-            empleadoBO.actualizarEstadoEmpleado(empleadoDTO.getRfc(), estado);
+            empleadoBO.actualizarEstadoEmpleado(empleadoDTO.getRfc(), "INACTIVO");
             return empleadoBO.obtenerEmpleado(empleadoDTO);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al cambiar el estado del empleado: " + e.getMessage(), e);
@@ -113,7 +113,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
 
         // Crear el CorreoDTO y enviarlo
         try {
-            CorreoDTO correoDespidoDTO = crearCorreoDespidoDTO(empleadoDTO);
+            CorreoDTO correoDespidoDTO = crearCorreoDespidoDTO(empleadoDTO, motivo);
             if (correoDespidoDTO != null) {
                 sistemaCorreo.sendEmail(correoDespidoDTO);
                 System.out.println("Correo de despido enviado a: " + correoDespidoDTO.getCorreoReceptor());
@@ -136,13 +136,14 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
      * @param empleadoDTO El DTO del empleado despedido, conteniendo su nombre completo y correo
      * @return Un objeto {CorreoDTO} listo para ser enviado, o {CorreoException} si no se encuentra la plantilla de correo.
      */
-    private CorreoDTO crearCorreoDespidoDTO(EmpleadoDTO empleadoDTO) throws CorreoException {
+    private CorreoDTO crearCorreoDespidoDTO(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException {
         PlantillaCorreo plantillaDespido = RepoPlantillaCorreo.getTemplate(TipoPlantillaCorreo.DESPIDO);
         if (plantillaDespido != null) {
             Map<String, Object> valores = new HashMap<>();
             valores.put("nombre", empleadoDTO.getNombre() + " " + empleadoDTO.getApellidoPaterno()
                     + " " + empleadoDTO.getApellidoMaterno());
             valores.put("fechaDespido", java.time.LocalDate.now().toString());
+            valores.put("razonDespido", motivo);
 
             CorreoDTO correoDTO = new CorreoDTO();
             correoDTO.setCorreoReceptor(empleadoDTO.getEmail());
