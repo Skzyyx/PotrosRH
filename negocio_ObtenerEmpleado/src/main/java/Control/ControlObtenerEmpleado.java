@@ -55,7 +55,7 @@ public class ControlObtenerEmpleado {
         try {
             EmpleadoDTO empleadoEncontrado = empleadoBO.obtenerEmpleadoActivo(empleado);
             if(empleadoEncontrado == null)
-                throw new ObtenerEmpleadoException("No existe un empleado registrado con el RFC recibido.");
+                throw new ObtenerEmpleadoException("No existe un empleado registrado con el RFC recibido o el empleado ya fue despedido.");
             else
                 return empleadoEncontrado;
         } catch (ObjetosNegocioException ex) {throw new ObtenerEmpleadoException(ex.getMessage(), ex);}
