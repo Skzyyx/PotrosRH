@@ -11,29 +11,33 @@ import dto.EmpleadoDTO;
 public interface IDespedirEmpleado {
 
     /**
-     * Cambia el estado de un empleado.
-     * @param empleadoDTO El DTO del empleado a actualizar.
-     * @param estado El nuevo estado del empleado.
-     * @return El DTO del empleado con el estado actualizado.
-     * @throws CorreoException Si hay un error en la operación.
+     * Cambia el estado de un empleado a un nuevo estado especificado
+     *
+     * @param empleadoDTO El DTO del empleado cuyo estado se va a modificar
+     * @param estado      El nuevo estado que se asignará al empleado
+     * @return El DTO del empleado con el estado actualizado
+     * @throws CorreoException Si ocurre un error al cambiar el estado
      */
     EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws CorreoException;
 
     /**
      * Busca un empleado por su RFC.
-     * @param rfc El RFC del empleado a buscar.
-     * @return El DTO del empleado encontrado.
-     * @throws CorreoException Si hay un error en la operación.
-     * @throws ObjetosNegocioException Si no se encuentra el empleado.
+     *
+     * @param rfc El RFC del empleado a buscar
+     * @return El DTO del empleado encontrado
+     * @throws CorreoException           Si ocurre un error al buscar el empleado
+     * @throws ObjetosNegocioException Si no se encuentra el empleado
      */
     EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException, ObjetosNegocioException;
 
     /**
-     * Registra el despido de un empleado.
-     * @param empleadoDTO El DTO del empleado a despedir.
-     * @param motivo El motivo del despido.
-     * @throws CorreoException Si hay un error en la operación.
-     * @throws ObjetosNegocioException Si hay un error en los datos.
+     * Registra el despido de un empleado, actualiza su estado a "INACTIVO" y envía una
+     * notificación por correo al empleado
+     *
+     * @param empleadoDTO El DTO del empleado que será despedido
+     * @param motivo      El motivo del despido
+     * @throws CorreoException           Si ocurre un error al registrar el despido o enviar el correo.
+     * @throws ObjetosNegocioException Si ocurre un error en la lógica de negocio
      */
     void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException, ObjetosNegocioException;
 }
