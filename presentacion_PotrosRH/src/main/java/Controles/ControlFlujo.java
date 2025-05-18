@@ -8,13 +8,19 @@ import PanelesCasoBase.MenuPrincipal;
 import PanelesCasoBase.PrevisualizarEmpleado;
 import PanelesDespidos.PrevisualizarEmpleadoDespedir;
 import PanelesCasoBase.PrevisualizarNomina;
+import PanelesReportes.AnalisisInicialEInvestigacion;
+import PanelesReportes.BuscarReporte;
+import PanelesReportes.DatosGenerales;
 import PanelesReportes.DescripcionIncidente;
+import PanelesReportes.DeterminacionCaso;
 import PanelesReportes.ImpactoIncidente;
+import PanelesReportes.MotivoOmisionMalaConducta;
 import PanelesReportes.RegistroDatosGenerales;
 import PanelesReportes.SubmenuReportesMalaConducta;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import dto.ReporteMalaConductaDTO;
+import dto.ReporteRevisadoDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -46,6 +52,11 @@ public class ControlFlujo {
     private static RegistroDatosGenerales registroDatosGenerales;
     private static DescripcionIncidente descripcionIncidente;
     private static ImpactoIncidente impactoIncidente;
+    private static BuscarReporte buscarReporte;
+    private static DatosGenerales datosGenerales;
+    private static AnalisisInicialEInvestigacion analisisInicialEInvestigacion;
+    private static MotivoOmisionMalaConducta motivoOmisionMalaConducta;
+    private static DeterminacionCaso determinacionCaso;
     /**
     * Muestra la pantalla del menú principal de la aplicación.
     * 
@@ -137,6 +148,21 @@ public class ControlFlujo {
         if(impactoIncidente != null)
             impactoIncidente = null;
         
+        if(buscarReporte != null)
+            buscarReporte = null;
+        
+        if(datosGenerales != null)
+            datosGenerales = null;
+        
+        if(analisisInicialEInvestigacion != null)
+            analisisInicialEInvestigacion = null;
+        
+        if(motivoOmisionMalaConducta != null)
+            motivoOmisionMalaConducta = null;
+        
+        if(determinacionCaso != null)
+            determinacionCaso = null;
+        
         if(submenuReportesMalaConducta == null)
             submenuReportesMalaConducta = new SubmenuReportesMalaConducta();
         cambiarPantalla(submenuReportesMalaConducta);
@@ -175,7 +201,71 @@ public class ControlFlujo {
         impactoIncidente.setReporte(reporteMalaConducta);
         cambiarPantalla(impactoIncidente);
     }
-    
+    /**
+     * Muestra el panel de búsqueda de reportes de
+     * mala conducta.
+     */
+    public static void mostrarBuscarReporte(){
+        if(buscarReporte == null)
+            buscarReporte = new BuscarReporte();
+        cambiarPantalla(buscarReporte);
+    }
+    /**
+     * Muestra el panel de datos generales el reporte de 
+     * mala conducta.Recibe un reporte de mala conducta,
+     * obtenido en el panel de buscar reporte.
+     * @param reporte Reporte de mala conducta.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public static void mostrarDatosGenerales(ReporteMalaConductaDTO reporte) throws PresentacionException{
+        if(datosGenerales == null)
+            datosGenerales = new DatosGenerales();
+        datosGenerales.cargarReporte(reporte);
+        cambiarPantalla(datosGenerales);
+    }
+    /**
+     * Muestra el panel de análisis incial e investigación
+     * de un reporte de mala conducta. Dicho reporte es
+     * recibido gracias al panel de datos generales.
+     * Este panel marca el inicio de la revisión de dicho
+     * reporte.
+     * @param reporte Reporte de Mala Conducta a revisar.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public static void mostrarAnalisisIncialEInvestigacion(ReporteMalaConductaDTO reporte) throws PresentacionException{
+        if(analisisInicialEInvestigacion == null)
+            analisisInicialEInvestigacion = new AnalisisInicialEInvestigacion();
+        analisisInicialEInvestigacion.setReporteMalaConducta(reporte);
+        cambiarPantalla(analisisInicialEInvestigacion);
+    }
+    /**
+     * Muestra el panel de motivo de omisión de mala conducta.
+     * Recibe un reporte revisado, gracias al panel de análisis
+     * inicial e investigación, después de que el usuario haya
+     * confirmado que no hubo una mala conducta sancionable.
+     * @param reporteRevisado Reporte revisado.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public static void mostrarMotivoOmisionMalaConducta(ReporteRevisadoDTO reporteRevisado) throws PresentacionException{
+        if(motivoOmisionMalaConducta == null)
+            motivoOmisionMalaConducta = new MotivoOmisionMalaConducta();
+        motivoOmisionMalaConducta.setReporte(reporteRevisado);
+        cambiarPantalla(motivoOmisionMalaConducta);
+    }
+    /**
+     * Muestra el panel de determinación del caso.
+     * Recibe un reporte revisado, gracias al panel de análisis
+     * inicial e investigación, después de que el usuario haya
+     * confirmado que sí hubo una mala conducta sancionable.
+     * @param reporteRevisado Reporte revisado.
+     * @throws PresentacionException Excepción de la capa de Presentación.
+     */
+    public static void mostrarDeterminacionCaso(ReporteRevisadoDTO reporteRevisado) throws PresentacionException{
+        if(determinacionCaso == null)
+            determinacionCaso = new DeterminacionCaso();
+        determinacionCaso.setReporte(reporteRevisado);
+        cambiarPantalla(determinacionCaso);
+    }
     /**
     * Cambia la vista actual del sistema mostrando el panel recibido como nuevo contenido.
     * 
@@ -200,17 +290,13 @@ public class ControlFlujo {
     }
     
     /**
-    * Establece el panel contenedor principal para la interfaz gráfica.
-    * 
+    * Establece el panel contenedor principal para la interfaz gráfica.* 
     * Este método recibe un panel como parámetro y lo asigna como el contenedor
-    * principal en el cual se mostrarán las diferentes pantallas o vistas del sistema.
-    * 
+    * principal en el cual se mostrarán las diferentes pantallas o vistas del sistema.* 
     * @param contenedor El panel que se debe establecer como contenedor principal.
     */
-    public static void setContenedor(JPanel contenedor) {
-        panelContenedor = contenedor;
-    }
-    
+    public static void setContenedor(JPanel contenedor) {panelContenedor = contenedor;}
+
     /**
      * Muestra la pantalla de búsqueda de empleados para despedir.
      *
