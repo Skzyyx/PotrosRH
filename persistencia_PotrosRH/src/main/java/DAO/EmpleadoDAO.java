@@ -199,7 +199,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
     @Override
     public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException {
         try {
- 
+
             Bson match = Aggregates.match(Filters.eq("candidato.rfc", empleado.getRfc()));
 
             AggregateIterable<Empleado> resultado = empleadosCollection.aggregate(Arrays.asList(
@@ -209,9 +209,9 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             if (resultado.iterator().hasNext()) {
                 throw new AccesoDatosException("Ya existe un candidato con el rfc '" + empleado.getRfc() + "'.");
             }
-            InsertOneResult result = empleadosCollection.insertOne(empleado);
-            ObjectId idGenerado = result.getInsertedId().asObjectId().getValue();
-            empleado.setId(idGenerado);
+            
+            empleadosCollection.insertOne(empleado);
+
             return empleado;
         } catch (MongoException e) {
             LOG.log(Level.WARNING, e.getMessage());

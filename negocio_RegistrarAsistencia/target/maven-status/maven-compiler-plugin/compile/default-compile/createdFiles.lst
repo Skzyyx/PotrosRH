@@ -1,0 +1,5 @@
+Fachada\RegistrarAsistencia.class
+Control\ControlRegistrarAsistencia.class
+Excepciones\RegistrarAsistenciaException.class
+Interfaces\IRegistrarAsistencia.class
+Pruebas\Negocio_RegistrarAsistencia.class

@@ -30,6 +30,7 @@ public class EmpleadoMapper {
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
+        empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
         empleado.setRfc(empleadoDTO.getRfc());
         empleado.setCurp(empleadoDTO.getCurp());
         empleado.setEmail(empleadoDTO.getEmail());
@@ -72,6 +73,7 @@ public class EmpleadoMapper {
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
+        empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
         empleado.setRfc(empleadoDTO.getRfc());
         empleado.setCurp(empleadoDTO.getCurp());
         empleado.setEmail(empleadoDTO.getEmail());
@@ -108,10 +110,14 @@ public class EmpleadoMapper {
      */
     public static EmpleadoDTO toDTO(Empleado empleado){
         EmpleadoDTO empleadoDTO = new EmpleadoDTO();
-        // Falta el ID.
+        
+        if (empleado.getId() != null)
+            empleadoDTO.setId(empleado.getId().toString());
+        
         empleadoDTO.setNombre(empleado.getNombre());
         empleadoDTO.setApellidoPaterno(empleado.getApellidoPaterno());
         empleadoDTO.setApellidoMaterno(empleado.getApellidoMaterno());
+        empleadoDTO.setFechaNacimiento(empleado.getFechaNacimiento());
         empleadoDTO.setRfc(empleado.getRfc());
         empleadoDTO.setCurp(empleado.getCurp());
         empleadoDTO.setEmail(empleado.getEmail());

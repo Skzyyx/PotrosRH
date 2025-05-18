@@ -67,15 +67,13 @@ public class HorarioLaboral {
      */
     @Override
     public String toString() {
-        return String.format(
-                "%d, %d/%d/%d, %d/%d/%d", 
-                getDiaSemana(),
-                getHoraInicioTurno().getHour(),
-                getHoraInicioTurno().getMinute(),
-                getHoraInicioTurno().getSecond(),
-                getHoraFinTurno().getHour(),
-                getHoraFinTurno().getMinute(),
-                getHoraFinTurno().getSecond()
-        );
+        StringBuilder sb = new StringBuilder();
+        sb.append("HorarioLaboral{");
+        sb.append("diaSemana=").append(diaSemana);
+        sb.append(", horaInicioTurno=").append(horaInicioTurno);
+        sb.append(", horaFinTurno=").append(horaFinTurno);
+        sb.append('}');
+        return sb.toString();
     }
+    
 }

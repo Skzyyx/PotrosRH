@@ -1,0 +1,5 @@
+Exceptions\RegistrarObtenerCandidatoException.class
+Fachada\RegistrarObtenerCandidato.class
+Interfaces\IRegistrarObteneCandidato.class
+Pruebas\Negocio_RegistrarObtenerCandidato.class
+Control\ControlRegistrarObtenerCandidato.class

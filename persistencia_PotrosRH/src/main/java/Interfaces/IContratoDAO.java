@@ -8,10 +8,29 @@ import Entidades.Contrato;
 import Exceptions.AccesoDatosException;
 
 /**
+ * Interfaz que define las operaciones de acceso a datos para la entidad
+ * Contrato. Establece los métodos necesarios para gestionar contratos de
+ * empleados en el sistema de persistencia, independientemente de la
+ * implementación específica.
  *
- * @author skyro
+ * Actualmente define una operación básica para registrar nuevos contratos,
+ * asegurando la integridad de los datos mediante validaciones como evitar
+ * contratos duplicados para un mismo empleado.
+ *
+ * @author Jose Luis Islas Molina 252574
  */
 public interface IContratoDAO {
-    
+
+    /**
+     * Registra un nuevo contrato en el sistema de persistencia. Debe
+     * implementar validaciones para evitar contratos duplicados para el mismo
+     * empleado.
+     *
+     * @param contrato El objeto Contrato que se va a registrar
+     * @return El objeto Contrato registrado, posiblemente con identificadores
+     * generados
+     * @throws AccesoDatosException Si ocurre un error durante el registro o si
+     * ya existe un contrato para el mismo empleado
+     */
     Contrato registrarContrato(Contrato contrato) throws AccesoDatosException;
 }

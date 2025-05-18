@@ -1,5 +1,6 @@
 package dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,9 +13,11 @@ import java.util.List;
  */
 public class EmpleadoDTO {
     // Atributos de un empleado.
+    private String id;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
+    private LocalDate fechaNacimiento;
     private String email;
     private String rfc;
     private String curp;
@@ -33,9 +36,11 @@ public class EmpleadoDTO {
     public EmpleadoDTO() {}
     /**
      * Constructor que recibe los atributos.
+     * @param id Id del empleado.
      * @param nombre Nombre del empleado.
      * @param apellidoPaterno Apellido paterno del empleado.
      * @param apellidoMaterno Apellido materno del empleado.
+     * @param fechaNacimiento Fecha de nacimiento del empleado.
      * @param email Correco electrónico del empleado.
      * @param rfc RFC del empleado.
      * @param curp CURP del empleado.
@@ -50,9 +55,11 @@ public class EmpleadoDTO {
      * @param horariosLaborales Horarios laborales del empleado.
      */
     public EmpleadoDTO(
+            String id,
             String nombre, 
             String apellidoPaterno, 
             String apellidoMaterno, 
+            LocalDate fechaNacimiento,
             String email, 
             String rfc,
             String curp,
@@ -67,9 +74,11 @@ public class EmpleadoDTO {
             List<HorarioLaboralDTO> horariosLaborales
     ) 
     {
+        this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.rfc = rfc;
         this.curp = curp;
@@ -83,6 +92,16 @@ public class EmpleadoDTO {
         this.estado = estado;
         this.horariosLaborales = horariosLaborales;
     }
+    /**
+     * Retorna el id del empleado.
+     * @return Id del empleado.
+     */
+    public String getId() {return id;}
+    /**
+     * Establece el id del empleado.
+     * @param id Id del empleado.
+     */
+    public void setId(String id) {this.id = id;}
     /**
      * Retorna el nombre del empleado.
      * @return Nombre del empleado.
@@ -113,6 +132,16 @@ public class EmpleadoDTO {
      * @param apellidoMaterno Nuevo apellido materno del empleado.
      */
     public void setApellidoMaterno(String apellidoMaterno) {this.apellidoMaterno = apellidoMaterno;}
+    /**
+     * Retorna la fecha de nacimiento del empleado.
+     * @return Fecha de nacimiento del empleado.
+     */
+    public LocalDate getFechaNacimiento() {return fechaNacimiento;}
+    /**
+     * Establece la fecha de nacimiento del empleado.
+     * @param fechaNacimiento Nuevo apellido materno del empleado.
+     */
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
     /**
      * Retorna el correo electrónico del empleado.
      * @return Correo electrónico del empleado.

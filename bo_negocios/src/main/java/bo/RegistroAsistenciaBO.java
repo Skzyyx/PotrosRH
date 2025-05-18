@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Benjamin Soto Coronado (253183)
  */
-public class RegistroAsistenciaBO implements IRegistroAsistenciaBO{
+public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
     public static IRegistroAsistenciaBO instance;
     private final IRegistroAsistenciaDAO registroAsistenciaDAO = new RegistroAsistenciaDAO();
     

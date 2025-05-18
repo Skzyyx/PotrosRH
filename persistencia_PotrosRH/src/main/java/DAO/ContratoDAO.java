@@ -23,20 +23,43 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
+ * Esta clase implementa la interfaz IContratoDAO y proporciona métodos para
+ * gestionar contratos de empleados en la base de datos MongoDB. Permite 
+ * registrar nuevos contratos verificando que no exista uno previo para 
+ * el mismo empleado.
  *
- * @author skyro
+ * @author Jose Luis Islas Molina 252574
  */
 public class ContratoDAO implements IContratoDAO {
 
+    /**
+     * Logger para registrar mensajes y excepciones de la clase.
+     */
     private static final Logger LOG = Logger.getLogger(ContratoDAO.class.getName());
 
+    /**
+     * Colección de MongoDB que almacena los documentos de contratos.
+     */
     private final MongoCollection<Contrato> contratosCollection;
 
+    /**
+     * Constructor que inicializa la conexión a la colección de contratos en MongoDB.
+     * Obtiene la base de datos a través de la clase Conexion y configura la colección
+     * para trabajar con objetos de tipo Contrato.
+     */
     public ContratoDAO() {
         MongoDatabase database = Conexion.getDatabase();
         this.contratosCollection = database.getCollection("contratos", Contrato.class);
     }
-    
+
+    /**
+     * Registra un nuevo contrato en la base de datos.
+     * Verifica que no exista un contrato previo para el mismo empleado antes de registrarlo.
+     *
+     * @param contrato El objeto Contrato que se va a registrar
+     * @return El contrato registrado con éxito
+     * @throws AccesoDatosException Si ya existe un contrato para el mismo empleado o si ocurre un error en la base de datos
+     */
     @Override
     public Contrato registrarContrato(Contrato contrato) throws AccesoDatosException {
         try {
@@ -46,19 +69,17 @@ public class ContratoDAO implements IContratoDAO {
                     match
             ));
 
-
             if (resultado.iterator().hasNext()) {
                 throw new AccesoDatosException("Ya existe un contrato para ese empleado.");
             }
 
-            InsertOneResult result = contratosCollection.insertOne(contrato);
-            ObjectId idGenerado = result.getInsertedId().asObjectId().getValue();
-            contrato.setId(idGenerado);
+            contratosCollection.insertOne(contrato);
+
             return contrato;
         } catch (MongoException e) {
-            LOG.log(Level.WARNING, e.getMessage());
+            LOG.log(Level.WARNING, null, e);
             throw new AccesoDatosException("Ocurrió un error al intentar registrar el candidato.");
         }
     }
-    
+
 }

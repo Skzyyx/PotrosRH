@@ -1,6 +1,7 @@
 package Entidades;
 
 import Enums.EstadoEmpleado;
+import java.time.LocalDate;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -18,6 +19,7 @@ public class Empleado {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
+    private LocalDate fechaNacimiento;
     private String email;
     private String rfc;
     private String curp;
@@ -52,6 +54,7 @@ public class Empleado {
             String nombre, 
             String apellidoPaterno, 
             String apellidoMaterno, 
+            LocalDate fechaNacimiento,
             String email, 
             String rfc, 
             String curp, 
@@ -66,6 +69,7 @@ public class Empleado {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.rfc = rfc;
         this.curp = curp;
@@ -107,6 +111,16 @@ public class Empleado {
      * @param apellidoMaterno Nuevo apellido materno del empleado.
      */
     public void setApellidoMaterno(String apellidoMaterno) {this.apellidoMaterno = apellidoMaterno;}
+    /**
+     * Retorna la fecha de nacimiento del empleado.
+     * @return Fecha de nacimiento del empleado.
+     */
+    public LocalDate getFechaNacimiento() {return fechaNacimiento;}
+    /**
+     * Establece la fecha de nacimiento del empleado.
+     * @param fechaNacimiento Nuevo apellido materno del empleado.
+     */
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
     /**
      * Retorna el correo electrónico del empleado.
      * @return Correo electrónico del empleado.
@@ -228,16 +242,28 @@ public class Empleado {
      * @return Cadena con la información relevante del empleado.
      */
     @Override
-    public String toString() {return 
-            String.format(
-                    "%s, %s %s %s, %s, %s, %s, %s", 
-                    getId(),
-                    getNombre(), 
-                    getApellidoPaterno(), 
-                    getApellidoMaterno(), 
-                    getEmail(), 
-                    getTelefono(), 
-                    getDepartamento(), 
-                    getPuesto());
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Empleado{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", apellidoPaterno=").append(apellidoPaterno);
+        sb.append(", apellidoMaterno=").append(apellidoMaterno);
+        sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", email=").append(email);
+        sb.append(", rfc=").append(rfc);
+        sb.append(", curp=").append(curp);
+        sb.append(", direccion=").append(direccion);
+        sb.append(", telefono=").append(telefono);
+        sb.append(", departamento=").append(departamento);
+        sb.append(", puesto=").append(puesto);
+        sb.append(", salarioBase=").append(salarioBase);
+        sb.append(", estado=").append(estado);
+        sb.append(", horariosLaborales=").append(horariosLaborales);
+        sb.append('}');
+        return sb.toString();
     }
+    
+    
+    
 }
