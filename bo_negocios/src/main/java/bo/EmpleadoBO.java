@@ -173,39 +173,57 @@ public class EmpleadoBO implements IEmpleadoBO{
      */
     @Override
     public EmpleadoDTO actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException {
-        if (rfc == null || rfc.trim().isEmpty()) {
-            throw new ObjetosNegocioException("El RFC del empleado no puede ser nulo o vacío para actualizar el estado.");
-        }
-        if (nuevoEstado == null || nuevoEstado.trim().isEmpty()) {
-            throw new ObjetosNegocioException("El nuevo estado del empleado no puede ser nulo o vacío.");
-        }
-
-        try {
-            EstadoEmpleado estado;
-            try {
-                estado = EstadoEmpleado.valueOf(nuevoEstado.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new ObjetosNegocioException("El estado '" + nuevoEstado + "' no es un estado de empleado válido.");
-            }
-            Empleado empleadoRFC = new Empleado();
-            empleadoRFC.setRfc(rfc);
-            Empleado empleado = empleadoDAO.obtenerEmpleado(empleadoRFC);
-            if (empleado != null) {
-                empleado.setEstado(estado);
-                empleadoDAO.actualizarEmpleado(empleado);
-                return EmpleadoMapper.toDTO(empleado);
-            } else {
-                throw new ObjetosNegocioException("No se encontró el empleado con el RFC proporcionado para actualizar el estado.");
-            }
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + ex.getMessage(), ex);
-        }
+//        if (rfc == null || rfc.trim().isEmpty()) {
+//            throw new ObjetosNegocioException("El RFC del empleado no puede ser nulo o vacío para actualizar el estado.");
+//        }
+//        if (nuevoEstado == null || nuevoEstado.trim().isEmpty()) {
+//            throw new ObjetosNegocioException("El nuevo estado del empleado no puede ser nulo o vacío.");
+//        }
+//
+//        try {
+//            EstadoEmpleado estado;
+//            try {
+//                estado = EstadoEmpleado.valueOf(nuevoEstado.toUpperCase());
+//            } catch (IllegalArgumentException e) {
+//                throw new ObjetosNegocioException("El estado '" + nuevoEstado + "' no es un estado de empleado válido.");
+//            }
+//            Empleado empleadoRFC = new Empleado();
+//            empleadoRFC.setRfc(rfc);
+//            Empleado empleado = empleadoDAO.obtenerEmpleado(empleadoRFC);
+//            if (empleado != null) {
+//                empleado.setEstado(estado);
+//                empleadoDAO.actualizarEmpleado(empleado);
+//                return EmpleadoMapper.toDTO(empleado);
+//            } else {
+//                throw new ObjetosNegocioException("No se encontró el empleado con el RFC proporcionado para actualizar el estado.");
+//            }
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + ex.getMessage(), ex);
+//        }
+        return null;
     }
     
-    public void actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
+    @Override
+    public EmpleadoDTO actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
         try {
             empleadoDAO.actualizarEstado(rfc, nuevoEstado);
+
+            Empleado empleadoRFC = new Empleado();
+            empleadoRFC.setRfc(rfc);
+            Empleado empleadoActualizado = empleadoDAO.obtenerEmpleado(empleadoRFC);
+
+            if (empleadoActualizado != null) {
+                EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+                empleadoDTO.setId(empleadoActualizado.getId()!= null ? empleadoActualizado.getId().toHexString() : null);
+                empleadoDTO.setRfc(empleadoActualizado.getRfc());
+                empleadoDTO.setEstado(empleadoActualizado.getEstado().toString());
+
+                return empleadoDTO;
+            } else {
+                throw new ObjetosNegocioException("Error al obtener el empleado actualizado.");
+            }
+
         } catch (AccesoDatosException ex) {
             throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + ex.getMessage(), ex);
         }

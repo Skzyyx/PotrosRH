@@ -182,14 +182,18 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (btnEstoySeguro.isSelected()) {
-            try {
-                controlDespidos.registrarDespido(empleadoADespedir, razonDespido);
-                JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                ControlFlujo.mostrarMenuPrincipal();
-            } catch (CorreoException ex) {
-                JOptionPane.showMessageDialog(this, "Error al enviar el correo de despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } catch (ObjetosNegocioException ex) {
-                JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (empleadoADespedir != null) {
+                try {
+                    controlDespidos.registrarDespido(empleadoADespedir, razonDespido);
+                    JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    ControlFlujo.mostrarMenuPrincipal();
+                } catch (CorreoException ex) {
+                    JOptionPane.showMessageDialog(this, "Error al enviar el correo de despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (ObjetosNegocioException ex) {
+                    JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha seleccionado un empleado para despedir.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else if (btnNoEstoySeguro.isSelected()) {
             JOptionPane.showMessageDialog(this, "Despido cancelado.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
