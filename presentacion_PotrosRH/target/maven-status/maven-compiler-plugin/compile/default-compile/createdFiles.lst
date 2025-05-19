@@ -181,6 +181,7 @@ PanelesReportes\DatosGenerales$4.class
 PanelesReportes\MotivoOmisionMalaConducta$1.class
 PanelesReportes\DescripcionIncidente$3.class
 PanelesReportes\ImpactoIncidente$3.class
+Controles\ControlAsistencia.class
 PanelesReportes\ConfirmacionMalaConducta$6.class
 PanelesCasoBase\BusquedaEmpleado$6.class
 PanelesReportes\RegistroDatosGenerales$3.class

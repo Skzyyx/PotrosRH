@@ -76,16 +76,20 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
     @Override
     public List<ReporteMalaConductaDTO> obtenerReporteEmpleado(EmpleadoDTO empleado, LocalDate fechaIncidente) throws ObjetosNegocioException{
         
-        if(empleado == null)
+        if(!(empleado != null && !empleado.getRfc().isEmpty()))
             throw new ObjetosNegocioException("No se permite RFC vacío.");
-
+        
+        // Se extrae el RFC recibido y se añade a una entidad Empleado.
         Empleado empleadoRfc = new Empleado();
         empleadoRfc.setRfc(empleado.getRfc());
         
         try {
+            // Obtiene el empleado completo con su ID, a partir de su RFC.
+            Empleado empleadoId = empleadoDAO.obtenerEmpleadoActivo(empleadoRfc);
             
             List<ReporteMalaConductaDTO> reportesObtenidosMapeados = new ArrayList<>();
-            List<ReporteMalaConducta> reportesObtenidos = reportesDAO.obtenerReporteEmpleado(empleadoRfc, fechaIncidente);
+            // Busca los reportes de un empleado reportado, a partir de empleado obtenido con su ID.
+            List<ReporteMalaConducta> reportesObtenidos = reportesDAO.obtenerReporteEmpleado(empleadoId, fechaIncidente);
             
             if(reportesObtenidos != null && !reportesObtenidos.isEmpty()){
                 for(ReporteMalaConducta reporteMalaConducta : reportesObtenidos){
