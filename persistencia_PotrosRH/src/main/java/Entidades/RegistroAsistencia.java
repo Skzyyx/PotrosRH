@@ -2,6 +2,7 @@ package Entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa un registro de asistencia de un empleado.
@@ -13,23 +14,24 @@ import java.time.LocalTime;
  */
 public class RegistroAsistencia {
     // Atrbutos de un registro de asistencia.
-    private Empleado empleado;
+    private ObjectId id;
     private LocalDate fechaAsistencia;
     private LocalTime horaEntrada;
     private LocalTime horaSalida;
+    private ObjectId empleadoId;
     /**
      * Constructor por defecto.
      */
     public RegistroAsistencia() {}
     /**
      * Constructor que recibe los atributos.
-     * @param empleado Empleado asociado al registro de la asistencia.
+     * @param empleadoId Empleado asociado al registro de la asistencia.
      * @param fechaAsistencia Fecha del registro de la asistencia.
      * @param horaEntrada Hora de entrada del registro de la asistencia.
      * @param horaSalida Hora de salida del registro de la asistencia.
      */
-    public RegistroAsistencia(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaEntrada, LocalTime horaSalida) {
-        this.empleado = empleado;
+    public RegistroAsistencia(ObjectId empleadoId, LocalDate fechaAsistencia, LocalTime horaEntrada, LocalTime horaSalida) {
+        this.empleadoId = empleadoId;
         this.fechaAsistencia = fechaAsistencia;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
@@ -38,12 +40,12 @@ public class RegistroAsistencia {
      * Retorna el empleado asociado al registro de la asistencia.
      * @return Empleado asociado al registro de la asistencia.
      */
-    public Empleado getEmpleado() {return empleado;}
+                         //public Empleado getEmpleado() {return empleado;}
     /**
      * Establece el empleado asociado al registro de la asistencia.
      * @param empleado Nuevo empleado asociado al registro de la asistencia.
      */
-    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
+                        //public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
     /**
      * Retorna la fecha del registro de la asistencia.
      * @return Fecha del registro de la asistencia.
@@ -74,6 +76,24 @@ public class RegistroAsistencia {
      * @param horaSalida Nueva hora de salida del registro de la asistencia.
      */
     public void setHoraSalida(LocalTime horaSalida) {this.horaSalida = horaSalida;}
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getEmpleadoId() {
+        return empleadoId;
+    }
+
+    public void setEmpleadoId(ObjectId empleadoId) {
+        this.empleadoId = empleadoId;
+    }
+    
+    
     /**
      * Retorna una cadena con la información relevante del registro de la asistencia.
      * @return Cadena con la información relevante del registro de la asistencia.
@@ -82,7 +102,7 @@ public class RegistroAsistencia {
     public String toString() {
         return String.format(
                 "%s, %d/%d/%d, %d:%d:%d, %d:%d:%d", 
-                getEmpleado().getNombre(),
+                //getEmpleado().getNombre(),
                 getFechaAsistencia().getDayOfMonth(),
                 getFechaAsistencia().getMonthValue(),
                 getFechaAsistencia().getYear(),

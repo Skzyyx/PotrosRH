@@ -4,6 +4,11 @@
  */
 package PanelesRegistrarAsistencia;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import javax.swing.JComponent;
+
 /**
  *
  * @author INSPIRON
@@ -11,7 +16,7 @@ package PanelesRegistrarAsistencia;
 public class SubmenuRegistrarAsistencia extends javax.swing.JPanel {
 
     /**
-     * Creates new form SubmenuRegistrarAsistencia
+     * Creates new form RegistrarAsistencia
      */
     public SubmenuRegistrarAsistencia() {
         initComponents();
@@ -26,23 +31,100 @@ public class SubmenuRegistrarAsistencia extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRegistrarEntrada = new javax.swing.JButton();
+        btnRegistrarSalida = new javax.swing.JButton();
+
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+
+        btnRegistrarEntrada.setBackground(new java.awt.Color(44, 44, 44));
+        btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        btnRegistrarEntrada.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Asistencias.png"))); // NOI18N
+        btnRegistrarEntrada.setText("Registrar Entrada");
+        btnRegistrarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarEntradaActionPerformed(evt);
+            }
+        });
+
+        btnRegistrarSalida.setBackground(new java.awt.Color(44, 44, 44));
+        btnRegistrarSalida.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        btnRegistrarSalida.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarSalida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuPrincipal/Asistencias.png"))); // NOI18N
+        btnRegistrarSalida.setText("Registrar Salida");
+        btnRegistrarSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarSalidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(200, Short.MAX_VALUE)
+                .addComponent(btnRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110)
+                .addComponent(btnRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
+
+        btnRegistrarEntrada.setBorderPainted(false);
+        btnRegistrarEntrada.setContentAreaFilled(false);
+        btnRegistrarEntrada.setOpaque(false);
+        btnRegistrarEntrada.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
+        btnRegistrarEntrada.setBorderPainted(false);
+        btnRegistrarEntrada.setContentAreaFilled(false);
+        btnRegistrarEntrada.setOpaque(false);
+        btnRegistrarEntrada.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+            @Override
+            public void paint(Graphics g, JComponent c) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Pinta un fondo redondeado
+                g2.setColor(c.getBackground());
+                g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);
+                super.paint(g2, c);
+                g2.dispose();
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
+
+    private void btnRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarSalidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarEntrada;
+    private javax.swing.JButton btnRegistrarSalida;
     // End of variables declaration//GEN-END:variables
 }
