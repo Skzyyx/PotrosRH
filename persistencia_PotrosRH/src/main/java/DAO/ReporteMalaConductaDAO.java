@@ -116,7 +116,7 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
             // Actualización del estado del reporte de mala conducta asociado.
             Bson actualizarEstadoReporte = Updates.set("estadoReporte", EstadoReporte.REVISADO);
             // Filtro para buscar el reporte de mala conducta asociado por su ID.
-            Bson filtroID = Filters.eq("id", reporteSancionadoNuevo.getReporteMalaConducta().getId());
+            Bson filtroID = Filters.eq("_id", reporteSancionadoNuevo.getReporteMalaConducta().getId());
             // Ejecuta la actualización del estado del reporte de mala conducta asociado.
             UpdateResult estadoActualizado = reportes.updateOne(filtroID, actualizarEstadoReporte);
             // Si el estado del reporte de mala conducta no fue actualizado.
@@ -143,7 +143,7 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
             // Actualización del estado del reporte de mala conducta asociado.
             Bson actualizarEstadoReporte = Updates.set("estadoReporte", EstadoReporte.REVISADO);
             // Filtro para buscar el reporte de mala conducta asociado por su ID.
-            Bson filtroID = Filters.eq("id", reporteOmitidoNuevo.getReporteMalaConducta().getId());
+            Bson filtroID = Filters.eq("_id", reporteOmitidoNuevo.getReporteMalaConducta().getId());
             // Ejecuta la actualización del estado del reporte de mala conducta asociado.
             UpdateResult estadoActualizado = reportes.updateOne(filtroID, actualizarEstadoReporte);
             // Si el estado del reporte de mala conducta no fue actualizado.

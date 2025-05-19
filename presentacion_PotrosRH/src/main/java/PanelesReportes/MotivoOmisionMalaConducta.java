@@ -191,8 +191,14 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
      */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         if(!jTAMotiviOmision.getText().trim().isEmpty()){
-            ReporteRevisadoOmitidoDTO reporteOmitido = (ReporteRevisadoOmitidoDTO) reporteRevisado;
             try {
+                ReporteRevisadoOmitidoDTO reporteOmitido = new ReporteRevisadoOmitidoDTO();
+                reporteOmitido.setReporteMalaConducta(reporteRevisado.getReporteMalaConducta());
+                reporteOmitido.setInfoCompleta(reporteRevisado.isInfoCompleta());
+                reporteOmitido.setTieneAntecedentesPrevios(reporteRevisado.isTieneAntecedentesPrevios());
+                reporteOmitido.setDescripcionAntecedentesPrevios(reporteRevisado.getDescripcionAntecedentesPrevios());
+                reporteOmitido.setEntrevistasRealizadas(reporteRevisado.getEntrevistasRealizadas());
+                reporteOmitido.setEvidenciasRevisadas(reporteRevisado.getEvidenciasRevisadas());
                 reporteOmitido.setMotivoOmision(jTAMotiviOmision.getText().trim());
                 if(ControlReportes.getInstance().registrarReporteOmitido(reporteOmitido) != null){
                     OptionPane.showInfoMessage(this, "¡Reporte revisado registrado con éxito!", "Reporte revisado exitosamente");

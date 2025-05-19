@@ -37,7 +37,7 @@ public class RevisarReporte {
         if(!(reporteSancionadoNuevo.getNormasVioladas() != null && !reporteSancionadoNuevo.getNormasVioladas().isEmpty()))
             throw new ReporteException("ERROR: Debe seleccionar al menos una norma violada por el empleado.");
         
-        if(!(reporteSancionadoNuevo.getNivelGravedad()== null && !reporteSancionadoNuevo.getNivelGravedad().trim().isEmpty()))
+        if(!(reporteSancionadoNuevo.getNivelGravedad()!= null && !reporteSancionadoNuevo.getNivelGravedad().trim().isEmpty()))
             throw new ReporteException("ERROR: Debe seleccionar el nivel de gravedad del incidente.");
         
         if(

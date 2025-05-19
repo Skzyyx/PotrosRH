@@ -14,8 +14,8 @@ public class ReporteMalaConducta {
     // Atributos de un reporte de mala conducta.
     private ObjectId id;
     private Long numeroSeguimiento;
-    private Empleado empleadoReportado;
-    private Empleado empleadoReportante;
+    private ObjectId empleadoReportado;
+    private ObjectId empleadoReportante;
     private LocalDateTime fechaHoraIncidente;
     private String lugarIncidente;
     private String descripcionDetallada;
@@ -44,8 +44,8 @@ public class ReporteMalaConducta {
      */
     public ReporteMalaConducta(
             Long numeroSeguimiento, 
-            Empleado empleadoReportado, 
-            Empleado empleadoReportante, 
+            ObjectId empleadoReportado, 
+            ObjectId empleadoReportante, 
             LocalDateTime fechaHoraIncidente, 
             String lugarIncidente, 
             String descripcionDetallada, 
@@ -85,8 +85,8 @@ public class ReporteMalaConducta {
     public ReporteMalaConducta(
             ObjectId id,
             Long numeroSeguimiento, 
-            Empleado empleadoReportado, 
-            Empleado empleadoReportante, 
+            ObjectId empleadoReportado, 
+            ObjectId empleadoReportante, 
             LocalDateTime fechaHoraIncidente, 
             String lugarIncidente, 
             String descripcionDetallada, 
@@ -123,12 +123,12 @@ public class ReporteMalaConducta {
      * Retorna el empleado reportado del reporte.
      * @return Empleado reportado del reporte.
      */
-    public Empleado getEmpleadoReportado() {return empleadoReportado;}
+    public ObjectId getEmpleadoReportado() {return empleadoReportado;}
     /**
      * Retorna el empleado reportante del reporte.
      * @return Empleado reportante del reporte.
      */
-    public Empleado getEmpleadoReportante() {return empleadoReportante;}
+    public ObjectId getEmpleadoReportante() {return empleadoReportante;}
     /**
      * Retorna la fecha y hora del incidente.
      * @return Fecha y hora del incidente.
@@ -183,12 +183,12 @@ public class ReporteMalaConducta {
      * Establece el empleado reportado del reporte.
      * @param empleadoReportado Nuevo empleado reportado del reporte.
      */
-    public void setEmpleadoReportado(Empleado empleadoReportado) {this.empleadoReportado = empleadoReportado;}
+    public void setEmpleadoReportado(ObjectId empleadoReportado) {this.empleadoReportado = empleadoReportado;}
     /**
      * Establece el empleado reportante del reporte.
      * @param empleadoReportante Nuevo empleado reportante del reporte.
      */
-    public void setEmpleadoReportante(Empleado empleadoReportante) {this.empleadoReportante = empleadoReportante;}
+    public void setEmpleadoReportante(ObjectId empleadoReportante) {this.empleadoReportante = empleadoReportante;}
     /**
      * Establece la fecha y hora del incidente.
      * @param fechaHoraIncidente Nueva fecha y hora del incidente.

@@ -163,6 +163,18 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         }
     }
     /**
+     * Obtiene un empleado a partir de su ID.
+     * @param empleado Entidad empleado con el ID a buscar.
+     * @return Empleado obtenidos.
+     * @throws AccesoDatosException Exceción del proyecto DAO.
+     */
+    @Override
+    public Empleado obtenerEmpleadoId(Empleado empleado) throws AccesoDatosException{
+        try {
+            return empleados.findOneAndDelete(Filters.eq("_id", empleado.getId()));
+        } catch (Exception e) {throw new AccesoDatosException("Ocurrió un error al obtener el empleado.");}
+    }
+    /**
      * Obtiene un empleado activo de la base de datos.
      * @param empleado Empleado del cual se el extra su RFC, para buscarlo en la BD.
      * @return Entidad empleado, correspondiente al RFC recibido.

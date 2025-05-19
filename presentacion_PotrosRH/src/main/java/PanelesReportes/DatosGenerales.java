@@ -109,10 +109,10 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFLugarIncidente.setEditable(false);
         jTFLugarIncidente.setBackground(new java.awt.Color(255, 255, 255));
-        jTFLugarIncidente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFLugarIncidente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFLugarIncidente.setForeground(new java.awt.Color(0, 0, 0));
         jTFLugarIncidente.setBorder(null);
-        jTFLugarIncidente.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFLugarIncidente.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLDescripcionDetallada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLDescripcionDetallada.setForeground(new java.awt.Color(0, 0, 0));
@@ -134,10 +134,10 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFNombreEmpleado.setEditable(false);
         jTFNombreEmpleado.setBackground(new java.awt.Color(255, 255, 255));
-        jTFNombreEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFNombreEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFNombreEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         jTFNombreEmpleado.setBorder(null);
-        jTFNombreEmpleado.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFNombreEmpleado.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLPuesto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLPuesto.setForeground(new java.awt.Color(0, 0, 0));
@@ -145,17 +145,17 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFPuesto.setEditable(false);
         jTFPuesto.setBackground(new java.awt.Color(255, 255, 255));
-        jTFPuesto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFPuesto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFPuesto.setForeground(new java.awt.Color(0, 0, 0));
         jTFPuesto.setBorder(null);
-        jTFPuesto.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFPuesto.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jTFDepartamento.setEditable(false);
         jTFDepartamento.setBackground(new java.awt.Color(255, 255, 255));
-        jTFDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFDepartamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFDepartamento.setForeground(new java.awt.Color(0, 0, 0));
         jTFDepartamento.setBorder(null);
-        jTFDepartamento.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFDepartamento.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLDepartamento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLDepartamento.setForeground(new java.awt.Color(0, 0, 0));
@@ -163,10 +163,10 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFechaHoraIncidente.setEditable(false);
         jTFechaHoraIncidente.setBackground(new java.awt.Color(255, 255, 255));
-        jTFechaHoraIncidente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFechaHoraIncidente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFechaHoraIncidente.setForeground(new java.awt.Color(0, 0, 0));
         jTFechaHoraIncidente.setBorder(null);
-        jTFechaHoraIncidente.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFechaHoraIncidente.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLFechaHoraIncidente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLFechaHoraIncidente.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,10 +174,10 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFReportadoPor.setEditable(false);
         jTFReportadoPor.setBackground(new java.awt.Color(255, 255, 255));
-        jTFReportadoPor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFReportadoPor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFReportadoPor.setForeground(new java.awt.Color(0, 0, 0));
         jTFReportadoPor.setBorder(null);
-        jTFReportadoPor.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFReportadoPor.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLReportadoPor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLReportadoPor.setForeground(new java.awt.Color(0, 0, 0));
@@ -185,10 +185,10 @@ public class DatosGenerales extends javax.swing.JPanel {
 
         jTFCargoReportante.setEditable(false);
         jTFCargoReportante.setBackground(new java.awt.Color(255, 255, 255));
-        jTFCargoReportante.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTFCargoReportante.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTFCargoReportante.setForeground(new java.awt.Color(0, 0, 0));
         jTFCargoReportante.setBorder(null);
-        jTFCargoReportante.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTFCargoReportante.setMargin(new java.awt.Insets(2, 30, 2, 6));
 
         jLCargoReportante.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLCargoReportante.setForeground(new java.awt.Color(0, 0, 0));
@@ -468,6 +468,10 @@ public class DatosGenerales extends javax.swing.JPanel {
             // Lugar del incidente.
             if(reporteMalaConducta.getLugarIncidente() != null)
                 jTFLugarIncidente.setText(reporteMalaConducta.getLugarIncidente());
+            
+            // Descripción detallada del reporte.
+            if(reporteMalaConducta.getDescripcionDetallada()!= null && !reporteMalaConducta.getDescripcionDetallada().isEmpty())
+                jTADescripcionDetallada.setText(reporteMalaConducta.getDescripcionDetallada());
             
             // Testigos (si es que hubieron).
             if(reporteMalaConducta.getTestigos() != null && !reporteMalaConducta.getTestigos().isEmpty()){

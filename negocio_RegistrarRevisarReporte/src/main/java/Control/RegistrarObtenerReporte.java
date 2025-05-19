@@ -63,20 +63,20 @@ public class RegistrarObtenerReporte {
      */
     public List<ReporteMalaConductaDTO> obtenerReporteEmpleado(EmpleadoDTO empleado, LocalDate fechaIncidente) throws ReporteException {
         
-        if(!(empleado != null && empleado.getRfc().isEmpty()))
+        if(!(empleado != null && !empleado.getRfc().isEmpty()))
                 throw new ReporteException("No se permite un RFC vacío.");
         
         try {
             List<ReporteMalaConductaDTO> reportesNoRevisados = new ArrayList<>();
-            for(ReporteMalaConductaDTO reporte: reporteBO.obtenerReporteEmpleado(empleado, fechaIncidente)){
-                if(reporte.getEstadoReporte().equals("NO_REVISADO"))
-                    reportesNoRevisados.add(reporte);
-            }
-            
-            if(!reportesNoRevisados.isEmpty())
+            List<ReporteMalaConductaDTO> reportesObtenidos = reporteBO.obtenerReporteEmpleado(empleado, fechaIncidente);
+            if(reportesObtenidos != null && !reportesObtenidos.isEmpty()){
+                for(ReporteMalaConductaDTO reporte: reportesObtenidos){
+                    if(reporte.getEstadoReporte().equals("NO_REVISADO"))
+                        reportesNoRevisados.add(reporte);
+                }
                 return reportesNoRevisados;
-            else
-                throw new ReporteException("No existen reportes sin revisar asociados al empleado.");
+            } else
+                throw new ReporteException("No existen reportes sin revisar asociados al empleado en la fecha especificada.");
             
         } catch (ObjetosNegocioException e) {throw new ReporteException(e.getMessage(), e);}
     }

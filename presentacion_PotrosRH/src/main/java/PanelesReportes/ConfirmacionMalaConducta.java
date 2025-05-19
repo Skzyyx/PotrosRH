@@ -47,6 +47,7 @@ public class ConfirmacionMalaConducta extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(640, 360));
         setMinimumSize(new java.awt.Dimension(640, 360));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(17, 119, 202));
         jPanel1.setMaximumSize(new java.awt.Dimension(640, 360));
@@ -165,10 +166,10 @@ public class ConfirmacionMalaConducta extends javax.swing.JDialog {
                 g2.dispose();
             }
         });
-        btnAnterior.setBorderPainted(false);
-        btnAnterior.setContentAreaFilled(false);
-        btnAnterior.setOpaque(false);
-        btnAnterior.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnSi.setBorderPainted(false);
+        btnSi.setContentAreaFilled(false);
+        btnSi.setOpaque(false);
+        btnSi.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -180,10 +181,10 @@ public class ConfirmacionMalaConducta extends javax.swing.JDialog {
                 g2.dispose();
             }
         });
-        btnAnterior.setBorderPainted(false);
-        btnAnterior.setContentAreaFilled(false);
-        btnAnterior.setOpaque(false);
-        btnAnterior.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnNo.setBorderPainted(false);
+        btnNo.setContentAreaFilled(false);
+        btnNo.setOpaque(false);
+        btnNo.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();

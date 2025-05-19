@@ -36,6 +36,13 @@ public interface IEmpleadoBO {
      */
     public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException;
     /**
+     * Obtiene un empleado a partir de su ID.
+     * @param empleado Objeto EmpleadoDTO con el ID a buscar.
+     * @return Empleado obtenidos.
+     * @throws ObjetosNegocioException Exceción del proyecto EmpleadoBO.
+     */
+    public EmpleadoDTO obtenerEmpleadoId(EmpleadoDTO empleado) throws ObjetosNegocioException;
+    /**
      * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC, cuyo estado sea ACTIVO.
      * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
      * @param empleado Objeto EmpleadoBO del cual se extrae su RFC.

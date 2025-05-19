@@ -33,7 +33,8 @@ public class BuscarReporte extends javax.swing.JPanel {
     public BuscarReporte() {
         initComponents();
         ControlCampos.limiteCaracteresCampoTexto(jTEmpleado, 13);
-        ControlCampos.configurarCamposCantidades(jTEmpleado);
+        ControlCampos.limiteCaracteresCampoTexto(jTNumSeguimiento, 10);
+        ControlCampos.configurarCamposCantidades(jTNumSeguimiento);
         jLNumSeguimiento.setVisible(false);
         jTNumSeguimiento.setVisible(false);
         jListResultados.setModel(modeloLista);
@@ -149,7 +150,7 @@ public class BuscarReporte extends javax.swing.JPanel {
         jTEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTEmpleado.setForeground(new java.awt.Color(0, 0, 0));
         jTEmpleado.setBorder(null);
-        jTEmpleado.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTEmpleado.setMargin(new java.awt.Insets(2, 30, 2, 6));
         add(jTEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 334, 47));
 
         jLFechaIncidente.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
@@ -194,7 +195,7 @@ public class BuscarReporte extends javax.swing.JPanel {
         jTNumSeguimiento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTNumSeguimiento.setForeground(new java.awt.Color(0, 0, 0));
         jTNumSeguimiento.setBorder(null);
-        jTNumSeguimiento.setMargin(new java.awt.Insets(2, 15, 2, 6));
+        jTNumSeguimiento.setMargin(new java.awt.Insets(2, 30, 2, 6));
         add(jTNumSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 334, 47));
 
         btnSiguiente.setBackground(new java.awt.Color(0, 0, 0));
@@ -208,10 +209,10 @@ public class BuscarReporte extends javax.swing.JPanel {
             }
         });
         add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 611, 146, 55));
-        btnBuscar.setBorderPainted(false);
-        btnBuscar.setContentAreaFilled(false);
-        btnBuscar.setOpaque(false);
-        btnBuscar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnSiguiente.setBorderPainted(false);
+        btnSiguiente.setContentAreaFilled(false);
+        btnSiguiente.setOpaque(false);
+        btnSiguiente.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -233,40 +234,54 @@ public class BuscarReporte extends javax.swing.JPanel {
         if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
             try {
                 // Valida que haya un RFC a buscar.
-                if(jTNumSeguimiento.getText().trim().isEmpty())
+                if(jTEmpleado.getText().trim().isEmpty())
                     throw new PresentacionException("Por favor, ingrese el RFC a buscar");
-                // Nuevo EmpleadoDTO.
-                EmpleadoDTO empleado = new EmpleadoDTO();
-                // Agrega el RFC al EmpleadoDTO.
-                empleado.setRfc(jTNumSeguimiento.getText().trim());
+                
+                // Valida que la fecha del incidente haya sido seleccionada.
+                if(jDPFechaIncidente.getSelectedDate() == null)
+                    throw new PresentacionException("Seleccione una fecha del incidente.");
                 
                 // Valida que la fecha del incidente no esté después de la fecha actual.
                 if(jDPFechaIncidente.getSelectedDate().isAfter(LocalDate.now()))
                     throw new PresentacionException("La fecha del incidente no puede estar después de la fecha actual.");
                 
+                // Nuevo EmpleadoDTO.
+                EmpleadoDTO empleado = new EmpleadoDTO();
+                // Agrega el RFC al EmpleadoDTO.
+                empleado.setRfc(jTEmpleado.getText().trim());
+                
                 // Busca los reportes asociados al RFC del empleado y los almacena en la lista de reportes encontrados.
                 reportesEncontrados = ControlReportes.getInstance().obtenerReporteEmpleado(empleado, jDPFechaIncidente.getSelectedDate());
                 // Carga la lista de reportes obtenidos.
                 cargarLista();
-            } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
+            } catch (PresentacionException e) {
+                modeloLista.setSize(0);
+                OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");
+            }
         } else{
             try {
                 // Valida que se haya ingresado un número de seguimiento.
-                if(jTEmpleado.getText().trim().isEmpty())
+                if(jTNumSeguimiento.getText().trim().isEmpty())
                     throw new PresentacionException("Por favor, ingrese un número de seguimiento.");
+                
                 // Nuevo reporte de mala conducta.
                 ReporteMalaConductaDTO reporte = new ReporteMalaConductaDTO();
                 // Se extrae el número de seguimiento ingresado.
-                reporte.setNumeroSeguimiento(Long.valueOf(jTEmpleado.getText().trim()));
+                reporte.setNumeroSeguimiento(Long.valueOf(jTNumSeguimiento.getText().trim()));
                 
                 // Se busca el reporte asociado al número de seguimiento.
                 reporte = ControlReportes.getInstance().obtenerReporteSeguimiento(reporte);
                 
+                // Limpia la lista de reportes encontrados
+                reportesEncontrados.clear();
                 // Se añade el reporte obtenido a la lista de reportes obtenidos, aunque sólo se puede obtener uno.
                 reportesEncontrados.add(reporte);
                 // Carga la lista de reportes obtenidos.
                 cargarLista();
-            } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");}
+            } catch (PresentacionException e) {
+                modeloLista.setSize(0);
+                OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
     /**
@@ -281,6 +296,7 @@ public class BuscarReporte extends javax.swing.JPanel {
      * @param evt Click.
      */
     private void jCBFiltroBusquedaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBFiltroBusquedaItemStateChanged
+        modeloLista.setSize(0);
         if(jCBFiltroBusqueda.getSelectedItem().equals("RFC")){
             jTNumSeguimiento.setText("");
             jTNumSeguimiento.setVisible(false);
@@ -320,6 +336,7 @@ public class BuscarReporte extends javax.swing.JPanel {
      * Carga la lista con los reportes encontrados.
      */
     private void cargarLista(){
+        modeloLista.setSize(0);
         if(reportesEncontrados != null && !reportesEncontrados.isEmpty()){
             for (int i = 0; i < reportesEncontrados.size(); i++) {
                 ReporteMalaConductaDTO reporte = reportesEncontrados.get(i);
