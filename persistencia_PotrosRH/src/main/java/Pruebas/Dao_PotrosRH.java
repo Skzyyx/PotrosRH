@@ -51,16 +51,16 @@ public class Dao_PotrosRH {
         IEmpleadoDAO emDAO = new EmpleadoDAO();
         
         Candidato c = new Candidato();
-        c.setNombre("Lionel");
-        c.setApellidoPaterno("Messi");
-        c.setApellidoMaterno("Cuccitini");
-        c.setRfc("MECL870624BCL");
-        c.setEmail("messi@gmail.com");
-        c.setTelefono("6442564729");
-        c.setEdad(37);
-        c.setExperiencia("20 años como futbolista.");
-        c.setNivelEstudio("Preparatoria.");
-        c.setHabilidadesClave("Futbol.");
+        c.setNombre("Jesús Ernesto");
+        c.setApellidoPaterno("López");
+        c.setApellidoMaterno("Ibarra");
+        c.setRfc("LOIJ920315XYZ");
+        c.setEmail("neto@potros.itson.edu.mx");
+        c.setTelefono("6622537849");
+        c.setEdad(19);
+        c.setExperiencia("Experto en Pokemon.");
+        c.setNivelEstudio("Universidad.");
+        c.setHabilidadesClave("Juegos Interactivos.");
         
         try {
             c = cDAO.registrarCandidato(c);
@@ -104,12 +104,12 @@ public class Dao_PotrosRH {
         em.setRfc(c.getRfc());
         em.setEmail(c.getEmail());
         em.setTelefono(c.getTelefono());
-        em.setCurp("CURPMESS1010");
-        em.setDepartamento("Deportes");
-        em.setDireccion(new Direccion("Cabra", "10", "Barcelona"));
+        em.setCurp("CURPNETO1234");
+        em.setDepartamento("Producción");
+        em.setDireccion(new Direccion("Random", "90", "Obregón"));
         em.setEstado(EstadoEmpleado.ACTIVO);
-        em.setPuesto("Falso nueve");
-        em.setSalarioBase(120000.00);
+        em.setPuesto("Ingeniero en Software");
+        em.setSalarioBase(40000.00);
             
         try {
             emDAO.registrarEmpleado(em);

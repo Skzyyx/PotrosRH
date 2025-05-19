@@ -29,7 +29,6 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
     public MotivoOmisionMalaConducta() {
         initComponents();
         ControlCampos.limiteCaracteresAreaTexto(jTAMotiviOmision, 1000);
-        btnConfirmar.setVisible(true);
     }
     
     /**
@@ -133,11 +132,6 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         jTAMotiviOmision.setLineWrap(true);
         jTAMotiviOmision.setRows(5);
         jTAMotiviOmision.setWrapStyleWord(true);
-        jTAMotiviOmision.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTAMotiviOmisionKeyTyped(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTAMotiviOmision);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 1170, 390));
@@ -153,10 +147,10 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
             }
         });
         add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 628, 146, 55));
-        btnAnterior.setBorderPainted(false);
-        btnAnterior.setContentAreaFilled(false);
-        btnAnterior.setOpaque(false);
-        btnAnterior.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setContentAreaFilled(false);
+        btnConfirmar.setOpaque(false);
+        btnConfirmar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -210,21 +204,8 @@ public class MotivoOmisionMalaConducta extends javax.swing.JPanel {
         } else
             OptionPane.showErrorMessage(this, "ERROR: Ingrese el motivo de la omisión del reporte.", "Sin motivo de omisión");
     }//GEN-LAST:event_btnConfirmarActionPerformed
-    /**
-     * KeyListener para cada ocasión que se escribe algo en el 
-     * área de texto del motivo del la omisión. Si el texto
-     * está vacío, se esconde el botón de confirmar. En 
-     * cambio, si el texto no está vacío, se muestra el
-     * botón de confirmar.
-     * @param evt Tecla escrita.
-     */
-    private void jTAMotiviOmisionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAMotiviOmisionKeyTyped
-        if(jTAMotiviOmision.getText().trim().isEmpty())
-            btnConfirmar.setVisible(false);
-        else
-            btnConfirmar.setVisible(true);
-    }//GEN-LAST:event_jTAMotiviOmisionKeyTyped
-    /**
+
+   /**
      * Añade el reporte revisado recibido, asegurándose que
      * no esté vacío.
      * @param reporte Reporte Revisado a añadir.

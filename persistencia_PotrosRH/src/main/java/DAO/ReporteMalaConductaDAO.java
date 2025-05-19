@@ -70,8 +70,10 @@ public class ReporteMalaConductaDAO implements IReporteMalaConductaDAO {
     @Override
     public List<ReporteMalaConducta> obtenerReporteEmpleado(Empleado empleado, LocalDate fechaIncidente) throws AccesoDatosException {
         try {
-            // Filtro para el RFC.
-            Bson filtroRFC = Filters.eq("empleadoReportado.rfc", empleado.getRfc());
+            // Busca el empleado a partir del RFC.
+            Empleado empleadoObtenido = new EmpleadoDAO().obtenerEmpleadoActivo(empleado);
+            // Filtro para el ID del empleado obtenido.
+            Bson filtroRFC = Filters.eq("empleadoReportado", empleadoObtenido.getId());
             // Filtro para el comienzo del día de la fecha recibida.
             Bson filtroFechaInicio = Filters.gte(
                     "fechaHoraIncidente", 

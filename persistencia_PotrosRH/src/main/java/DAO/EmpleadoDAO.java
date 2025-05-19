@@ -171,7 +171,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
     @Override
     public Empleado obtenerEmpleadoId(Empleado empleado) throws AccesoDatosException{
         try {
-            return empleados.findOneAndDelete(Filters.eq("_id", empleado.getId()));
+            return empleados.find(Filters.eq("_id", empleado.getId())).first();
         } catch (Exception e) {throw new AccesoDatosException("Ocurrió un error al obtener el empleado.");}
     }
     /**

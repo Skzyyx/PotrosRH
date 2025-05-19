@@ -1,10 +1,12 @@
 package bo;
 
+import DAO.EmpleadoDAO;
 import DAO.ReporteMalaConductaDAO;
 import Entidades.Empleado;
 import Entidades.ReporteMalaConducta;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IEmpleadoDAO;
 import Interfaces.IReporteMalaConductaBO;
 import Interfaces.IReporteMalaConductaDAO;
 import dto.EmpleadoDTO;
@@ -14,6 +16,7 @@ import dto.ReporteRevisadoSancionadoDTO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import mappers.EmpleadoMapper;
 import mappers.ReporteMalaConductaMapper;
 import mappers.ReporteRevisadoMapper;
 
@@ -26,6 +29,8 @@ import mappers.ReporteRevisadoMapper;
 public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
     // Atributo DAO para operaciones CRUD con entidades ReporteMalaConducta, ReporteRevisadoSancionado y ReporteRevisadoOmitido.
     private final IReporteMalaConductaDAO reportesDAO = new ReporteMalaConductaDAO();
+    // Atributo DAO para obtener empleados a partir de sus IDs.
+    private final IEmpleadoDAO empleadoDAO = new EmpleadoDAO();
     // Atributo SingleTon de la clase.
     private static ReporteMalaConductaBO instance;
     /**
@@ -84,7 +89,24 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
             
             if(reportesObtenidos != null && !reportesObtenidos.isEmpty()){
                 for(ReporteMalaConducta reporteMalaConducta : reportesObtenidos){
-                    reportesObtenidosMapeados.add(ReporteMalaConductaMapper.toDTO(reporteMalaConducta));
+                    // Se mapea el reporte obtenido de la manera convencional.
+                    ReporteMalaConductaDTO reporteObtenido = ReporteMalaConductaMapper.toDTO(reporteMalaConducta);
+                    
+                    // Se encapsula el ID del empleado reportante obtenido en una entidad Empleado.
+                    Empleado empleadoReportado = new Empleado();
+                    empleadoReportado.setId(reporteMalaConducta.getEmpleadoReportado());
+                    // Se busca la entidad completa del empleado reportado a partir de su ID.
+                    empleadoReportado = empleadoDAO.obtenerEmpleadoId(empleadoReportado);
+                    // Se mapea la entidad obtenida y se añade al reporte obtenido.
+                    reporteObtenido.setEmpleadoReportado(EmpleadoMapper.toDTO(empleadoReportado));
+                    
+                    // Se realiza el mismo proceso con el empleado reportante.
+                    Empleado empleadoReportante = new Empleado();
+                    empleadoReportante.setId(reporteMalaConducta.getEmpleadoReportante());
+                    empleadoReportante = empleadoDAO.obtenerEmpleadoId(empleadoReportante);
+                    reporteObtenido.setEmpleadoReportante(EmpleadoMapper.toDTO(empleadoReportante));
+                    // Se agrega a la lista de reportes obtenidos, con los empleados completos.
+                    reportesObtenidosMapeados.add(reporteObtenido);
                 }
                 return reportesObtenidosMapeados;
             } else
@@ -109,8 +131,32 @@ public class ReporteMalaConductaBO implements IReporteMalaConductaBO {
         reporte.setNumeroSeguimiento(reporteSeguimiento.getNumeroSeguimiento());
         
         try {
+            // Se ejecuta la consulta y se almacena el resultado en la misma entidad.
             reporte = reportesDAO.obtenerReporteSeguimiento(reporte);
-            return reporte != null ? ReporteMalaConductaMapper.toDTO(reporte) : null;
+            
+            // Si no se encontró el reporte esperado, se retorna null.
+            if(reporte == null)
+                return null;
+            
+            // Se mapea el reporte obtenido de la manera convencional.
+            ReporteMalaConductaDTO reporteObtenido = ReporteMalaConductaMapper.toDTO(reporte);
+            
+            // Se encapsula el ID del empleado reportante obtenido en una entidad Empleado.
+            Empleado empleadoReportado = new Empleado();
+            empleadoReportado.setId(reporte.getEmpleadoReportado());
+            // Se busca la entidad completa del empleado reportado a partir de su ID.
+            empleadoReportado = empleadoDAO.obtenerEmpleadoId(empleadoReportado);
+            // Se mapea la entidad obtenida y se añade al reporte obtenido.
+            reporteObtenido.setEmpleadoReportado(EmpleadoMapper.toDTO(empleadoReportado));
+
+            // Se realiza el mismo proceso con el empleado reportante.
+            Empleado empleadoReportante = new Empleado();
+            empleadoReportante.setId(reporte.getEmpleadoReportante());
+            empleadoReportante = empleadoDAO.obtenerEmpleadoId(empleadoReportante);
+            reporteObtenido.setEmpleadoReportante(EmpleadoMapper.toDTO(empleadoReportante));
+            
+            // Se regresa el reporte obtenido, ahora con la información de los empleados completa.
+            return reporteObtenido;
             
         } catch (AccesoDatosException e) {throw new ObjetosNegocioException(e.getMessage(), e);}
     }

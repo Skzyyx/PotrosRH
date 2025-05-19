@@ -22,8 +22,8 @@ public class ReporteMalaConductaMapper {
      */
     public static ReporteMalaConducta toEntityNuevo(ReporteMalaConductaDTO nuevoReporteDTO){
         ReporteMalaConducta reporteMalaConducta = new ReporteMalaConducta();
-        reporteMalaConducta.setEmpleadoReportante(new ObjectId(nuevoReporteDTO.getEmpleadoReportado().getId()));
-        reporteMalaConducta.setEmpleadoReportado(new ObjectId(nuevoReporteDTO.getEmpleadoReportante().getId()));
+        reporteMalaConducta.setEmpleadoReportado(new ObjectId(nuevoReporteDTO.getEmpleadoReportado().getId()));
+        reporteMalaConducta.setEmpleadoReportante(new ObjectId(nuevoReporteDTO.getEmpleadoReportante().getId()));
         reporteMalaConducta.setFechaHoraIncidente(nuevoReporteDTO.getFechaHoraIncidente());
         reporteMalaConducta.setLugarIncidente(nuevoReporteDTO.getLugarIncidente());
         reporteMalaConducta.setDescripcionDetallada(nuevoReporteDTO.getDescripcionDetallada());
@@ -50,8 +50,8 @@ public class ReporteMalaConductaMapper {
     public static ReporteMalaConducta toEntityViejo(ReporteMalaConductaDTO viejoReporteDTO){
         ReporteMalaConducta reporteMalaConducta = new ReporteMalaConducta();
         reporteMalaConducta.setId(new ObjectId(viejoReporteDTO.getId()));
-        reporteMalaConducta.setEmpleadoReportante(new ObjectId(viejoReporteDTO.getEmpleadoReportado().getId()));
-        reporteMalaConducta.setEmpleadoReportado(new ObjectId(viejoReporteDTO.getEmpleadoReportante().getId()));
+        reporteMalaConducta.setEmpleadoReportado(new ObjectId(viejoReporteDTO.getEmpleadoReportado().getId()));
+        reporteMalaConducta.setEmpleadoReportante(new ObjectId(viejoReporteDTO.getEmpleadoReportante().getId()));
         reporteMalaConducta.setFechaHoraIncidente(viejoReporteDTO.getFechaHoraIncidente());
         reporteMalaConducta.setLugarIncidente(viejoReporteDTO.getLugarIncidente());
         reporteMalaConducta.setDescripcionDetallada(viejoReporteDTO.getDescripcionDetallada());
@@ -84,7 +84,7 @@ public class ReporteMalaConductaMapper {
         reporteMalaConductaDTO.setEmpleadoReportado(empleadoReportado);
         
         EmpleadoDTO empleadoReportante = new EmpleadoDTO();
-        empleadoReportante.setId(viejoReporte.getEmpleadoReportado().toHexString());;
+        empleadoReportante.setId(viejoReporte.getEmpleadoReportante().toHexString());;
         reporteMalaConductaDTO.setEmpleadoReportante(empleadoReportante);
         
         reporteMalaConductaDTO.setFechaHoraIncidente(viejoReporte.getFechaHoraIncidente());

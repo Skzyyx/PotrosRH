@@ -101,6 +101,8 @@ public class ReporteRevisadoMapper {
         reporteRevisadoOmitido.setEntrevistasRealizadas(reporteOmitidoNuevoDTO.getEntrevistasRealizadas());
         reporteRevisadoOmitido.setEvidenciasRevisadas(reporteOmitidoNuevoDTO.getEvidenciasRevisadas());
         
+        reporteRevisadoOmitido.setMotivoOmision(reporteOmitidoNuevoDTO.getMotivoOmision());
+        
         return reporteRevisadoOmitido;
     }
     /**
@@ -120,6 +122,7 @@ public class ReporteRevisadoMapper {
         
         reporteRevisadoOmitido.setEntrevistasRealizadas(reporteOmitidoViejoDTO.getEntrevistasRealizadas());
         reporteRevisadoOmitido.setEvidenciasRevisadas(reporteOmitidoViejoDTO.getEvidenciasRevisadas());
+        
         reporteRevisadoOmitido.setMotivoOmision(reporteOmitidoViejoDTO.getMotivoOmision());
         
         return reporteRevisadoOmitido;
