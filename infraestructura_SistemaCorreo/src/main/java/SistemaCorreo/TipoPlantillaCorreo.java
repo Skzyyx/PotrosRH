@@ -7,6 +7,6 @@ package SistemaCorreo;
 public enum TipoPlantillaCorreo {
     CONTRATACION,
     DESPIDO,
-    NOMINA
-
+    NOMINA,
+    ASISTENCIA
 }

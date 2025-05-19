@@ -4,16 +4,22 @@
  */
 package Control;
 
+import Excepciones.CorreoException;
 import Excepciones.RegistrarAsistenciaException;
 import Exceptions.ObjetosNegocioException;
+import Interface.ISistemaCorreo;
 import Interfaces.IHorarioLaboralBO;
 import Interfaces.IRegistroAsistenciaBO;
+import SistemaCorreo.SistemaCorreo;
 import bo.HorarioLaboralBO;
 import bo.RegistroAsistenciaBO;
+import dto.CorreoDTO;
 import dto.EmpleadoDTO;
 import dto.HorarioLaboralDTO;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,8 +88,35 @@ public class ControlRegistrarAsistencia {
         }
     }
     
-    public boolean enviarCorreo(){
-        return true;
+    public boolean enviarCorreo(EmpleadoDTO empleado, LocalDate fechaAsistencia, LocalTime hora, String tipoAsistencia) throws RegistrarAsistenciaException {
+        try {
+            ISistemaCorreo sistemaCorreo = new SistemaCorreo();
+            CorreoDTO dto = new CorreoDTO();
+            dto.setCorreoReceptor(empleado.getEmail());
+            dto.setPlantillaCorreo("ASISTENCIA"); 
+
+            DateTimeFormatter fechaFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter horaFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+            Map<String, Object> values = Map.of(
+            "nombre", String.join(" ", 
+                empleado.getNombre(),
+                empleado.getApellidoPaterno(),
+                empleado.getApellidoMaterno()
+            ),
+            "tipoRegistro", tipoAsistencia.toLowerCase(),
+            "fecha", fechaAsistencia.format(fechaFormatter),
+            "hora", hora.format(horaFormatter)
+            );
+
+            dto.setValues(values);
+
+            sistemaCorreo.sendEmail(dto);
+            return true;
+        } catch (CorreoException ex) {
+            Logger.getLogger(ControlRegistrarAsistencia.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RegistrarAsistenciaException("Error al enviar correo: " + ex.getMessage());
+        }
     }
     
 }

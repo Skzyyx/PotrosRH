@@ -70,6 +70,9 @@ public class RepoPlantillaCorreo {
             </body>
             </html>
             """
+        ),TipoPlantillaCorreo.ASISTENCIA, new PlantillaCorreo(
+            "Confirmación de registro de asistencia",
+            "Buen día {{nombre}}, se ha registrado exitosamente su {{tipoRegistro}} el día {{fecha}} a las {{hora}}."
         )
     );
 
