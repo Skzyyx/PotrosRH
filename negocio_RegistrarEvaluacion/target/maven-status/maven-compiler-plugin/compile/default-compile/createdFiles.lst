@@ -1,5 +1,5 @@
 Pruebas\Negocio_RegistrarEvaluacion.class
 Exceptions\RegistrarEvaluacionException.class
+Fachada\RegistrarEvaluacion.class
 Control\ControlRegistrarEvaluacion.class
 Interface\IRegistrarEvaluacion.class
-Fachada\RegistrarEvaluación.class

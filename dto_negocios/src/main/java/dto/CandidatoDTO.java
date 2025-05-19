@@ -4,6 +4,8 @@
  */
 package dto;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author skyro
@@ -17,7 +19,11 @@ public class CandidatoDTO {
     private String rfc;
     private String email;
     private String telefono;
-    private Integer edad;
+    private LocalDate fechaNacimiento;
+    private String sexo;
+    private String calle;
+    private String numero;
+    private String colonia;
     private String experiencia;
     private String nivelEstudio;
     private String habilidadesClave;
@@ -25,20 +31,7 @@ public class CandidatoDTO {
     public CandidatoDTO() {
     }
 
-    public CandidatoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, Integer edad, String experiencia, String nivelEstudio, String habilidadesClave) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.rfc = rfc;
-        this.email = email;
-        this.telefono = telefono;
-        this.edad = edad;
-        this.experiencia = experiencia;
-        this.nivelEstudio = nivelEstudio;
-        this.habilidadesClave = habilidadesClave;
-    }
-    
-    public CandidatoDTO(String id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, Integer edad, String experiencia, String nivelEstudio, String habilidadesClave) {
+    public CandidatoDTO(String id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -46,7 +39,28 @@ public class CandidatoDTO {
         this.rfc = rfc;
         this.email = email;
         this.telefono = telefono;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.experiencia = experiencia;
+        this.nivelEstudio = nivelEstudio;
+        this.habilidadesClave = habilidadesClave;
+    }
+
+    public CandidatoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.rfc = rfc;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
         this.experiencia = experiencia;
         this.nivelEstudio = nivelEstudio;
         this.habilidadesClave = habilidadesClave;
@@ -108,12 +122,44 @@ public class CandidatoDTO {
         this.telefono = telefono;
     }
 
-    public Integer getEdad() {
-        return edad;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
     }
 
     public String getExperiencia() {
@@ -151,7 +197,11 @@ public class CandidatoDTO {
         sb.append(", rfc=").append(rfc);
         sb.append(", email=").append(email);
         sb.append(", telefono=").append(telefono);
-        sb.append(", edad=").append(edad);
+        sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", sexo=").append(sexo);
+        sb.append(", calle=").append(calle);
+        sb.append(", numero=").append(numero);
+        sb.append(", colonia=").append(colonia);
         sb.append(", experiencia=").append(experiencia);
         sb.append(", nivelEstudio=").append(nivelEstudio);
         sb.append(", habilidadesClave=").append(habilidadesClave);

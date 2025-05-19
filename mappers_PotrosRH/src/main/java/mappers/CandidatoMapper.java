@@ -5,6 +5,8 @@
 package mappers;
 
 import Entidades.Candidato;
+import Entidades.Direccion;
+import Enums.Sexo;
 import dto.CandidatoDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,24 @@ import org.bson.types.ObjectId;
  */
 public class CandidatoMapper {
     
-    public static Candidato toEntity(CandidatoDTO dto) {
+    public static Candidato toEntityNuevo(CandidatoDTO dto) {
+        return new Candidato(
+                dto.getNombre(), 
+                dto.getApellidoPaterno(), 
+                dto.getApellidoMaterno(), 
+                dto.getRfc(), 
+                dto.getEmail(), 
+                dto.getTelefono(), 
+                dto.getFechaNacimiento(),
+                Sexo.valueOf(dto.getSexo()),
+                new Direccion(dto.getCalle(), dto.getNumero(), dto.getColonia()),
+                dto.getExperiencia(),
+                dto.getNivelEstudio(), 
+                dto.getHabilidadesClave()
+        );
+    }
+    
+    public static Candidato toEntityViejo(CandidatoDTO dto) {
         return new Candidato(
                 new ObjectId(dto.getId()),
                 dto.getNombre(), 
@@ -25,7 +44,9 @@ public class CandidatoMapper {
                 dto.getRfc(), 
                 dto.getEmail(), 
                 dto.getTelefono(), 
-                dto.getEdad(), 
+                dto.getFechaNacimiento(),
+                Sexo.valueOf(dto.getSexo()),
+                new Direccion(dto.getCalle(), dto.getNumero(), dto.getColonia()),
                 dto.getExperiencia(),
                 dto.getNivelEstudio(), 
                 dto.getHabilidadesClave()
@@ -41,7 +62,11 @@ public class CandidatoMapper {
                 candidato.getRfc(), 
                 candidato.getEmail(), 
                 candidato.getTelefono(), 
-                candidato.getEdad(), 
+                candidato.getFechaNacimiento(),
+                candidato.getSexo().toString(), 
+                candidato.getDireccion().getCalle(),
+                candidato.getDireccion().getNumero(),
+                candidato.getDireccion().getColonia(),
                 candidato.getExperiencia(),
                 candidato.getNivelEstudio(), 
                 candidato.getHabilidadesClave()
@@ -56,7 +81,11 @@ public class CandidatoMapper {
                 candidato.getRfc(), 
                 candidato.getEmail(), 
                 candidato.getTelefono(), 
-                candidato.getEdad(), 
+                candidato.getFechaNacimiento(),
+                candidato.getSexo().toString(), 
+                candidato.getDireccion().getCalle(),
+                candidato.getDireccion().getNumero(),
+                candidato.getDireccion().getColonia(),
                 candidato.getExperiencia(),
                 candidato.getNivelEstudio(), 
                 candidato.getHabilidadesClave()

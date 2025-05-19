@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import Enums.Sexo;
+import java.time.LocalDate;
 import org.bson.types.ObjectId;
 
 /**
@@ -21,7 +23,9 @@ public class Candidato {
     private String rfc;
     private String email;
     private String telefono;
-    private Integer edad;
+    private LocalDate fechaNacimiento;
+    private Sexo sexo;
+    private Direccion direccion;
     private String experiencia;
     private String nivelEstudio;
     private String habilidadesClave;
@@ -42,12 +46,14 @@ public class Candidato {
      * @param rfc RFC del candidato
      * @param email Correo electrónico del candidato
      * @param telefono Número telefónico del candidato
-     * @param edad Edad del candidato en años
+     * @param fechaNacimiento Fecha de Nacimiento del candidato
+     * @param sexo Sexo del candidato
+     * @param direccion Direccion del candidato
      * @param experiencia Descripción de la experiencia laboral del candidato
      * @param nivelEstudio Nivel de estudios del candidato
      * @param habilidadesClave Habilidades clave del candidato
      */
-    public Candidato(ObjectId id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, Integer edad, String experiencia, String nivelEstudio, String habilidadesClave) {
+    public Candidato(ObjectId id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {    
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -55,7 +61,24 @@ public class Candidato {
         this.rfc = rfc;
         this.email = email;
         this.telefono = telefono;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.direccion = direccion;
+        this.experiencia = experiencia;
+        this.nivelEstudio = nivelEstudio;
+        this.habilidadesClave = habilidadesClave;
+    }
+
+    public Candidato(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.rfc = rfc;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.direccion = direccion;
         this.experiencia = experiencia;
         this.nivelEstudio = nivelEstudio;
         this.habilidadesClave = habilidadesClave;
@@ -188,23 +211,59 @@ public class Candidato {
     }
 
     /**
+     * Obtiene la fecha de nacimiento del candidato.
+     * 
+     * @return Fecha de nacimiento del candidato
+     */
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * Establece la fecha de nacimiento del candidato.
+     * 
+     * @param fechaNacimiento Nueva fecha de nacimiento del candidato
+     */
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
      * Obtiene la edad del candidato.
      * 
-     * @return Edad del candidato en años
+     * @return Sexo del candidato.
      */
-    public Integer getEdad() {
-        return edad;
+    public Sexo getSexo() {
+        return sexo;
     }
 
     /**
      * Establece la edad del candidato.
      * 
-     * @param edad Nueva edad del candidato en años
+     * @param sexo Sexo del candidato.
      */
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setSexo(Sexo sexo) {     
+        this.sexo = sexo;
     }
 
+    /**
+     * Obtiene la direccion del candidato.
+     * 
+     * @return Dirección del candidato.
+     */
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * Establece la direccion del candidato.
+     * 
+     * @param direccion Direccion del candidato.
+     */
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+    
     /**
      * Obtiene la experiencia laboral del candidato.
      * 
@@ -275,11 +334,11 @@ public class Candidato {
         sb.append(", rfc=").append(rfc);
         sb.append(", email=").append(email);
         sb.append(", telefono=").append(telefono);
-        sb.append(", edad=").append(edad);
+        sb.append(", sexo=").append(sexo);
         sb.append(", experiencia=").append(experiencia);
         sb.append(", nivelEstudio=").append(nivelEstudio);
         sb.append(", habilidadesClave=").append(habilidadesClave);
         sb.append('}');
         return sb.toString();
-    }   
+    }
 }

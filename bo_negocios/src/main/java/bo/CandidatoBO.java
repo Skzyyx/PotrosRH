@@ -44,7 +44,7 @@ public class CandidatoBO implements ICandidatoBO {
         }
 
         try {
-            Candidato map = CandidatoMapper.toEntity(candidato);
+            Candidato map = CandidatoMapper.toEntityNuevo(candidato);
             return CandidatoMapper.toDTOViejo(candidatoDAO.registrarCandidato(map));
         } catch (AccesoDatosException ex) {
             Logger.getLogger(CandidatoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());

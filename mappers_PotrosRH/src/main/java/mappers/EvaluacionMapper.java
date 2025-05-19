@@ -20,7 +20,7 @@ public class EvaluacionMapper {
                 new ObjectId(dto.getId()),
                 dto.getFechaHoraEvaluacion(),
                 ResultadoEvaluacion.valueOf(dto.getResultado()),
-                CandidatoMapper.toEntity(dto.getCandidato()),
+                CandidatoMapper.toEntityViejo(dto.getCandidato()),
                 PreguntaMapper.toEntitySet(dto.getPreguntas())
         );
     }

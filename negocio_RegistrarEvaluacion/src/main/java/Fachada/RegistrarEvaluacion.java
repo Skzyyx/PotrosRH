@@ -15,14 +15,21 @@ import java.util.logging.Logger;
  *
  * @author skyro
  */
-public class RegistrarEvaluación implements IRegistrarEvaluacion {
+public class RegistrarEvaluacion implements IRegistrarEvaluacion {
 
+    private static RegistrarEvaluacion instance;
     private ControlRegistrarEvaluacion control;
 
-    public RegistrarEvaluación() {
+    private RegistrarEvaluacion() {
         this.control = new ControlRegistrarEvaluacion();
     }
     
+    public static IRegistrarEvaluacion getInstance() {
+        if (instance == null) {
+            instance = new RegistrarEvaluacion();
+        }
+        return instance;
+    }
     
     @Override
     public EvaluacionDTO registrarEvaluacion(EvaluacionDTO evaluacion) throws RegistrarEvaluacionException {
@@ -31,7 +38,7 @@ public class RegistrarEvaluación implements IRegistrarEvaluacion {
             
             return control.registrarEvaluacion(evaluacion);
         } catch (RegistrarEvaluacionException ex) {
-            Logger.getLogger(RegistrarEvaluación.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            Logger.getLogger(RegistrarEvaluacion.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new RegistrarEvaluacionException(ex.getMessage());
         }
     }

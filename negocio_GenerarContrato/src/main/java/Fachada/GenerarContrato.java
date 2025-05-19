@@ -15,12 +15,20 @@ import java.util.logging.Logger;
  *
  * @author skyro
  */
-public class GenerarContrato implements IGenerarContrato{
+public class GenerarContrato implements IGenerarContrato {
 
+    private static GenerarContrato instance;
     private ControlGenerarContrato control;
 
-    public GenerarContrato() {
+    private GenerarContrato() {
         this.control = new ControlGenerarContrato();
+    }
+    
+    public static IGenerarContrato getInstance() { 
+        if (instance == null) {
+            instance = new GenerarContrato();
+        }
+        return instance;
     }
     
     @Override

@@ -8,8 +8,6 @@ import Control.ControlRegistrarObtenerCandidato;
 import Exceptions.RegistrarObtenerCandidatoException;
 import Interfaces.IRegistrarObteneCandidato;
 import dto.CandidatoDTO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,32 +15,28 @@ import java.util.logging.Logger;
  */
 public class RegistrarObtenerCandidato implements IRegistrarObteneCandidato {
 
+    private static RegistrarObtenerCandidato instance;
     private ControlRegistrarObtenerCandidato control;
 
-    public RegistrarObtenerCandidato() {
+    private RegistrarObtenerCandidato() {
         this.control = new ControlRegistrarObtenerCandidato();
+    }
+
+    public static synchronized IRegistrarObteneCandidato getInstance() {
+        if (instance == null) {
+            instance = new RegistrarObtenerCandidato();
+        }
+        return instance;
     }
 
     @Override
     public CandidatoDTO registrarCandidato(CandidatoDTO candidato) throws RegistrarObtenerCandidatoException {
-
-        try {
-            control.validarDatosCandidato(candidato);
-
-            return control.registrarCandidato(candidato);
-        } catch (RegistrarObtenerCandidatoException ex) {
-            Logger.getLogger(RegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-            throw new RegistrarObtenerCandidatoException(ex.getMessage());
-        }
+        control.validarDatosCandidato(candidato);
+        return control.registrarCandidato(candidato);
     }
 
     @Override
     public CandidatoDTO obtenerCandidato(CandidatoDTO candidato) throws RegistrarObtenerCandidatoException {
-        try {
-            return control.obtenerCandidato(candidato);
-        } catch (RegistrarObtenerCandidatoException ex) {
-            Logger.getLogger(RegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-            throw new RegistrarObtenerCandidatoException(ex.getMessage());
-        }
+        return control.obtenerCandidato(candidato);
     }
 }

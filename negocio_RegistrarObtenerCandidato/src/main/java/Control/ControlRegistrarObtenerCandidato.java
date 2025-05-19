@@ -37,6 +37,15 @@ public class ControlRegistrarObtenerCandidato {
                 throw new RegistrarObtenerCandidatoException("Error al acceder al campo: " + field.getName());
             }
         }
+        
+        if (!candidato.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) 
+            throw new RegistrarObtenerCandidatoException("El correo no tiene el formato correcto");
+        
+        if (candidato.getTelefono().trim().length() < 10) 
+            throw new RegistrarObtenerCandidatoException("El teléfono puede tener hasta máximo 10 dígitos");
+        
+        if(!candidato.getRfc().matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$"))
+            throw new RegistrarObtenerCandidatoException("RFC con formato inválido.");
         return true;
     }
     

@@ -20,6 +20,7 @@ import Enums.EstadoEmpleado;
 import Enums.ModoPago;
 import Enums.PeriodoPago;
 import Enums.ResultadoEvaluacion;
+import Enums.Sexo;
 import Enums.TipoContrato;
 import Exceptions.AccesoDatosException;
 import Interfaces.ICandidatoDAO;
@@ -57,7 +58,7 @@ public class Dao_PotrosRH {
         c.setRfc("LOIJ920315XYZ");
         c.setEmail("neto@potros.itson.edu.mx");
         c.setTelefono("6622537849");
-        c.setEdad(19);
+        c.setSexo(Sexo.HOMBRE);
         c.setExperiencia("Experto en Pokemon.");
         c.setNivelEstudio("Universidad.");
         c.setHabilidadesClave("Juegos Interactivos.");
