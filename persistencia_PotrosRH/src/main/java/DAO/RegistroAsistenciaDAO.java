@@ -1,10 +1,18 @@
 package DAO;
 
+import Conexion.Conexion;
 import Entidades.Empleado;
+import Entidades.RegistroAsistencia;
 import Exceptions.AccesoDatosException;
 import Interfaces.IRegistroAsistenciaDAO;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import org.bson.conversions.Bson;
 
 /**
  * Clase para métodos de Persistencia con entidades RegistroAsistencia.
@@ -15,6 +23,15 @@ import java.time.LocalTime;
  * @author Benjamin Soto Coronado (253183)
  */
 public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
+    
+    private final MongoCollection<RegistroAsistencia> RegistroAsistenciaCollection;
+
+    public RegistroAsistenciaDAO() {
+        MongoDatabase database = Conexion.getDatabase();
+        this.RegistroAsistenciaCollection = database.getCollection("registro_asistencia", RegistroAsistencia.class);
+    }
+    
+    
     /**
      * Obtiene los días trabajados de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
@@ -53,11 +70,47 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     }
     
     @Override
-    public boolean registrarEntrada(Empleado empleado,LocalDate fechaAsistencia,LocalTime horaEntrada)throws AccesoDatosException{
-        return true;
+    public boolean registrarEntrada(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaEntrada) throws AccesoDatosException {
+        try {
+            Bson filtro = Filters.and(
+                Filters.eq("empleadoId", empleado.getId()),
+                Filters.eq("fechaAsistencia", fechaAsistencia),
+                Filters.eq("horaSalida", null) 
+            );
+            RegistroAsistencia registroExistente = RegistroAsistenciaCollection.find(filtro).first();
+            if (registroExistente != null) {
+                return false;
+            }
+            RegistroAsistencia nuevoRegistro = new RegistroAsistencia(
+                empleado.getId(),
+                fechaAsistencia,
+                horaEntrada,
+                null
+            );
+            RegistroAsistenciaCollection.insertOne(nuevoRegistro);
+            return true;
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al registrar la entrada del empleado", e);
+        }
     }
+    
     @Override
-    public boolean registrarSalida(Empleado empleado,LocalDate FechaAsistencia,LocalTime horaSalida)throws AccesoDatosException{
-        return true;
+    public boolean registrarSalida(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaSalida) throws AccesoDatosException {
+        try {
+            Bson filtro = Filters.and(
+            Filters.eq("empleadoId", empleado.getId()),
+            Filters.eq("fechaAsistencia", fechaAsistencia),
+            Filters.eq("horaSalida", null)  
+        );
+
+            Bson actualizacion = Updates.set("horaSalida", horaSalida);
+
+            UpdateResult resultado = RegistroAsistenciaCollection.updateOne(filtro, actualizacion);
+
+            return resultado.getModifiedCount() > 0;
+
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al registrar la salida del empleado", e);
+        }
     }
 }

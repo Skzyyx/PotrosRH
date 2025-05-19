@@ -57,7 +57,7 @@ public class ControlAsistencia {
         try {
             return registrarAsistencia.registrarSalida(empleado, fechaAsistencia, horaSalida);
         } catch (RegistrarAsistenciaException e) {
-            throw new PresentacionException("Error al registrar entrada"+e.getMessage());
+            throw new PresentacionException("Error al registrar salida"+e.getMessage());
         }
     }
     
@@ -65,7 +65,7 @@ public class ControlAsistencia {
         try {
             return registrarAsistencia.obtenerDetallesHorarioLaboralDia(empleado, fechaAsistencia);
         } catch (RegistrarAsistenciaException e) {
-            throw new PresentacionException("Error al registrar entrada"+e.getMessage());
+            throw new PresentacionException("Error al obtener los detalles del horario laboral"+e.getMessage());
         }
     } 
     
@@ -73,7 +73,7 @@ public class ControlAsistencia {
         try {
             return registrarAsistencia.validarHorarioLaboral(empleado, fechaAsistencia);
         } catch (RegistrarAsistenciaException e) {
-            throw new PresentacionException("Error al registrar entrada"+e.getMessage());
+            throw new PresentacionException("Error al validar el horario laboral"+e.getMessage());
         }
     }
 }

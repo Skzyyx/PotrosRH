@@ -2,6 +2,7 @@ package Entidades;
 
 import Enums.DiaSemana;
 import java.time.LocalTime;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa un horario laboral de un empleado.
@@ -13,6 +14,7 @@ import java.time.LocalTime;
  */
 public class HorarioLaboral {
     // Atributos de un horario laboral.
+    private ObjectId id;
     private DiaSemana diaSemana;
     private LocalTime horaInicioTurno;
     private LocalTime horaFinTurno;
@@ -20,6 +22,13 @@ public class HorarioLaboral {
      * Constructor por defecto.
      */
     public HorarioLaboral() {}
+    
+    public HorarioLaboral(ObjectId id, DiaSemana diaSemana, LocalTime horaInicioTurno, LocalTime horaFinTurno) {
+        this.id = id;
+        this.diaSemana = diaSemana;
+        this.horaInicioTurno = horaInicioTurno;
+        this.horaFinTurno = horaFinTurno;
+    }
     /**
      * Constructor que recibe los atributos.
      * @param diaSemana Día de la semana del horario laboral.
@@ -61,10 +70,21 @@ public class HorarioLaboral {
      * @param horaFinTurno Nueva hora de fin del turno del horario laboral.
      */
     public void setHoraFinTurno(LocalTime horaFinTurno) {this.horaFinTurno = horaFinTurno;}
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
+    
     /**
      * Retorna una cadena con la información relevante del horario laboral.
      * @return Cadena con información relevante del horario laboral.
      */
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

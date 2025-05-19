@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
-import java.util.logging.Level;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
@@ -16,12 +15,12 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  *
  * @author INSPIRON
  */
-public class RegistrarEntrada extends javax.swing.JPanel {
+public class RegistrarSalida extends javax.swing.JPanel {
 
     /**
-     * Creates new form RegistrarEntrada
+     * Creates new form SubmenuRegistrarAsistencia
      */
-    public RegistrarEntrada() {
+    public RegistrarSalida() {
         initComponents();
     }
 
@@ -34,28 +33,27 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtRfcRegistrarEntrada = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        txtRfcRegistrarEntrada = new javax.swing.JTextField();
+        btnBuscarEmpleado = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jlblNombreEmpleado = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jlblFechaActual = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jlblHoraDeEntradaEsperada = new javax.swing.JLabel();
+        jlblHoraDeSalidaEsperada = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jlblHoraDeEntrada = new javax.swing.JLabel();
-        btnBuscarEmpleado = new javax.swing.JButton();
-        btnRegistrarEntrada = new javax.swing.JButton();
+        jlblHoraDeSalida = new javax.swing.JLabel();
+        btnRegistrarSalida = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Nombre del empleado:");
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Ingresar el RFC del empleado:");
 
         txtRfcRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtRfcRegistrarEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -64,9 +62,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Ingresar el RFC del empleado:");
+        btnBuscarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBuscarEmpleado.setText("Buscar Empleado");
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Nombre del empleado:");
 
         jlblNombreEmpleado.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jlblNombreEmpleado.setForeground(new java.awt.Color(255, 255, 255));
@@ -82,28 +83,25 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Hora de entrada esperada:");
+        jLabel4.setText("Hora de salida esperada:");
 
-        jlblHoraDeEntradaEsperada.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jlblHoraDeEntradaEsperada.setForeground(new java.awt.Color(255, 255, 255));
-        jlblHoraDeEntradaEsperada.setText("Hora de llegada que aparece en su horario");
+        jlblHoraDeSalidaEsperada.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jlblHoraDeSalidaEsperada.setForeground(new java.awt.Color(255, 255, 255));
+        jlblHoraDeSalidaEsperada.setText("Hora de salida que aparece en su horario");
 
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Hora de entrada:");
+        jLabel5.setText("Hora salida:");
 
-        jlblHoraDeEntrada.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jlblHoraDeEntrada.setForeground(new java.awt.Color(255, 255, 255));
-        jlblHoraDeEntrada.setText("Hora actual del sistema");
+        jlblHoraDeSalida.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jlblHoraDeSalida.setForeground(new java.awt.Color(255, 255, 255));
+        jlblHoraDeSalida.setText("Hora actual del sistema");
 
-        btnBuscarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBuscarEmpleado.setText("Buscar Empleado");
-
-        btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistrarEntrada.setText("Registrar Entrada");
-        btnRegistrarEntrada.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarSalida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRegistrarSalida.setText("Registrar Salida");
+        btnRegistrarSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarEntradaActionPerformed(evt);
+                btnRegistrarSalidaActionPerformed(evt);
             }
         });
 
@@ -118,14 +116,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblNombreEmpleado)
-                            .addComponent(jlblFechaActual)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txtRfcRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,18 +123,26 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                         .addComponent(btnBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlblFechaActual)
+                            .addComponent(jlblNombreEmpleado)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblHoraDeEntrada)
-                            .addComponent(jlblHoraDeEntradaEsperada))))
-                .addGap(407, 407, Short.MAX_VALUE))
+                            .addComponent(jlblHoraDeSalidaEsperada)
+                            .addComponent(jlblHoraDeSalida))))
+                .addContainerGap(407, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
-                .addComponent(btnRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
@@ -157,7 +155,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(txtRfcRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(32, 32, 32)
                         .addComponent(btnBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,15 +168,15 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jlblHoraDeEntradaEsperada))
+                    .addComponent(jlblHoraDeSalidaEsperada))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jlblHoraDeEntrada))
+                    .addComponent(jlblHoraDeSalida))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
 
@@ -215,23 +213,23 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRfcRegistrarEntradaActionPerformed
 
-    private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
+    private void btnRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
+    }//GEN-LAST:event_btnRegistrarSalidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnRegistrarEntrada;
+    private javax.swing.JButton btnRegistrarSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jlblFechaActual;
-    private javax.swing.JLabel jlblHoraDeEntrada;
-    private javax.swing.JLabel jlblHoraDeEntradaEsperada;
+    private javax.swing.JLabel jlblHoraDeSalida;
+    private javax.swing.JLabel jlblHoraDeSalidaEsperada;
     private javax.swing.JLabel jlblNombreEmpleado;
     private javax.swing.JTextField txtRfcRegistrarEntrada;
     // End of variables declaration//GEN-END:variables
