@@ -29,7 +29,7 @@ public class ControlDespido {
     
     public EmpleadoDTO buscarEmpleadoPorRFC(EmpleadoDTO empleadoDTO) throws PresentacionException {
         try {
-            return obtenerEmpleado.obtenerEmpleado(empleadoDTO);
+            return obtenerEmpleado.obtenerEmpleadoActivo(empleadoDTO);
         } catch (Exception e) {
             throw new PresentacionException("Error al buscar empleado: " + e.getMessage());
         }

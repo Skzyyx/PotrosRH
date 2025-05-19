@@ -185,7 +185,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
             try {
                 controlDespidos.registrarDespido(empleadoADespedir, razonDespido);
                 JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                ControlFlujo.mostrarMenuPrincipal(); // Regresar al menú principal después del despido
+                ControlFlujo.mostrarMenuPrincipal();
             } catch (CorreoException ex) {
                 JOptionPane.showMessageDialog(this, "Error al enviar el correo de despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (ObjetosNegocioException ex) {

@@ -297,13 +297,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String motivo = getMotivoDespido().trim();
         if (!motivo.isEmpty()) {
-            try {
-                controlDespido.registrarDespido(empleado, motivo);
-                JOptionPane.showMessageDialog(this, "Despido registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                ControlFlujo.mostrarMenuPrincipal();
-            } catch (PresentacionException ex) {
-                JOptionPane.showMessageDialog(this, "Error al registrar el despido: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            ControlFlujo.mostrarPanelConfirmacionDespido(empleado, motivo);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el motivo del despido.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
         }

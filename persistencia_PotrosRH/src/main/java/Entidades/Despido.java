@@ -1,23 +1,24 @@
 package Entidades;
 
 import java.time.LocalDate;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author Jesús Ernesto López Ibarra (252663)
  */
 public class Despido {
-    
-    private int idDespido;
+    private ObjectId _id;
+    private ObjectId idDespido;
     private String rfcEmpleado;
     private LocalDate fechaDespido;
     private String motivo;
 
-    public int getIdDespido() {
+    public ObjectId getIdDespido() {
         return idDespido;
     }
 
-    public void setIdDespido(int idDespido) {
+    public void setIdDespido(ObjectId idDespido) {
         this.idDespido = idDespido;
     }
 
@@ -45,10 +46,18 @@ public class Despido {
         this.motivo = motivo;
     }
 
+    public ObjectId getId() {
+        return _id;
+    }
+
+    public void setId(ObjectId _id) {
+        this._id = _id;
+    }
+    
     public Despido() {
     }
 
-    public Despido(int idDespido, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+    public Despido(ObjectId idDespido, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
         this.idDespido = idDespido;
         this.rfcEmpleado = rfcEmpleado;
         this.fechaDespido = fechaDespido;
@@ -61,6 +70,14 @@ public class Despido {
         this.motivo = motivo;
     }
 
+    public Despido(ObjectId _id, ObjectId idDespido, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this._id = _id;
+        this.idDespido = idDespido;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+    
     @Override
     public String toString() {
         return "Despido{" + "idDespido=" + idDespido + ", rfcEmpleado=" + rfcEmpleado + ", fechaDespido=" + fechaDespido + ", motivo=" + motivo + '}';

@@ -53,7 +53,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
             } catch (AccesoDatosException ex) {
                 Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return empleadoBO.obtenerEmpleado(empleadoDTO);
+            return empleadoBO.obtenerEmpleadoActivo(empleadoDTO);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al cambiar el estado del empleado: " + e.getMessage(), e);
         }
@@ -76,7 +76,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
         try {
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
-            return empleadoBO.obtenerEmpleado(empleado);
+            return empleadoBO.obtenerEmpleadoActivo(empleado);
         } catch (ObjetosNegocioException e) {
             throw new CorreoException("Error al buscar empleado: " + e.getMessage(), e);
         }

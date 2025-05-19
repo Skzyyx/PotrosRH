@@ -18,13 +18,17 @@ public class DespidoMapper {
         );
     }
 
-    public DespidoDTO toDTO(Despido entity) { 
+    public DespidoDTO toDTO(Despido entity) {
         if (entity == null) return null;
-        return new DespidoDTO(
-            entity.getIdDespido(),
-            entity.getRfcEmpleado(),
-            entity.getFechaDespido(),
-            entity.getMotivo()
-        );
+        DespidoDTO dto = new DespidoDTO();
+        if (entity.getId()!= null) {
+            dto.setId(entity.getId().toHexString());
+        }
+        if (entity.getId()!= null) {
+            dto.setEmpleadoid(entity.getId().toHexString());
+        }
+        dto.setFechaDespido(entity.getFechaDespido());
+        dto.setMotivo(entity.getMotivo());
+        return dto;
     }
 }

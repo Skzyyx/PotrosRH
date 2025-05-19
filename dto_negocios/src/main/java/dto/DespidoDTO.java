@@ -7,7 +7,9 @@ import java.time.LocalDate;
  * @author Jesus Ernesto López Ibarra (252663)
  */
 public class DespidoDTO {
+    private String id;
     private int idDespido;
+    private String empleadoid;
     private String rfcEmpleado;
     private LocalDate fechaDespido;
     private String motivo;
@@ -44,6 +46,22 @@ public class DespidoDTO {
         this.motivo = motivo;
     }
 
+    public String getEmpleadoid() {
+        return empleadoid;
+    }
+
+    public void setEmpleadoid(String empleadoid) {
+        this.empleadoid = empleadoid;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public DespidoDTO() {
     }
     
@@ -62,6 +80,38 @@ public class DespidoDTO {
 
     public DespidoDTO(int idDespido, LocalDate fechaDespido, String motivo) {
         this.idDespido = idDespido;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+
+    public DespidoDTO(int idDespido, String empleadoid, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this.idDespido = idDespido;
+        this.empleadoid = empleadoid;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+
+    public DespidoDTO(String empleadoid, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this.empleadoid = empleadoid;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+
+    public DespidoDTO(String id, int idDespido, String empleadoid, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this.id = id;
+        this.idDespido = idDespido;
+        this.empleadoid = empleadoid;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+
+    public DespidoDTO(String id, String empleadoid, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this.id = id;
+        this.empleadoid = empleadoid;
+        this.rfcEmpleado = rfcEmpleado;
         this.fechaDespido = fechaDespido;
         this.motivo = motivo;
     }

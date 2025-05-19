@@ -9,6 +9,7 @@ import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IDespidoEmpleadoBO;
 import dto.DespidoDTO;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -43,8 +44,9 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
      */
     @Override
     public void registrarDespido(DespidoDTO despidoDTO) throws AccesoDatosException {
+        ObjectId empleadoObjectId = new ObjectId(despidoDTO.getEmpleadoid());
         Despido despidoEntity = new Despido(
-            despidoDTO.getIdDespido(),
+            empleadoObjectId,
             despidoDTO.getRfcEmpleado(),
             despidoDTO.getFechaDespido(),
             despidoDTO.getMotivo()
