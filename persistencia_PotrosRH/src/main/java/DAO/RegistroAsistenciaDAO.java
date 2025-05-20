@@ -2,17 +2,25 @@ package DAO;
 
 import Conexion.Conexion;
 import Entidades.Empleado;
+import Entidades.Nomina;
 import Entidades.RegistroAsistencia;
 import Exceptions.AccesoDatosException;
 import Interfaces.IRegistroAsistenciaDAO;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  * Clase para métodos de Persistencia con entidades RegistroAsistencia.
@@ -25,10 +33,11 @@ import org.bson.conversions.Bson;
 public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     
     private final MongoCollection<RegistroAsistencia> RegistroAsistenciaCollection;
-
+    private final MongoCollection<Nomina> NominaCollection;
     public RegistroAsistenciaDAO() {
         MongoDatabase database = Conexion.getDatabase();
         this.RegistroAsistenciaCollection = database.getCollection("registro_asistencia", RegistroAsistencia.class);
+        this.NominaCollection=database.getCollection("nomina", Nomina.class);
     }
     
     
@@ -41,9 +50,42 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     @Override
+    
     public Integer obtenerDiasTrabajados(Empleado empleado) throws AccesoDatosException {
-        return null;
+    try {
+        ObjectId empleadoId = empleado.getId();
+
+        // Obtener la fecha de corte más reciente
+        Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
+        Nomina ultimaNomina = NominaCollection
+            .find(filtroNomina)
+            .sort(Sorts.descending("fechaCorte"))
+            .limit(1)
+            .first();
+
+        LocalDate fechaInicio = (ultimaNomina != null) ? ultimaNomina.getFechaCorte() : LocalDate.MIN;
+
+  
+        Bson filtroAsistencias = Filters.and(
+            Filters.eq("empleadoId", empleadoId),
+            Filters.gt("fechaAsistencia", fechaInicio)
+        );
+
+        List<RegistroAsistencia> asistencias = RegistroAsistenciaCollection
+            .find(filtroAsistencias)
+            .into(new ArrayList<>());
+
+        Set<LocalDate> diasUnicos = asistencias.stream()
+            .map(RegistroAsistencia::getFechaAsistencia)
+            .collect(Collectors.toSet());
+
+        return diasUnicos.size();
+
+    } catch (Exception e) {
+        throw new AccesoDatosException("Error al obtener días trabajados", e);
     }
+}
+
     /**
      * Obtiene las horas trabajadas de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
@@ -54,8 +96,50 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
      */
     @Override
     public Integer obtenerHorasTrabajadas(Empleado empleado) throws AccesoDatosException {
-        return null;
+    try {
+        ObjectId empleadoId = empleado.getId();
+
+        // 1. Buscar la última nómina del empleado (orden descendente por fechaCorte)
+        Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
+        Nomina ultimaNomina = NominaCollection
+            .find(filtroNomina)
+            .sort(Sorts.descending("fechaCorte"))
+            .limit(1)
+            .first();
+
+        // Si no hay nómina previa, tomamos como inicio el primer día del mes
+        LocalDate fechaInicio = (ultimaNomina != null)
+            ? ultimaNomina.getFechaCorte()
+            : LocalDate.now().withDayOfMonth(1);
+
+        // 2. Filtrar registros de asistencia del empleado después de esa fecha
+        Bson filtroAsistencias = Filters.and(
+            Filters.eq("empleadoId", empleadoId),
+            Filters.gt("fechaAsistencia", fechaInicio)
+        );
+
+        List<RegistroAsistencia> asistencias = RegistroAsistenciaCollection
+            .find(filtroAsistencias)
+            .into(new ArrayList<>());
+
+        // 3. Sumar todas las horas trabajadas (horaSalida - horaEntrada) para cada asistencia válida
+        int totalMinutos = 0;
+        for (RegistroAsistencia asistencia : asistencias) {
+            LocalTime entrada = asistencia.getHoraEntrada();
+            LocalTime salida = asistencia.getHoraSalida();
+
+            if (entrada != null && salida != null && salida.isAfter(entrada)) {
+                Duration duracion = Duration.between(entrada, salida);
+                totalMinutos += duracion.toMinutes();
+            }
+        }
+
+        return totalMinutos / 60;
+
+    } catch (Exception e) {
+        throw new AccesoDatosException("Error al obtener las horas trabajadas", e);
     }
+}
     /**
      * Obtiene la fecha del primer día de trabajo de un empleado, 
      * el cual vendría siendo su primer registro de asistencia.
@@ -66,7 +150,24 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
      */
     @Override
     public LocalDate obtenerFechaPrimerDiaTrabajo(Empleado empleado) throws AccesoDatosException {
-        return null;
+        try {
+            Bson filtro = Filters.eq("empleadoId", empleado.getId());
+
+            RegistroAsistencia primerRegistro = RegistroAsistenciaCollection
+                .find(filtro)
+                .sort(Sorts.ascending("fechaAsistencia"))
+                .limit(1)
+                .first();
+
+            if (primerRegistro != null) {
+                return primerRegistro.getFechaAsistencia();
+            } else {
+                return null; 
+            }
+
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al obtener la fecha del primer día de trabajo del empleado", e);
+        }
     }
     
     @Override

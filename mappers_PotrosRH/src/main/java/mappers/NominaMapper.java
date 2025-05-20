@@ -2,6 +2,7 @@ package mappers;
 
 import Entidades.Nomina;
 import dto.NominaDTO;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que mapea entidades Nomina a NominaDTO, 
@@ -21,7 +22,7 @@ public class NominaMapper {
      */
     public static Nomina toEntityNuevo(NominaDTO nominaDTO){
         Nomina nomina = new Nomina();
-        nomina.setEmpleado(EmpleadoMapper.toEntityViejo(nominaDTO.getEmpleado()));
+        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleado_id()));
         nomina.setBono(nominaDTO.getBono());
         nomina.setFechaCorte(nominaDTO.getFechaCorte());
         nomina.setDiasTrabajados(nominaDTO.getDiasTrabajados());
@@ -44,7 +45,7 @@ public class NominaMapper {
     public static Nomina toEntityViejo(NominaDTO nominaDTO){
         Nomina nomina = new Nomina();
         // Falta el ID.
-        nomina.setEmpleado(EmpleadoMapper.toEntityViejo(nominaDTO.getEmpleado()));
+        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleado_id()));
         nomina.setBono(nominaDTO.getBono());
         nomina.setFechaCorte(nominaDTO.getFechaCorte());
         nomina.setDiasTrabajados(nominaDTO.getDiasTrabajados());
@@ -65,7 +66,7 @@ public class NominaMapper {
     public static NominaDTO toDTO(Nomina nomina){
         // Falta el ID.
         NominaDTO nominaDTO = new NominaDTO();
-        nominaDTO.setEmpleado(EmpleadoMapper.toDTO(nomina.getEmpleado()));
+        nominaDTO.setEmpleado_id(nomina.getEmpleado_id().toHexString());
         nominaDTO.setBono(nomina.getBono());
         nominaDTO.setFechaCorte(nomina.getFechaCorte());
         nominaDTO.setDiasTrabajados(nomina.getDiasTrabajados());
