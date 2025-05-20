@@ -17,6 +17,7 @@ public class CandidatoDTO {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String rfc;
+    private String curp;
     private String email;
     private String telefono;
     private LocalDate fechaNacimiento;
@@ -31,12 +32,13 @@ public class CandidatoDTO {
     public CandidatoDTO() {
     }
 
-    public CandidatoDTO(String id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
+    public CandidatoDTO(String id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String curp, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.rfc = rfc;
+        this.curp = curp;
         this.email = email;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
@@ -49,11 +51,12 @@ public class CandidatoDTO {
         this.habilidadesClave = habilidadesClave;
     }
 
-    public CandidatoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
+    public CandidatoDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String curp, String email, String telefono, LocalDate fechaNacimiento, String sexo, String calle, String numero, String colonia, String experiencia, String nivelEstudio, String habilidadesClave) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.rfc = rfc;
+        this.curp = curp;
         this.email = email;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
@@ -106,6 +109,14 @@ public class CandidatoDTO {
         this.rfc = rfc;
     }
 
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
+    
     public String getEmail() {
         return email;
     }

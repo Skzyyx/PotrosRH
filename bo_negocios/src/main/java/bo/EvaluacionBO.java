@@ -39,7 +39,7 @@ public class EvaluacionBO implements IEvaluacionBO {
     public EvaluacionDTO registrarEvaluacion(EvaluacionDTO evaluacion) throws ObjetosNegocioException {
         
         try {    
-            Evaluacion map = EvaluacionMapper.toEntity(evaluacion);
+            Evaluacion map = EvaluacionMapper.toEntityNuevo(evaluacion);
             return EvaluacionMapper.toDTOViejo(evaluacionDAO.registrarEvaluacion(map));
         } catch (AccesoDatosException ex) {
             Logger.getLogger(EvaluacionBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());

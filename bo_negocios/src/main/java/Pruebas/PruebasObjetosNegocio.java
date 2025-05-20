@@ -1,7 +1,14 @@
 package Pruebas;
 
 
+import Exceptions.ObjetosNegocioException;
+import bo.CandidatoBO;
+import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
+import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * Clase de pruebas del proyecto.
  * @author Leonardo Flores Leyva (252390)
@@ -18,15 +25,16 @@ public class PruebasObjetosNegocio {
      */
     public static void main(String[] args) {
         
-        Random random = new Random();
-        
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
-        System.out.println(random.nextBoolean());
+        CandidatoFiltroDTO filtro = new CandidatoFiltroDTO();
+        filtro.setRfc("DASDASDASDA");
+        try {
+            List<CandidatoDTO> candidatosFiltrados = CandidatoBO.getInstance().obtenerPorFiltro(filtro);
+            candidatosFiltrados.forEach(t -> {
+                System.out.println(t.toString());
+            });
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(PruebasObjetosNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

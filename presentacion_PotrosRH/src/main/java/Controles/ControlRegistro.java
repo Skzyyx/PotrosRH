@@ -15,8 +15,10 @@ import Interface.IRegistrarEvaluacion;
 import Interfaces.IGenerarContrato;
 import Interfaces.IRegistrarObteneCandidato;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
 import dto.ContratoDTO;
 import dto.EvaluacionDTO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,6 +70,15 @@ public class ControlRegistro {
         }
     }
     
+    public List<CandidatoDTO> obtenerTodosCandidatos() throws PresentacionException {
+        try {
+            return registrarObteneCandidato.obtenerTodos();
+        } catch (RegistrarObtenerCandidatoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+    
     public EvaluacionDTO registrarEvaluacion(EvaluacionDTO evaluacion) throws PresentacionException {
         try {
             evaluacionDTO = registrarEvaluacion.registrarEvaluacion(evaluacion);
@@ -83,6 +94,15 @@ public class ControlRegistro {
             contratoDTO = generarContrato.registrarContrato(contrato);
             return contratoDTO;
         } catch (GenerarContratoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+    
+    public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws PresentacionException {
+        try {
+            return registrarObteneCandidato.obtenerPorFiltro(filtro);
+        } catch (RegistrarObtenerCandidatoException ex) {
             Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new PresentacionException(ex.getMessage());
         }

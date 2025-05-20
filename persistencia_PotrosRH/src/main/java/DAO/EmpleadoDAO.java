@@ -235,6 +235,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         }
     }
     
+    @Override
     public void actualizarEstado(String rfc, String nuevoEstado) throws AccesoDatosException {
         try {
             empleados.updateOne(Filters.eq("rfc", rfc), Updates.set("estado", nuevoEstado));

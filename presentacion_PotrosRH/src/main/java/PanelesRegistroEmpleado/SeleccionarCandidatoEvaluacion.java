@@ -4,12 +4,32 @@
  */
 package PanelesRegistroEmpleado;
 
+import Controles.ControlFlujoRegistro;
+import Controles.ControlRegistro;
+import Excepciones.PresentacionException;
+import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +42,9 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
      */
     public SeleccionarCandidatoEvaluacion() {
         initComponents();
+        cargarListeners();
+        limpiarCampos();
+        llenarTabla();
     }
 
     /**
@@ -51,21 +74,19 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
                 }
             }
         };
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lblNombreCompleto = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         lblFechaNacimiento = new javax.swing.JLabel();
-        lblEdad = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
         btnEvaluar = new javax.swing.JButton();
 
@@ -86,7 +107,7 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
 
             },
             new String [] {
-                " Nombre Completo", "RFC", "Edad", "Sexo"
+                " Nombre Completo", "RFC", "Email", "Telefono"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -105,16 +126,16 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        boxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "RFC", "CORREO", "TELEFONO" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Filtrar por");
 
         jPanel2.setBackground(new java.awt.Color(17, 119, 202));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel3.setText("Datos del Candidato");
+        jPanel2.setMaximumSize(new java.awt.Dimension(329, 438));
+        jPanel2.setMinimumSize(new java.awt.Dimension(329, 438));
+        jPanel2.setPreferredSize(new java.awt.Dimension(329, 438));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel4.setText("RFC");
@@ -125,16 +146,14 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
         jLabel6.setText("Nombre Completo");
 
         lblNombreCompleto.setText("nombreCompleto");
+        lblNombreCompleto.setMaximumSize(new java.awt.Dimension(192, 16));
+        lblNombreCompleto.setMinimumSize(new java.awt.Dimension(192, 16));
+        lblNombreCompleto.setPreferredSize(new java.awt.Dimension(192, 16));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel8.setText("Fecha de Nacimiento");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel9.setText("Edad");
-
         lblFechaNacimiento.setText("fechaNacimiento");
-
-        lblEdad.setText("edad");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel12.setText("Teléfono");
@@ -149,62 +168,54 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel5.setText("Correo Electrónico");
 
-        jLabel7.setText("correoElectronico");
+        lblEmail.setText("correoElectronico");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel3.setText("Datos del Candidato");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(74, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombreCompleto)
+                            .addComponent(jLabel8)
                             .addComponent(jLabel6)
                             .addComponent(lblRfc)
                             .addComponent(jLabel4)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(lblFechaNacimiento)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel14)
-                                    .addComponent(lblTelefono)
-                                    .addComponent(lblDireccion)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEdad)
-                                    .addComponent(jLabel9))))))
-                .addGap(65, 65, 65))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel14)
+                            .addComponent(lblTelefono)
+                            .addComponent(lblDireccion)
+                            .addComponent(jLabel5)
+                            .addComponent(lblEmail)
+                            .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFechaNacimiento))))
+                .addGap(0, 74, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRfc)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombreCompleto)
+                .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaNacimiento)
-                    .addComponent(lblEdad))
+                .addComponent(lblFechaNacimiento)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,13 +223,24 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(lblEmail)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDireccion)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
+
+        lblNombreCompleto.setPreferredSize(new Dimension(192, 16));
+        lblNombreCompleto.setMinimumSize(new Dimension(192, 16));
+        lblNombreCompleto.setMaximumSize(new Dimension(192, 16));
+        jLabel8.setPreferredSize(new Dimension(144, 19));
+        jLabel8.setMinimumSize(new Dimension(144, 19));
+        jLabel8.setMaximumSize(new Dimension(144, 19));
+        lblFechaNacimiento.setPreferredSize(new Dimension(91, 16));
+        lblFechaNacimiento.setMinimumSize(new Dimension(91, 16));
+        lblFechaNacimiento.setMaximumSize(new Dimension(91, 16));
+        jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
 
         btnVolver.setBackground(new java.awt.Color(44, 44, 44));
         btnVolver.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -255,9 +277,9 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
                         .addComponent(boxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(tfBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGap(409, 409, 409)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,11 +301,12 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
                             .addComponent(boxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEvaluar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -323,11 +346,11 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-
+        btnVolver();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnEvaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEvaluarActionPerformed
-
+        btnEvaluar();
     }//GEN-LAST:event_btnEvaluarActionPerformed
 
 
@@ -343,19 +366,153 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDireccion;
-    private javax.swing.JLabel lblEdad;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFechaNacimiento;
     private javax.swing.JLabel lblNombreCompleto;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JTextField tfBuscador;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarTabla() {
+        try {
+            CandidatoFiltroDTO filtro = new CandidatoFiltroDTO();
+            switch (boxFiltro.getSelectedItem().toString()) {
+                case "RFC":
+                    filtro.setRfc(tfBuscador.getText());
+                    break;
+                case "CORREO":
+                    filtro.setEmail(tfBuscador.getText());
+                    break;
+                case "TELEFONO":
+                    filtro.setTelefono(tfBuscador.getText());
+                    break;
+                default:
+                    break;
+            }
+
+            List<CandidatoDTO> candidatos = ControlRegistro.getInstance().obtenerPorFiltro(filtro);
+
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+            // Limpiar filas anteriores
+            modelo.setRowCount(0);
+
+            // Agregar nuevas filas
+            for (CandidatoDTO c : candidatos) {
+                modelo.addRow(new Object[]{
+                    String.join(" ", c.getNombre(), c.getApellidoPaterno(), c.getApellidoMaterno()),
+                    c.getRfc(),
+                    c.getEmail(),
+                    c.getTelefono()
+                });
+            }
+        } catch (PresentacionException ex) {
+            Logger.getLogger(SeleccionarCandidatoEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void cargarListeners() {
+        tfBuscador.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                llenarTabla();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                llenarTabla();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                llenarTabla();
+            }
+        });
+
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Para evitar que se dispare dos veces (por ajuste interno del evento)
+                if (e.getValueIsAdjusting()) {
+                    return;
+                }
+
+                int filaSeleccionada = jTable1.getSelectedRow();
+                if (filaSeleccionada == -1) {
+                    return;
+                }
+
+                CandidatoDTO rfc = new CandidatoDTO();
+                rfc.setRfc(String.valueOf(jTable1.getValueAt(filaSeleccionada, 1)));
+                try {
+                    CandidatoDTO candidato = ControlRegistro.getInstance().obtenerCandidato(rfc);
+
+                    lblRfc.setText(candidato.getRfc());
+                    lblNombreCompleto.setText(String.join(" ", candidato.getNombre(), candidato.getApellidoPaterno(), candidato.getApellidoMaterno()));
+                    lblFechaNacimiento.setText(candidato.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                    lblTelefono.setText(candidato.getTelefono());
+                    lblEmail.setText(candidato.getEmail());
+                    String direccion = String.join(" ", candidato.getCalle(), candidato.getNumero(), candidato.getColonia());
+                    lblDireccion.setText("<html><div style='width: 249px;'>"
+                            + direccion
+                            + "</div></html>");
+
+                } catch (PresentacionException ex) {
+                    Logger.getLogger(SeleccionarCandidatoEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
+
+        boxFiltro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                llenarTabla();
+            }
+        });
+    }
+
+    private void btnVolver() {
+        ControlFlujoRegistro.mostrarMenuContrataciones();
+        limpiarCampos();
+        llenarTabla();
+    }
+
+    private void btnEvaluar() {
+        if (jTable1.getSelectedRow() == -1) {
+            OptionPane.OptionPane.showErrorMessage(this, "Debes seleccionar un candidato primero.", "Error");
+            return;
+        }
+        CandidatoDTO candidato = new CandidatoDTO();
+        candidato.setRfc(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        try {
+            candidato = ControlRegistro.getInstance().obtenerCandidato(candidato);
+            ControlFlujoRegistro.mostrarCapturarDatosEvaluacion(candidato);
+        } catch (PresentacionException ex) {
+            Logger.getLogger(SeleccionarCandidatoEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void limpiarCampos() {
+
+        boxFiltro.setSelectedIndex(0);
+        tfBuscador.setText(" ");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        jTable1.setModel(model);
+        lblRfc.setText(" ");
+        lblNombreCompleto.setText(" ");
+        lblDireccion.setText(" ");
+        lblTelefono.setText(" ");
+        lblFechaNacimiento.setText(" ");
+        lblEmail.setText(" ");
+    }
 }

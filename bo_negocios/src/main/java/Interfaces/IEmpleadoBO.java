@@ -54,4 +54,6 @@ public interface IEmpleadoBO {
     public EmpleadoDTO actualizarEstadoEmpleado(String rfc, String nuevoEstado) throws ObjetosNegocioException;
     
     public EmpleadoDTO actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException;
+    
+    public EmpleadoDTO registrarEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException;
 }

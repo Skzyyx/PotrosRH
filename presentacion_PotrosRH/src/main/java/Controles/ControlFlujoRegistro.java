@@ -5,9 +5,11 @@
 package Controles;
 
 import PanelesCasoBase.MenuPrincipal;
+import PanelesRegistroEmpleado.CapturarDatosEvaluacion;
 import PanelesRegistroEmpleado.MenuContrataciones;
 import PanelesRegistroEmpleado.RegistrarCandidato;
 import PanelesRegistroEmpleado.SeleccionarCandidatoEvaluacion;
+import dto.CandidatoDTO;
 import javax.swing.JPanel;
 
 /**
@@ -25,6 +27,7 @@ public class ControlFlujoRegistro {
     private static MenuContrataciones menuContrataciones;
     private static RegistrarCandidato registrarCandidato;
     private static SeleccionarCandidatoEvaluacion seleccionarCandidatoEvaluacion;
+    private static CapturarDatosEvaluacion capturarDatosEvaluacion;
     
     public static void mostrarMenuContrataciones() {
         if (menuContrataciones == null) {
@@ -44,6 +47,7 @@ public class ControlFlujoRegistro {
         if (seleccionarCandidatoEvaluacion == null) {
             seleccionarCandidatoEvaluacion = new SeleccionarCandidatoEvaluacion();
         }
+        seleccionarCandidatoEvaluacion.limpiarCampos();
         cambiarPantalla(seleccionarCandidatoEvaluacion);
     }
     
@@ -62,6 +66,14 @@ public class ControlFlujoRegistro {
     
     public static void setContenedor(JPanel contenedor) {
         panelContenedor = contenedor;
+    }
+
+    public static void mostrarCapturarDatosEvaluacion(CandidatoDTO candidato) {
+        if (capturarDatosEvaluacion == null) {
+            capturarDatosEvaluacion = new CapturarDatosEvaluacion();
+        }
+        capturarDatosEvaluacion.setCandidato(candidato);
+        cambiarPantalla(capturarDatosEvaluacion);
     }
     
 }

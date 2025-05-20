@@ -205,6 +205,17 @@ public class EmpleadoBO implements IEmpleadoBO{
     }
     
     @Override
+    public EmpleadoDTO registrarEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException {
+        try {
+            Empleado map = EmpleadoMapper.toEntityNuevo(empleado);
+            return EmpleadoMapper.toDTO(empleadoDAO.registrarEmpleado(map));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
+    }
+    
+    @Override
     public EmpleadoDTO actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
         try {
             empleadoDAO.actualizarEstado(rfc, nuevoEstado);

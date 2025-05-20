@@ -90,6 +90,7 @@ public class MenuContrataciones extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(17, 119, 202));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Contrataciones");
         jPanel1.add(jLabel1);
 
