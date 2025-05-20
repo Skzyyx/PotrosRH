@@ -290,7 +290,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         if (resultado == JOptionPane.YES_OPTION) {
             try {
                 ControlNomina.getInstance().generarNomina();
-                ControlFlujo.mostrarPrevisualizarNomina();
+                ControlFlujo.mostrarPrevisualizarNomina(RFCEmpleado.getText().trim());
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
