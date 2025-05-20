@@ -29,7 +29,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
     /**
      * Creates new form BusquedaRFCNomina
      */
-    private ConfirmacionDespido() {
+    public ConfirmacionDespido() {
         initComponents();
     }
 
@@ -176,8 +176,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        //j
-        
+        ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed

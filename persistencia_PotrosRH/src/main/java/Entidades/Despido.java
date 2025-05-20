@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 public class Despido {
     private ObjectId _id;
     private ObjectId idDespido;
+    private String empleadoId;
     private String rfcEmpleado;
     private LocalDate fechaDespido;
     private String motivo;
@@ -53,10 +54,35 @@ public class Despido {
     public void setId(ObjectId _id) {
         this._id = _id;
     }
+
+    public String getEmpleadoId() {
+        return empleadoId;
+    }
+
+    public void setEmpleadoId(String empleadoId) {
+        this.empleadoId = empleadoId;
+    }
     
     public Despido() {
     }
 
+    public Despido(ObjectId _id, ObjectId idDespido, String empleadoId, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this._id = _id;
+        this.idDespido = idDespido;
+        this.empleadoId = empleadoId;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+
+    public Despido(ObjectId _id, String empleadoId, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
+        this._id = _id;
+        this.empleadoId = empleadoId;
+        this.rfcEmpleado = rfcEmpleado;
+        this.fechaDespido = fechaDespido;
+        this.motivo = motivo;
+    }
+    
     public Despido(ObjectId idDespido, String rfcEmpleado, LocalDate fechaDespido, String motivo) {
         this.idDespido = idDespido;
         this.rfcEmpleado = rfcEmpleado;
@@ -77,9 +103,9 @@ public class Despido {
         this.fechaDespido = fechaDespido;
         this.motivo = motivo;
     }
-    
+
     @Override
     public String toString() {
-        return "Despido{" + "idDespido=" + idDespido + ", rfcEmpleado=" + rfcEmpleado + ", fechaDespido=" + fechaDespido + ", motivo=" + motivo + '}';
+        return "Despido{" + "_id=" + _id + ", idDespido=" + idDespido + ", empleadoId=" + empleadoId + ", rfcEmpleado=" + rfcEmpleado + ", fechaDespido=" + fechaDespido + ", motivo=" + motivo + '}';
     }
 }

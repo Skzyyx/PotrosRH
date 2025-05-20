@@ -13,7 +13,9 @@ import SistemaCorreo.TipoPlantillaCorreo;
 import bo.DespidoEmpleadoBO;
 import bo.EmpleadoBO;
 import dto.CorreoDTO;
+import dto.DespidoDTO;
 import dto.EmpleadoDTO;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -94,28 +96,27 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
      */
     @Override
     public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws CorreoException, ObjetosNegocioException {
-        if (empleadoDTO == null || empleadoDTO.getRfc() == null || empleadoDTO.getRfc().isEmpty() || motivo == null || motivo.isEmpty()) {
-            throw new ObjetosNegocioException("Error: Datos incompletos para registrar el despido.");
+        if (empleadoDTO == null || empleadoDTO.getId() == null || empleadoDTO.getId().isEmpty() || motivo == null || motivo.isEmpty()) {
+            throw new ObjetosNegocioException("Error: Datos incompletos para registrar el despido. Asegúrese de que el ID del empleado esté presente.");
         }
-        dto.DespidoDTO despidoDTO = new dto.DespidoDTO();
-        despidoDTO.setRfcEmpleado(empleadoDTO.getRfc());
+        DespidoDTO despidoDTO = new DespidoDTO();
+        despidoDTO.setEmpleadoid(empleadoDTO.getId());
         despidoDTO.setMotivo(motivo);
-        despidoDTO.setFechaDespido(java.time.LocalDate.now());
+        despidoDTO.setFechaDespido(LocalDate.now());
         try {
             despidoBO.registrarDespido(despidoDTO);
         } catch (AccesoDatosException ex) {
             Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
-            throw new CorreoException("Error al registrar el despido: " + ex.getMessage(), ex); // Lanza una CorreoException
+            throw new ObjetosNegocioException("Error al registrar el despido: " + ex.getMessage(), ex); // Lanza ObjetosNegocioException
         }
 
         try {
-            cambiarEstado(empleadoDTO, "INACTIVO");
-        } catch (CorreoException ex) {
+            empleadoBO.actualizarEstadoEmpleadoD(empleadoDTO.getRfc(), "INACTIVO");
+        } catch (AccesoDatosException ex) {
             Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
-            throw new CorreoException("Error al cambiar el estado del empleado: " + ex.getMessage(), ex);
+            throw new ObjetosNegocioException("Error al cambiar el estado del empleado: " + ex.getMessage(), ex); // Lanza ObjetosNegocioException
         }
 
-        // Crear el CorreoDTO y enviarlo
         try {
             CorreoDTO correoDespidoDTO = crearCorreoDespidoDTO(empleadoDTO, motivo);
             if (correoDespidoDTO != null) {
@@ -127,7 +128,7 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
             }
         } catch (CorreoException ex) {
             Logger.getLogger(ControlSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
-            throw new CorreoException("Error al enviar el correo de despido: " + ex.getMessage(), ex); 
+            throw new CorreoException("Error al enviar el correo de despido: " + ex.getMessage(), ex);
         }
     }
 

@@ -329,6 +329,9 @@ public class ControlFlujo {
     }
     
     public static void mostrarPanelConfirmacionDespido(EmpleadoDTO empleado, String razon) {
+        if (confirmacionDespido == null) {
+            confirmacionDespido = new ConfirmacionDespido();
+        }
         confirmacionDespido.setDatosDespido(empleado, razon);
         cambiarPantalla(confirmacionDespido);
     }
