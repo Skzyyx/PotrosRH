@@ -8,7 +8,11 @@ import Exceptions.AccesoDatosException;
 import Interfaces.IRegistroAsistenciaDAO;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Field;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
@@ -16,9 +20,11 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
@@ -96,46 +102,53 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
      */
     @Override
     public Integer obtenerHorasTrabajadas(Empleado empleado) throws AccesoDatosException {
-    try {
-        ObjectId empleadoId = empleado.getId();
+        try {
+            ObjectId empleadoId = empleado.getId();
 
-        Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
-        Nomina ultimaNomina = NominaCollection
-            .find(filtroNomina)
-            .sort(Sorts.descending("fechaCorte"))
-            .limit(1)
-            .first();
+            Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
+            Nomina ultimaNomina = NominaCollection
+                .find(filtroNomina)
+                .sort(Sorts.descending("fechaCorte"))
+                .limit(1)
+                .first();
 
-        LocalDate fechaInicio = (ultimaNomina != null)
-            ? ultimaNomina.getFechaCorte()
-            : LocalDate.now().withDayOfMonth(1);
+            LocalDate fechaInicio = (ultimaNomina != null)
+                ? ultimaNomina.getFechaCorte()
+                : LocalDate.now().withDayOfMonth(1);
 
-        Bson filtroAsistencias = Filters.and(
-            Filters.eq("empleadoId", empleadoId),
-            Filters.gt("fechaAsistencia", fechaInicio)
-        );
+            List<Bson> pipeline = Arrays.asList(
+                Aggregates.match(Filters.and(
+                    Filters.eq("empleadoId", empleadoId),
+                    Filters.gte("fechaHoraEntrada", fechaInicio.atStartOfDay()),
+                    Filters.ne("fechaHoraSalida", null),
+                    Filters.expr(new Document("$gt", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
+                )),
+                Aggregates.addFields(new Field<>("horasTrabajadas", 
+                    new Document("$divide", Arrays.asList(
+                        new Document("$subtract", Arrays.asList(
+                            "$fechaHoraSalida", 
+                            "$fechaHoraEntrada"
+                        )),
+                        3600000.0
+                    ))
+                )),
+                Aggregates.group(
+                    null, 
+                    Accumulators.sum("totalHoras", "$horasTrabajadas")
+                )
+            );
 
-        List<RegistroAsistencia> asistencias = RegistroAsistenciaCollection
-            .find(filtroAsistencias)
-            .into(new ArrayList<>());
+            Document resultado = RegistroAsistenciaCollection
+                .aggregate(pipeline, Document.class) 
+                .first();
 
-        int totalMinutos = 0;
-        for (RegistroAsistencia asistencia : asistencias) {
-            LocalTime entrada = asistencia.getHoraEntrada();
-            LocalTime salida = asistencia.getHoraSalida();
-
-            if (entrada != null && salida != null && salida.isAfter(entrada)) {
-                Duration duracion = Duration.between(entrada, salida);
-                totalMinutos += duracion.toMinutes();
-            }
+                double horas = resultado.getDouble("totalHoras");
+                return (int) Math.round(horas);
+                
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al obtener las horas trabajadas", e);
         }
-
-        return totalMinutos / 60;
-
-    } catch (Exception e) {
-        throw new AccesoDatosException("Error al obtener las horas trabajadas", e);
     }
-}
     /**
      * Obtiene la fecha del primer día de trabajo de un empleado, 
      * el cual vendría siendo su primer registro de asistencia.
