@@ -527,20 +527,20 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     * 
     * @param nomina Objeto NominaDTOcon los datos de la nómina.
     */
-    public void setDatosNomina(NominaDTO nomina) {
-        this.nomina = nomina;
-        EmpleadoDTO empleado = nomina.getEmpleado();
-        System.out.println(nomina.toString());
-        lblNombreEmpleado.setText(empleado.getNombre());
-        lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
-        lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
-        lblRfcEmpleado.setText(empleado.getRfc());
-        lblPuestoEmpleado.setText(empleado.getPuesto());
-        lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
-        lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
-        lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
-        lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
-        lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
-        lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
-    }
+//    public void setDatosNomina(NominaDTO nomina) {
+//        this.nomina = nomina;
+//        EmpleadoDTO empleado = 
+//        System.out.println(nomina.toString());
+//        lblNombreEmpleado.setText(empleado.getNombre());
+//        lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+//        lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+//        lblRfcEmpleado.setText(empleado.getRfc());
+//        lblPuestoEmpleado.setText(empleado.getPuesto());
+//        lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+//        lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
+//        lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
+//        lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
+//        lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
+//        lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
+//    }
 }

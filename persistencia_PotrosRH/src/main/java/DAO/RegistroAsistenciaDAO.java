@@ -99,7 +99,6 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     try {
         ObjectId empleadoId = empleado.getId();
 
-        // 1. Buscar la última nómina del empleado (orden descendente por fechaCorte)
         Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
         Nomina ultimaNomina = NominaCollection
             .find(filtroNomina)
@@ -107,12 +106,10 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
             .limit(1)
             .first();
 
-        // Si no hay nómina previa, tomamos como inicio el primer día del mes
         LocalDate fechaInicio = (ultimaNomina != null)
             ? ultimaNomina.getFechaCorte()
             : LocalDate.now().withDayOfMonth(1);
 
-        // 2. Filtrar registros de asistencia del empleado después de esa fecha
         Bson filtroAsistencias = Filters.and(
             Filters.eq("empleadoId", empleadoId),
             Filters.gt("fechaAsistencia", fechaInicio)
@@ -122,7 +119,6 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
             .find(filtroAsistencias)
             .into(new ArrayList<>());
 
-        // 3. Sumar todas las horas trabajadas (horaSalida - horaEntrada) para cada asistencia válida
         int totalMinutos = 0;
         for (RegistroAsistencia asistencia : asistencias) {
             LocalTime entrada = asistencia.getHoraEntrada();

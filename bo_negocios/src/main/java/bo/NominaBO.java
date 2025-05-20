@@ -1,8 +1,10 @@
 package bo;
 
+import DAO.EmpleadoDAO;
 import DAO.NominaDAO;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IEmpleadoDAO;
 import Interfaces.INominaBO;
 import Interfaces.INominaDAO;
 import dto.EmpleadoDTO;
@@ -25,6 +27,7 @@ public class NominaBO implements INominaBO {
     private static INominaBO instance;
     // Atributo DAO para operaciones CRUD con Nóminas.
     private static final INominaDAO nominaDAO = new NominaDAO();
+    private static final IEmpleadoDAO empleadoDAO= new EmpleadoDAO();
     /**
      * Constructor por defecto.
      */
@@ -67,12 +70,16 @@ public class NominaBO implements INominaBO {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         
         NominaDTO nomina = new NominaDTO();
-        nomina.setEmpleado(empleado);
+        nomina.setEmpleado_id(empleado.getId());
         nomina.setBono(0.0);
         nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
         nomina.setDiasTrabajados(14);
         nomina.setSalarioBruto(empleado.getSalarioBase());
-        nomina.setSalarioNeto(nomina.getEmpleado().getSalarioBase()- nomina.getIsr());
+        try {
+            nomina.setSalarioNeto(empleadoDAO.obtenerEmpleadoId(mappers.EmpleadoMapper.toEntityViejo(empleado)).getSalarioBase()- nomina.getIsr());
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nomina.setFechaCorte(LocalDate.now());
         nomina.setHorasTrabajadas(40.0);
         nomina.setHorasExtra(5.0);
