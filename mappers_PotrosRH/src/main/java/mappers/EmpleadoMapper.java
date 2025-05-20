@@ -147,4 +147,12 @@ public class EmpleadoMapper {
         // Se retorna el objeto de transferencia mapeado.
         return empleadoDTO;
     }
+
+    public static List<EmpleadoDTO> toDTOViejoList(List<Empleado> empleados) {
+        List<EmpleadoDTO> dtos = new ArrayList<>();
+        for (Empleado empleado : empleados) {
+            dtos.add(toDTO(empleado));
+        }
+        return dtos;
+    }
 }

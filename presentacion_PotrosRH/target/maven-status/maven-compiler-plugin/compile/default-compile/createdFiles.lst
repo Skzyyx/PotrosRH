@@ -7,6 +7,7 @@ PanelesCasoBase\PrevisualizarNomina$4.class
 PanelesReportes\SubmenuReportesMalaConducta$6.class
 PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia.class
 Controles\ControlFlujoRegistro.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$1.class
 PanelesDespidos\BusquedaEmpleadoDespedir$4.class
 PanelesReportes\MotivoOmisionMalaConducta$6.class
 PanelesRegistrarAsistencia\RegistrarEntrada$3.class
@@ -20,6 +21,7 @@ PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$4.class
 PanelesCasoBase\MenuPrincipal$11.class
 PanelesReportes\DatosGenerales$3.class
 PanelesCasoBase\MenuPrincipal$5.class
+PanelesRegistroEmpleado\CapturarDatosContrato.class
 PanelesRegistrarAsistencia\RegistrarSalida$3.class
 PanelesReportes\AnalisisInicialEInvestigacion.class
 PanelesReportes\DeterminacionCaso$6.class
@@ -69,6 +71,7 @@ PanelesRegistroEmpleado\MenuContrataciones.class
 PanelesRegistroEmpleado\MenuContrataciones$3.class
 PanelesReportes\DeterminacionCaso$2.class
 PanelesCasoBase\PrevisualizarNomina.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$8.class
 PanelesCasoBase\MenuPrincipal$10.class
 PanelesDespidos\BusquedaEmpleadoDespedir$2.class
 PanelesReportes\ConfirmacionMalaConducta$2.class
@@ -77,6 +80,7 @@ PanelesReportes\BuscarReporte$1.class
 PanelesReportes\SubmenuReportesMalaConducta$2.class
 Controles\ControlReportes.class
 PanelesDespidos\BusquedaEmpleadoDespedir.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$5.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir$4.class
 Controles\ControlCampos$3.class
 PanelesCasoBase\PrevisualizarNomina$6.class
@@ -93,9 +97,11 @@ PanelesRegistroEmpleado\MenuContrataciones$4.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir$3.class
 PanelesDespidos\BusquedaEmpleadoDespedir$3.class
 PanelesReportes\ImpactoIncidente.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$6.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$2.class
 PanelesRegistroEmpleado\CapturarDatosEvaluacion$1.class
 PanelesReportes\BuscarReporte$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato.class
 PanelesReportes\DeterminacionCaso$5.class
 PanelesRegistroEmpleado\RegistrarCandidato$5.class
 PanelesReportes\ConfirmacionMalaConducta.class
@@ -107,10 +113,12 @@ PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia$1.class
 PanelesCasoBase\MenuPrincipal$3.class
 PanelesRegistroEmpleado\MenuContrataciones$5.class
 PanelesReportes\DeterminacionCaso$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$7.class
 PanelesReportes\SubmenuReportesMalaConducta.class
 PanelesReportes\SubmenuReportesMalaConducta$3.class
 PanelesReportes\BuscarReporte$3.class
 PanelesRegistroEmpleado\RegistrarCandidato$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$4.class
 PanelesReportes\ConfirmacionMalaConducta$1.class
 PanelesDespidos\BusquedaEmpleadoDespedir$1.class
 PanelesCasoBase\PrevisualizarEmpleado$3.class
@@ -140,6 +148,7 @@ PanelesReportes\DatosGenerales$1.class
 PanelesRegistrarAsistencia\RegistrarEntrada$1.class
 PanelesRegistroEmpleado\RegistrarCandidato$1.class
 PanelesRegistrarAsistencia\RegistrarEntrada.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$9.class
 PanelesReportes\AnalisisInicialEInvestigacion$6.class
 PanelesReportes\AnalisisInicialEInvestigacion$11.class
 PanelesReportes\MotivoOmisionMalaConducta$4.class
@@ -148,6 +157,7 @@ PanelesRegistroEmpleado\MenuContrataciones$8.class
 PanelesDespidos\BusquedaEmpleadoDespedir$6.class
 PanelesRegistroEmpleado\RegistrarCandidato$8.class
 PanelesDespidos\ConfirmacionDespido$2.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$3.class
 PanelesRegistroEmpleado\RegistrarCandidato$7.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$6.class
 PanelesCasoBase\BusquedaEmpleado$3.class
@@ -182,6 +192,7 @@ PanelesReportes\MotivoOmisionMalaConducta$2.class
 PanelesReportes\RegistroDatosGenerales.class
 PanelesCasoBase\BusquedaEmpleado$5.class
 PanelesRegistroEmpleado\CapturarDatosEvaluacion$5.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$2.class
 PanelesRegistroEmpleado\RegistrarCandidato$9.class
 PanelesCasoBase\PrevisualizarNomina$3.class
 PanelesCasoBase\PrevisualizarNomina$2.class

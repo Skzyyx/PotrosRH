@@ -6,6 +6,8 @@ import Interfaces.IEmpleadoBO;
 import Interfaces.IObtenerEmpleado;
 import bo.EmpleadoBO;
 import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,5 +76,14 @@ public class ControlObtenerEmpleado {
         
         if (!(rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
             throw new ObtenerEmpleadoException("RFC no válido");
+    }
+    
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException {
+        try {
+            return empleadoBO.obtenerTodosSinContrato(filtro);
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new ObtenerEmpleadoException(ex.getMessage());
+        }
     }
 }

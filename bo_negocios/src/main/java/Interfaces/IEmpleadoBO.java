@@ -3,6 +3,8 @@ package Interfaces;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
+import java.util.List;
 
 /**
  * Interfaz que declara los métodos de EmpleadoBO.
@@ -56,4 +58,6 @@ public interface IEmpleadoBO {
     public EmpleadoDTO actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException;
     
     public EmpleadoDTO registrarEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException;
+    
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObjetosNegocioException;
 }

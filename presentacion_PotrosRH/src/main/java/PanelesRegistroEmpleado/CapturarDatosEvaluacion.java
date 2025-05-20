@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CapturarDatosEvaluacion extends javax.swing.JPanel {
 
-    private static CandidatoDTO candidato;
+    private CandidatoDTO candidato;
 
     /**
      * Creates new form CapturarDatosEvaluacion
@@ -389,7 +389,7 @@ public class CapturarDatosEvaluacion extends javax.swing.JPanel {
         }
     }
 
-    public static void setCandidato(CandidatoDTO nuevoCandidato) {
+    public void setCandidato(CandidatoDTO nuevoCandidato) {
         candidato = nuevoCandidato;
     }
 

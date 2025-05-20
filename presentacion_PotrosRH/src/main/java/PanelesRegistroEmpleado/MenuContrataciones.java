@@ -198,7 +198,7 @@ public class MenuContrataciones extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEvaluarCandidatoActionPerformed
 
     private void btnGenerarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarContratoActionPerformed
-        // TODO add your handling code here:
+        ControlFlujoRegistro.mostrarSeleccionarEmpleadoContrato();
     }//GEN-LAST:event_btnGenerarContratoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
