@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class NominaDTO {
     // Atributos de una nómina.
-    private String empleado_id;
+    private String empleadoId;
     private Double bono;
     private Double salarioBruto;
     private Double isr;
@@ -39,7 +39,7 @@ public class NominaDTO {
      * @param horasExtra Horas extra de la nómina.
      * @param estadoCobro Estado de cobro de la nómina.
      */
-    public NominaDTO(String empleado_id, Double bono, Double salarioBruto, Double isr, Double salarioNeto, LocalDate fechaCorte, Integer diasTrabajados, Double horasTrabajadas, Double horasExtra, boolean estadoCobro) {this.empleado_id = empleado_id;    
+    public NominaDTO(String empleadoId, Double bono, Double salarioBruto, Double isr, Double salarioNeto, LocalDate fechaCorte, Integer diasTrabajados, Double horasTrabajadas, Double horasExtra, boolean estadoCobro) {this.empleadoId = empleadoId;    
         this.bono = bono;
         this.salarioBruto = salarioBruto;
         this.isr = isr;
@@ -55,13 +55,13 @@ public class NominaDTO {
      * Retorna el empleado asociado a la nómina.
      * @return Empleado asociado a la nómina.
      */
-    public String getEmpleado_id() {return empleado_id;}
+    public String getEmpleadoId() {return empleadoId;}
 
     /**
      * Establece el empleado asociado a la nómina.
-     * @param empleado Nuevo empleado asociado a la nómina.
+     * @param empleadoId Nuevo id del empleado asociado a la nómina.
      */
-    public void setEmpleado_id(String empleado_id) {this.empleado_id = empleado_id;}
+    public void setEmpleadoId(String empleadoId) {this.empleadoId = empleadoId;}
 
     /**
      * Retorna el bono de la nómina.

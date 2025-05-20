@@ -97,7 +97,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
     public boolean enviarCorreo(NominaDTO nomina) throws GenerarNominaException {
         try {
             EmpleadoDTO empleadoBuscar = new EmpleadoDTO();
-            empleadoBuscar.setId(nomina.getEmpleado_id());
+            empleadoBuscar.setId(nomina.getEmpleadoId());
             EmpleadoDTO empleado = empleadoBO.obtenerEmpleadoId(empleadoBuscar);
             
             ISistemaCorreo sistemaCorreo = new SistemaCorreo();

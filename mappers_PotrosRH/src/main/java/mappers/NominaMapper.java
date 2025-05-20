@@ -22,7 +22,7 @@ public class NominaMapper {
      */
     public static Nomina toEntityNuevo(NominaDTO nominaDTO){
         Nomina nomina = new Nomina();
-        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleado_id()));
+        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleadoId()));
         nomina.setBono(nominaDTO.getBono());
         nomina.setFechaCorte(nominaDTO.getFechaCorte());
         nomina.setDiasTrabajados(nominaDTO.getDiasTrabajados());
@@ -45,7 +45,7 @@ public class NominaMapper {
     public static Nomina toEntityViejo(NominaDTO nominaDTO){
         Nomina nomina = new Nomina();
         // Falta el ID.
-        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleado_id()));
+        nomina.setEmpleado_id(new ObjectId(nominaDTO.getEmpleadoId()));
         nomina.setBono(nominaDTO.getBono());
         nomina.setFechaCorte(nominaDTO.getFechaCorte());
         nomina.setDiasTrabajados(nominaDTO.getDiasTrabajados());
@@ -66,7 +66,7 @@ public class NominaMapper {
     public static NominaDTO toDTO(Nomina nomina){
         // Falta el ID.
         NominaDTO nominaDTO = new NominaDTO();
-        nominaDTO.setEmpleado_id(nomina.getEmpleado_id().toHexString());
+        nominaDTO.setEmpleadoId(nomina.getEmpleado_id().toHexString());
         nominaDTO.setBono(nomina.getBono());
         nominaDTO.setFechaCorte(nomina.getFechaCorte());
         nominaDTO.setDiasTrabajados(nomina.getDiasTrabajados());

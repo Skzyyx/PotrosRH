@@ -26,6 +26,7 @@ import Interfaces.ICandidatoDAO;
 import Interfaces.IContratoDAO;
 import Interfaces.IEmpleadoDAO;
 import Interfaces.IEvaluacionDAO;
+import com.github.javafaker.Faker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -50,105 +51,117 @@ public class Dao_PotrosRH {
         IContratoDAO coDAO = new ContratoDAO();
         IEmpleadoDAO emDAO = new EmpleadoDAO();
 
-        
-                    Candidato c = new Candidato();
-        c.setNombre("Jesús Ernesto");
-        c.setApellidoPaterno("López");
-        c.setApellidoMaterno("Ibarra");
-        c.setRfc("LOIJ920315XYZ");
-        c.setEmail("neto@potros.itson.edu.mx");
-        c.setTelefono("6622537849");
-        c.setSexo(Sexo.HOMBRE);
-        c.setExperiencia("Experto en Pokemon.");
-        c.setNivelEstudio("Universidad.");
-        c.setHabilidadesClave("Juegos Interactivos.");
+        Faker faker = new Faker();
+
+//        Candidato c = new Candidato();
+//        c.setNombre("Jesús Ernesto");
+//        c.setApellidoPaterno("López");
+//        c.setApellidoMaterno("Ibarra");
+//        c.setRfc("LOIJ920315XYZ");
+//        c.setEmail("neto@potros.itson.edu.mx");
+//        c.setTelefono("6622537849");
+//        c.setCurp("CURPNETO1234");
+//        c.setSexo(Sexo.HOMBRE);
+//        c.setExperiencia("Experto en Pokemon.");
+//        c.setNivelEstudio("Universidad.");
+//        c.setHabilidadesClave("Juegos Interactivos.");
+//
+//        try {
+//            c = cDAO.registrarCandidato(c);
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        System.out.println(c.toString());
+//
+//        Set<Pregunta> preguntas = new HashSet();
+//        preguntas.add(new Pregunta("Pregunta1?", "Respuesta1"));
+//        preguntas.add(new Pregunta("Pregunta2?", "Respuesta2"));
+//        preguntas.add(new Pregunta("Pregunta3?", "Respuesta3"));
+//
+//        Evaluacion e = new Evaluacion();
+//        e.setFechaHoraEvaluacion(LocalDateTime.now());
+//        e.setCandidato(c);
+//        e.setPreguntas(preguntas);
+//        e.setResultado(ResultadoEvaluacion.APROBADO);
+//
+//        try {
+//            eDAO.registrarEvaluacion(e);
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        System.out.println(e.toString());
+//
+//        Empleado em = new Empleado();
+//        List<HorarioLaboral> horarios = new ArrayList();
+//        horarios.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//
+//        em.setHorariosLaborales(horarios);
+//        em.setNombre(faker.name().name());
+//        em.setApellidoPaterno(faker.name().firstName());
+//        em.setApellidoMaterno(faker.name().lastName());
+//        em.setRfc(c.getRfc());
+//        em.setEmail(faker.internet().emailAddress());
+//        em.setTelefono(faker.phoneNumber().cellPhone());
+//        em.setCurp(c.getCurp());
+//        em.setDepartamento("Producción");
+//        em.setDireccion(new Direccion(faker.address().streetName(), faker.address().streetAddressNumber(), faker.address().secondaryAddress()));
+//        em.setEstado(EstadoEmpleado.ACTIVO);
+//        em.setPuesto(faker.job().title());
+//        em.setSalarioBase(40000.00);
+//
+//        try {
+//            emDAO.registrarEmpleado(em);
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        System.out.println(em.toString());
 
         try {
-            c = cDAO.registrarCandidato(c);
+            //        Set<HorarioLaboral> horarios2 = new HashSet();
+//        horarios2.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios2.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios2.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios2.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//        horarios2.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
+//
+//        Contrato co = new Contrato();
+//        co.setDepartamento("Producción");
+//        co.setEmpleadoId(e.getId());
+//        co.setEvaluacion(e);
+//        co.setFechaInicio(LocalDate.of(2020, 05, 16));
+//        co.setFechaFin(LocalDate.of(2030, 05, 16));
+//        co.setHorarios(horarios2);
+//        co.setEmpleadoId(em.getId());
+//        co.setLugarTrabajo("Obregón");
+//        co.setModoPago(ModoPago.EFECTIVO);
+//        co.setPeriodoPago(PeriodoPago.SEMANAL);
+//        co.setPuesto("Desarrollador");
+//        co.setSueldo(em.getSalarioBase());
+//        co.setTipoContrato(TipoContrato.PERIODO);
+//
+//        try {
+//            coDAO.registrarContrato(co);
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        System.out.println(co.toString());
+            
+            System.out.println("----------------------");
+            emDAO.obtenerTodosSinContrato(new ArrayList<>())
+                    .forEach((t) -> {
+                        System.out.println(t.toString());
+                    });
         } catch (AccesoDatosException ex) {
             Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        System.out.println(c.toString());
-
-        Set<Pregunta> preguntas = new HashSet();
-        preguntas.add(new Pregunta("Pregunta1?", "Respuesta1"));
-        preguntas.add(new Pregunta("Pregunta2?", "Respuesta2"));
-        preguntas.add(new Pregunta("Pregunta3?", "Respuesta3"));
-
-        Evaluacion e = new Evaluacion();
-        e.setFechaHoraEvaluacion(LocalDateTime.now());
-        e.setCandidato(c);
-        e.setPreguntas(preguntas);
-        e.setResultado(ResultadoEvaluacion.APROBADO);
-
-        try {
-            eDAO.registrarEvaluacion(e);
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println(e.toString());
-
-        Empleado em = new Empleado();
-        List<HorarioLaboral> horarios = new ArrayList();
-        horarios.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-
-        em.setHorariosLaborales(horarios);
-        em.setNombre(c.getNombre());
-        em.setApellidoPaterno(c.getApellidoPaterno());
-        em.setApellidoMaterno(c.getApellidoMaterno());
-        em.setRfc(c.getRfc());
-        em.setEmail(c.getEmail());
-        em.setTelefono(c.getTelefono());
-        em.setCurp("CURPNETO1234");
-        em.setDepartamento("Producción");
-        em.setDireccion(new Direccion("Random", "90", "Obregón"));
-        em.setEstado(EstadoEmpleado.ACTIVO);
-        em.setPuesto("Ingeniero en Software");
-        em.setSalarioBase(40000.00);
-
-        try {
-            emDAO.registrarEmpleado(em);
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println(em.toString());
-
-        Set<HorarioLaboral> horarios2 = new HashSet();
-        horarios2.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.MARTES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.MIERCOLES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.JUEVES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-        horarios2.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
-
-        Contrato co = new Contrato();
-        co.setDepartamento("Producción");
-        co.setEmpleadoId(e.getId());
-        co.setEvaluacion(e);
-        co.setFechaInicio(LocalDate.of(2020, 05, 16));
-        co.setFechaFin(LocalDate.of(2030, 05, 16));
-        co.setHorarios(horarios2);
-        co.setEmpleadoId(em.getId());
-        co.setLugarTrabajo("Obregón");
-        co.setModoPago(ModoPago.EFECTIVO);
-        co.setPeriodoPago(PeriodoPago.SEMANAL);
-        co.setPuesto("Desarrollador");
-        co.setSueldo(em.getSalarioBase());
-        co.setTipoContrato(TipoContrato.PERIODO);
-
-        try {
-            coDAO.registrarContrato(co);
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println(co.toString());
     }
 
 }

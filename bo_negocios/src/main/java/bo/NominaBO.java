@@ -70,7 +70,7 @@ public class NominaBO implements INominaBO {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         
         NominaDTO nomina = new NominaDTO();
-        nomina.setEmpleado_id(empleado.getId());
+        nomina.setEmpleadoId(empleado.getId());
         nomina.setBono(0.0);
         nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
         nomina.setDiasTrabajados(14);

@@ -88,7 +88,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         lblEmail = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
-        btnEvaluar = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -253,13 +253,13 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
             }
         });
 
-        btnEvaluar.setBackground(new java.awt.Color(44, 44, 44));
-        btnEvaluar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        btnEvaluar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEvaluar.setText("Evaluar");
-        btnEvaluar.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setBackground(new java.awt.Color(44, 44, 44));
+        btnSiguiente.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEvaluarActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
 
@@ -272,19 +272,19 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(boxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(tfBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(tfBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGap(409, 409, 409)
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(btnEvaluar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -309,7 +309,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
                         .addGap(41, 41, 41)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEvaluar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -328,10 +328,10 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
-        btnEvaluar.setBorderPainted(false);
-        btnEvaluar.setContentAreaFilled(false);
-        btnEvaluar.setOpaque(false);
-        btnEvaluar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnSiguiente.setBorderPainted(false);
+        btnSiguiente.setContentAreaFilled(false);
+        btnSiguiente.setOpaque(false);
+        btnSiguiente.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -349,14 +349,14 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         btnVolver();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnEvaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEvaluarActionPerformed
-        btnEvaluar();
-    }//GEN-LAST:event_btnEvaluarActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        btnSiguiente();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxFiltro;
-    private javax.swing.JButton btnEvaluar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -450,10 +450,10 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
                     return;
                 }
 
-                CandidatoDTO rfc = new CandidatoDTO();
+                EmpleadoDTO rfc = new EmpleadoDTO();
                 rfc.setRfc(String.valueOf(jTable1.getValueAt(filaSeleccionada, 1)));
                 try {
-                    CandidatoDTO candidato = ControlRegistro.getInstance().obtenerCandidato(rfc);
+                    EmpleadoDTO candidato = ControlRegistro.getInstance().obtenerEmpleado(rfc);
 
                     lblRfc.setText(candidato.getRfc());
                     lblNombreCompleto.setText(String.join(" ", candidato.getNombre(), candidato.getApellidoPaterno(), candidato.getApellidoMaterno()));
@@ -486,9 +486,9 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         llenarTabla();
     }
 
-    private void btnEvaluar() {
+    private void btnSiguiente() {
         if (jTable1.getSelectedRow() == -1) {
-            OptionPane.OptionPane.showErrorMessage(this, "Debes seleccionar un candidato primero.", "Error");
+            OptionPane.OptionPane.showErrorMessage(this, "Debes seleccionar un empleado primero.", "Error");
             return;
         }
         EmpleadoDTO empleado = new EmpleadoDTO();
