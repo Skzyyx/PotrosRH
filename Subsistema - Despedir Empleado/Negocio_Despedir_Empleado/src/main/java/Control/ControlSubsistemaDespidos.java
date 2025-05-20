@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase que implementa la interfaz {IDespedirEmpleado} y coordina las operaciones
+ * Clase que implementa la interfaz IDespedirEmpleado y coordina las operaciones
  * relacionadas con el despido de empleados, incluyendo la actualización del estado,
  * el registro del despido y el envío de una notificación por correo
  *

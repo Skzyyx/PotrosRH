@@ -26,11 +26,11 @@ public class DespidoEmpleadoFachada {
     }
 
     /**
-     * Busca un empleado por su RFC.
+     * Busca un empleado por su RFC
      *
-     * @param rfc El RFC del empleado a buscar.
-     * @return El DTO del empleado encontrado.
-     * @throws PresentacionException Si ocurre un error durante la búsqueda.
+     * @param rfc El RFC del empleado a buscar
+     * @return El DTO del empleado encontrado
+     * @throws PresentacionException Si ocurre un error durante la búsqueda
      */
     public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws SubsistemaException {
         try {
@@ -41,11 +41,11 @@ public class DespidoEmpleadoFachada {
     }
 
     /**
-     * Registra el despido de un empleado.
+     * Registra el despido de un empleado
      *
-     * @param empleadoDTO El DTO del empleado que será despedido.
-     * @param motivo      El motivo del despido.
-     * @throws PresentacionException Si ocurre un error durante el registro del despido.
+     * @param empleadoDTO El DTO del empleado que será despedido
+     * @param motivo      El motivo del despido
+     * @throws PresentacionException Si ocurre un error durante el registro del despido
      */
     public void registrarDespido(EmpleadoDTO empleadoDTO, String motivo) throws SubsistemaException {
         try {
@@ -56,12 +56,12 @@ public class DespidoEmpleadoFachada {
     }
 
     /**
-     * Cambia el estado de un empleado.
+     * Cambia el estado de un empleado
      *
-     * @param empleadoDTO El DTO del empleado.
-     * @param estado      El nuevo estado.
-     * @return El DTO del empleado con el estado actualizado.
-     * @throws PresentacionException Si ocurre un error al cambiar el estado.
+     * @param empleadoDTO El DTO del empleado
+     * @param estado      El nuevo estado
+     * @return El DTO del empleado con el estado actualizado
+     * @throws PresentacionException Si ocurre un error al cambiar el estado
      */
     public EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws SubsistemaException {
         try {

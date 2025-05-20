@@ -15,7 +15,9 @@ import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
 /**
- *
+ * El panel permite a los usuarios ingresar
+ * el RFC de un empleado para buscarlo y proceder con el proceso de despido
+ * 
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -179,6 +181,11 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
         ControlFlujo.mostrarMenuPrincipal();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Maneja el evento de clic del botón Buscar.
+     *
+     * @param evt El evento de acción que se generó.
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String rfc = txtRfc.getText().trim();
         if (!rfc.isEmpty()) {
@@ -194,7 +201,11 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese el RFC del empleado.", "Campo Requerido", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    /**
+     * Maneja el evento de acción del campo de texto RFC
+     *
+     * @param evt El evento de acción que se generó
+     */
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
         btnBuscarActionPerformed(evt);
     }//GEN-LAST:event_txtRfcActionPerformed
@@ -207,10 +218,20 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Obtiene el campo de texto RFC.
+     *
+     * @return El campo de texto donde el usuario ingresa el RFC.
+     */
     public JTextField getTxtRfc() {
         return txtRfc;
     }
 
+    /**
+     * Establece el campo de texto RFC.
+     *
+     * @param txtRfc El nuevo campo de texto RFC a establecer.
+     */
     public void setTxtRfc(JTextField txtRfc) {
         this.txtRfc = txtRfc;
     }

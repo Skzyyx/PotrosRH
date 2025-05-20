@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
 
     private EmpleadoDTO empleado;
-    private final ControlDespido controlDespido = ControlDespido.getInstance();
     
     /**
      * Creates new form PrevisualisarEmpleado
@@ -290,10 +289,21 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverMouseClicked
 
+    /**
+     * Maneja el evento de clic del botón Volver
+     * Regresa al panel de búsqueda de empleados para despedir
+     *
+     * @param evt El evento de acción que se generó
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    /**
+     * Maneja el evento de clic del botón Confirmar
+     *
+     * @param evt El evento de acción que se generó
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String motivo = getMotivoDespido().trim();
         if (!motivo.isEmpty()) {

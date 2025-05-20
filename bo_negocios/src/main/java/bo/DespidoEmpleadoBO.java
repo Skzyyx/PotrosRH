@@ -26,8 +26,8 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
     }
 
     /**
-     * Método SingleTon de la clase.
-     * @return Instancia SingleTon de la clase.
+     * Método SingleTon de la clase
+     * @return Instancia SingleTon de la clase
      */
     public static synchronized DespidoEmpleadoBO getInstance() {
         if (instance == null) {
@@ -37,10 +37,10 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
     }
 
     /**
-     * Método para registrar un despido.
-     * Convierte el DespidoDTO en una entidad Despido y lo guarda en la base de datos.
+     * Método para registrar un despido
+     * Convierte el DespidoDTO en una entidad Despido y lo guarda en la base de datos
      *
-     * @param despidoDTO El DTO con la información del despido.
+     * @param despidoDTO El DTO con la información del despido
      */
     @Override
     public void registrarDespido(DespidoDTO despidoDTO) throws AccesoDatosException {
@@ -55,11 +55,11 @@ public class DespidoEmpleadoBO implements IDespidoEmpleadoBO {
     }
 
     /**
-     * Método para actualizar el estado de un empleado en la base de datos.
+     * Método para actualizar el estado de un empleado en la base de datos
      * 
-     * @param rfc El RFC del empleado cuyo estado se desea actualizar.
-     * @param nuevoEstado El nuevo estado que se desea asignar al empleado.
-     * @return El DTO con la información actualizada del empleado. segun se arreglo esto lmao
+     * @param rfc El RFC del empleado cuyo estado se desea actualizar
+     * @param nuevoEstado El nuevo estado que se desea asignar al empleado
+     * @return El DTO con la información actualizada del empleado
      */
     @Override
     public void actualizarEstadoEmpleado(String rfc) throws ObjetosNegocioException, AccesoDatosException {

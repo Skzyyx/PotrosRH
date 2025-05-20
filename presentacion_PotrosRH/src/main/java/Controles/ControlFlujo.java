@@ -298,11 +298,11 @@ public class ControlFlujo {
     public static void setContenedor(JPanel contenedor) {panelContenedor = contenedor;}
 
     /**
-     * Muestra la pantalla de búsqueda de empleados para despedir.
+     * Muestra la pantalla de búsqueda de empleados para despedir
      *
-     * Si la instancia de la pantalla de búsqueda para despido aún no ha sido creada, se instancia.
-     * Antes de mostrarla, se limpia el campo de búsqueda.
-     * Luego, se cambia la pantalla actual para mostrar esta vista.
+     * Si la instancia de la pantalla de búsqueda para despido aún no ha sido creada, se instancia
+     * Antes de mostrarla, se limpia el campo de búsqueda
+     * Luego, se cambia la pantalla actual para mostrar esta vista
      */
     public static void mostrarBusquedaEmpleadoDespedir() {
         BusquedaEmpleadoDespedir busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
@@ -313,12 +313,8 @@ public class ControlFlujo {
     /**
      * Muestra la pantalla de previsualización del empleado que se va a despedir.
      *
-     * Obtiene la información del empleado a partir de su RFC utilizando la capa de control de negocio.
-     * Si la instancia de la pantalla de previsualización para despido no ha sido creada, se instancia.
-     * Luego, se asignan los datos del empleado a la vista y se muestra la pantalla correspondiente.
-     *
-     * @param rfc Clave RFC del empleado que se desea previsualizar para despedir.
-     * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
+     * @param rfc Clave RFC del empleado que se desea previsualizar para despedir
+     * @throws PresentacionException Si ocurre un error al obtener los datos del empleado
      */
     public static void mostrarPrevisualizarEmpleadoDespedir(EmpleadoDTO empleadoDTO) {
         if (previsualizarEmpleadoDespedir == null) {
@@ -328,6 +324,14 @@ public class ControlFlujo {
         cambiarPantalla(previsualizarEmpleadoDespedir);
     }
     
+    /**
+     * Muestra el panel de confirmación de despido con la información del
+     * empleado y el motivo proporcionados
+     *
+     * @param empleado El DTO del empleado a despedir
+     * @param razon    El motivo del despido que se mostrará al usuario para su
+     * confirmación
+     */
     public static void mostrarPanelConfirmacionDespido(EmpleadoDTO empleado, String razon) {
         if (confirmacionDespido == null) {
             confirmacionDespido = new ConfirmacionDespido();

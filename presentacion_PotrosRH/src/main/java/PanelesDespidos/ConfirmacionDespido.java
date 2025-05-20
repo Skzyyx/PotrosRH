@@ -33,13 +33,13 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
         initComponents();
     }
 
-    public static ConfirmacionDespido getInstance() {
-        if (instance == null) {
-            instance = new ConfirmacionDespido();
-        }
-        return instance;
-    }
-
+    /**
+     * Establece los datos del empleado a despedir y la razón del despido
+     * que se mostrarán en el panel
+     *
+     * @param empleado El DTO del empleado seleccionado para el despido
+     * @param razon    El motivo del despido
+     */
     public void setDatosDespido(EmpleadoDTO empleado, String razon) {
         this.empleadoADespedir = empleado;
         this.razonDespido = razon;
@@ -175,10 +175,21 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de clic del botón Volver
+     * Regresa al panel de búsqueda de empleados para despedir
+     *
+     * @param evt El evento de acción que se generó
+     */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         ControlFlujo.mostrarBusquedaEmpleadoDespedir();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    /**
+     * Maneja el evento de clic del botón Continuar
+     *
+     * @param evt El evento de acción que se generó
+     */
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (btnEstoySeguro.isSelected()) {
             if (empleadoADespedir != null) {
