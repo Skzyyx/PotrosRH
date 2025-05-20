@@ -62,29 +62,6 @@ public class ControlSubsistemaDespidos implements IDespedirEmpleado{
     }
 
     /**
-     * Busca un empleado por su RFC
-     *
-     * @param rfc El RFC del empleado a buscar
-     * @return El DTO del empleado encontrado
-     * @throws CorreoException           Si el RFC proporcionado está vacío o si ocurre un error
-     * al buscar el empleado en la capa de negocio
-     * @throws ObjetosNegocioException Si no se encuentra ningún empleado con el RFC proporcionado
-     */
-    @Override
-    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException, ObjetosNegocioException {
-        if (rfc == null || rfc.isEmpty()) {
-            throw new ObjetosNegocioException("Error: El RFC no puede estar vacío para buscar un empleado.");
-        }
-        try {
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(rfc);
-            return empleadoBO.obtenerEmpleadoActivo(empleado);
-        } catch (ObjetosNegocioException e) {
-            throw new CorreoException("Error al buscar empleado: " + e.getMessage(), e);
-        }
-    }
-
-    /**
      * Registra el despido de un empleado, actualiza su estado a "INACTIVO" y envía una
      * notificación por correo al empleado
      *

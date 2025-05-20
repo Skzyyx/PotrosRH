@@ -21,16 +21,6 @@ public interface IDespedirEmpleado {
     EmpleadoDTO cambiarEstado(EmpleadoDTO empleadoDTO, String estado) throws CorreoException;
 
     /**
-     * Busca un empleado por su RFC.
-     *
-     * @param rfc El RFC del empleado a buscar
-     * @return El DTO del empleado encontrado
-     * @throws CorreoException           Si ocurre un error al buscar el empleado
-     * @throws ObjetosNegocioException Si no se encuentra el empleado
-     */
-    EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws CorreoException, ObjetosNegocioException;
-
-    /**
      * Registra el despido de un empleado, actualiza su estado a "INACTIVO" y envía una
      * notificación por correo al empleado
      *

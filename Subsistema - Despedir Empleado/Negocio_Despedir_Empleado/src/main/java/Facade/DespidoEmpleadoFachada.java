@@ -26,21 +26,6 @@ public class DespidoEmpleadoFachada {
     }
 
     /**
-     * Busca un empleado por su RFC
-     *
-     * @param rfc El RFC del empleado a buscar
-     * @return El DTO del empleado encontrado
-     * @throws PresentacionException Si ocurre un error durante la búsqueda
-     */
-    public EmpleadoDTO buscarEmpleadoPorRFC(String rfc) throws SubsistemaException {
-        try {
-            return controlDespido.buscarEmpleadoPorRFC(rfc);
-        } catch (CorreoException | ObjetosNegocioException e) {
-            throw new SubsistemaException("Error al buscar empleado: " + e.getMessage());
-        }
-    }
-
-    /**
      * Registra el despido de un empleado
      *
      * @param empleadoDTO El DTO del empleado que será despedido
