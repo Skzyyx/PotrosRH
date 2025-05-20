@@ -15,9 +15,18 @@ import org.bson.types.ObjectId;
  */
 public class EvaluacionMapper {
     
-    public static Evaluacion toEntity(EvaluacionDTO dto) {
+    public static Evaluacion toEntityViejo(EvaluacionDTO dto) {
         return new Evaluacion(
                 new ObjectId(dto.getId()),
+                dto.getFechaHoraEvaluacion(),
+                ResultadoEvaluacion.valueOf(dto.getResultado()),
+                CandidatoMapper.toEntityViejo(dto.getCandidato()),
+                PreguntaMapper.toEntitySet(dto.getPreguntas())
+        );
+    }
+    
+    public static Evaluacion toEntityNuevo(EvaluacionDTO dto) {
+        return new Evaluacion(
                 dto.getFechaHoraEvaluacion(),
                 ResultadoEvaluacion.valueOf(dto.getResultado()),
                 CandidatoMapper.toEntityViejo(dto.getCandidato()),

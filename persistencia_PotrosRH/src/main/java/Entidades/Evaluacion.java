@@ -44,6 +44,13 @@ public class Evaluacion {
         this.preguntas = preguntas;
     }
 
+    public Evaluacion(LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, Candidato candidato, Set<Pregunta> preguntas) {
+        this.fechaHoraEvaluacion = fechaHoraEvaluacion;
+        this.resultado = resultado;
+        this.candidato = candidato;
+        this.preguntas = preguntas;
+    }
+
     /**
      * Obtiene el identificador único de la evaluación.
      *

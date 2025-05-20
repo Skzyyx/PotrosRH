@@ -1,4 +1,5 @@
 PanelesReportes\DescripcionIncidente$1.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$9.class
 PanelesReportes\AnalisisInicialEInvestigacion$8.class
 PanelesReportes\BuscarReporte$2.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir.class
@@ -6,6 +7,7 @@ PanelesCasoBase\PrevisualizarNomina$4.class
 PanelesReportes\SubmenuReportesMalaConducta$6.class
 PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia.class
 Controles\ControlFlujoRegistro.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$1.class
 PanelesDespidos\BusquedaEmpleadoDespedir$4.class
 PanelesReportes\MotivoOmisionMalaConducta$6.class
 PanelesRegistrarAsistencia\RegistrarEntrada$3.class
@@ -19,6 +21,7 @@ PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$4.class
 PanelesCasoBase\MenuPrincipal$11.class
 PanelesReportes\DatosGenerales$3.class
 PanelesCasoBase\MenuPrincipal$5.class
+PanelesRegistroEmpleado\CapturarDatosContrato.class
 PanelesRegistrarAsistencia\RegistrarSalida$3.class
 PanelesReportes\AnalisisInicialEInvestigacion.class
 PanelesReportes\DeterminacionCaso$6.class
@@ -28,6 +31,7 @@ PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$5.class
 PanelesReportes\DeterminacionCaso$1.class
 PanelesCasoBase\LogIn$3.class
 PanelesReportes\DescripcionIncidente$6.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$4.class
 Controles\ControlCampos$2.class
 PanelesCasoBase\MenuPrincipal$12.class
 PanelesRegistrarAsistencia\RegistrarSalida$2.class
@@ -39,6 +43,7 @@ PanelesReportes\BuscarReporte$7.class
 PanelesReportes\ImpactoIncidente$6.class
 PanelesReportes\DeterminacionCaso$7.class
 PanelesReportes\AnalisisInicialEInvestigacion$7.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$3.class
 PanelesReportes\ImpactoIncidente$5.class
 PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia$4.class
 PanelesCasoBase\LogIn$4.class
@@ -66,6 +71,7 @@ PanelesRegistroEmpleado\MenuContrataciones.class
 PanelesRegistroEmpleado\MenuContrataciones$3.class
 PanelesReportes\DeterminacionCaso$2.class
 PanelesCasoBase\PrevisualizarNomina.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$8.class
 PanelesCasoBase\MenuPrincipal$10.class
 PanelesDespidos\BusquedaEmpleadoDespedir$2.class
 PanelesReportes\ConfirmacionMalaConducta$2.class
@@ -74,11 +80,13 @@ PanelesReportes\BuscarReporte$1.class
 PanelesReportes\SubmenuReportesMalaConducta$2.class
 Controles\ControlReportes.class
 PanelesDespidos\BusquedaEmpleadoDespedir.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$5.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir$4.class
 Controles\ControlCampos$3.class
 PanelesCasoBase\PrevisualizarNomina$6.class
 PanelesReportes\SubmenuReportesMalaConducta$5.class
 PanelesReportes\ImpactoIncidente$7.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$2.class
 PanelesReportes\AnalisisInicialEInvestigacion$9.class
 PanelesReportes\BuscarReporte.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion.class
@@ -89,8 +97,11 @@ PanelesRegistroEmpleado\MenuContrataciones$4.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir$3.class
 PanelesDespidos\BusquedaEmpleadoDespedir$3.class
 PanelesReportes\ImpactoIncidente.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$6.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$2.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$1.class
 PanelesReportes\BuscarReporte$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato.class
 PanelesReportes\DeterminacionCaso$5.class
 PanelesRegistroEmpleado\RegistrarCandidato$5.class
 PanelesReportes\ConfirmacionMalaConducta.class
@@ -102,15 +113,18 @@ PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia$1.class
 PanelesCasoBase\MenuPrincipal$3.class
 PanelesRegistroEmpleado\MenuContrataciones$5.class
 PanelesReportes\DeterminacionCaso$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$7.class
 PanelesReportes\SubmenuReportesMalaConducta.class
 PanelesReportes\SubmenuReportesMalaConducta$3.class
 PanelesReportes\BuscarReporte$3.class
 PanelesRegistroEmpleado\RegistrarCandidato$4.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$4.class
 PanelesReportes\ConfirmacionMalaConducta$1.class
 PanelesDespidos\BusquedaEmpleadoDespedir$1.class
 PanelesCasoBase\PrevisualizarEmpleado$3.class
 Controles\JTextLimit.class
 PanelesRegistroEmpleado\RegistrarCandidato.class
+PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$7.class
 PanelesReportes\RegistroDatosGenerales$1.class
 Pruebas\Pruebas.class
 PanelesCasoBase\BusquedaEmpleado$4.class
@@ -119,6 +133,7 @@ PanelesDespidos\PrevisualizarEmpleadoDespedir$5.class
 PanelesReportes\AnalisisInicialEInvestigacion$5.class
 PanelesCasoBase\PrevisualizarNomina$7.class
 PanelesReportes\MotivoOmisionMalaConducta$3.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$6.class
 PanelesCasoBase\MenuPrincipal$8.class
 PanelesRegistroEmpleado\RegistrarCandidato$2.class
 PanelesReportes\DescripcionIncidente$4.class
@@ -133,6 +148,7 @@ PanelesReportes\DatosGenerales$1.class
 PanelesRegistrarAsistencia\RegistrarEntrada$1.class
 PanelesRegistroEmpleado\RegistrarCandidato$1.class
 PanelesRegistrarAsistencia\RegistrarEntrada.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$9.class
 PanelesReportes\AnalisisInicialEInvestigacion$6.class
 PanelesReportes\AnalisisInicialEInvestigacion$11.class
 PanelesReportes\MotivoOmisionMalaConducta$4.class
@@ -141,6 +157,7 @@ PanelesRegistroEmpleado\MenuContrataciones$8.class
 PanelesDespidos\BusquedaEmpleadoDespedir$6.class
 PanelesRegistroEmpleado\RegistrarCandidato$8.class
 PanelesDespidos\ConfirmacionDespido$2.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$3.class
 PanelesRegistroEmpleado\RegistrarCandidato$7.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$6.class
 PanelesCasoBase\BusquedaEmpleado$3.class
@@ -167,12 +184,15 @@ PanelesCasoBase\LogIn$2.class
 PanelesDespidos\PrevisualizarEmpleadoDespedir$7.class
 PanelesRegistrarAsistencia\RegistrarEntrada$2.class
 Controles\ControlCampos.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$8.class
 Controles\ControlNomina.class
 PanelesReportes\ConfirmacionMalaConducta$5.class
 PanelesCasoBase\PrevisualizarEmpleado$2.class
 PanelesReportes\MotivoOmisionMalaConducta$2.class
 PanelesReportes\RegistroDatosGenerales.class
 PanelesCasoBase\BusquedaEmpleado$5.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$5.class
+PanelesRegistroEmpleado\SeleccionarEmpleadoContrato$2.class
 PanelesRegistroEmpleado\RegistrarCandidato$9.class
 PanelesCasoBase\PrevisualizarNomina$3.class
 PanelesCasoBase\PrevisualizarNomina$2.class
@@ -183,6 +203,7 @@ PanelesCasoBase\MenuPrincipal.class
 PanelesReportes\DatosGenerales.class
 PanelesReportes\DatosGenerales$4.class
 PanelesReportes\MotivoOmisionMalaConducta$1.class
+PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$8.class
 PanelesReportes\DescripcionIncidente$3.class
 PanelesReportes\ImpactoIncidente$3.class
 Controles\ControlAsistencia.class
@@ -193,8 +214,10 @@ PanelesReportes\RegistroDatosGenerales$2.class
 PanelesCasoBase\PrevisualizarNomina$1.class
 OptionPane\OptionPane.class
 PanelesReportes\DescripcionIncidente$2.class
+PanelesRegistroEmpleado\CapturarDatosEvaluacion$7.class
 PanelesCasoBase\LogIn$1.class
 Frame\CarcasaPaneles.class
 PanelesReportes\ImpactoIncidente$2.class
+PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$9.class
 PanelesReportes\AnalisisInicialEInvestigacion$4.class
 PanelesReportes\ConfirmacionMalaConducta$7.class

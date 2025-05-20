@@ -51,12 +51,15 @@ public class EmpleadoMapper {
         
         // Se crea una lista de entidades HorarioLaboral.
         List<HorarioLaboral> horariosLaborales = new ArrayList<>();
-        // Se recorre cada HorarioLaboralDTO de la lista de horarios laborales del empleadoDTO.
-        for(HorarioLaboralDTO horarioLaboralDTO: empleadoDTO.getHorariosLaborales())
-            // Se mapea cada horario obtenido y se agrega a la lista de horarios laborales.
-            horariosLaborales.add(HorarioLaboralMapper.toEntityNuevo(horarioLaboralDTO));
-        // Se agrega la lista de horarios laborales mapeada a la entidad.
-        empleado.setHorariosLaborales(horariosLaborales);
+        
+        if (empleadoDTO.getHorariosLaborales() != null) {
+            // Se recorre cada HorarioLaboralDTO de la lista de horarios laborales del empleadoDTO.
+            for(HorarioLaboralDTO horarioLaboralDTO: empleadoDTO.getHorariosLaborales())
+                // Se mapea cada horario obtenido y se agrega a la lista de horarios laborales.
+                horariosLaborales.add(HorarioLaboralMapper.toEntityNuevo(horarioLaboralDTO));
+            // Se agrega la lista de horarios laborales mapeada a la entidad.
+            empleado.setHorariosLaborales(horariosLaborales);
+        }
         
         // Se retorna la entidad mapeada.
         return empleado;
@@ -143,5 +146,13 @@ public class EmpleadoMapper {
         
         // Se retorna el objeto de transferencia mapeado.
         return empleadoDTO;
+    }
+
+    public static List<EmpleadoDTO> toDTOViejoList(List<Empleado> empleados) {
+        List<EmpleadoDTO> dtos = new ArrayList<>();
+        for (Empleado empleado : empleados) {
+            dtos.add(toDTO(empleado));
+        }
+        return dtos;
     }
 }

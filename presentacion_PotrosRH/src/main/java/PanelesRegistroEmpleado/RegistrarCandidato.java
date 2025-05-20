@@ -591,6 +591,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
             candidato.setCalle(tfCalle.getText());
             candidato.setNumero(tfNumeroCasa.getText());
             candidato.setColonia(tfColonia.getText());
+            candidato.setCurp(tfCurp.getText());
 
             ControlRegistro.getInstance().registrarCandidato(candidato);
             OptionPane.showInfoMessage(this, "¡Candidato registrado exitosamente!", "Éxito");

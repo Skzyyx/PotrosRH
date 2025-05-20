@@ -11,12 +11,15 @@ import Interfaces.ICandidatoDAO;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -85,7 +88,8 @@ public class CandidatoDAO implements ICandidatoDAO {
      *
      * @param rfc El RFC del candidato a buscar
      * @return El objeto Candidato encontrado, o null si no existe
-     * @throws AccesoDatosException Si ocurre un error al intentar acceder a la base de datos
+     * @throws AccesoDatosException Si ocurre un error al intentar acceder a la
+     * base de datos
      */
     @Override
     public Candidato obtenerCandidato(String rfc) throws AccesoDatosException {
@@ -101,14 +105,36 @@ public class CandidatoDAO implements ICandidatoDAO {
      * Recupera todos los candidatos almacenados en la base de datos.
      *
      * @return Una lista con todos los objetos Candidato encontrados
-     * @throws AccesoDatosException Si ocurre un error al intentar acceder a la base de datos
+     * @throws AccesoDatosException Si ocurre un error al intentar acceder a la
+     * base de datos
      */
     @Override
     public List<Candidato> obtenerTodos() throws AccesoDatosException {
         try {
-            return candidatosCollection.find().into(new ArrayList<>());
+            List<Bson> pipeline = Arrays.asList(
+                    Aggregates.lookup("evaluaciones", "_id", "candidato._id", "evaluaciones"),
+                    Aggregates.match(Filters.size("evaluaciones", 0))
+            );
+
+            return candidatosCollection.aggregate(pipeline, Candidato.class).into(new ArrayList<>());
         } catch (Exception e) {
-            throw new AccesoDatosException("Error al consultar todos los candidatos.", e);
+            throw new AccesoDatosException("Error al consultar los candidatos sin evaluaciones.", e);
+        }
+    }
+
+    @Override
+    public List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException {
+
+        try {
+            pipelines.add(Aggregates.lookup("evaluaciones", "_id", "candidato._id", "evaluaciones"));
+            pipelines.add(Aggregates.match(
+                    Filters.not(Filters.elemMatch("evaluaciones", Filters.eq("resultado", "APROBADO")))
+            ));
+
+            return candidatosCollection.aggregate(pipelines, Candidato.class).into(new ArrayList<>());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AccesoDatosException("Error al consultar los candidatos sin evaluaciones.");
         }
     }
 }

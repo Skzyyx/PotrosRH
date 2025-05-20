@@ -16,6 +16,8 @@ import SistemaCorreo.RepoPlantillaCorreo;
 import SistemaCorreo.TipoPlantillaCorreo;
 import java.util.Map;
 import Interface.ISistemaCorreo;
+import Interfaces.IEmpleadoBO;
+import bo.EmpleadoBO;
 import dto.CorreoDTO;
 
 /**
@@ -34,7 +36,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
      * Objeto BO de las nóminas.
      */
     private final INominaBO nominaBO = NominaBO.getInstance();
-
+    private final IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
     /**
      * Genera la nómina de un empleado activo.
      *
@@ -94,7 +96,9 @@ public class ControlGenerarNomina implements IGenerarNomina {
      */
     public boolean enviarCorreo(NominaDTO nomina) throws GenerarNominaException {
         try {
-            EmpleadoDTO empleado = nomina.getEmpleado();
+            EmpleadoDTO empleadoBuscar = new EmpleadoDTO();
+            empleadoBuscar.setId(nomina.getEmpleado_id());
+            EmpleadoDTO empleado = empleadoBO.obtenerEmpleadoId(empleadoBuscar);
             
             ISistemaCorreo sistemaCorreo = new SistemaCorreo();
             
@@ -120,7 +124,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
             
             sistemaCorreo.sendEmail(dto);
             return true;
-        } catch (CorreoException ex) {
+        } catch (CorreoException | ObjetosNegocioException ex) {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new GenerarNominaException("Ocurrió un error al intentar enviar el correo.");
         }

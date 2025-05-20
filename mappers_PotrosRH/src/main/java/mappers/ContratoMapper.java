@@ -29,7 +29,7 @@ public class ContratoMapper {
                 dto.getSueldo(),
                 PeriodoPago.valueOf(dto.getPeriodoPago()),
                 ModoPago.valueOf(dto.getModoPago()),
-                EvaluacionMapper.toEntity(dto.getEvaluacion()),
+                EvaluacionMapper.toEntityViejo(dto.getEvaluacion()),
                 new ObjectId(dto.getEmpleadoId()),
                 HorarioLaboralMapper.toEntitySet(dto.getHorarios())            
         );

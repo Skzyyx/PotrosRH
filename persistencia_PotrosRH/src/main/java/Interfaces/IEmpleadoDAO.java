@@ -2,6 +2,8 @@ package Interfaces;
 
 import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
+import java.util.List;
+import org.bson.conversions.Bson;
 
 /**
  * Interfaz para clases EmpleadoDAO.
@@ -55,4 +57,6 @@ public interface IEmpleadoDAO {
     public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException;
     
     public void actualizarEstado(String rfc, String nuevoEstado) throws AccesoDatosException;
+    
+    public List<Empleado> obtenerTodosSinContrato(List<Bson> pipeline) throws AccesoDatosException;
 }

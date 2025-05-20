@@ -4,9 +4,12 @@
  */
 package Interfaces;
 
+import Entidades.Candidato;
 import Exceptions.ObjetosNegocioException;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
 import java.util.List;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -19,4 +22,6 @@ public interface ICandidatoBO {
     CandidatoDTO obtenerCandidato(CandidatoDTO candidato) throws ObjetosNegocioException;
 
     List<CandidatoDTO> obtenerTodos() throws ObjetosNegocioException;
+    
+    List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws ObjetosNegocioException;
 }

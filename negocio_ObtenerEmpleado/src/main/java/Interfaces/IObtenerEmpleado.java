@@ -2,6 +2,8 @@ package Interfaces;
 
 import Excepciones.ObtenerEmpleadoException;
 import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
+import java.util.List;
 
 /**
  *
@@ -33,4 +35,6 @@ public interface IObtenerEmpleado {
      * @throws ObtenerEmpleadoException Excepción del subsistema.
      */
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
+    
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException;
 }

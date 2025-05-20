@@ -9,7 +9,9 @@ import Exceptions.RegistrarObtenerCandidatoException;
 import Interfaces.ICandidatoBO;
 import bo.CandidatoBO;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,7 +69,25 @@ public class ControlRegistrarObtenerCandidato {
         try {
             return candidatoBO.obtenerCandidato(candidato);
         } catch (ObjetosNegocioException ex) {
-            Logger.getLogger(ControlRegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlRegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new RegistrarObtenerCandidatoException(ex.getMessage());
+        }
+    }
+    
+    public List<CandidatoDTO> obtenerTodos() throws RegistrarObtenerCandidatoException {
+        try {
+            return candidatoBO.obtenerTodos();
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlRegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new RegistrarObtenerCandidatoException(ex.getMessage());
+        }
+    }
+
+    public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws RegistrarObtenerCandidatoException {
+        try {
+            return candidatoBO.obtenerPorFiltro(filtro);
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlRegistrarObtenerCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new RegistrarObtenerCandidatoException(ex.getMessage());
         }
     }

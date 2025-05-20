@@ -16,9 +16,15 @@ import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
+import dto.EmpleadoFiltroDTO;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
+import org.bson.conversions.Bson;
 /**
  * Implementa la interfaz IEmpleadoBO y sus métodos.
  * @author Leonardo Flores Leyva (252390)
@@ -205,6 +211,17 @@ public class EmpleadoBO implements IEmpleadoBO{
     }
     
     @Override
+    public EmpleadoDTO registrarEmpleado(EmpleadoDTO empleado) throws ObjetosNegocioException {
+        try {
+            Empleado map = EmpleadoMapper.toEntityNuevo(empleado);
+            return EmpleadoMapper.toDTO(empleadoDAO.registrarEmpleado(map));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
+    }
+    
+    @Override
     public EmpleadoDTO actualizarEstadoEmpleadoD(String rfc, String nuevoEstado) throws ObjetosNegocioException, AccesoDatosException {
         try {
             empleadoDAO.actualizarEstado(rfc, nuevoEstado);
@@ -228,4 +245,63 @@ public class EmpleadoBO implements IEmpleadoBO{
             throw new ObjetosNegocioException("Error al actualizar el estado del empleado: " + ex.getMessage(), ex);
         }
     }
+
+    @Override
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObjetosNegocioException {
+        List<Bson> filters = new ArrayList<>();
+
+        if (filtro.getRfc() != null && !filtro.getRfc().isBlank()) {
+            filters.add(Filters.regex("rfc", ".*" + filtro.getRfc() + ".*", "i")); // Contiene, ignorando mayúsculas
+        }
+
+        if (filtro.getEmail() != null && !filtro.getEmail().isBlank()) {
+            filters.add(Filters.regex("email", ".*" + filtro.getEmail() + ".*", "i"));
+        }
+
+        if (filtro.getTelefono() != null && !filtro.getTelefono().isBlank()) {
+            filters.add(Filters.regex("telefono", ".*" + filtro.getTelefono() + ".*", "i"));
+        }
+        
+        List<Bson> pipeline = new ArrayList<>();
+
+        if (!filters.isEmpty()) {
+            pipeline.add(Aggregates.match(Filters.and(filters)));
+        }
+        
+        try {
+            return EmpleadoMapper.toDTOViejoList(empleadoDAO.obtenerTodosSinContrato(pipeline));
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
+    }
+    
+//    public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws ObjetosNegocioException {
+//        List<Bson> filters = new ArrayList<>();
+//
+//        if (filtro.getRfc() != null && !filtro.getRfc().isBlank()) {
+//            filters.add(Filters.regex("rfc", ".*" + filtro.getRfc() + ".*", "i")); // Contiene, ignorando mayúsculas
+//        }
+//
+//        if (filtro.getEmail() != null && !filtro.getEmail().isBlank()) {
+//            filters.add(Filters.regex("email", ".*" + filtro.getEmail() + ".*", "i"));
+//        }
+//
+//        if (filtro.getTelefono() != null && !filtro.getTelefono().isBlank()) {
+//            filters.add(Filters.regex("telefono", ".*" + filtro.getTelefono() + ".*", "i"));
+//        }
+//
+//        List<Bson> pipeline = new ArrayList<>();
+//
+//        if (!filters.isEmpty()) {
+//            pipeline.add(Aggregates.match(Filters.and(filters)));
+//        }
+//
+//        try {
+//            return CandidatoMapper.toDTOViejoList(candidatoDAO.obtenerPorFiltro(pipeline));
+//        } catch (AccesoDatosException ex) {
+//            Logger.getLogger(CandidatoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+//            throw new ObjetosNegocioException(ex.getMessage());
+//        }
+//    }
 }

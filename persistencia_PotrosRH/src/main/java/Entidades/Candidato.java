@@ -21,6 +21,7 @@ public class Candidato {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String rfc;
+    private String curp;
     private String email;
     private String telefono;
     private LocalDate fechaNacimiento;
@@ -53,12 +54,13 @@ public class Candidato {
      * @param nivelEstudio Nivel de estudios del candidato
      * @param habilidadesClave Habilidades clave del candidato
      */
-    public Candidato(ObjectId id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {    
+    public Candidato(ObjectId id, String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String curp, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {    
         this.id = id;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.rfc = rfc;
+        this.curp = curp;
         this.email = email;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
@@ -69,11 +71,12 @@ public class Candidato {
         this.habilidadesClave = habilidadesClave;
     }
 
-    public Candidato(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {
+    public Candidato(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String curp, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.rfc = rfc;
+        this.curp = curp;
         this.email = email;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
@@ -172,6 +175,14 @@ public class Candidato {
      */
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 
     /**

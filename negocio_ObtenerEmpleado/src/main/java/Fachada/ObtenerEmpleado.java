@@ -4,6 +4,8 @@ import Excepciones.ObtenerEmpleadoException;
 import Interfaces.IObtenerEmpleado;
 import Control.ControlObtenerEmpleado;
 import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
+import java.util.List;
 
 /**
  * Clase fachada que implementa la interfaz IObtenerEmpleado.
@@ -54,5 +56,9 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     @Override
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
         return new ControlObtenerEmpleado().obtenerEmpleadoActivo(empleado);
+    }
+    
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException {
+        return new ControlObtenerEmpleado().obtenerTodosSinContrato(filtro);
     }
 }

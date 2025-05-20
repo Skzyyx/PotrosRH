@@ -37,7 +37,7 @@ public class RegistrarObtenerReporte {
         if(reporteNuevo == null)
             throw new ReporteException("ERROR: El reporte no puede ser nulo.");
         
-        verificarReporteRevisado(reporteNuevo);
+        verificarReporte(reporteNuevo);
         
         try {
             // Se agrega la fecha de hoy como fecha de registro del nuevo reporte.
@@ -125,17 +125,17 @@ public class RegistrarObtenerReporte {
      * @param reporte Reporte a revisar.
      * @throws ReporteException Excepción del subsistema.
      */
-    private void verificarReporteRevisado(ReporteMalaConductaDTO reporte) throws ReporteException{
+    private void verificarReporte(ReporteMalaConductaDTO reporte) throws ReporteException{
         // Si el empleado reportado no existe
-        if(!(reporte.getEmpleadoReportado() != null && !reporte.getEmpleadoReportado().getRfc().isEmpty()))
+        if(!(reporte.getEmpleadoReportado() != null && !reporte.getEmpleadoReportado().getId().isEmpty()))
             throw new ReporteException("El reporte debe tener asociado a un empleado a reportar.");
         
         // Si el empleado reportante no existe
-        if(!(reporte.getEmpleadoReportante() != null && !reporte.getEmpleadoReportante().getRfc().isEmpty()))
+        if(!(reporte.getEmpleadoReportante() != null && !reporte.getEmpleadoReportante().getId().isEmpty()))
             throw new ReporteException("El reporte debe tener asociado a un empleado responsable del reporte.");
         
-        // Si el RFC del empleado reportado es el mismo que el del empleado reportante.
-        if(reporte.getEmpleadoReportante().getRfc().equals(reporte.getEmpleadoReportado().getRfc()))
+        // Si el ID del empleado reportado es el mismo que el del empleado reportante.
+        if(reporte.getEmpleadoReportante().getId().equals(reporte.getEmpleadoReportado().getId()))
             throw new ReporteException("El empleado no se puede reportar a sí mismo. Elija dos empleados diferentes");
         
         // Si la fecha y hora del incidente no existe.

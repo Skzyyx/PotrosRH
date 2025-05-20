@@ -7,4 +7,4 @@ package Enums;
  * @author José Luis Islas Molina (252574)
  * @author Benjamin Soto Coronado (253183)
  */
-public enum EstadoEmpleado {ACTIVO, INACTIVO;}
+public enum EstadoEmpleado {ACTIVO, INACTIVO, SIN_CONTRATO;}

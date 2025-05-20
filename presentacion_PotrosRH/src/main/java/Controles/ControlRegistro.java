@@ -4,19 +4,26 @@
  */
 package Controles;
 
+import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
 import Exceptions.GenerarContratoException;
 import Exceptions.RegistrarEvaluacionException;
 import Exceptions.RegistrarObtenerCandidatoException;
 import Fachada.GenerarContrato;
+import Fachada.ObtenerEmpleado;
 import Fachada.RegistrarEvaluacion;
 import Fachada.RegistrarObtenerCandidato;
 import Interface.IRegistrarEvaluacion;
 import Interfaces.IGenerarContrato;
+import Interfaces.IObtenerEmpleado;
 import Interfaces.IRegistrarObteneCandidato;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
 import dto.ContratoDTO;
+import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
 import dto.EvaluacionDTO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +42,7 @@ public class ControlRegistro {
     private final IRegistrarObteneCandidato registrarObteneCandidato = RegistrarObtenerCandidato.getInstance();
     private final IRegistrarEvaluacion registrarEvaluacion = RegistrarEvaluacion.getInstance();
     private final IGenerarContrato generarContrato = GenerarContrato.getInstance();
+    private final IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
 
     private ControlRegistro() {
         this.candidatoDTO = new CandidatoDTO();
@@ -68,6 +76,15 @@ public class ControlRegistro {
         }
     }
     
+    public List<CandidatoDTO> obtenerTodosCandidatos() throws PresentacionException {
+        try {
+            return registrarObteneCandidato.obtenerTodos();
+        } catch (RegistrarObtenerCandidatoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+    
     public EvaluacionDTO registrarEvaluacion(EvaluacionDTO evaluacion) throws PresentacionException {
         try {
             evaluacionDTO = registrarEvaluacion.registrarEvaluacion(evaluacion);
@@ -83,6 +100,35 @@ public class ControlRegistro {
             contratoDTO = generarContrato.registrarContrato(contrato);
             return contratoDTO;
         } catch (GenerarContratoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+    
+    public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws PresentacionException {
+        try {
+            return registrarObteneCandidato.obtenerPorFiltro(filtro);
+        } catch (RegistrarObtenerCandidatoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+    
+    public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws PresentacionException {
+        try {
+            return obtenerEmpleado.obtenerTodosSinContrato(filtro);
+        } catch (ObtenerEmpleadoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new PresentacionException(ex.getMessage());
+        }
+    }
+
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws PresentacionException {
+        EmpleadoDTO rfc = new EmpleadoDTO();
+        rfc.setRfc(empleado.getRfc());
+        try {
+            return obtenerEmpleado.obtenerEmpleado(rfc);
+        } catch (ObtenerEmpleadoException ex) {
             Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new PresentacionException(ex.getMessage());
         }

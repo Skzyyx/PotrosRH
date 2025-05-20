@@ -116,15 +116,15 @@ public class ControlFlujo {
     * 
     * @throws PresentacionException Si ocurre un error durante la generación de la nómina.
     */
-    public static void mostrarPrevisualizarNomina() throws PresentacionException {
+    public static void mostrarPrevisualizarNomina(String rfc) throws PresentacionException {
         try {
             NominaDTO nomina = ControlNomina.getInstance().generarNomina();
-            
+            EmpleadoDTO empleado= ControlNomina.getInstance().obtenerEmpleado(rfc);
             if (previsualizarNomina == null) {
                 previsualizarNomina = new PrevisualizarNomina();
             }
             
-            previsualizarNomina.setDatosNomina(nomina);
+            previsualizarNomina.setDatosNomina(nomina,empleado);
             cambiarPantalla(previsualizarNomina);
         } catch (PresentacionException ex) {
             Logger.getLogger(ControlFlujo.class.getName()).log(Level.SEVERE, null, ex);

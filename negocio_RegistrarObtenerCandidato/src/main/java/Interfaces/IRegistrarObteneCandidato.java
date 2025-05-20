@@ -6,6 +6,8 @@ package Interfaces;
 
 import Exceptions.RegistrarObtenerCandidatoException;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
+import java.util.List;
 
 /**
  *
@@ -16,4 +18,8 @@ public interface IRegistrarObteneCandidato {
     CandidatoDTO registrarCandidato(CandidatoDTO candidato) throws RegistrarObtenerCandidatoException;
     
     CandidatoDTO obtenerCandidato(CandidatoDTO candidato) throws RegistrarObtenerCandidatoException;
+    
+    List<CandidatoDTO> obtenerTodos() throws RegistrarObtenerCandidatoException;
+
+    List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws RegistrarObtenerCandidatoException;    
 }

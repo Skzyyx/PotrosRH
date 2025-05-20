@@ -26,6 +26,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>
-        <exec.mainClass>bo_negocios.Bo_negocios</exec.mainClass>
+        <exec.mainClass>Pruebas.PruebasObjetosNegocio</exec.mainClass>
     </properties>
 </project>

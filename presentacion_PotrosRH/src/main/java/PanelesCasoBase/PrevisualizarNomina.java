@@ -26,6 +26,7 @@ import javax.swing.JComponent;
 public class PrevisualizarNomina extends javax.swing.JPanel {
     // Nómina a mostrar.
     private NominaDTO nomina;
+    private EmpleadoDTO empleado;
 
     /**
      * Creates new form PrevisualizarNomina
@@ -527,9 +528,9 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     * 
     * @param nomina Objeto NominaDTOcon los datos de la nómina.
     */
-    public void setDatosNomina(NominaDTO nomina) {
+    public void setDatosNomina(NominaDTO nomina,EmpleadoDTO empleado) {
         this.nomina = nomina;
-        EmpleadoDTO empleado = nomina.getEmpleado();
+        this.empleado=empleado;
         System.out.println(nomina.toString());
         lblNombreEmpleado.setText(empleado.getNombre());
         lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());

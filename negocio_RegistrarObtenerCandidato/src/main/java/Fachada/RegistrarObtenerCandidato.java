@@ -8,6 +8,8 @@ import Control.ControlRegistrarObtenerCandidato;
 import Exceptions.RegistrarObtenerCandidatoException;
 import Interfaces.IRegistrarObteneCandidato;
 import dto.CandidatoDTO;
+import dto.CandidatoFiltroDTO;
+import java.util.List;
 
 /**
  *
@@ -38,5 +40,15 @@ public class RegistrarObtenerCandidato implements IRegistrarObteneCandidato {
     @Override
     public CandidatoDTO obtenerCandidato(CandidatoDTO candidato) throws RegistrarObtenerCandidatoException {
         return control.obtenerCandidato(candidato);
+    }
+
+    @Override
+    public List<CandidatoDTO> obtenerTodos() throws RegistrarObtenerCandidatoException {
+        return control.obtenerTodos();
+    }
+
+    @Override
+    public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws RegistrarObtenerCandidatoException {
+        return control.obtenerPorFiltro(filtro);
     }
 }

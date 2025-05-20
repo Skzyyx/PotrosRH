@@ -7,6 +7,7 @@ package Interfaces;
 import Entidades.Candidato;
 import Exceptions.AccesoDatosException;
 import java.util.List;
+import org.bson.conversions.Bson;
 
 /**
  * Interfaz que define las operaciones de acceso a datos para la entidad
@@ -49,4 +50,6 @@ public interface ICandidatoDAO {
      * @throws AccesoDatosException Si ocurre un error durante la consulta
      */
     List<Candidato> obtenerTodos() throws AccesoDatosException;
+    
+    List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException;
 }
