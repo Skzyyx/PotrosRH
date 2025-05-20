@@ -28,6 +28,6 @@ public interface IGenerarNomina {
      * @return `true` si la nómina fue guardada y el correo enviado correctamente, `false` en caso contrario.
      * @throws GenerarNominaException Si la nómina es nula o si ocurre un error al guardar la nómina o enviar el correo.
      */
-    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException;
+    public NominaDTO guardarNomina(NominaDTO nomina) throws GenerarNominaException;
     
 }

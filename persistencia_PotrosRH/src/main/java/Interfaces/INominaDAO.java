@@ -17,10 +17,10 @@ public interface INominaDAO {
     /**
      * Guarda una nueva nómina en la base de datos.
      * @param nomina Nómina a guardar.
-     * @return VERDADERO si la nómina fue guardada con éxito, FALSO en caso contrario.
+     * @return Nomina con nómina insertada.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
-    public boolean guardarNomina(Nomina nomina) throws AccesoDatosException;
+    public Nomina guardarNomina(Nomina nomina) throws AccesoDatosException;
     /**
      * Obtiene la fecha de la última nómina generada, correspondiente al empleado
      * recibido.

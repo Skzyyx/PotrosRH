@@ -99,7 +99,7 @@ public class ControlNomina {
         try {
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
-            empleadoDTO = obtenerEmpleado.obtenerEmpleado(empleado);;
+            empleadoDTO = obtenerEmpleado.obtenerEmpleadoActivo(empleado);;
             return empleadoDTO;
         } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
@@ -137,7 +137,7 @@ public class ControlNomina {
     * 
     * @throws PresentacionException Si ocurre un error al guardar la nómina.
     */    
-    public boolean guardarNomina(NominaDTO nomina) throws PresentacionException {
+    public NominaDTO guardarNomina(NominaDTO nomina) throws PresentacionException {
         try {
             return generarNomina.guardarNomina(nominaDTO);
         } catch (GenerarNominaException ex) {

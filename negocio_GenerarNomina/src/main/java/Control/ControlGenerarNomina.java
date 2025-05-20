@@ -47,13 +47,16 @@ public class ControlGenerarNomina implements IGenerarNomina {
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
         // Si el empleado es null
-        if (empleado == null) {
+        if (!(empleado != null && empleado.getId() != null)) 
             throw new GenerarNominaException("El empleado no puede ser nulo.");
-        }
+        
         // Si el empleado está inactivo.
-        if (!empleado.getEstado().equals("ACTIVO")) {
+        if (!(empleado.getEstado() != null && empleado.getEstado().toUpperCase().equals("ACTIVO"))) 
             throw new GenerarNominaException("El empleado debe de estar activo.");
-        }
+        
+        // Si el DTO recibido no tiene el salario base del empleado.
+        if(empleado.getSalarioBase() == null )
+            throw new GenerarNominaException("El empleado recibido no cuenta con un salario base.");
 
         try {
             return nominaBO.generarNomina(empleado); // Se genera la nómina y se regresa como un DTO.
@@ -71,7 +74,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
      * @throws GenerarNominaException Si la nómina es nula o si ocurre un error.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException {
+    public NominaDTO guardarNomina(NominaDTO nomina) throws GenerarNominaException {
         // Si la nómina está vacía.
         if (nomina == null) {
             throw new GenerarNominaException("La nomina no puede ser nula.");
@@ -79,8 +82,8 @@ public class ControlGenerarNomina implements IGenerarNomina {
         // Sistema de correo electrónico.
         //ICorreo sistemaCorreo = new Correo();
         try {
-            nominaBO.guardarNomina(nomina); // Se guarda la nómina.
-            return true; // Regresa true como confirmación de nómina generada con éxito.
+            NominaDTO nominaDTO = nominaBO.guardarNomina(nomina); // Se guarda la nómina.
+            return nominaDTO; // Regresa true como confirmación de nómina generada con éxito.
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new GenerarNominaException(ex.getMessage(), ex);

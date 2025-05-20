@@ -29,7 +29,7 @@ public class Nomina {
     public Nomina() {}
     /**
      * Constructor que recibe los atributos.
-     * @param empleado Empleado asociado a la nómina.
+     * @param empleado_id Empleado asociado a la nómina.
      * @param bono Bono de la nómina.
      * @param isr ISR aplicado de la nómina.
      * @param salarioBruto Salario bruto de la nómina.
@@ -40,7 +40,19 @@ public class Nomina {
      * @param horasExtra Horas extra de la nómina.
      * @param estadoCobro Estado de cobro de la nómina.
      */
-    public Nomina(ObjectId empleado_id, Double bono, Double isr, Double salarioBruto, Double salarioNeto, LocalDate fechaCorte, Integer diasTrabajados, Double horasTrabajadas, Double horasExtra, boolean estadoCobro) {this.empleado_id = empleado_id;    
+    public Nomina(
+            ObjectId empleado_id, 
+            Double bono, 
+            Double isr, 
+            Double salarioBruto, 
+            Double salarioNeto, 
+            LocalDate fechaCorte, 
+            Integer diasTrabajados, 
+            Double horasTrabajadas, 
+            Double horasExtra, 
+            boolean estadoCobro
+    ) {
+        this.empleado_id = empleado_id;    
         this.bono = bono;
         this.isr = isr;
         this.salarioBruto = salarioBruto;
@@ -51,26 +63,21 @@ public class Nomina {
         this.horasExtra = horasExtra;
         this.estadoCobro = estadoCobro;
 }
-
     /**
      * Retorna el empleado asociado a la nómina.
      * @return Empleado asociado a la nómina.
      */
     public ObjectId getEmpleado_id() {return empleado_id;}
-
     /**
      * Establece el empleado asociado a la nómina.
-     * @param empleado Nuevo empleado asociado a la nómina.
+     * @param empleado_id Nuevo empleado asociado a la nómina.
      */
     public void setEmpleado_id(ObjectId empleado_id) {this.empleado_id = empleado_id;}
-
     /**
      * Retorna el bono de la nómina.
      * @return Bono de la nómina.
      */
-    public Double getBono() {
-        return bono;
-    }
+    public Double getBono() {return bono;}
     /**
      * Establece el bono de la nómina.
      * @param bono Nuevo bono de la nómina.
@@ -162,7 +169,7 @@ public class Nomina {
      */
     @Override
     public String toString() {
-        return String.format("%s, %f, %f, %f, %d/%d/%d, %d, %f, %f", 
+        return String.format("%f, %f, %f, %d/%d/%d, %d, %f, %f", 
                 //getEmpleado().getNombre(),
                 getIsr(),
                 getSalarioBruto(),

@@ -1,7 +1,6 @@
 package Fachada;
 
 import Control.ControlGenerarNomina;
-import Excepciones.CorreoException;
 import Exceptions.GenerarNominaException;
 import Interfaces.IGenerarNomina;
 import dto.EmpleadoDTO;
@@ -28,14 +27,12 @@ public class GenerarNomina implements IGenerarNomina {
     /**
      * Clase control del subsistema.
      */
-    private ControlGenerarNomina control;
+    private final ControlGenerarNomina control;
 
     /**
      * Constructor por defecto.
      */
-    private GenerarNomina() {
-        this.control = new ControlGenerarNomina();
-    }
+    private GenerarNomina() {this.control = new ControlGenerarNomina();}
 
     /**
      * Método que devuelve el objeto SingleTon de la clase. Si el objeto aún no
@@ -44,9 +41,8 @@ public class GenerarNomina implements IGenerarNomina {
      * @return Objeto SingleTon de la clase.
      */
     public static synchronized IGenerarNomina getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new GenerarNomina();
-        }
         return instance;
     }
 
@@ -59,9 +55,7 @@ public class GenerarNomina implements IGenerarNomina {
      * @throws GenerarNominaException Si el empleado es nulo o no está activo.
      */
     @Override
-    public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
-        return control.generarNomina(empleado);
-    }
+    public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {return control.generarNomina(empleado);}
 
     /**
      * Guarda la nómina generada en la base de datos y envía un correo al
@@ -75,9 +69,12 @@ public class GenerarNomina implements IGenerarNomina {
      * al guardar la nómina o enviar el correo.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) throws GenerarNominaException {
+    public NominaDTO guardarNomina(NominaDTO nomina) throws GenerarNominaException {
         try {
-            return control.guardarNomina(nomina) && control.enviarCorreo(nomina);
+            NominaDTO nominaInsertada = control.guardarNomina(nomina);
+            if(nominaInsertada != null)
+                control.enviarCorreo(nomina);
+            return nominaInsertada;
         } catch (GenerarNominaException ex) {
             Logger.getLogger(GenerarNomina.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new GenerarNominaException(ex.getMessage());

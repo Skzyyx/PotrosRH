@@ -75,11 +75,7 @@ public class NominaBO implements INominaBO {
         nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
         nomina.setDiasTrabajados(14);
         nomina.setSalarioBruto(empleado.getSalarioBase());
-        try {
-            nomina.setSalarioNeto(empleadoDAO.obtenerEmpleadoId(mappers.EmpleadoMapper.toEntityViejo(empleado)).getSalarioBase()- nomina.getIsr());
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        nomina.setSalarioNeto(empleado.getSalarioBase()- nomina.getIsr());
         nomina.setFechaCorte(LocalDate.now());
         nomina.setHorasTrabajadas(40.0);
         nomina.setHorasExtra(5.0);
@@ -89,16 +85,16 @@ public class NominaBO implements INominaBO {
     /**
      * Simula el guardado de una nómina en la base de datos.
      * @param nomina Objeto NominaDTO que se desea guardar.
-     * @return true si la nómina se guardó correctamente, false en caso contrario.
+     * @return NominaDTO con nómina insertada.
      * @throws Exceptions.ObjetosNegocioException Excepción.
      */
     @Override
-    public boolean guardarNomina(NominaDTO nomina) throws ObjetosNegocioException{
+    public NominaDTO guardarNomina(NominaDTO nomina) throws ObjetosNegocioException{
         if(nomina == null)
             throw new ObjetosNegocioException("No se aceptan nominas vacias.");
         
         try {
-            return nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina));
+            return NominaMapper.toDTO(nominaDAO.guardarNomina(NominaMapper.toEntityNuevo(nomina)));
         } catch (AccesoDatosException ex) {
             Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage());
@@ -131,5 +127,13 @@ public class NominaBO implements INominaBO {
         double isrMensual = cuotaFija + (excedente * (tasaExcedente / 100));
         // Ajustar ISR a los días trabajados
         return isrMensual * (diasPagados / 30.4);
+    }
+    /**
+     * Calcula las horas esperadas de un empleado, a partir 
+     * de su horario laboral y la fecha de su última nómina.
+     * @param empleado 
+     */
+    private void calcularHorasEsperadas(EmpleadoDTO empleado){
+        
     }
 }

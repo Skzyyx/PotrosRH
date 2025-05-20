@@ -24,8 +24,8 @@ public interface INominaBO {
     /**
      * Simula el guardado de una nómina en la base de datos.
      * @param nomina Objeto NominaDTO que se desea guardar.
-     * @return true si la nómina se guardó correctamente, false en caso contrario.
+     * @return NominaDTO con nómina insertada.
      * @throws Exceptions.ObjetosNegocioException Excepción.
      */
-    public boolean guardarNomina(NominaDTO nomina) throws ObjetosNegocioException;
+    public NominaDTO guardarNomina(NominaDTO nomina) throws ObjetosNegocioException;
 }

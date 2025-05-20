@@ -28,7 +28,7 @@ public class NominaDTO {
     public NominaDTO() {}
     /**
      * Constructor que recibe los atributos.
-     * @param empleado Empleado asociado a la nómina.
+     * @param empleadoId Empleado asociado a la nómina.
      * @param bono Bono de la nómina.
      * @param isr ISR aplicado de la nómina.
      * @param salarioBruto Salario bruto de la nómina.
@@ -39,7 +39,19 @@ public class NominaDTO {
      * @param horasExtra Horas extra de la nómina.
      * @param estadoCobro Estado de cobro de la nómina.
      */
-    public NominaDTO(String empleadoId, Double bono, Double salarioBruto, Double isr, Double salarioNeto, LocalDate fechaCorte, Integer diasTrabajados, Double horasTrabajadas, Double horasExtra, boolean estadoCobro) {this.empleadoId = empleadoId;    
+    public NominaDTO(
+            String empleadoId, 
+            Double bono, 
+            Double salarioBruto, 
+            Double isr, 
+            Double salarioNeto, 
+            LocalDate fechaCorte, 
+            Integer diasTrabajados, 
+            Double horasTrabajadas, 
+            Double horasExtra, 
+            boolean estadoCobro
+    ) {
+        this.empleadoId = empleadoId;    
         this.bono = bono;
         this.salarioBruto = salarioBruto;
         this.isr = isr;
@@ -50,13 +62,11 @@ public class NominaDTO {
         this.horasExtra = horasExtra;
         this.estadoCobro = estadoCobro;
 }
-
     /**
      * Retorna el empleado asociado a la nómina.
      * @return Empleado asociado a la nómina.
      */
     public String getEmpleadoId() {return empleadoId;}
-
     /**
      * Establece el empleado asociado a la nómina.
      * @param empleadoId Nuevo id del empleado asociado a la nómina.
@@ -67,9 +77,7 @@ public class NominaDTO {
      * Retorna el bono de la nómina.
      * @return Bono de la nómina.
      */
-    public Double getBono() {
-        return bono;
-    }
+    public Double getBono() {return bono;}
     /**
      * Establece el bono de la nómina.
      * @param bono Nuevo bono de la nómina.
@@ -161,7 +169,7 @@ public class NominaDTO {
      */
     @Override
     public String toString() {
-        return String.format("%s, %f, %f, %f, %d/%d/%d, %d, %f, %f", 
+        return String.format("%f, %f, %f, %d/%d/%d, %d, %f, %f", 
                 //getEmpleado().getNombre(),
                 getIsr(),
                 getSalarioBruto(),

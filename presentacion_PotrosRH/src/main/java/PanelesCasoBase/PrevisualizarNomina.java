@@ -423,7 +423,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             nomina.setBono(Double.valueOf(lblBono.getText()));
             nomina.setSalarioNeto(Double.valueOf(lblSalarioNetoEmpleado.getText()));
 
-            if (ControlNomina.getInstance().guardarNomina(nomina)) {
+            if (ControlNomina.getInstance().guardarNomina(nomina) != null) {
                 OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
             }
 
