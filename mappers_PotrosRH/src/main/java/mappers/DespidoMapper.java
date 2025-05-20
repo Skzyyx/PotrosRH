@@ -25,17 +25,11 @@ public class DespidoMapper {
         Despido entity = new Despido();
         if (dto.getEmpleadoid() != null && !dto.getEmpleadoid().isEmpty()) {
             entity.setId(new ObjectId(dto.getEmpleadoid()));
-        } else {
-            throw new IllegalArgumentException("El empleadoId en el DTO no puede ser nulo.");
         }
         entity.setFechaDespido(dto.getFechaDespido());
         entity.setMotivo(dto.getMotivo());
         if (dto.getId() != null && !dto.getId().isEmpty()) {
-            try {
-                entity.setId(new ObjectId(dto.getId()));
-            } catch (IllegalArgumentException e) {
-                System.err.println("Error al convertir ID del DTO a ObjectId: " + dto.getId());
-            }
+            entity.setId(new ObjectId(dto.getId()));
         }
         return entity;
     }
