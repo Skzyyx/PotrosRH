@@ -163,6 +163,31 @@ public class NominaBO implements INominaBO {
     }
     
     /**
+     * Obtiene la fecha de la última nómina de un empleado.
+     * @param empleado Empleado asociado.
+     * @return Fecha de la última nómina del empleado.
+     * @throws ObjetosNegocioException Excepción.
+     */
+    @Override
+    public LocalDate obtenerFechaUltimaNomina(EmpleadoDTO empleado) throws ObjetosNegocioException{
+        
+        if (!(empleado != null && empleado.getId() != null))
+            throw new ObjetosNegocioException("El empleado no puede ser nulo");
+        
+        try {
+            //Se extrae el ID del empleado
+            Empleado empleadoId = new Empleado();
+            empleadoId.setId(new ObjectId(empleado.getId()));
+            
+            // Se obtiene la fecha de la última nómina del empleado.
+            return nominaDAO.obtenerFechaUltimaNomina(empleadoId);
+        } catch (AccesoDatosException e) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, e);
+            throw new ObjetosNegocioException(e.getMessage(), e);
+        }
+    }
+    
+    /**
      * Calcula el ISR aplicando la tabla de tasas del SAT en base al ingreso mensual del empleado.
      * @param ingresoTotal Monto total del salario a considerar.
      * @param diasPagados Número de días trabajados en el período de pago.

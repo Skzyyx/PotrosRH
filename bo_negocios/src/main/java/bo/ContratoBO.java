@@ -6,14 +6,18 @@ package bo;
 
 import DAO.ContratoDAO;
 import Entidades.Contrato;
+import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IContratoBO;
 import Interfaces.IContratoDAO;
 import dto.ContratoDTO;
+import dto.EmpleadoDTO;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.ContratoMapper;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -48,6 +52,31 @@ public class ContratoBO implements IContratoBO {
             Logger.getLogger(ContratoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new ObjetosNegocioException(ex.getMessage());
 
+        }
+    }
+    
+    /**
+     * Obtiene la fecha de inicio del contrato de 
+     * un empleado en particular.
+     * @param empleado Empleado asociado.
+     * @return Fecha de inicio del contrato del empleado.
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    @Override
+    public LocalDate obtenerFechaInicioContrato(EmpleadoDTO empleado) throws ObjetosNegocioException{
+        if (!(empleado != null && empleado.getId() != null))
+            throw new ObjetosNegocioException("El empleado no puede ser nulo");
+        
+        try {
+            //Se extrae el ID del empleado
+            Empleado empleadoId = new Empleado();
+            empleadoId.setId(new ObjectId(empleado.getId()));
+            
+            // Se obtiene la fecha de la última nómina del empleado.
+            return contratoDAO.obtenerFechaInicioContrato(empleadoId);
+        } catch (AccesoDatosException e) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, e);
+            throw new ObjetosNegocioException(e.getMessage(), e);
         }
     }
 }

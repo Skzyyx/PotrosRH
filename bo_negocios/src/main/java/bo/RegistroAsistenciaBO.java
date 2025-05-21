@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -64,5 +65,64 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);
         }    }
+    
+    /**
+     * Obtiene los días trabajados de un empleado.
+     * @param empleado Empleado asociado.
+     * @param fechaInicio Fecha de inicio del período.
+     * @return Días trabajados del empleado en el período (fecha de inicio y actual).
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    @Override
+    public Integer obtenerDiasTrabajados(EmpleadoDTO empleado, LocalDate fechaInicio) throws ObjetosNegocioException{
+        
+        if (!(empleado != null && empleado.getId() != null))
+            throw new ObjetosNegocioException("El empleado no puede ser nulo");
+        
+        if(fechaInicio == null)
+            throw new ObjetosNegocioException("La fecha no puede estra vacía");
+        
+        try {
+            
+            //Se extrae el ID del empleado
+            Empleado empleadoId = new Empleado();
+            empleadoId.setId(new ObjectId(empleado.getId()));
+            
+            return registroAsistenciaDAO.obtenerDiasTrabajados(empleadoId, fechaInicio);
+            
+        } catch (AccesoDatosException e) {
+            Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, e);
+            throw new ObjetosNegocioException(e.getMessage(), e);
+        }
+    }
+    
+    /**
+     * Obtiene las horas trabajadas de un empleado.
+     * @param empleado Empleado asociado.
+     * @param fechaInicio Fecha de inicio del período.
+     * @return Horas trabajadas del empleado, en el período establecido (fecha de inicio y actual).
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    @Override
+    public Double obtenerHorasTrabajadas(EmpleadoDTO empleado, LocalDate fechaInicio) throws ObjetosNegocioException{
+        if (!(empleado != null && empleado.getId() != null))
+            throw new ObjetosNegocioException("El empleado no puede ser nulo");
+        
+        if(fechaInicio == null)
+            throw new ObjetosNegocioException("La fecha no puede estra vacía");
+        
+        try {
+            
+            //Se extrae el ID del empleado
+            Empleado empleadoId = new Empleado();
+            empleadoId.setId(new ObjectId(empleado.getId()));
+            
+            return registroAsistenciaDAO.obtenerHorasTrabajadas(empleadoId, fechaInicio);
+            
+        } catch (AccesoDatosException e) {
+            Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, e);
+            throw new ObjetosNegocioException(e.getMessage(), e);
+        }
+    }
     
 }

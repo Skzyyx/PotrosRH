@@ -3,6 +3,7 @@ package Interfaces;
 import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
+import java.time.LocalDate;
 
 /**
  * Interfaz del objeto de Negocio NominaBO.
@@ -28,4 +29,11 @@ public interface INominaBO {
      * @throws Exceptions.ObjetosNegocioException Excepción.
      */
     public NominaDTO guardarNomina(NominaDTO nomina) throws ObjetosNegocioException;
+    /**
+     * Obtiene la fecha de la última nómina de un empleado.
+     * @param empleado Empleado asociado.
+     * @return Fecha de la última nómina del empleado.
+     * @throws ObjetosNegocioException Excepción.
+     */
+    public LocalDate obtenerFechaUltimaNomina(EmpleadoDTO empleado) throws ObjetosNegocioException;
 }
