@@ -489,19 +489,18 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     */
     private void actualizarBono() {
         try {
-            String rfc = lblRfcEmpleado.getText().trim();
+            String rfc = empleado.getRfc();
             String item = (String) bonoSelector.getSelectedItem();
 
             if (rfc.equals(".")) 
                 return;
             
-            
-            EmpleadoDTO empleado = ControlNomina.getInstance().obtenerEmpleado(rfc);
-            if (empleado == null) 
+            EmpleadoDTO empleadoEncontrado = ControlNomina.getInstance().obtenerEmpleado(empleado);
+            if (empleadoEncontrado == null) 
                 return;
             
 
-            if (Bonos.valueOf(item) == null && ControlNomina.getInstance().obtenerEmpleado(rfc) == null) 
+            if (Bonos.valueOf(item) == null && ControlNomina.getInstance().obtenerEmpleado(empleado) == null) 
                 return;
             
             
@@ -509,7 +508,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             double bono = bonoEnum.getCantidad();
             lblBono.setText(String.valueOf(bono));
 
-            double salarioBruto = ControlNomina.getInstance().obtenerEmpleado(rfc).getSalarioBase() + bono;
+            double salarioBruto = ControlNomina.getInstance().obtenerEmpleado(empleado).getSalarioBase() + bono;
             lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
 
             double isr = nomina.getIsr();
@@ -525,23 +524,27 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     * Recibe un objeto NominaDTO y actualiza las etiquetas correspondientes con la 
     * información del empleado (nombre, RFC, puesto, estado) y los detalles de la nómina 
     * (horas trabajadas, horas extras, salario bruto, ISR y salario neto).
-    * 
+    * @param empleado Empleado asociado a la nómina.
     * @param nomina Objeto NominaDTOcon los datos de la nómina.
     */
-    public void setDatosNomina(NominaDTO nomina,EmpleadoDTO empleado) {
-        this.nomina = nomina;
-        this.empleado=empleado;
-        System.out.println(nomina.toString());
-        lblNombreEmpleado.setText(empleado.getNombre());
-        lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
-        lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
-        lblRfcEmpleado.setText(empleado.getRfc());
-        lblPuestoEmpleado.setText(empleado.getPuesto());
-        lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
-        lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
-        lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
-        lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
-        lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
-        lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
+    public void setDatosNomina(NominaDTO nomina,EmpleadoDTO empleado) throws PresentacionException {
+        if(empleado != null && nomina != null){
+            this.nomina = nomina;
+            this.empleado=empleado;
+            System.out.println(nomina.toString());
+            lblNombreEmpleado.setText(empleado.getNombre());
+            lblApellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
+            lblApellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
+            lblRfcEmpleado.setText(empleado.getRfc());
+            lblPuestoEmpleado.setText(empleado.getPuesto());
+            lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+            lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
+            lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
+            lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
+            lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
+            lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
+        } else
+            throw new PresentacionException("La nómina o el empleado están vacíos.");
+        
     }
 }

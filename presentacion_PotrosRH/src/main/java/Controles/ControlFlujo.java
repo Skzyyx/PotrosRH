@@ -94,18 +94,10 @@ public class ControlFlujo {
     
     /**
     * Muestra la pantalla de previsualización de un empleado.
-    * 
-    * Obtiene la información del empleado a partir de su RFC utilizando la capa de control.
-    * Si la instancia de la pantalla de previsualización no ha sido creada, se instancia.
-    * Luego, se asignan los datos del empleado a la vista y se muestra la pantalla correspondiente.
-    * 
-    * @param rfc Clave RFC del empleado que se desea previsualizar.
+     * @param empleado Empleado obtenido en BusquedaEmpleado.
     * @throws PresentacionException Si ocurre un error al obtener los datos del empleado.
     */
-    public static void mostrarPrevisualizarEmpleado(String rfc) throws PresentacionException {
-
-        ControlNomina controlNomina = ControlNomina.getInstance();
-        EmpleadoDTO empleado = controlNomina.obtenerEmpleado(rfc);
+    public static void mostrarPrevisualizarEmpleado(EmpleadoDTO empleado) throws PresentacionException {
 
         if (previsualizarEmpleado == null) {
             previsualizarEmpleado = new PrevisualizarEmpleado();
@@ -120,18 +112,18 @@ public class ControlFlujo {
     * Genera una nueva nómina utilizando la capa de control y muestra la vista correspondiente.
     * Si la instancia de la pantalla de previsualización de nómina aún no ha sido creada, se instancia.
     * Luego, se cargan los datos de la nómina en la vista y se cambia la pantalla actual.
-    * 
+    * @param nominaGenerada Nómina generada
+    * @param empleado Empleado asociado a la nómina.
     * @throws PresentacionException Si ocurre un error durante la generación de la nómina.
     */
-    public static void mostrarPrevisualizarNomina(String rfc) throws PresentacionException {
+    public static void mostrarPrevisualizarNomina(NominaDTO nominaGenerada, EmpleadoDTO empleado) throws PresentacionException {
         try {
-            NominaDTO nomina = ControlNomina.getInstance().generarNomina();
-            EmpleadoDTO empleado= ControlNomina.getInstance().obtenerEmpleado(rfc);
+            
             if (previsualizarNomina == null) {
                 previsualizarNomina = new PrevisualizarNomina();
             }
             
-            previsualizarNomina.setDatosNomina(nomina,empleado);
+            previsualizarNomina.setDatosNomina(nominaGenerada, empleado);
             cambiarPantalla(previsualizarNomina);
         } catch (PresentacionException ex) {
             Logger.getLogger(ControlFlujo.class.getName()).log(Level.SEVERE, null, ex);

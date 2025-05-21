@@ -85,23 +85,25 @@ public class ControlGenerarNomina implements IGenerarNomina {
             LocalDate fechaInicio = nominaBO.obtenerFechaUltimaNomina(empleado);
             
             // Si el empleado todavía no tiene nóminas asociadas, primero se busca su fecha de inicio de su contrato.
-            if(fechaInicio == null)
+            if(fechaInicio == null){
+                // Se obtiene la fecha del inicio del contrato del empleado.
                 fechaInicio = contratoBO.obtenerFechaInicioContrato(empleado);
-            
-            // Si el empleado tampoco tiene una fecha de inicio del contrato (no debería pasar)
-            if(fechaInicio == null)
-                throw new ObjetosNegocioException("El empleado no tiene un contrato asociado. Contacte a su gerente para evaluar esta anomalía.");
-            
-            /*
-                Se obtiene la fecha que teóricamente debería ser su primer día de trabajo, ya que
-                la fecha de inicio del contrato podría no ser necesariamente su primer día de
-                trabajo.
-            */
-            fechaInicio = nominaBO.obtenerFechaPrimerDiaTrabajoEsperado(empleado, fechaInicio);
-            
-            // Si se retorna null, quiere decir que el empleado no tiene un horario laboral (tampoco no debería pasar)
-            if(fechaInicio == null)
-                throw new ObjetosNegocioException("El empleado asociado no tiene un horario laboral. Contacte a su gerente para evaluar esta anomalía.");
+                
+                // Si el empleado tampoco tiene una fecha de inicio del contrato (no debería pasar)
+                if(fechaInicio == null)
+                    throw new ObjetosNegocioException("El empleado no tiene un contrato asociado. Contacte a su gerente para evaluar esta anomalía.");
+
+                /*
+                    Se obtiene la fecha que teóricamente debería ser su primer día de trabajo, ya que
+                    la fecha de inicio del contrato podría no ser necesariamente su primer día de
+                    trabajo.
+                */
+                fechaInicio = nominaBO.obtenerFechaPrimerDiaTrabajoEsperado(empleado, fechaInicio);
+
+                // Si se retorna null, quiere decir que el empleado no tiene un horario laboral (tampoco no debería pasar)
+                if(fechaInicio == null)
+                    throw new ObjetosNegocioException("El empleado asociado no tiene un horario laboral. Contacte a su gerente para evaluar esta anomalía.");
+            }
             
             // Se calculan las horas esperadas
             Double horasEsperadas = nominaBO.calcularHorasEsperadas(empleado, fechaInicio);
@@ -121,7 +123,6 @@ public class ControlGenerarNomina implements IGenerarNomina {
             Double horasTrabajadas = asistenciaBO.obtenerHorasTrabajadas(empleado, fechaInicio);
             
             // Se verifica que se obtuvo una cantidad de horas trabajadas
-            // Se verifica que se obtuvo una cantidad.
             if(horasTrabajadas == null)
                 throw new GenerarNominaException("Ocurrió un error en el cálculo del salario bruto y neto de la nómina.");
             

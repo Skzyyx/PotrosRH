@@ -32,7 +32,7 @@
                       <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
                       <Component id="btnCancelar" min="-2" pref="193" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="btnGenerar" min="-2" pref="193" max="-2" attributes="0"/>
+                      <Component id="btnBuscar" min="-2" pref="193" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="273" max="32767" attributes="0"/>
@@ -48,7 +48,7 @@
               <Component id="txtRfc" min="-2" pref="72" max="-2" attributes="0"/>
               <EmptySpace pref="130" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnGenerar" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="btnBuscar" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
@@ -70,7 +70,7 @@
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="txtRfc.setToolTipText(&quot;Ingrese el RFC.&quot;);&#xa;txtRfc.setHorizontalAlignment(SwingConstants.CENTER);&#xa;txtRfc.setOpaque(false); // Hace que el fondo predeterminado no se pinte&#xa;txtRfc.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Margen interno para el texto&#xa;txtRfc.setUI(new BasicTextFieldUI() {&#xa;    @Override&#xa;    protected void paintSafely(Graphics g) {&#xa;        Graphics2D g2 = (Graphics2D) g.create();&#xa;        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);&#xa;&#xa;        int arc = 50; // Radio de redondeo&#xa;&#xa;        // Dibujar fondo redondeado&#xa;        g2.setColor(txtRfc.getBackground());&#xa;        g2.fill(new RoundRectangle2D.Float(0, 0, txtRfc.getWidth(), txtRfc.getHeight(), arc, arc));&#xa;&#xa;        g2.dispose();&#xa;&#xa;        // Llamar a la implementaci&#xf3;n original para pintar el texto correctamente&#xa;        super.paintSafely(g);&#xa;    }&#xa;&#xa;    @Override&#xa;    protected void paintBackground(Graphics g) {&#xa;        // No hacemos nada aqu&#xed; para evitar conflictos&#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGenerar">
+    <Component class="javax.swing.JButton" name="btnBuscar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="2c" green="2c" red="2c" type="rgb"/>
@@ -84,10 +84,10 @@
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnGenerar.setBorderPainted(false);&#xa;btnGenerar.setContentAreaFilled(false);&#xa;btnGenerar.setOpaque(false);&#xa;btnGenerar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {&#xa;    @Override&#xa;    public void paint(Graphics g, JComponent c) {&#xa;        Graphics2D g2 = (Graphics2D) g.create();&#xa;        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);&#xa;        // Pinta un fondo redondeado&#xa;        g2.setColor(c.getBackground());&#xa;        g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);&#xa;        super.paint(g2, c);&#xa;        g2.dispose();&#xa;    }&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnBuscar.setBorderPainted(false);&#xa;btnBuscar.setContentAreaFilled(false);&#xa;btnBuscar.setOpaque(false);&#xa;btnBuscar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {&#xa;    @Override&#xa;    public void paint(Graphics g, JComponent c) {&#xa;        Graphics2D g2 = (Graphics2D) g.create();&#xa;        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);&#xa;        // Pinta un fondo redondeado&#xa;        g2.setColor(c.getBackground());&#xa;        g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);&#xa;        super.paint(g2, c);&#xa;        g2.dispose();&#xa;    }&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">

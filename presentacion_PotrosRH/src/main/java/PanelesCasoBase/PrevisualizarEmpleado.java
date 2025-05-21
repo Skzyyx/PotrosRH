@@ -5,6 +5,7 @@ import Controles.ControlNomina;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
 import dto.EmpleadoDTO;
+import dto.NominaDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -24,11 +25,14 @@ import javax.swing.JOptionPane;
  * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarEmpleado extends javax.swing.JPanel {
-
+    
+    private EmpleadoDTO empleadoDTO = new EmpleadoDTO();;
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public PrevisualizarEmpleado() {initComponents();}
+    public PrevisualizarEmpleado() {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,8 +293,8 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
             try {
-                ControlNomina.getInstance().generarNomina();
-                ControlFlujo.mostrarPrevisualizarNomina(RFCEmpleado.getText().trim());
+                NominaDTO nominaGenerada = ControlNomina.getInstance().generarNomina(empleadoDTO);
+                ControlFlujo.mostrarPrevisualizarNomina(nominaGenerada, empleadoDTO);
             } catch (PresentacionException ex) {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
@@ -338,20 +342,23 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
 
     /**
     * Actualiza los componentes de la interfaz con los datos del empleado.
-    * 
     * Recibe un objeto EmpleadoDTO y actualiza las etiquetas correspondientes 
     * con la información del empleado (nombre, apellido paterno, apellido materno, RFC, 
     * puesto y estado).
-    * 
     * @param empleado Objeto EmpleadoDTO con los datos del empleado.
+    * @throws PresentacionException Excepción de la capa de Presentación.
     */
-    public void setDatosEmpleado(EmpleadoDTO empleado) {
-        System.out.println(empleado.toString());
-        nombreEmpleado.setText(empleado.getNombre());
-        apellidoPaternoEmpleado.setText(empleado.getApellidoPaterno());
-        apellidoMaternoEmpleado.setText(empleado.getApellidoMaterno());
-        RFCEmpleado.setText(empleado.getRfc());
-        puestoEmpleado.setText(empleado.getPuesto());
-        estadoEmpleado.setText(String.valueOf(empleado.getEstado()));
+    public void setDatosEmpleado(EmpleadoDTO empleado) throws PresentacionException {
+        if(empleado != null){
+            empleadoDTO = empleado;
+            System.out.println(empleadoDTO.toString());
+            nombreEmpleado.setText(empleadoDTO.getNombre());
+            apellidoPaternoEmpleado.setText(empleadoDTO.getApellidoPaterno());
+            apellidoMaternoEmpleado.setText(empleadoDTO.getApellidoMaterno());
+            RFCEmpleado.setText(empleadoDTO.getRfc());
+            puestoEmpleado.setText(empleadoDTO.getPuesto());
+            estadoEmpleado.setText(String.valueOf(empleadoDTO.getEstado()));
+        } else
+            throw new PresentacionException("El empleado está vacío.");
     }
 }

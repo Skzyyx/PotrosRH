@@ -1,9 +1,11 @@
 package PanelesCasoBase;
 
+import Controles.ControlCampos;
 import Controles.ControlFlujo;
 import Controles.ControlNomina;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -11,7 +13,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
@@ -30,6 +31,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
      */
     public BusquedaEmpleado() {
         initComponents();
+        ControlCampos.limiteCaracteresCampoTexto(txtRfc, 13);
     }
 
     /**
@@ -42,7 +44,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     private void initComponents() {
 
         txtRfc = new javax.swing.JTextField();
-        btnGenerar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -56,13 +58,13 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
             }
         });
 
-        btnGenerar.setBackground(new java.awt.Color(44, 44, 44));
-        btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerar.setText("Buscar");
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setBackground(new java.awt.Color(44, 44, 44));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -97,7 +99,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
                         .addGap(413, 413, 413)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 273, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,7 +111,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
                 .addComponent(txtRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(85, 85, 85))
         );
@@ -141,10 +143,10 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
                 // No hacemos nada aquí para evitar conflictos
             }
         });
-        btnGenerar.setBorderPainted(false);
-        btnGenerar.setContentAreaFilled(false);
-        btnGenerar.setOpaque(false);
-        btnGenerar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setOpaque(false);
+        btnBuscar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -173,14 +175,14 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             btnBuscar();
         } catch (PresentacionException ex) {
             Logger.getLogger(BusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
         }
-    }//GEN-LAST:event_btnGenerarActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
@@ -193,8 +195,8 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_txtRfcActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGenerar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtRfc;
@@ -216,10 +218,13 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
             throw new PresentacionException("El RFC debe tener 13 caracteres.");
         }
         try {
-            if (ControlNomina.getInstance().obtenerEmpleado(rfc) != null) 
-                ControlFlujo.mostrarPrevisualizarEmpleado(rfc);
+            EmpleadoDTO empleadoEncontrado = new EmpleadoDTO();
+            empleadoEncontrado.setRfc(rfc);
+            empleadoEncontrado = ControlNomina.getInstance().obtenerEmpleado(empleadoEncontrado);
+            if (empleadoEncontrado != null) 
+                ControlFlujo.mostrarPrevisualizarEmpleado(empleadoEncontrado);
             
-        } catch (Exception e) {
+        } catch (PresentacionException e) {
             OptionPane.showErrorMessage(this, e.getMessage(), "Error");
         }
         

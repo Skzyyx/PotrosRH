@@ -86,21 +86,15 @@ public class ControlNomina {
         } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
     /**
-    * Obtiene un empleado a partir de su RFC.
-    * 
-    * Este método intenta obtener un objeto EmpleadoDTO utilizando el RFC proporcionado.
-    * Si ocurre un error durante el proceso de obtención, se lanza una excepción 
-    * PresentacionException con el mensaje correspondiente.
-    * @param rfc El RFC del empleado que se desea obtener.
+    * Obtiene un empleado a partir de su RFC, encapsulado en el
+    * DTO recibido.
+    * @param empleado Empleado con su RFC.
     * @return El objeto EmpleadoDTO correspondiente al RFC proporcionado.
     * @throws PresentacionException Si ocurre un error al obtener el empleado.
     */
-    public EmpleadoDTO obtenerEmpleado(String rfc) throws PresentacionException {
+    public EmpleadoDTO obtenerEmpleado(EmpleadoDTO empleado) throws PresentacionException {
         try {
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(rfc);
-            empleadoDTO = obtenerEmpleado.obtenerEmpleadoActivo(empleado);;
-            return empleadoDTO;
+            return obtenerEmpleado.obtenerEmpleadoActivo(empleado);
         } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
     /**
@@ -109,14 +103,13 @@ public class ControlNomina {
     * Este método utiliza los datos del empleado actual para generar una nómina.
     * Si ocurre un error durante el proceso de generación, se lanza una excepción 
     * PresentacionException con el mensaje correspondiente.
-    * 
+    * @param empleado Empleado asociado a la nueva nómina.
     * @return El objeto NominaDTO generado para el empleado.
-    * 
     * @throws PresentacionException Si ocurre un error al generar la nómina.
     */
-    public NominaDTO generarNomina() throws PresentacionException {
+    public NominaDTO generarNomina(EmpleadoDTO empleado) throws PresentacionException {
         try {
-            NominaDTO nomina  = generarNomina.generarNomina(empleadoDTO);
+            NominaDTO nomina  = generarNomina.generarNomina(empleado);
             nominaDTO = nomina;
             return nomina;
         } catch (GenerarNominaException ex) {
