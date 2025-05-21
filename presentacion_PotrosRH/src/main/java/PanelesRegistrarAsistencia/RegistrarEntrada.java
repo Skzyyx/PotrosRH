@@ -28,11 +28,14 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
  */
 public class RegistrarEntrada extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistrarEntrada
-     */
+    // Variables de instancia
+    private EmpleadoDTO empleadoEncontrado;
+    private final ControlAsistencia control;
+    
     public RegistrarEntrada() {
         initComponents();
+        control = ControlAsistencia.getInstance();
+        ocultarTodo();
     }
 
     /**
@@ -236,7 +239,28 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     }//GEN-LAST:event_txtRfcRegistrarEntradaActionPerformed
 
     private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Validar que tenemos un empleado
+            if (this.empleadoEncontrado == null) {
+                JOptionPane.showMessageDialog(this, "Primero busque un empleado válido", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            boolean registroExitoso = control.registrarEntrada(
+                this.empleadoEncontrado,
+                LocalDate.now(),
+                LocalTime.now()
+            );
+            
+            if (registroExitoso) {
+                JOptionPane.showMessageDialog(this, "Entrada registrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                resetearFormulario();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo registrar la entrada", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (PresentacionException ex) {
+            JOptionPane.showMessageDialog(this, "Error al registrar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -255,8 +279,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
 
-            ControlAsistencia control = ControlAsistencia.getInstance();
-            EmpleadoDTO empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
+            this.empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
 
             if (empleadoEncontrado != null) {
                 mostrarTodo();
@@ -310,6 +333,13 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         // Actualizar fecha y hora en el momento de mostrar
         jlblFechaActual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jlblHoraDeEntrada.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
+    
+    private void resetearFormulario() {
+        this.empleadoEncontrado = null;
+        txtRfcRegistrarEntrada.setText("");
+        ocultarTodo();
+        btnRegistrarEntrada.setEnabled(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
