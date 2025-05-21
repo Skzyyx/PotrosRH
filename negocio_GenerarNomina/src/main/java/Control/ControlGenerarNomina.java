@@ -11,14 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Interfaces.INominaBO;
 import SistemaCorreo.SistemaCorreo;
-import SistemaCorreo.PlantillaCorreo;
-import SistemaCorreo.RepoPlantillaCorreo;
-import SistemaCorreo.TipoPlantillaCorreo;
 import java.util.Map;
 import Interface.ISistemaCorreo;
 import Interfaces.IEmpleadoBO;
 import bo.EmpleadoBO;
 import dto.CorreoDTO;
+import java.time.LocalDate;
 
 /**
  * Realiza validaciones de negocio y genera la nómina correspondiente al
@@ -57,6 +55,10 @@ public class ControlGenerarNomina implements IGenerarNomina {
         // Si el DTO recibido no tiene el salario base del empleado.
         if(empleado.getSalarioBase() == null )
             throw new GenerarNominaException("El empleado recibido no cuenta con un salario base.");
+        
+        // Si el empleado no está cargado con su horario laboral completo.
+        if(!(empleado.getHorariosLaborales() != null && !empleado.getHorariosLaborales().isEmpty()))
+            throw new GenerarNominaException("El empleado recibido no cuenta con su horario laboral completo.");
 
         try {
             return nominaBO.generarNomina(empleado); // Se genera la nómina y se regresa como un DTO.
@@ -76,11 +78,12 @@ public class ControlGenerarNomina implements IGenerarNomina {
     @Override
     public NominaDTO guardarNomina(NominaDTO nomina) throws GenerarNominaException {
         // Si la nómina está vacía.
-        if (nomina == null) {
+        if (nomina == null) 
             throw new GenerarNominaException("La nomina no puede ser nula.");
-        }
-        // Sistema de correo electrónico.
-        //ICorreo sistemaCorreo = new Correo();
+        
+        // Valida los atributos de la nómina recibida.
+        validarNomina(nomina);
+        
         try {
             NominaDTO nominaDTO = nominaBO.guardarNomina(nomina); // Se guarda la nómina.
             return nominaDTO; // Regresa true como confirmación de nómina generada con éxito.
@@ -131,5 +134,74 @@ public class ControlGenerarNomina implements IGenerarNomina {
             Logger.getLogger(ControlGenerarNomina.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new GenerarNominaException("Ocurrió un error al intentar enviar el correo.");
         }
+    }
+    /**
+     * Valida los atributos de una nómina recibida.
+     * @param nomina Nómina a validar.
+     * @throws GenerarNominaException 
+     */
+    private void validarNomina(NominaDTO nomina) throws GenerarNominaException{
+        // Si la nómina no tiene un empleado asociado.
+        if(!(nomina.getEmpleadoId() != null && !nomina.getEmpleadoId().isEmpty()))
+            throw new GenerarNominaException("La nomina debe tener un empleado asociado.");
+        
+        // Si la nómina cuenta con un bono, pero es negativo.
+        if(nomina.getBono() != null && nomina.getBono() < 0.0)
+            throw new GenerarNominaException("No se le puede aplicar un bono negativo a la nómina.");
+        
+        // Si la nómina no tiene el ISR
+        if(nomina.getIsr() == null)
+            throw new GenerarNominaException("La nomina debe contar con el ISR aplicado al sueldo del empleado.");
+        // Si el ISR es negativo.
+        if(nomina.getIsr() < 0.0)
+            throw new GenerarNominaException("El ISR no puede ser negativo.");
+        
+        // Si la nómina no cuenta con el salario bruto.
+        if(nomina.getSalarioBruto() == null)
+            throw new GenerarNominaException("La nómina debe contar con el salario bruto.");
+        
+        // Si el salario bruto es negativo.
+        if(nomina.getSalarioBruto() < 0.0)
+            throw new GenerarNominaException("El salario bruto no puede ser negativo.");
+        
+        // Si la nómina no cuenta con el salario neto.
+        if(nomina.getSalarioNeto() == null)
+            throw new GenerarNominaException("La nómina debe contar con el salario neto.");
+        
+        // Si el salario neto es negativo.
+        if(nomina.getSalarioNeto() < 0.0)
+            throw new GenerarNominaException("El salario neto no puede ser negativo.");
+        
+        // Si la nómina no tiene la fecha de corte.
+        if(nomina.getFechaCorte() == null)
+            throw new GenerarNominaException("La nómina debe contar con una fecha de corte");
+        
+        // Si la fecha de corte está después de la actual.
+        if(nomina.getFechaCorte().isAfter(LocalDate.now()))
+            throw new GenerarNominaException("La fecha de corte no puede estar después de la fecha actual.");
+        
+        // Si la nómina no cuenta con los días trabajados.
+        if(nomina.getDiasTrabajados() == null)
+            throw new GenerarNominaException("La nómina debe contar con los días trabajados del empleado.");
+        
+        // Si los días trabajados es una cantidad negativa
+        if(nomina.getDiasTrabajados() < 0)
+            throw new GenerarNominaException("La nomina debe contar con los días trabajados del empleado.");
+        
+        // Si la nómina no cuenta con las horas trabajadas del empleado.
+        if(nomina.getHorasTrabajadas() == null)
+            throw new GenerarNominaException("La nómina debe contar con las horas trabajadas del empleado");
+        
+        // Si las horas trabajas es un número negativo
+        if(nomina.getHorasTrabajadas() < 0.0)
+            throw new GenerarNominaException("Las cantidad de horas trabajadas no puede ser negativa.");
+        
+        // Si la nómina cuenta con horas extra, pero es una cantidad negativa
+        if(nomina.getHorasExtra() != null && nomina.getHorasExtra() < 0.0)
+            throw new GenerarNominaException("Las cantidad de horas extra no puede ser negativa.");
+        
+        // Si el estado de cobro de la nómina es positivo
+        if(nomina.getEstadoCobro() == true)
+            throw new GenerarNominaException("No se puede guardar una nómina que ya ha sido cobrada.");
     }
 }

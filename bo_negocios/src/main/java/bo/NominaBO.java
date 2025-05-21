@@ -2,17 +2,25 @@ package bo;
 
 import DAO.EmpleadoDAO;
 import DAO.NominaDAO;
+import DAO.RegistroAsistenciaDAO;
+import Entidades.Empleado;
+import Enums.DiaSemana;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IEmpleadoDAO;
 import Interfaces.INominaBO;
 import Interfaces.INominaDAO;
+import Interfaces.IRegistroAsistenciaDAO;
 import dto.EmpleadoDTO;
+import dto.HorarioLaboralDTO;
 import dto.NominaDTO;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.NominaMapper;
+import org.bson.types.ObjectId;
 
 /**
  * Objeto de negocio NominaBO.
@@ -27,6 +35,7 @@ public class NominaBO implements INominaBO {
     private static INominaBO instance;
     // Atributo DAO para operaciones CRUD con Nóminas.
     private static final INominaDAO nominaDAO = new NominaDAO();
+    private static final IRegistroAsistenciaDAO asistenciaDAO = new RegistroAsistenciaDAO();
     private static final IEmpleadoDAO empleadoDAO= new EmpleadoDAO();
     /**
      * Constructor por defecto.
@@ -69,6 +78,8 @@ public class NominaBO implements INominaBO {
         if (empleado == null) 
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         
+        
+        
         NominaDTO nomina = new NominaDTO();
         nomina.setEmpleadoId(empleado.getId());
         nomina.setBono(0.0);
@@ -90,7 +101,7 @@ public class NominaBO implements INominaBO {
      */
     @Override
     public NominaDTO guardarNomina(NominaDTO nomina) throws ObjetosNegocioException{
-        if(nomina == null)
+        if(!(nomina != null && nomina.getEmpleadoId() != null))
             throw new ObjetosNegocioException("No se aceptan nominas vacias.");
         
         try {
@@ -133,7 +144,33 @@ public class NominaBO implements INominaBO {
      * de su horario laboral y la fecha de su última nómina.
      * @param empleado 
      */
-    private void calcularHorasEsperadas(EmpleadoDTO empleado){
-        
+    private double calcularHorasEsperadas(EmpleadoDTO empleado) throws ObjetosNegocioException{
+        //Se extrae el ID del empleado
+        Empleado empleadoId = new Empleado();
+        empleadoId.setId(new ObjectId(empleado.getId()));
+        try {
+            // Se obtiene la fecha de la última nómina del empleado.
+            LocalDate fechaInicio = nominaDAO.obtenerFechaUltimaNomina(empleadoId);
+            // Fecha actual, para establecer el período de las horas esperadas.
+            LocalDate fechaActual = LocalDate.now();
+            // Se extrae el horario laboral completo del empleado.
+            List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
+            // Acumulador de las horas esperadas.
+            double horasEsperadas = 0.0;
+            // Itera sobre el período, añadiendo las horas de cada día laboral
+            do{
+                for(HorarioLaboralDTO diaLaboral : horario){
+                    if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaActual.getDayOfWeek().getValue() ){
+                        Duration duracion = Duration.between(diaLaboral.getHoraInicioTurno(), diaLaboral.getHoraFinTurno());
+                        horasEsperadas += duracion.toSeconds() / 3600;
+                    }
+                    fechaActual.plusDays(1);
+                }
+            } while(!fechaInicio.isEqual(fechaActual));
+            
+            return horasEsperadas;
+        } catch (AccesoDatosException e) {
+            throw new ObjetosNegocioException("Sucedió un error al procesar la nómina. Inténtelo de nuevo más tarde o contacte a su técnico.");
+        }
     }
 }
