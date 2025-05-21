@@ -25,7 +25,9 @@ import javax.swing.JOptionPane;
  * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarEmpleado extends javax.swing.JPanel {
-    
+    /**
+     * EmpleadoDTO, con la información completa del empleado asociado a la nómina.
+     */
     private EmpleadoDTO empleadoDTO = new EmpleadoDTO();;
     /**
      * Creates new form PrevisualisarEmpleado
@@ -280,7 +282,11 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Generar. Genera la nómina y la transfiere al
+     * panel de PrevisualizarNomina.
+     * @param evt Click.
+     */
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");
         if (resultado == JOptionPane.YES_OPTION) {
@@ -291,13 +297,12 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
                 Logger.getLogger(PrevisualizarEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
             }
-            
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
     /**
      * Regresa a la búsqueda de empleados al hacer click
      * en el botón cancelar.
-     * @param evt Evento.
+     * @param evt Click..
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // Limpia los campos.

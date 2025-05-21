@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase que gestiona el flujo entre las pantallas del sistema.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -200,6 +200,7 @@ public class ControlFlujo {
      * que contenga la descripción del incidente y
      * los datos generales.
      * @param reporteMalaConducta Reporte de mala conducta incompleto.
+     * @throws PresentacionException Excepción de la capa de presentación.
      */
     public static void mostrarImpactoIncidente(ReporteMalaConductaDTO reporteMalaConducta) throws PresentacionException{
         if(impactoIncidente == null)
@@ -311,16 +312,15 @@ public class ControlFlujo {
      * Luego, se cambia la pantalla actual para mostrar esta vista
      */
     public static void mostrarBusquedaEmpleadoDespedir() {
-        BusquedaEmpleadoDespedir busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
+        if(busquedaEmpleadoDespedir == null)
+            busquedaEmpleadoDespedir = new BusquedaEmpleadoDespedir();
         busquedaEmpleadoDespedir.limpiarCampo();
         cambiarPantalla(busquedaEmpleadoDespedir);
     }
     
     /**
      * Muestra la pantalla de previsualización del empleado que se va a despedir.
-     *
-     * @param rfc Clave RFC del empleado que se desea previsualizar para despedir
-     * @throws PresentacionException Si ocurre un error al obtener los datos del empleado
+     * @param empleadoDTO Empleado a despedir.
      */
     public static void mostrarPrevisualizarEmpleadoDespedir(EmpleadoDTO empleadoDTO) {
         if (previsualizarEmpleadoDespedir == null) {
@@ -333,10 +333,8 @@ public class ControlFlujo {
     /**
      * Muestra el panel de confirmación de despido con la información del
      * empleado y el motivo proporcionados
-     *
      * @param empleado El DTO del empleado a despedir
-     * @param razon    El motivo del despido que se mostrará al usuario para su
-     * confirmación
+     * @param razon El motivo del despido que se mostrará al usuario para su confirmación.
      */
     public static void mostrarPanelConfirmacionDespido(EmpleadoDTO empleado, String razon) {
         if (confirmacionDespido == null) {
@@ -346,26 +344,33 @@ public class ControlFlujo {
         cambiarPantalla(confirmacionDespido);
     }
     
-    //mostrar submenu registrar asistencia
+    /**
+     * Mostrar submenu registrar asistencia.
+     */
     public static void mostrarSubmenuRegistrarAsistenia(){
         if (submenuRegistrarAsistencia == null) {
             submenuRegistrarAsistencia = new SubmenuRegistrarAsistencia();
         }
         cambiarPantalla(submenuRegistrarAsistencia);
     }
-    
+    /**
+     * Muestra el panel para el registro de la entrada
+     * de un empleado.
+     */
     public static void mostrarRegistrarEntrada(){
-        if(registrarEntrada==null){
+        if(registrarEntrada==null)
             registrarEntrada= new RegistrarEntrada();
-        }
+        
         cambiarPantalla(registrarEntrada);
     }
-    
+    /**
+     * Muestra el panel para el registro de la salida 
+     * de un empleado.
+     */
     public static void mostrarRegistrarSalida(){
-        if(registrarSalida==null){
-            registrarSalida= new RegistrarSalida();
-        }
+        if(registrarSalida == null)
+            registrarSalida = new RegistrarSalida();
+        
         cambiarPantalla(registrarSalida);
     }
-    
 }

@@ -416,7 +416,8 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
     /**
-     * Botón Registrar. Registra la nómina.
+     * Botón Registrar. Registra la nómina y muestra un
+     * mensaje de confirmación.
      * @param evt Click.
      */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

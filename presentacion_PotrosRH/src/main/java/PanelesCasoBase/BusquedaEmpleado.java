@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
 /**
- *
+ * Panel para buscar al empleado por su RFC.
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -52,11 +52,6 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         setBackground(new java.awt.Color(17, 119, 202));
 
         txtRfc.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        txtRfc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRfcActionPerformed(evt);
-            }
-        });
 
         btnBuscar.setBackground(new java.awt.Color(44, 44, 44));
         btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
@@ -187,14 +182,8 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
         ControlFlujo.mostrarMenuPrincipal();
-
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRfcActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -232,18 +221,13 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
             
             ControlFlujo.mostrarPrevisualizarEmpleado(empleadoEncontrado);
             
-        } catch (PresentacionException e) {
-            OptionPane.showErrorMessage(this, e.getMessage(), "Error");
-        }
-        
-
+        } catch (PresentacionException e) {OptionPane.showErrorMessage(this, e.getMessage(), "Error");}
     }
+    
     /**
     * Limpia el campo de texto del RFC.
     * 
     * Este método establece el contenido del campo de texto del RFC como vacío.
     */
-    public void limpiarCampo() {
-        txtRfc.setText("");
-    }
+    public void limpiarCampo() {txtRfc.setText("");}
 }

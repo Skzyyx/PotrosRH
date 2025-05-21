@@ -39,8 +39,8 @@ public class ValidarEmpleado implements IValidarEmpleado {
     @Override
     public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
         boolean esActivo = new ControlValidarEmpleado().validarEstado(empleado);
-        boolean asistencia = new ControlValidarEmpleado().validarPorcentajeAsistencias(empleado);
         boolean periodoValido = new ControlValidarEmpleado().validarPeriodoNomina(empleado);
+        boolean asistencia = new ControlValidarEmpleado().validarPorcentajeAsistencias(empleado);
         return esActivo && asistencia && periodoValido;
     }
 }

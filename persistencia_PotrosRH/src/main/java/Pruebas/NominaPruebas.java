@@ -8,16 +8,15 @@ import Conexion.Conexion;
 import DAO.EmpleadoDAO;
 import Entidades.Empleado;
 import Entidades.Nomina;
+import Exceptions.AccesoDatosException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Sorts;
-import java.time.LocalDate;
-import org.bson.Document;
 import org.bson.conversions.Bson;
 
 /**
- *
+ * Clase de pruebas.
  * @author PC WHITE WOLF
  */
 public class NominaPruebas {
@@ -46,7 +45,7 @@ public class NominaPruebas {
             else
                 System.out.printf("Exito, eso creo.");
             
-        } catch (Exception e) {
+        } catch (AccesoDatosException e) {
             System.out.println("Algo salio mal.");
         }
     }
