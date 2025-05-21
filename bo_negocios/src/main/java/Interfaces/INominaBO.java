@@ -15,14 +15,6 @@ import java.time.LocalDate;
  */
 public interface INominaBO {
     /**
-     * Genera una nómina para un empleado dado.
-     * 
-     * @param empleado Objeto EmpleadoDTO con los datos del empleado.
-     * @return NominaDTO con los datos de la nómina generada.
-     * @throws ObjetosNegocioException si el empleado es nulo.
-     */
-    public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException;
-    /**
      * Simula el guardado de una nómina en la base de datos.
      * @param nomina Objeto NominaDTO que se desea guardar.
      * @return NominaDTO con nómina insertada.
@@ -36,4 +28,26 @@ public interface INominaBO {
      * @throws ObjetosNegocioException Excepción.
      */
     public LocalDate obtenerFechaUltimaNomina(EmpleadoDTO empleado) throws ObjetosNegocioException;
+    /**
+     * Al no contar con un atributo especial en alguna entidad, y suponiendo que el empleado
+     * falte a su primer día de trabajo, se obtiene la fecha en la que debería haber trabajado
+     * por primera vez. Esto se hace al tomar el primer día del horario laboral del empleado
+     * que se ubique dentro el período, tomando como límite superior la fecha actual, y como
+     * límite inferior la fecha de inicio del contrato del empleado. ¿Se podría considerar
+     * una mexicanada?
+     * @param empleado Empleado, con su horario laboral completo.
+     * @param fechaInicioContrato Fecha de inicio del contrato del empleado.
+     * @return Fecha del primero día de trabajo del empleado.
+     */
+    public LocalDate obtenerFechaPrimerDiaTrabajoEsperado(EmpleadoDTO empleado, LocalDate fechaInicioContrato);
+    /**
+     * Calcula las horas esperadas de un empleado, a partir 
+     * de su horario laboral y la fecha de inicio, que se
+     * espera que sea de la última nómina o la de su primer
+     * día esperado de trabajo.
+     * @param empleado Empleado asociado a la nómina.
+     * @param fechaInicio Fecha de inicio del período de la nómina.
+     * @return Horas esperadas de trabajo del empleado, de acuerdo al período.
+     */
+    public Double calcularHorasEsperadas(EmpleadoDTO empleado, LocalDate fechaInicio);
 }

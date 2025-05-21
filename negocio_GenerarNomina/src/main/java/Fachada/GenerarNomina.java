@@ -33,7 +33,7 @@ public class GenerarNomina implements IGenerarNomina {
      * Constructor por defecto.
      */
     private GenerarNomina() {this.control = new ControlGenerarNomina();}
-
+    
     /**
      * Método que devuelve el objeto SingleTon de la clase. Si el objeto aún no
      * se ha creado, se crea y se retorna.

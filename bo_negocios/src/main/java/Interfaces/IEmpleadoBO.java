@@ -16,20 +16,6 @@ import java.util.List;
  */
 public interface IEmpleadoBO {
     /**
-     * Valida que el estado del empleado sea ACTIVO.
-     * @param empleado Empleado cuyo estado será validado.
-     * @return {@code true} si el RFC es válido.
-     * @throws ObjetosNegocioException Si el RFC es nulo o está vacío.
-     */
-    public boolean validarEstado(EmpleadoDTO empleado) throws ObjetosNegocioException;
-    /**
-     * Determina si el porcentaje de faltas de un empleado es aceptable.
-     * @param empleado Empleado a evaluar.
-     * @return {@code true} si el porcentaje de faltas es menor al 80%, {@code false} en caso contrario.
-     * @throws Exceptions.ObjetosNegocioException cuando no cumple con el minimo de asistencias.
-     */
-    public boolean validarPorcentajeAsistencias(EmpleadoDTO empleado) throws ObjetosNegocioException;
-    /**
      * Obtiene un objeto {@link EmpleadoDTO} a partir de su RFC.
      * Si el RFC es inválido o el empleado no se encuentra en la lista, lanza una excepción.
      * @param empleado Objeto EmpleadoBO del cual se extrae su RFC.

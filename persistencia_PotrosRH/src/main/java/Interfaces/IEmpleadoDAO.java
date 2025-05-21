@@ -15,22 +15,6 @@ import org.bson.conversions.Bson;
  */
 public interface IEmpleadoDAO {
     /**
-     * Valida el estado de un empleado.
-     * @param empleado Empleado del cual se le extrae su RFC.
-     * @return VERDADERO si el empleado está activo, FALSO en caso contrario.
-     * @throws AccesoDatosException Excepción del proyecto DAO.
-     */
-    public boolean validarEstado(Empleado empleado) throws AccesoDatosException;
-    /**
-     * Valida que el porcentaje de asistencia de un empleado sea
-     * igual o superior al 80%, correspondiente con su período
-     * de trabajo.
-     * @param empleado Empleado del cual se le extrae su RFC.
-     * @return VERDADERO si el porcentaje de asistencia es igual o superior al 80%, FALSO en caso contrario.
-     * @throws AccesoDatosException Excepción del proyecto DAO.
-     */
-    public boolean validarPorcentajeAsistencias(Empleado empleado) throws AccesoDatosException;
-    /**
      * Obtiene un empleado de la base de datos.
      * @param empleado Empleado del cual se el extra su RFC, para buscarlo en la BD.
      * @return Entidad empleado, correspondiente al RFC recibido.

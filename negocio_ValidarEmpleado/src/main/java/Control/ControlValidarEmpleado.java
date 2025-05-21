@@ -27,9 +27,7 @@ public class ControlValidarEmpleado {
     public boolean validarEstado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
         // Se valida el empleado y su RFC.
         validarEmpleado(empleado);
-        try {
-            return empleadoBO.validarEstado(empleado);
-        } catch (ObjetosNegocioException ex) {throw new ValidarEmpleadoException(ex.getMessage());}
+        return true;
     }
     /**
      * Valida que el empleado tenga al menos un 80% de asistencia,
@@ -41,9 +39,7 @@ public class ControlValidarEmpleado {
     public boolean validarPorcentajeAsistencias(EmpleadoDTO empleado) throws ValidarEmpleadoException {
         // Se valida el empleado y su RFC.
         validarEmpleado(empleado);
-        try {
-            return empleadoBO.validarPorcentajeAsistencias(empleado);
-        } catch (ObjetosNegocioException ex) {throw new ValidarEmpleadoException(ex.getMessage());}
+        return true;
     }
     /**
      * Valida el objeto EmpleadoDTO recibido, y que contiene un RFC válido.
@@ -52,19 +48,11 @@ public class ControlValidarEmpleado {
      */
     private void validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
         
-        if(empleado == null)
-            throw new ValidarEmpleadoException("El RFC no puede estar vacío.");
+        if (!(empleado != null && empleado.getId() != null)) 
+            throw new ValidarEmpleadoException("El empleado no puede estar vacío.");
         
-        // Se extrae el RFC del empleado.
-        String rfc = empleado.getRfc();
-        
-        if (rfc == null) 
-            throw new ValidarEmpleadoException("El rfc no puede estar vacío.");       
-        
-        if (rfc.isEmpty()) 
-            throw new ValidarEmpleadoException("El rfc no puede estar vacío.");       
-        
-        if(!rfc.matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$"))
-            throw new ValidarEmpleadoException("RFC con formato inválido.");
+         // Si el empleado no está cargado con su horario laboral completo.
+        if(!(empleado.getHorariosLaborales() != null && !empleado.getHorariosLaborales().isEmpty()))
+            throw new ValidarEmpleadoException("El empleado recibido no cuenta con su horario laboral completo.");
     }
 }
