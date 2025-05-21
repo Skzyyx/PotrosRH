@@ -38,9 +38,22 @@ public class ValidarEmpleado implements IValidarEmpleado {
      */
     @Override
     public boolean validarEmpleado(EmpleadoDTO empleado) throws ValidarEmpleadoException {
+        // Valida si el empleado está activo.
         boolean esActivo = new ControlValidarEmpleado().validarEstado(empleado);
+        if(!esActivo)
+            throw new ValidarEmpleadoException("El empleado no se encuentra activo.");
+        
+        // Valida si no se le ha generado otra nómina hace poco tiempo al empleado.
         boolean periodoValido = new ControlValidarEmpleado().validarPeriodoNomina(empleado);
+        if(!periodoValido)
+            throw new ValidarEmpleadoException("Ya se le ha generado una nómina al empleado recibido, hace menos de 5 días.");
+        
+        // Valida si el empleado ha sido lo suficientemente puntual.
         boolean asistencia = new ControlValidarEmpleado().validarPorcentajeAsistencias(empleado);
-        return esActivo && asistencia && periodoValido;
+        if(!asistencia)
+            throw new ValidarEmpleadoException("El empleado no ha cumplido con al menos el 80% de asistencias en el período de su nómina.");
+        
+        // Regresa verdadero si pasa todas las validaciones.
+        return true;
     }
 }

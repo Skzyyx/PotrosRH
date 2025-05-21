@@ -187,7 +187,6 @@ PanelesReportes\DescripcionIncidente$5.class
 PanelesReportes\ImpactoIncidente$1.class
 PanelesReportes\DatosGenerales$2.class
 PanelesCasoBase\LogIn$2.class
-PanelesDespidos\PrevisualizarEmpleadoDespedir$7.class
 PanelesRegistrarAsistencia\RegistrarEntrada$2.class
 PanelesRegistroEmpleado\CapturarDatosContrato$7.class
 Controles\ControlCampos.class
