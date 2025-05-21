@@ -55,7 +55,9 @@ public class GenerarNomina implements IGenerarNomina {
      * @throws GenerarNominaException Si el empleado es nulo o no está activo.
      */
     @Override
-    public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {return control.generarNomina(empleado);}
+    public NominaDTO generarNomina(EmpleadoDTO empleado) throws GenerarNominaException {
+        return control.generarNomina(empleado);
+    }
 
     /**
      * Guarda la nómina generada en la base de datos y envía un correo al

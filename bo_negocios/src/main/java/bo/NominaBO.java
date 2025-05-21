@@ -1,5 +1,6 @@
 package bo;
 
+import DAO.ContratoDAO;
 import DAO.EmpleadoDAO;
 import DAO.NominaDAO;
 import DAO.RegistroAsistenciaDAO;
@@ -7,6 +8,7 @@ import Entidades.Empleado;
 import Enums.DiaSemana;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
+import Interfaces.IContratoDAO;
 import Interfaces.IEmpleadoDAO;
 import Interfaces.INominaBO;
 import Interfaces.INominaDAO;
@@ -36,7 +38,7 @@ public class NominaBO implements INominaBO {
     // Atributo DAO para operaciones CRUD con Nóminas.
     private static final INominaDAO nominaDAO = new NominaDAO();
     private static final IRegistroAsistenciaDAO asistenciaDAO = new RegistroAsistenciaDAO();
-    private static final IEmpleadoDAO empleadoDAO= new EmpleadoDAO();
+    private static final IContratoDAO contratoDAO = new ContratoDAO();
     /**
      * Constructor por defecto.
      */
@@ -86,12 +88,38 @@ public class NominaBO implements INominaBO {
             
             // Se obtiene la fecha de la última nómina del empleado.
             LocalDate fechaInicio = nominaDAO.obtenerFechaUltimaNomina(empleadoId);
+            
+            // Si el empleado todavía no tiene nóminas asociadas, primero se busca su fecha de inicio de su contrato.
+            if(fechaInicio == null)
+                fechaInicio = contratoDAO.obtenerFechaInicioContrato(empleadoId);
+            
+            // Si el empleado tampoco tiene una fecha de inicio del contrato (no debería pasar)
+            if(fechaInicio == null)
+                throw new ObjetosNegocioException("El empleado no tiene un contrato asociado. Contacte a su gerente para evaluar esta anomalía.");
+            
+            /*
+                Se obtiene la fecha que teóricamente debería ser su primer día de trabajo, ya que
+                la fecha de inicio del contrato podría no ser necesariamente su primer día de
+                trabajo.
+            */
+            fechaInicio = obtenerFechaPrimerDiaTrabajoEsperado(empleado, fechaInicio);
+            
+            // Si se retorna null, quiere decir que el empleado no tiene un horario laboral (tampoco no debería pasar)
+            if(fechaInicio == null)
+                throw new ObjetosNegocioException("El empleado asociado no tiene un horario laboral. Contacte a su gerente para evaluar esta anomalía.");
+            
             // Se calculan las horas esperadas
             Double horasEsperadas = calcularHorasEsperadas(empleado, fechaInicio);
             // Se obtiene la cantidad de días trabajados del empleado.
             Integer diasTrabajados = asistenciaDAO.obtenerDiasTrabajados(empleadoId, fechaInicio);
+            
+            // Se verifica que el empleado sí trabajó.
+            if(diasTrabajados == null)
+                throw new ObjetosNegocioException("El empleado no ha asistido ningún día a trabajar.");
+            
             // Se obtiene la cantidad de horas trabajadas.
             Double horasTrabajadas = asistenciaDAO.obtenerHorasTrabajadas(empleadoId, fechaInicio);
+            
             // Se calculan las horas extra.
             Double horasExtra = horasTrabajadas - horasEsperadas;
             
@@ -164,12 +192,13 @@ public class NominaBO implements INominaBO {
     /**
      * Calcula las horas esperadas de un empleado, a partir 
      * de su horario laboral y la fecha de inicio, que se
-     * espera que sea de la última nómina o de su primer
+     * espera que sea de la última nómina o la de su primer
      * día esperado de trabajo.
      * @param empleado Empleado asociado a la nómina.
      * @param fechaInicio Fecha de inicio del período de la nómina.
+     * @return Horas esperadas de trabajo del empleado, de acuerdo al período.
      */
-    private double calcularHorasEsperadas(EmpleadoDTO empleado, LocalDate fechaInicio){
+    public double calcularHorasEsperadas(EmpleadoDTO empleado, LocalDate fechaInicio){
         // Fecha actual, para establecer el período de las horas esperadas.
         LocalDate fechaActual = LocalDate.now();
         // Se extrae el horario laboral completo del empleado.
@@ -178,14 +207,58 @@ public class NominaBO implements INominaBO {
         double horasEsperadas = 0.0;
         // Itera sobre el período, añadiendo las horas de cada día laboral
         do{
+            // Recorre cada día laboral del empleado.
             for(HorarioLaboralDTO diaLaboral : horario){
-                if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaActual.getDayOfWeek().getValue() ){
+                // Si el día coincide con el de la fecha de inicio, se suman sus horas al acumulador.
+                if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaInicio.getDayOfWeek().getValue() ){
                     Duration duracion = Duration.between(diaLaboral.getHoraInicioTurno(), diaLaboral.getHoraFinTurno());
                     horasEsperadas += duracion.toSeconds() / 3600;
                 }
-                fechaActual.plusDays(1);
+                // Pasa al día siguiente del período.
+                fechaInicio.plusDays(1);
             }
+        // Mientras la fecha que se está iterando no sea la misma que la actual.
         } while(!fechaInicio.isEqual(fechaActual));
+        
         return horasEsperadas;
+    }
+    
+    /**
+     * Al no contar con un atributo especial en alguna entidad, y suponiendo que el empleado
+     * falte a su primer día de trabajo, se obtiene la fecha en la que debería haber trabajado
+     * por primera vez. Esto se hace al tomar el primer día del horario laboral del empleado
+     * que se ubique dentro el período, tomando como límite superior la fecha actual, y como
+     * límite inferior la fecha de inicio del contrato del empleado. ¿Se podría considerar
+     * una mexicanada?
+     * @param empleado Empleado, con su horario laboral completo.
+     * @param fechaInicioContrato Fecha de inicio del contrato del empleado.
+     * @return Fecha del primero día de trabajo del empleado.
+     */
+    public LocalDate obtenerFechaPrimerDiaTrabajoEsperado(EmpleadoDTO empleado, LocalDate fechaInicioContrato){
+        // Fecha actual, para establecer el límite superior.
+        LocalDate fechaActual = LocalDate.now();
+        // Se extrae el horario laboral completo
+        List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
+        // Almacenará la fecha que se espera sea el primer día de 
+        LocalDate fechaPrimerDiaTrabajoEsperado = null;
+        // Itera sobre el período
+        do{
+            // Recorre cada día laboral del empleado.
+            for(HorarioLaboralDTO diaLaboral : horario){
+                /*
+                    Si el día coincide con el de la fecha de inicio del contrato, 
+                    se agrega dicha fecha a la variable fechaPrimerDiaTrabajoEsperado y se sale del ciclo.
+                */
+                if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaInicioContrato.getDayOfWeek().getValue() ){
+                    fechaPrimerDiaTrabajoEsperado = fechaInicioContrato;
+                    break;
+                }
+                // Pasa al día siguiente del período.
+                fechaInicioContrato.plusDays(1);
+            }
+        // Mientras la fecha que se está iterando no sea la misma que la actual.
+        } while(!fechaInicioContrato.isEqual(fechaActual));
+        
+        return fechaPrimerDiaTrabajoEsperado;
     }
 }
