@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 /**
- *
- * @author skyro
+ * Plantilla de un correo electrónico.
+ * @author Leonardo Flores Leyva (252390)
+ * @author José Alfredo Guzmán Moreno (252524)
+ * @author Jesús Ernesto López Ibarra (252663)
+ * @author José Luis Islas Molina (252574)
+ * @author Benjamin Soto Coronado (253183)
  */
 public class PlantillaCorreo {
     
@@ -17,13 +21,9 @@ public class PlantillaCorreo {
         this.bodyTemplate = bodyTemplate;
     }
 
-    public String getSubject(Map<String, Object> values) {
-        return replacePlaceholders(subjectTemplate, values);
-    }
+    public String getSubject(Map<String, Object> values) {return replacePlaceholders(subjectTemplate, values);}
 
-    public String getBody(Map<String, Object> values) {
-        return replacePlaceholders(bodyTemplate, values);
-    }
+    public String getBody(Map<String, Object> values) {return replacePlaceholders(bodyTemplate, values);}
 
     private String replacePlaceholders(String template, Map<String, Object> values) {
         String result = template;

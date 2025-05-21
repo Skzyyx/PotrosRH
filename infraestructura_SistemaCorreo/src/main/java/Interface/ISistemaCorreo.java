@@ -2,15 +2,7 @@ package Interface;
 
 
 import Excepciones.CorreoException;
-import SistemaCorreo.PlantillaCorreo;
 import dto.CorreoDTO;
-import java.util.Map;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
-
 /**
  * Clase que se encarga del envío de correos electrónicos.
  * @author Leonardo Flores Leyva (252390)
@@ -22,14 +14,18 @@ import java.util.Map;
 public interface ISistemaCorreo {
     
     /**
-     * Envía un correo electrónico con los detalles del recibo de nómina de un empleado.
-     * 
+     * Envía un correo electrónico.
      * @param correo DTO que contiene los datos necesarios para enviar el correo.
      * @throws CorreoException Si ocurre un error al enviar el correo.
-     * 
      * @return true si se logra el envío.
      */
     boolean sendEmail(CorreoDTO correo) throws CorreoException;
-    
+    /**
+     * Envia un correo electrónico con un PDF asociado.
+     * @param correo CorreoDTO, con el correo electrónico del destinatario.
+     * @param bytesPdf Datos del PDF a enviar.
+     * @return VERDADERO si el envío fue exitoso, FALSO en caso contrario.
+     * @throws CorreoException Excepción de Infraestructura.
+     */
     boolean sendEmail(CorreoDTO correo, byte[] bytesPdf) throws CorreoException;
 }

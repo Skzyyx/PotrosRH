@@ -9,7 +9,6 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import java.util.Map;
 import java.util.Properties;
 import Interface.ISistemaCorreo;
 import dto.CorreoDTO;
@@ -22,7 +21,6 @@ import jakarta.mail.util.ByteArrayDataSource;
 
 /**
  * Clase que se encarga del envío de correos electrónicos.
- *
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
