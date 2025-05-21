@@ -26,12 +26,15 @@ import java.time.format.DateTimeFormatter;
  * @author INSPIRON
  */
 public class RegistrarSalida extends javax.swing.JPanel {
-
+    private EmpleadoDTO empleadoEncontrado;
+    private final ControlAsistencia control;
     /**
      * Creates new form SubmenuRegistrarAsistencia
      */
     public RegistrarSalida() {
         initComponents();
+        control = ControlAsistencia.getInstance();
+        ocultarTodo();
     }
 
     /**
@@ -44,7 +47,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        txtRfcRegistrarEntrada = new javax.swing.JTextField();
+        txtRfcRegistrarSalida = new javax.swing.JTextField();
         btnBuscarEmpleado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jlblNombreEmpleado = new javax.swing.JLabel();
@@ -65,10 +68,10 @@ public class RegistrarSalida extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ingresar el RFC del empleado:");
 
-        txtRfcRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        txtRfcRegistrarEntrada.addActionListener(new java.awt.event.ActionListener() {
+        txtRfcRegistrarSalida.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtRfcRegistrarSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRfcRegistrarEntradaActionPerformed(evt);
+                txtRfcRegistrarSalidaActionPerformed(evt);
             }
         });
 
@@ -138,7 +141,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRfcRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRfcRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -173,7 +176,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtRfcRegistrarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtRfcRegistrarSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(btnBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -200,11 +203,11 @@ public class RegistrarSalida extends javax.swing.JPanel {
                 .addGap(40, 40, 40))
         );
 
-        txtRfcRegistrarEntrada.setToolTipText("Ingrese el RFC.");
-        txtRfcRegistrarEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-        txtRfcRegistrarEntrada.setOpaque(false); // Hace que el fondo predeterminado no se pinte
-        txtRfcRegistrarEntrada.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Margen interno para el texto
-        txtRfcRegistrarEntrada.setUI(new BasicTextFieldUI() {
+        txtRfcRegistrarSalida.setToolTipText("Ingrese el RFC.");
+        txtRfcRegistrarSalida.setHorizontalAlignment(SwingConstants.CENTER);
+        txtRfcRegistrarSalida.setOpaque(false); // Hace que el fondo predeterminado no se pinte
+        txtRfcRegistrarSalida.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Margen interno para el texto
+        txtRfcRegistrarSalida.setUI(new BasicTextFieldUI() {
             @Override
             protected void paintSafely(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -213,8 +216,8 @@ public class RegistrarSalida extends javax.swing.JPanel {
                 int arc = 50; // Radio de redondeo
 
                 // Dibujar fondo redondeado
-                g2.setColor(txtRfcRegistrarEntrada.getBackground());
-                g2.fill(new RoundRectangle2D.Float(0, 0, txtRfcRegistrarEntrada.getWidth(), txtRfcRegistrarEntrada.getHeight(), arc, arc));
+                g2.setColor(txtRfcRegistrarSalida.getBackground());
+                g2.fill(new RoundRectangle2D.Float(0, 0, txtRfcRegistrarSalida.getWidth(), txtRfcRegistrarSalida.getHeight(), arc, arc));
 
                 g2.dispose();
 
@@ -229,12 +232,35 @@ public class RegistrarSalida extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRfcRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcRegistrarEntradaActionPerformed
+    private void txtRfcRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcRegistrarSalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtRfcRegistrarEntradaActionPerformed
+    }//GEN-LAST:event_txtRfcRegistrarSalidaActionPerformed
 
     private void btnRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSalidaActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Validar que tenemos un empleado
+            if (this.empleadoEncontrado == null) {
+                JOptionPane.showMessageDialog(this, "Primero busque un empleado válido", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            boolean registroExitoso = control.registrarSalida(
+                this.empleadoEncontrado,  
+                LocalDate.now(),
+                LocalTime.now()
+            );
+            
+            if (registroExitoso) {
+                JOptionPane.showMessageDialog(this, "Salida registrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                resetearFormulario();
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "No se pudo registrar la salida. Verifique que el empleado haya registrado entrada hoy.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (PresentacionException ex) {
+            JOptionPane.showMessageDialog(this, "Error al registrar salida: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarSalidaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -243,7 +269,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
 
     private void btnBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoActionPerformed
         try {
-            String rfc = txtRfcRegistrarEntrada.getText().trim();
+            String rfc = txtRfcRegistrarSalida.getText().trim();
 
             if (rfc.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Favor de ingresar un rfc", "Error", JOptionPane.ERROR_MESSAGE);
@@ -312,6 +338,13 @@ public class RegistrarSalida extends javax.swing.JPanel {
         btnRegistrarSalida.setVisible(false);
         btnCancelar.setVisible(false);
     }
+    
+    private void resetearFormulario() {
+        this.empleadoEncontrado = null;
+        txtRfcRegistrarSalida.setText("");
+        ocultarTodo();
+        btnRegistrarSalida.setEnabled(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnCancelar;
@@ -325,6 +358,6 @@ public class RegistrarSalida extends javax.swing.JPanel {
     private javax.swing.JLabel jlblHoraDeSalida;
     private javax.swing.JLabel jlblHoraDeSalidaEsperada;
     private javax.swing.JLabel jlblNombreEmpleado;
-    private javax.swing.JTextField txtRfcRegistrarEntrada;
+    private javax.swing.JTextField txtRfcRegistrarSalida;
     // End of variables declaration//GEN-END:variables
 }
