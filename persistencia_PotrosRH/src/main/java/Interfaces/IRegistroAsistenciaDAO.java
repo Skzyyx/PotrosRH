@@ -17,21 +17,23 @@ public interface IRegistroAsistenciaDAO {
     /**
      * Obtiene los días trabajados de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
-     * el día de hoy. Se utiliza para generar nuevas nóminas.
+     * el día de hoy.Se utiliza para generar nuevas nóminas.
      * @param empleado Empleado del cual de desea obtener sus cantidad de días trabajados.
+     * @param fechaInicio Fecha de inicio del período de trabajo.
      * @return Número de días trabajados, desde su última nómina generada.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
-    public Integer obtenerDiasTrabajados(Empleado empleado) throws AccesoDatosException;
+    public Integer obtenerDiasTrabajados(Empleado empleado, LocalDate fechaInicio) throws AccesoDatosException;
     /**
      * Obtiene las horas trabajadas de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
-     * el día de hoy. Se utiliza para generar nuevas nóminas.
+     * el día de hoy.Se utiliza para generar nuevas nóminas.
      * @param empleado Empleado del cual de desea obtener sus cantidad de horas trabajadas.
+     * @param fechaInicio Fecha de inicio del período de trabajo.
      * @return Horas trabajadas del empleado, desde su última nómina generada.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
-    public Integer obtenerHorasTrabajadas(Empleado empleado) throws AccesoDatosException;
+    public Double obtenerHorasTrabajadas(Empleado empleado, LocalDate fechaInicio) throws AccesoDatosException;
     /**
      * Obtiene la fecha del primer día de trabajo de un empleado, 
      * el cual vendría siendo su primer registro de asistencia.

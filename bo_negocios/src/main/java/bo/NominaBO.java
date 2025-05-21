@@ -75,22 +75,44 @@ public class NominaBO implements INominaBO {
     @Override
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws ObjetosNegocioException {
         
-        if (empleado == null) 
+        if (!(empleado != null && empleado.getId() != null))
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         
-        
-        
-        NominaDTO nomina = new NominaDTO();
-        nomina.setEmpleadoId(empleado.getId());
-        nomina.setBono(0.0);
-        nomina.setIsr(calcularISR(empleado.getSalarioBase(), 14));
-        nomina.setDiasTrabajados(14);
-        nomina.setSalarioBruto(empleado.getSalarioBase());
-        nomina.setSalarioNeto(empleado.getSalarioBase()- nomina.getIsr());
-        nomina.setFechaCorte(LocalDate.now());
-        nomina.setHorasTrabajadas(40.0);
-        nomina.setHorasExtra(5.0);
-        return nomina;
+        try {
+            
+            //Se extrae el ID del empleado
+            Empleado empleadoId = new Empleado();
+            empleadoId.setId(new ObjectId(empleado.getId()));
+            
+            // Se obtiene la fecha de la última nómina del empleado.
+            LocalDate fechaInicio = nominaDAO.obtenerFechaUltimaNomina(empleadoId);
+            // Se calculan las horas esperadas
+            Double horasEsperadas = calcularHorasEsperadas(empleado, fechaInicio);
+            // Se obtiene la cantidad de días trabajados del empleado.
+            Integer diasTrabajados = asistenciaDAO.obtenerDiasTrabajados(empleadoId, fechaInicio);
+            // Se obtiene la cantidad de horas trabajadas.
+            Double horasTrabajadas = asistenciaDAO.obtenerHorasTrabajadas(empleadoId, fechaInicio);
+            // Se calculan las horas extra.
+            Double horasExtra = horasTrabajadas - horasEsperadas;
+            
+            NominaDTO nomina = new NominaDTO();
+            nomina.setEmpleadoId(empleado.getId());
+            nomina.setBono(0.0);
+            nomina.setDiasTrabajados(diasTrabajados);
+            nomina.setIsr(calcularISR(empleado.getSalarioBase(), diasTrabajados));
+            nomina.setSalarioBruto(empleado.getSalarioBase() * diasTrabajados);
+            nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());
+            nomina.setFechaCorte(LocalDate.now());
+            nomina.setHorasTrabajadas(horasTrabajadas);
+            if(horasExtra > 0.0)
+                nomina.setHorasExtra(horasExtra);
+            else
+                nomina.setHorasExtra(null);
+            return nomina;
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ObjetosNegocioException(ex.getMessage(), ex);
+        }
     } 
     
     /**
@@ -141,36 +163,29 @@ public class NominaBO implements INominaBO {
     }
     /**
      * Calcula las horas esperadas de un empleado, a partir 
-     * de su horario laboral y la fecha de su última nómina.
-     * @param empleado 
+     * de su horario laboral y la fecha de inicio, que se
+     * espera que sea de la última nómina o de su primer
+     * día esperado de trabajo.
+     * @param empleado Empleado asociado a la nómina.
+     * @param fechaInicio Fecha de inicio del período de la nómina.
      */
-    private double calcularHorasEsperadas(EmpleadoDTO empleado) throws ObjetosNegocioException{
-        //Se extrae el ID del empleado
-        Empleado empleadoId = new Empleado();
-        empleadoId.setId(new ObjectId(empleado.getId()));
-        try {
-            // Se obtiene la fecha de la última nómina del empleado.
-            LocalDate fechaInicio = nominaDAO.obtenerFechaUltimaNomina(empleadoId);
-            // Fecha actual, para establecer el período de las horas esperadas.
-            LocalDate fechaActual = LocalDate.now();
-            // Se extrae el horario laboral completo del empleado.
-            List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
-            // Acumulador de las horas esperadas.
-            double horasEsperadas = 0.0;
-            // Itera sobre el período, añadiendo las horas de cada día laboral
-            do{
-                for(HorarioLaboralDTO diaLaboral : horario){
-                    if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaActual.getDayOfWeek().getValue() ){
-                        Duration duracion = Duration.between(diaLaboral.getHoraInicioTurno(), diaLaboral.getHoraFinTurno());
-                        horasEsperadas += duracion.toSeconds() / 3600;
-                    }
-                    fechaActual.plusDays(1);
+    private double calcularHorasEsperadas(EmpleadoDTO empleado, LocalDate fechaInicio){
+        // Fecha actual, para establecer el período de las horas esperadas.
+        LocalDate fechaActual = LocalDate.now();
+        // Se extrae el horario laboral completo del empleado.
+        List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
+        // Acumulador de las horas esperadas.
+        double horasEsperadas = 0.0;
+        // Itera sobre el período, añadiendo las horas de cada día laboral
+        do{
+            for(HorarioLaboralDTO diaLaboral : horario){
+                if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaActual.getDayOfWeek().getValue() ){
+                    Duration duracion = Duration.between(diaLaboral.getHoraInicioTurno(), diaLaboral.getHoraFinTurno());
+                    horasEsperadas += duracion.toSeconds() / 3600;
                 }
-            } while(!fechaInicio.isEqual(fechaActual));
-            
-            return horasEsperadas;
-        } catch (AccesoDatosException e) {
-            throw new ObjetosNegocioException("Sucedió un error al procesar la nómina. Inténtelo de nuevo más tarde o contacte a su técnico.");
-        }
+                fechaActual.plusDays(1);
+            }
+        } while(!fechaInicio.isEqual(fechaActual));
+        return horasEsperadas;
     }
 }

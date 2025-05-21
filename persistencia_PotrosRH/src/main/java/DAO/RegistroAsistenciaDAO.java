@@ -50,31 +50,21 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     /**
      * Obtiene los días trabajados de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
-     * el día de hoy. Se utiliza para generar nuevas nóminas.
+     * el día de hoy.Se utiliza para generar nuevas nóminas.
      * @param empleado Empleado del cual de desea obtener sus cantidad de días trabajados.
+     * @param fechaInicio Fecha de inicio del período de trabajo.
      * @return Número de días trabajados, desde su última nómina generada.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     @Override
-    
-    public Integer obtenerDiasTrabajados(Empleado empleado) throws AccesoDatosException {
+    public Integer obtenerDiasTrabajados(Empleado empleado, LocalDate fechaInicio) throws AccesoDatosException {
     try {
+        
         ObjectId empleadoId = empleado.getId();
-
-        // Obtener la fecha de corte más reciente
-        Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
-        Nomina ultimaNomina = NominaCollection
-            .find(filtroNomina)
-            .sort(Sorts.descending("fechaCorte"))
-            .limit(1)
-            .first();
-
-        LocalDate fechaInicio = (ultimaNomina != null) ? ultimaNomina.getFechaCorte() : LocalDate.MIN;
-
-  
+        
         Bson filtroAsistencias = Filters.and(
             Filters.eq("empleadoId", empleadoId),
-            Filters.gt("fechaAsistencia", fechaInicio)
+            Filters.gte("fechaAsistencia", fechaInicio)
         );
 
         List<RegistroAsistencia> asistencias = RegistroAsistenciaCollection
@@ -87,41 +77,30 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
 
         return diasUnicos.size();
 
-    } catch (Exception e) {
-        throw new AccesoDatosException("Error al obtener días trabajados", e);
-    }
+    } catch (Exception e) {throw new AccesoDatosException("Error al obtener días trabajados", e);}
 }
 
     /**
      * Obtiene las horas trabajadas de un empleado, cuyo período de tiempo
      * se ubica entre el día de la última nómina generada, hasta
-     * el día de hoy. Se utiliza para generar nuevas nóminas.
+     * el día de hoy.Se utiliza para generar nuevas nóminas.
      * @param empleado Empleado del cual de desea obtener sus cantidad de horas trabajadas.
+     * @param fechaInicio Fecha de inicio del período de trabajo.
      * @return Horas trabajadas del empleado, desde su última nómina generada.
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     @Override
-    public Integer obtenerHorasTrabajadas(Empleado empleado) throws AccesoDatosException {
+    public Double obtenerHorasTrabajadas(Empleado empleado, LocalDate fechaInicio) throws AccesoDatosException {
         try {
+            
             ObjectId empleadoId = empleado.getId();
-
-            Bson filtroNomina = Filters.eq("empleado_id", empleadoId);
-            Nomina ultimaNomina = NominaCollection
-                .find(filtroNomina)
-                .sort(Sorts.descending("fechaCorte"))
-                .limit(1)
-                .first();
-
-            LocalDate fechaInicio = (ultimaNomina != null)
-                ? ultimaNomina.getFechaCorte()
-                : LocalDate.now().withDayOfMonth(1);
 
             List<Bson> pipeline = Arrays.asList(
                 Aggregates.match(Filters.and(
                     Filters.eq("empleadoId", empleadoId),
                     Filters.gte("fechaHoraEntrada", fechaInicio.atStartOfDay()),
                     Filters.ne("fechaHoraSalida", null),
-                    Filters.expr(new Document("$gt", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
+                    Filters.expr(new Document("$gte", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
                 )),
                 Aggregates.addFields(new Field<>("horasTrabajadas", 
                     new Document("$divide", Arrays.asList(
@@ -142,12 +121,11 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
                 .aggregate(pipeline, Document.class) 
                 .first();
 
-                double horas = resultado.getDouble("totalHoras");
-                return (int) Math.round(horas);
-                
-        } catch (Exception e) {
-            throw new AccesoDatosException("Error al obtener las horas trabajadas", e);
-        }
+            double horas = resultado.getDouble("totalHoras");
+            
+            return horas;
+            
+        } catch (Exception e) {throw new AccesoDatosException("Error al obtener las horas trabajadas", e);}
     }
     /**
      * Obtiene la fecha del primer día de trabajo de un empleado, 
@@ -174,9 +152,7 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
                 return null; 
             }
 
-        } catch (Exception e) {
-            throw new AccesoDatosException("Error al obtener la fecha del primer día de trabajo del empleado", e);
-        }
+        } catch (Exception e) {throw new AccesoDatosException("Error al obtener la fecha del primer día de trabajo del empleado", e);}
     }
     
     @Override
