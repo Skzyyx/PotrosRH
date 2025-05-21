@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mappers.EmpleadoMapper;
 import org.bson.types.ObjectId;
 
 /**
@@ -41,9 +42,7 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         if(empleado.getRfc() == null)
             throw new ObjetosNegocioException("El RFC del empleado no puede estar vacío.");
         try{
-            Empleado empleadoRegistrarEntrada = new Empleado();
-            empleadoRegistrarEntrada.setRfc(empleado.getRfc());
-            return registroAsistenciaDAO.registrarEntrada(empleadoRegistrarEntrada, fechaAsistencia, horaEntrada);
+            return registroAsistenciaDAO.registrarEntrada(EmpleadoMapper.toEntityViejo(empleado), fechaAsistencia, horaEntrada);
         } catch (AccesoDatosException ex) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);
@@ -58,9 +57,7 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         if(empleado.getRfc() == null)
             throw new ObjetosNegocioException("El RFC del empleado no puede estar vacío.");
         try{
-            Empleado empleadoRegistrarEntrada = new Empleado();
-            empleadoRegistrarEntrada.setRfc(empleado.getRfc());
-            return registroAsistenciaDAO.registrarSalida(empleadoRegistrarEntrada, fechaAsistencia, horaSalida);
+            return registroAsistenciaDAO.registrarSalida(EmpleadoMapper.toEntityViejo(empleado), fechaAsistencia, horaSalida);
         } catch (AccesoDatosException ex) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);

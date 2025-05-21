@@ -19,8 +19,9 @@ import java.time.LocalTime;
 public class RegistrarAsistencia implements IRegistrarAsistencia{
     private static RegistrarAsistencia instance;
     private static ControlRegistrarAsistencia control;
-    public RegistrarAsistencia() {
-        
+    
+    private RegistrarAsistencia() {
+        control = new ControlRegistrarAsistencia();
     }
     
     public static synchronized IRegistrarAsistencia getInstance() {

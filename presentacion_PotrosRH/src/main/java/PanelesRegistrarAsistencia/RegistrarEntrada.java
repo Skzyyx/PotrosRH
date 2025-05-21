@@ -251,7 +251,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 LocalDate.now(),
                 LocalTime.now()
             );
-            
             if (registroExitoso) {
                 JOptionPane.showMessageDialog(this, "Entrada registrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 resetearFormulario();
@@ -278,9 +277,12 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
-
+            
             this.empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
-
+            if(!control.validarHorarioLaboral(empleadoEncontrado, LocalDate.now())){
+                JOptionPane.showMessageDialog(this, "Este empleado no tiene asignado este dia en su horario", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (empleadoEncontrado != null) {
                 mostrarTodo();
                 jlblNombreEmpleado.setText(empleadoEncontrado.getNombre()+" "+empleadoEncontrado.getApellidoPaterno()+" "+empleadoEncontrado.getApellidoMaterno());
@@ -290,11 +292,10 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                     LocalDate.now()
                 );
 
-                if (horario != null) {
                     jlblHoraDeEntradaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
-                } else {
+
                     jlblHoraDeEntradaEsperada.setText("No registrado");
-                }
+                
 
                 btnRegistrarEntrada.setEnabled(true);
             } else {
@@ -329,8 +330,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         jlblHoraDeEntrada.setVisible(true);
         btnRegistrarEntrada.setVisible(true);
         btnCancelar.setVisible(true);
-
-        // Actualizar fecha y hora en el momento de mostrar
         jlblFechaActual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         jlblHoraDeEntrada.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
     }

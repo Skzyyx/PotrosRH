@@ -15,6 +15,7 @@ import dto.HorarioLaboralDTO;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mappers.EmpleadoMapper;
 import mappers.HorarioLaboralMapper;
 
 /**
@@ -43,10 +44,10 @@ public class HorarioLaboralBO implements IHorarioLaboralBO{
         
         if(empleado.getRfc() == null)
             throw new ObjetosNegocioException("El RFC del empleado no puede estar vacío.");
+        if(empleado.getHorariosLaborales()==null)
+            throw new ObjetosNegocioException("El empleado no tiene horarios laborales asignados:");
         try{
-            Empleado empleadoValidar = new Empleado();
-            empleadoValidar.setRfc(empleado.getRfc());
-            return horarioLaboralDAO.validarHorarioLaboral(empleadoValidar, fechaAsistencia);
+            return horarioLaboralDAO.validarHorarioLaboral(EmpleadoMapper.toEntityViejo(empleado), fechaAsistencia);
         } catch (AccesoDatosException ex) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);
@@ -61,10 +62,10 @@ public class HorarioLaboralBO implements IHorarioLaboralBO{
         
         if(empleado.getRfc() == null)
             throw new ObjetosNegocioException("El RFC del empleado no puede estar vacío.");
+        if(empleado.getHorariosLaborales()==null)
+            throw new ObjetosNegocioException("El empleado no tiene horarios laborales asignados:");
         try{
-            Empleado empleadoObtener = new Empleado();
-            empleadoObtener.setRfc(empleado.getRfc());
-            return HorarioLaboralMapper.toDTO(horarioLaboralDAO.obtenerDetallesHorarioLaboralDia(empleadoObtener, fechaAsistencia));
+            return HorarioLaboralMapper.toDTO(horarioLaboralDAO.obtenerDetallesHorarioLaboralDia(EmpleadoMapper.toEntityViejo(empleado), fechaAsistencia));
         }catch (AccesoDatosException ex) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);

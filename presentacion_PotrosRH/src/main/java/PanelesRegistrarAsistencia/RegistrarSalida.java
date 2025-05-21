@@ -238,7 +238,6 @@ public class RegistrarSalida extends javax.swing.JPanel {
 
     private void btnRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarSalidaActionPerformed
         try {
-            // Validar que tenemos un empleado
             if (this.empleadoEncontrado == null) {
                 JOptionPane.showMessageDialog(this, "Primero busque un empleado válido", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -281,7 +280,10 @@ public class RegistrarSalida extends javax.swing.JPanel {
 
             ControlAsistencia control = ControlAsistencia.getInstance();
             EmpleadoDTO empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
-
+            if(!control.validarHorarioLaboral(empleadoEncontrado, LocalDate.now())){
+                JOptionPane.showMessageDialog(this, "Este empleado no tiene asignado este dia en su horario", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (empleadoEncontrado != null) {
                 mostrarTodo();
                 jlblNombreEmpleado.setText(empleadoEncontrado.getNombre()+" "+empleadoEncontrado.getApellidoPaterno()+" "+empleadoEncontrado.getApellidoMaterno());
@@ -290,12 +292,9 @@ public class RegistrarSalida extends javax.swing.JPanel {
                     empleadoEncontrado, 
                     LocalDate.now()
                 );
-
-                if (horario != null) {
-                    jlblHoraDeSalidaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
-                } else {
-                    jlblHoraDeSalidaEsperada.setText("No registrado");
-                }
+                
+                jlblHoraDeSalidaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
+    
 
                 btnRegistrarSalida.setEnabled(true);
             } else {
@@ -335,15 +334,12 @@ public class RegistrarSalida extends javax.swing.JPanel {
         jlblHoraDeSalidaEsperada.setVisible(false);
         jLabel5.setVisible(false);
         jlblHoraDeSalida.setVisible(false);
-        btnRegistrarSalida.setVisible(false);
-        btnCancelar.setVisible(false);
     }
     
     private void resetearFormulario() {
         this.empleadoEncontrado = null;
         txtRfcRegistrarSalida.setText("");
         ocultarTodo();
-        btnRegistrarSalida.setEnabled(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
