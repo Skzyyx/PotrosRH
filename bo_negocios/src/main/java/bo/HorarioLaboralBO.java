@@ -5,7 +5,6 @@
 package bo;
 
 import DAO.HorarioLaboralDAO;
-import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interfaces.IHorarioLaboralBO;

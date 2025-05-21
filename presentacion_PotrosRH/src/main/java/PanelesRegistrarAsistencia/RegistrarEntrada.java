@@ -293,8 +293,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 );
 
                     jlblHoraDeEntradaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
-
-                    jlblHoraDeEntradaEsperada.setText("No registrado");
                 
 
                 btnRegistrarEntrada.setEnabled(true);

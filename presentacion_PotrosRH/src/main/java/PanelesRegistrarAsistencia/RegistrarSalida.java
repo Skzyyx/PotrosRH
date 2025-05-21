@@ -277,9 +277,8 @@ public class RegistrarSalida extends javax.swing.JPanel {
 
             EmpleadoDTO empleado = new EmpleadoDTO();
             empleado.setRfc(rfc);
-
-            ControlAsistencia control = ControlAsistencia.getInstance();
-            EmpleadoDTO empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
+            
+            this.empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
             if(!control.validarHorarioLaboral(empleadoEncontrado, LocalDate.now())){
                 JOptionPane.showMessageDialog(this, "Este empleado no tiene asignado este dia en su horario", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -293,7 +292,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
                     LocalDate.now()
                 );
                 
-                jlblHoraDeSalidaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
+                jlblHoraDeSalidaEsperada.setText(horario.getHoraFinTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
     
 
                 btnRegistrarSalida.setEnabled(true);
