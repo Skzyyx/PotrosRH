@@ -36,6 +36,7 @@ import dto.CorreoDTO;
 import dto.HorarioLaboralDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -56,6 +57,23 @@ public class ControlGenerarContrato {
     public ContratoDTO registrarContrato(ContratoDTO contrato) throws GenerarContratoException {
         if (contrato == null) {
             throw new GenerarContratoException("El contrato no puede ser nulo.");
+        }
+        
+        for (Field field : contrato.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+
+            // Filtrar atributos que no quieres validar
+            if (field.getName().equals("id")) {
+                continue;
+            }
+
+            try {
+                if (field.get(contrato) == null) {
+                    throw new GenerarContratoException("El campo '" + field.getName() + "' no puede ser nulo.");
+                }
+            } catch (IllegalAccessException e) {
+                throw new GenerarContratoException("Error al acceder al campo: " + field.getName());
+            }
         }
 
         try {
@@ -79,7 +97,7 @@ public class ControlGenerarContrato {
         }
     }
     
-    public byte[] generarPDFContrato(ContratoDTO contrato) throws IOException {
+    private byte[] generarPDFContrato(ContratoDTO contrato) throws IOException {
         // Crear un stream para almacenar el PDF
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

@@ -20,6 +20,8 @@ public class EvaluacionMapper {
                 new ObjectId(dto.getId()),
                 dto.getFechaHoraEvaluacion(),
                 ResultadoEvaluacion.valueOf(dto.getResultado()),
+                dto.getPuntuacionesClave(),
+                dto.getNotas(),
                 CandidatoMapper.toEntityViejo(dto.getCandidato()),
                 PreguntaMapper.toEntitySet(dto.getPreguntas())
         );
@@ -29,6 +31,8 @@ public class EvaluacionMapper {
         return new Evaluacion(
                 dto.getFechaHoraEvaluacion(),
                 ResultadoEvaluacion.valueOf(dto.getResultado()),
+                dto.getPuntuacionesClave(),
+                dto.getNotas(),
                 CandidatoMapper.toEntityViejo(dto.getCandidato()),
                 PreguntaMapper.toEntitySet(dto.getPreguntas())
         );
@@ -39,6 +43,8 @@ public class EvaluacionMapper {
                 evaluacion.getId().toString(),
                 evaluacion.getFechaHoraEvaluacion(),
                 evaluacion.getResultado().toString(),
+                evaluacion.getPuntuacionesClave(),
+                evaluacion.getNotas(),
                 CandidatoMapper.toDTOViejo(evaluacion.getCandidato()),
                 PreguntaMapper.toDTOSet(evaluacion.getPreguntas())
         );

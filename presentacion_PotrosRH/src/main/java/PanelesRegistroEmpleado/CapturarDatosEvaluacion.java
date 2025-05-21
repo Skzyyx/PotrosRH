@@ -352,6 +352,8 @@ public class CapturarDatosEvaluacion extends javax.swing.JPanel {
 
             evaluacion.setCandidato(candidato);
             evaluacion.setFechaHoraEvaluacion(LocalDateTime.now());
+            evaluacion.setNotas(taNotas.getText());
+            evaluacion.setPuntuacionesClave(taPuntuacionesClave.getText());
             evaluacion.setPreguntas(obtenerPreguntas());
             ControlRegistro.getInstance().registrarEvaluacion(evaluacion);
             OptionPane.showInfoMessage(this, "Evaluación registrada exitosamente", "Éxito");

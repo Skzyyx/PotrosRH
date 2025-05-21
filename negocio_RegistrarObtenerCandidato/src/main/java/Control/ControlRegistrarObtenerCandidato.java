@@ -48,6 +48,9 @@ public class ControlRegistrarObtenerCandidato {
         
         if(!candidato.getRfc().matches("^[A-ZÑ&]{4}\\d{6}[A-Z0-9]{3}$"))
             throw new RegistrarObtenerCandidatoException("RFC con formato inválido.");
+        
+        if(!candidato.getCurp().matches("^[A-Z][AEIOU][A-Z]{2}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM](AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]\\d$"))
+                throw new RegistrarObtenerCandidatoException("CURP con formato inválido.");
         return true;
     }
     

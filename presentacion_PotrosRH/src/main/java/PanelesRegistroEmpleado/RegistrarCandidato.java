@@ -626,7 +626,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
         ControlCampos.configurarCamposTexto(tfApellidoM);
         ControlCampos.configurarCamposTexto(tfCalle);
         ControlCampos.configurarCamposTexto(tfColonia);
-        ControlCampos.configurarCamposTexto(tfExperiencia);
+        ControlCampos.configurarCamposCantidades(tfExperiencia);
         ControlCampos.configurarCamposTexto(tfHabilidadesClave);
         ControlCampos.configurarCamposTexto(tfNivelEstudio);
         ControlCampos.configurarCamposCantidades(tfNumeroCasa);

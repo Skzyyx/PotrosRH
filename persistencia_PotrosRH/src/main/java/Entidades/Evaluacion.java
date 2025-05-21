@@ -18,6 +18,8 @@ public class Evaluacion {
     private ObjectId id;
     private LocalDateTime fechaHoraEvaluacion;
     private ResultadoEvaluacion resultado;
+    private String puntuacionesClave;
+    private String notas;
     private Candidato candidato;
     private Set<Pregunta> preguntas = new HashSet<>();
 
@@ -36,17 +38,22 @@ public class Evaluacion {
      * @param candidato Candidato evaluado
      * @param preguntas Conjunto de preguntas realizadas
      */
-    public Evaluacion(ObjectId id, LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, Candidato candidato, Set<Pregunta> preguntas) {
+    
+    public Evaluacion(ObjectId id, LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, String puntuacionesClave, String notas, Candidato candidato, Set<Pregunta> preguntas) {
         this.id = id;
         this.fechaHoraEvaluacion = fechaHoraEvaluacion;
         this.resultado = resultado;
+        this.puntuacionesClave = puntuacionesClave;
+        this.notas = notas;
         this.candidato = candidato;
         this.preguntas = preguntas;
     }
 
-    public Evaluacion(LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, Candidato candidato, Set<Pregunta> preguntas) {
+    public Evaluacion(LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, String puntuacionesClave, String notas, Candidato candidato, Set<Pregunta> preguntas) {
         this.fechaHoraEvaluacion = fechaHoraEvaluacion;
         this.resultado = resultado;
+        this.puntuacionesClave = puntuacionesClave;
+        this.notas = notas;
         this.candidato = candidato;
         this.preguntas = preguntas;
     }
@@ -103,6 +110,22 @@ public class Evaluacion {
      */
     public void setResultado(ResultadoEvaluacion resultado) {
         this.resultado = resultado;
+    }
+
+    public String getPuntuacionesClave() {
+        return puntuacionesClave;
+    }
+
+    public void setPuntuacionesClave(String puntuacionesClave) {
+        this.puntuacionesClave = puntuacionesClave;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 
     /**

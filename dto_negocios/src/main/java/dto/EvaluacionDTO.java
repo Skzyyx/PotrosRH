@@ -17,16 +17,29 @@ public class EvaluacionDTO {
     private String id;
     private LocalDateTime fechaHoraEvaluacion;
     private String resultado;
+    private String puntuacionesClave;
+    private String notas;
     private CandidatoDTO candidato;
     private Set<PreguntaDTO> preguntas = new HashSet<>();
 
     public EvaluacionDTO() {
     }
 
-    public EvaluacionDTO(String id, LocalDateTime fechaHoraEvaluacion, String resultado, CandidatoDTO candidato, Set<PreguntaDTO> preguntas) {
+    public EvaluacionDTO(String id, LocalDateTime fechaHoraEvaluacion, String resultado, String puntuacionesClave, String notas, CandidatoDTO candidato, Set<PreguntaDTO> preguntas) {
         this.id = id;
         this.fechaHoraEvaluacion = fechaHoraEvaluacion;
         this.resultado = resultado;
+        this.puntuacionesClave = puntuacionesClave;
+        this.notas = notas;
+        this.candidato = candidato;
+        this.preguntas = preguntas;
+    }
+
+    public EvaluacionDTO(LocalDateTime fechaHoraEvaluacion, String resultado, String puntuacionesClave, String notas, CandidatoDTO candidato, Set<PreguntaDTO> preguntas) {
+        this.fechaHoraEvaluacion = fechaHoraEvaluacion;
+        this.resultado = resultado;
+        this.puntuacionesClave = puntuacionesClave;
+        this.notas = notas;
         this.candidato = candidato;
         this.preguntas = preguntas;
     }
@@ -53,6 +66,22 @@ public class EvaluacionDTO {
 
     public void setResultado(String resultado) {
         this.resultado = resultado;
+    }
+
+    public String getPuntuacionesClave() {
+        return puntuacionesClave;
+    }
+
+    public void setPuntuacionesClave(String puntuacionesClave) {
+        this.puntuacionesClave = puntuacionesClave;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 
     public CandidatoDTO getCandidato() {
