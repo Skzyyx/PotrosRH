@@ -8,6 +8,9 @@ import PanelesCasoBase.MenuPrincipal;
 import PanelesCasoBase.PrevisualizarEmpleado;
 import PanelesDespidos.PrevisualizarEmpleadoDespedir;
 import PanelesCasoBase.PrevisualizarNomina;
+import PanelesRegistrarAsistencia.RegistrarEntrada;
+import PanelesRegistrarAsistencia.RegistrarSalida;
+import PanelesRegistrarAsistencia.SubmenuRegistrarAsistencia;
 import PanelesReportes.AnalisisInicialEInvestigacion;
 import PanelesReportes.BuscarReporte;
 import PanelesReportes.DatosGenerales;
@@ -57,6 +60,10 @@ public class ControlFlujo {
     private static AnalisisInicialEInvestigacion analisisInicialEInvestigacion;
     private static MotivoOmisionMalaConducta motivoOmisionMalaConducta;
     private static DeterminacionCaso determinacionCaso;
+    // CU: Registrar Asitencia
+    private static SubmenuRegistrarAsistencia submenuRegistrarAsistencia;
+    private static RegistrarEntrada registrarEntrada;
+    private static RegistrarSalida registrarSalida;
     /**
     * Muestra la pantalla del menú principal de la aplicación.
     * 
@@ -339,4 +346,27 @@ public class ControlFlujo {
         confirmacionDespido.setDatosDespido(empleado, razon);
         cambiarPantalla(confirmacionDespido);
     }
+    
+    //mostrar submenu registrar asistencia
+    public static void mostrarSubmenuRegistrarAsistenia(){
+        if (submenuRegistrarAsistencia == null) {
+            submenuRegistrarAsistencia = new SubmenuRegistrarAsistencia();
+        }
+        cambiarPantalla(submenuRegistrarAsistencia);
+    }
+    
+    public static void mostrarRegistrarEntrada(){
+        if(registrarEntrada==null){
+            registrarEntrada= new RegistrarEntrada();
+        }
+        cambiarPantalla(registrarEntrada);
+    }
+    
+    public static void mostrarRegistrarSalida(){
+        if(registrarSalida==null){
+            registrarSalida= new RegistrarSalida();
+        }
+        cambiarPantalla(registrarSalida);
+    }
+    
 }

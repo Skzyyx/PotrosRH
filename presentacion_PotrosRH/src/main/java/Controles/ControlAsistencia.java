@@ -22,7 +22,6 @@ import java.time.LocalTime;
  */
 public class ControlAsistencia {
     private static ControlAsistencia instance;
-    private EmpleadoDTO empleadoDTO;
     private final IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
     private final IRegistrarAsistencia registrarAsistencia = RegistrarAsistencia.getInstance();
 
