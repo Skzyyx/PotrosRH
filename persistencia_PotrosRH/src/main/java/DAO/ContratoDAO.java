@@ -5,8 +5,8 @@
 package DAO;
 
 import Conexion.Conexion;
-import Entidades.Candidato;
 import Entidades.Contrato;
+import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
 import Interfaces.IContratoDAO;
 import com.mongodb.MongoException;
@@ -15,12 +15,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.model.Projections;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 /**
  * Esta clase implementa la interfaz IContratoDAO y proporciona métodos para
@@ -81,5 +81,29 @@ public class ContratoDAO implements IContratoDAO {
             throw new AccesoDatosException("Ocurrió un error al intentar registrar el candidato.");
         }
     }
-
+    
+    /**
+     * Obtiene la fecha de inicio del contrato de un
+     * empleado.
+     * @param empleado Empleado asociado al contrato.
+     * @return Fecha de inicio del contrato asociado al empleado.
+     * @throws AccesoDatosException Excepción de la capa de Persistencia.
+     */
+    @Override
+    public LocalDate obtenerFechaInicioContrato(Empleado empleado) throws AccesoDatosException{
+        try {
+            // Filtro para el id del empleado, asociado al contrato.
+            Bson empleadoId = Filters.eq("empleadoId", empleado.getId());
+            // Realiza la consulta y obtiene la fecha de inicio del contrato en una entidad Contrato.
+            Contrato resultado = contratosCollection.find(empleadoId).projection(Projections.include("fechaInicio")).first();
+            // Si la búsqueda fue exitosa, se extrae la fecha de inicio del contrato.
+            if(resultado != null && resultado.getFechaInicio() != null)
+                return resultado.getFechaInicio();
+            else
+                return null;
+            
+        } catch (Exception e) {
+            throw new AccesoDatosException("Error al buscar la fecha de inicio del contrato asociado al empleado.");
+        }
+    }
 }

@@ -63,7 +63,7 @@ public class NominaDAO implements INominaDAO {
                 .projection(Projections.include("fechaCorte"))
                 .sort(Sorts.descending("fechaCorte"))
                 .first();
-        if(!(fechaEncontrada != null && fechaEncontrada.getFechaCorte() != null))
+        if(fechaEncontrada != null && fechaEncontrada.getFechaCorte() != null)
             return fechaEncontrada.getFechaCorte();
         else
             return null;

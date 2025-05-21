@@ -5,7 +5,9 @@
 package Interfaces;
 
 import Entidades.Contrato;
+import Entidades.Empleado;
 import Exceptions.AccesoDatosException;
+import java.time.LocalDate;
 
 /**
  * Interfaz que define las operaciones de acceso a datos para la entidad
@@ -33,4 +35,12 @@ public interface IContratoDAO {
      * ya existe un contrato para el mismo empleado
      */
     Contrato registrarContrato(Contrato contrato) throws AccesoDatosException;
+    /**
+     * Obtiene la fecha de inicio del contrato de un
+     * empleado.
+     * @param empleado Empleado asociado al contrato.
+     * @return Fecha de inicio del contrato asociado al empleado.
+     * @throws AccesoDatosException Excepción de la capa de Persistencia.
+     */
+    public LocalDate obtenerFechaInicioContrato(Empleado empleado) throws AccesoDatosException;
 }
