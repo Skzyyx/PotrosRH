@@ -4,11 +4,21 @@
  */
 package PanelesRegistrarAsistencia;
 
+import Controles.ControlAsistencia;
+import Controles.ControlFlujo;
+import Excepciones.PresentacionException;
+import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
+import dto.HorarioLaboralDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
@@ -98,6 +108,11 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         btnBuscarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBuscarEmpleado.setText("Buscar Empleado");
+        btnBuscarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEmpleadoActionPerformed(evt);
+            }
+        });
 
         btnRegistrarEntrada.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrarEntrada.setText("Registrar Entrada");
@@ -109,6 +124,11 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -219,7 +239,78 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarEntradaActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        ControlFlujo.mostrarSubmenuRegistrarAsistenia();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoActionPerformed
+        try {
+            String rfc = txtRfcRegistrarEntrada.getText().trim();
+
+            if (rfc.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Favor de ingresar un rfc", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            EmpleadoDTO empleado = new EmpleadoDTO();
+            empleado.setRfc(rfc);
+
+            ControlAsistencia control = ControlAsistencia.getInstance();
+            EmpleadoDTO empleadoEncontrado = control.buscarEmpleadoPorRFC(empleado);
+
+            if (empleadoEncontrado != null) {
+                mostrarTodo();
+                jlblNombreEmpleado.setText(empleadoEncontrado.getNombre()+" "+empleadoEncontrado.getApellidoPaterno()+" "+empleadoEncontrado.getApellidoMaterno());
+
+                HorarioLaboralDTO horario = control.obtenerDetallesHorarioLaboralDia(
+                    empleadoEncontrado, 
+                    LocalDate.now()
+                );
+
+                if (horario != null) {
+                    jlblHoraDeEntradaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
+                } else {
+                    jlblHoraDeEntradaEsperada.setText("No registrado");
+                }
+
+                btnRegistrarEntrada.setEnabled(true);
+            } else {
+                ocultarTodo();
+                JOptionPane.showMessageDialog(this, "No se encontró empleado con ese RFC", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (PresentacionException e) {
+            ocultarTodo();
+            OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error de búsqueda");
+        }
+    }//GEN-LAST:event_btnBuscarEmpleadoActionPerformed
+
+    private void ocultarTodo() {
+        jLabel1.setVisible(false);
+        jlblNombreEmpleado.setVisible(false);
+        jLabel3.setVisible(false);
+        jlblFechaActual.setVisible(false);
+        jLabel4.setVisible(false);
+        jlblHoraDeEntradaEsperada.setVisible(false);
+        jLabel5.setVisible(false);
+        jlblHoraDeEntrada.setVisible(false);
+    }
+    
+    private void mostrarTodo() {
+        jLabel1.setVisible(true);
+        jlblNombreEmpleado.setVisible(true);
+        jLabel3.setVisible(true);
+        jlblFechaActual.setVisible(true);
+        jLabel4.setVisible(true);
+        jlblHoraDeEntradaEsperada.setVisible(true);
+        jLabel5.setVisible(true);
+        jlblHoraDeEntrada.setVisible(true);
+        btnRegistrarEntrada.setVisible(true);
+        btnCancelar.setVisible(true);
+
+        // Actualizar fecha y hora en el momento de mostrar
+        jlblFechaActual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        jlblHoraDeEntrada.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnCancelar;
@@ -236,3 +327,4 @@ public class RegistrarEntrada extends javax.swing.JPanel {
     private javax.swing.JTextField txtRfcRegistrarEntrada;
     // End of variables declaration//GEN-END:variables
 }
+

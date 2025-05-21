@@ -265,7 +265,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNominasActionPerformed
 
     private void btnAsistenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsistenciasActionPerformed
-        // TODO add your handling code here:
+        ControlFlujo.mostrarSubmenuRegistrarAsistenia();
     }//GEN-LAST:event_btnAsistenciasActionPerformed
 
     private void btnExpedientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedientesActionPerformed
