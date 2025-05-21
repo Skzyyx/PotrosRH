@@ -107,7 +107,7 @@ public class NominaBO implements INominaBO {
         // Acumulador de las horas esperadas.
         Double horasEsperadas = 0.0;
         // Itera sobre el período, añadiendo las horas de cada día laboral
-        do{
+        while(!fechaInicio.isEqual(fechaActual)){ // Mientras la fecha que se está iterando no sea la misma que la actual.
             // Recorre cada día laboral del empleado.
             for(HorarioLaboralDTO diaLaboral : horario){
                 // Si el día coincide con el de la fecha de inicio, se suman sus horas al acumulador.
@@ -119,8 +119,8 @@ public class NominaBO implements INominaBO {
             }
             // Pasa al día siguiente del período.
             fechaInicio = fechaInicio.plusDays(1);
-        // Mientras la fecha que se está iterando no sea la misma que la actual.
-        } while(!fechaInicio.isEqual(fechaActual));
+        }
+        
         if(horasEsperadas > 0)
             return horasEsperadas;
         else return null;
@@ -148,7 +148,7 @@ public class NominaBO implements INominaBO {
         // Variable para salirse del ciclo cuando se encunetre el día
         boolean encontrado = false;
         // Itera sobre el período
-        do{
+        while(!fechaInicioContrato.isEqual(fechaActual)){ // Mientras la fecha que se está iterando no sea la misma que la actual.
             // Recorre cada día laboral del empleado.
             for(HorarioLaboralDTO diaLaboral : horario){
                 /*
@@ -166,9 +166,8 @@ public class NominaBO implements INominaBO {
                 fechaInicioContrato = fechaInicioContrato.plusDays(1);
             else 
                 break;
-        // Mientras la fecha que se está iterando no sea la misma que la actual.
-        } while(!fechaInicioContrato.isEqual(fechaActual));
-        
+        } 
+        // Regresa la fecha del primer día de trabajo esperado.
         return fechaPrimerDiaTrabajoEsperado;
     }
 }

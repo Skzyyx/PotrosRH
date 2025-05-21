@@ -143,7 +143,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
             if(horasExtra > 0.0)
                 nomina.setHorasExtra(horasExtra);
             else
-                nomina.setHorasExtra(null);
+                nomina.setHorasExtra(0.0);
             
             // Se regresa la nómina generada.
             return nomina;

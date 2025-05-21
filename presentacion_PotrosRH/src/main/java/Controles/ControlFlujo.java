@@ -85,6 +85,13 @@ public class ControlFlujo {
     * Luego, se cambia la pantalla actual para mostrar esta vista.
     */
     public static void mostrarBusquedaEmpleado() {
+        
+        if(previsualizarEmpleado != null)
+            previsualizarEmpleado = null;
+        
+        if(previsualizarNomina != null)
+            previsualizarNomina = null;
+        
         if (busquedaEmpleado == null) {
             busquedaEmpleado = new BusquedaEmpleado();
         }

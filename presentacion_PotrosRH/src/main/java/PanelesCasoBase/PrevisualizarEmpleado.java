@@ -90,6 +90,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -100,6 +101,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerar.setText("Generar");
+        btnGenerar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);

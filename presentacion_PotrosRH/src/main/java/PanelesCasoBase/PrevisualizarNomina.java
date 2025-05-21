@@ -31,9 +31,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     /**
      * Creates new form PrevisualizarNomina
      */
-    public PrevisualizarNomina() {
-        initComponents();
-    }
+    public PrevisualizarNomina() {initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +42,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGenerar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel() {
@@ -105,13 +103,14 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        btnGenerar.setBackground(new java.awt.Color(44, 44, 44));
-        btnGenerar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerar.setText("Generar");
-        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(44, 44, 44));
+        btnRegistrar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -119,6 +118,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setMaximumSize(new java.awt.Dimension(1820, 23));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,7 +345,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 .addGap(407, 407, 407)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(508, 508, 508)
                 .addComponent(jLabel14)
@@ -353,7 +353,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 .addComponent(bonoSelector, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnGenerar});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancelar, btnRegistrar});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,16 +367,16 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnGenerar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnRegistrar});
 
-        btnGenerar.setBorderPainted(false);
-        btnGenerar.setContentAreaFilled(false);
-        btnGenerar.setOpaque(false);
-        btnGenerar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnRegistrar.setBorderPainted(false);
+        btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.setOpaque(false);
+        btnRegistrar.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();
@@ -408,15 +408,20 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             bonoSelector.addItem(bono.toString());
         }
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Botón Cancelar. Cancela toda la operación.
+     * @param evt Click.
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ControlFlujo.mostrarBusquedaEmpleado();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
-    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+    /**
+     * Botón Registrar. Registra la nómina.
+     * @param evt Click.
+     */
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
             nomina.setBono(Double.valueOf(lblBono.getText()));
-            nomina.setSalarioNeto(Double.valueOf(lblSalarioNetoEmpleado.getText()));
 
             if (ControlNomina.getInstance().guardarNomina(nomina) != null) {
                 OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
@@ -426,8 +431,11 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnGenerarActionPerformed
-
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+    /**
+     * CheckBox para seleccionar el bono de la nómina.
+     * @param evt Cambio de selección.
+     */
     private void bonoSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bonoSelectorItemStateChanged
         if(empleado != null)
             actualizarBono();
@@ -437,7 +445,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> bonoSelector;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -481,27 +489,27 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     */
     private void actualizarBono() {
         try {
+            
             String item = (String) bonoSelector.getSelectedItem();
             
             EmpleadoDTO empleadoEncontrado = ControlNomina.getInstance().obtenerEmpleado(empleado);
             if (empleadoEncontrado == null) 
                 return;
             
-
             if (Bonos.valueOf(item) == null) 
                 return;
-            
             
             Bonos bonoEnum = Bonos.valueOf(item);
             double bono = bonoEnum.getCantidad();
             lblBono.setText(String.valueOf(bono));
 
-            double salarioBruto = ControlNomina.getInstance().obtenerEmpleado(empleado).getSalarioBase() + bono;
-            lblSalarioBrutoEmpleado.setText(String.valueOf(salarioBruto));
+            double salarioBruto = nomina.getSalarioBruto() + bono;
+            lblSalarioBrutoEmpleado.setText(String.format("%.4f", salarioBruto));
 
             double isr = nomina.getIsr();
             double salarioNeto = salarioBruto - isr;
-            lblSalarioNetoEmpleado.setText(String.format("%.1f", salarioNeto));
+            nomina.setSalarioNeto(salarioNeto);
+            lblSalarioNetoEmpleado.setText(String.format("%.4f", salarioNeto));
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -527,11 +535,11 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             lblRfcEmpleado.setText(empleado.getRfc());
             lblPuestoEmpleado.setText(empleado.getPuesto());
             lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
-            lblHorasTrabajadasEmpleado.setText(String.valueOf(nomina.getHorasTrabajadas()));
-            lblHorasExtraEmpleado.setText(String.valueOf(nomina.getHorasExtra()));
-            lblSalarioBrutoEmpleado.setText(String.valueOf(nomina.getSalarioBruto()));
-            lblIsrEmpleado.setText(String.format("%.1f", nomina.getIsr()));
-            lblSalarioNetoEmpleado.setText(String.format("%.1f", nomina.getSalarioNeto()));
+            lblHorasTrabajadasEmpleado.setText(String.format("%.1f", nomina.getHorasTrabajadas()));
+            lblHorasExtraEmpleado.setText(String.format("%.1f", nomina.getHorasExtra()));
+            lblSalarioBrutoEmpleado.setText(String.format("%.4f", nomina.getSalarioBruto()));
+            lblIsrEmpleado.setText(String.format("%.4f", nomina.getIsr()));
+            lblSalarioNetoEmpleado.setText(String.format("%.4f", nomina.getSalarioNeto()));
         } else
             throw new PresentacionException("La nómina o el empleado están vacíos.");
         
