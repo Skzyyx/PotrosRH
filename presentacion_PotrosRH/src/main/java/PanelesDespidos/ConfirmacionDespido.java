@@ -13,11 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class ConfirmacionDespido extends javax.swing.JPanel {
 
@@ -29,9 +25,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
     /**
      * Creates new form BusquedaRFCNomina
      */
-    public ConfirmacionDespido() {
-        initComponents();
-    }
+    public ConfirmacionDespido() {initComponents();}
 
     /**
      * Establece los datos del empleado a despedir y la razón del despido
@@ -69,6 +63,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
         btnVolver.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -79,6 +74,7 @@ public class ConfirmacionDespido extends javax.swing.JPanel {
         btnContinuar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnContinuar.setForeground(new java.awt.Color(255, 255, 255));
         btnContinuar.setText("Continuar");
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);

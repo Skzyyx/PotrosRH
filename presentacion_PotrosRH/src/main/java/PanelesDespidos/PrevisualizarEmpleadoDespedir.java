@@ -1,8 +1,6 @@
     package PanelesDespidos;
 
-import Controles.ControlDespido;
 import Controles.ControlFlujo;
-import Excepciones.PresentacionException;
 import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,11 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
 
@@ -87,11 +81,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         btnConfirmar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setText("Confirmar");
-        btnConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConfirmarMouseClicked(evt);
-            }
-        });
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -102,6 +92,7 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
         btnVolver.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVolverMouseClicked(evt);
@@ -280,10 +271,6 @@ public class PrevisualizarEmpleadoDespedir extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseClicked
-        //
-    }//GEN-LAST:event_btnConfirmarMouseClicked
 
     private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
         ControlFlujo.mostrarBusquedaEmpleadoDespedir();

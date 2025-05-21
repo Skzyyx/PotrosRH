@@ -17,12 +17,7 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
 /**
  * El panel permite a los usuarios ingresar
  * el RFC de un empleado para buscarlo y proceder con el proceso de despido
- * 
- * @author Leonardo Flores Leyva (252390)
- * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
- * @author José Luis Islas Molina (252574)
- * @author Benjamin Soto Coronado (253183)
  */
 public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
 
@@ -31,10 +26,7 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
     /**
      * Creates new form BusquedaRFCNomina
      */
-    public BusquedaEmpleadoDespedir() {
-        initComponents();
-    }
-
+    public BusquedaEmpleadoDespedir() {initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +56,7 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -74,6 +67,7 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
         btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -183,7 +177,6 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
 
     /**
      * Maneja el evento de clic del botón Buscar.
-     *
      * @param evt El evento de acción que se generó.
      */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
