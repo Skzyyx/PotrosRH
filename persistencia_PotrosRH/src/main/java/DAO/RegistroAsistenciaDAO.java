@@ -8,15 +8,12 @@ import Exceptions.AccesoDatosException;
 import Interfaces.IRegistroAsistenciaDAO;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Field;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -92,38 +89,55 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
     @Override
     public Double obtenerHorasTrabajadas(Empleado empleado, LocalDate fechaInicio) throws AccesoDatosException {
         try {
-            
-            ObjectId empleadoId = empleado.getId();
-
-            List<Bson> pipeline = Arrays.asList(
-                Aggregates.match(Filters.and(
-                    Filters.eq("empleadoId", empleadoId),
-                    Filters.gte("fechaHoraEntrada", fechaInicio.atStartOfDay()),
-                    Filters.ne("fechaHoraSalida", null),
-                    Filters.expr(new Document("$gt", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
-                )),
-                Aggregates.addFields(new Field<>("horasTrabajadas", 
-                    new Document("$divide", Arrays.asList(
-                        new Document("$subtract", Arrays.asList(
-                            "$fechaHoraSalida", 
-                            "$fechaHoraEntrada"
-                        )),
-                        3600000.0
-                    ))
-                )),
-                Aggregates.group(
-                    null, 
-                    Accumulators.sum("totalHoras", "$horasTrabajadas")
-                )
+            /*
+                Etapa $match.
+                Obtiene los registros de asistencia que coincidan con
+                el id del empleado recibido, la fecha de asistencia
+                sea mayor o igual que la fecha de inicio recibida, y
+                el registro de asistencia cuente con una hora de salida
+                existente (asistencia total del empleado).
+            */
+            Bson match = Aggregates.match(Filters.and(
+                    Filters.eq("empleadoId", empleado.getId()),
+                    Filters.gte("fechaAsistencia", fechaInicio),
+                    Filters.and(
+                            Filters.ne("horaSalida", null),
+                            Filters.exists("horaSalida", true)
+                    )
+            ));
+            /*
+                Etapa $group.
+                Resta la hora de salida menos la hora de entrada, y suma
+                el resultado en un nuevo atributo llamado resta.
+            */
+            Bson group = new Document("$group", new Document("_id", null)
+                    .append("resta", new Document("$sum", new Document("$dateDiff",
+                            new Document("startDate", "$horaEntrada")
+                                    .append("endDate", "$horaSalida")
+                                    .append("unit", "second")
+                    )))
             );
-
-            Document resultado = RegistroAsistenciaCollection
-                .aggregate(pipeline, Document.class) 
-                .first();
-
-            double horas = resultado.getDouble("totalHoras");
+            /*
+                Estapa project.
+                Obtiene únicamente el atributo resta generado en la
+                etapa anterior.
+            */
+            Bson project = Aggregates.project(
+                    Projections.fields(
+                            Projections.include("resta"),
+                            Projections.excludeId()
+                    )
+            );
+            // Pipeline completo con las tres estapas.
+            List<Bson> pipeline = Arrays.asList(match, group, project);
             
-            return horas;
+            // Ejecuta la consulta y la guarda en un Documento. Debido a que se extrae un solo valor, no es necesario un DTO de salida.
+            Document resultado = RegistroAsistenciaCollection.aggregate(pipeline, Document.class).first();
+            
+            if(resultado != null)
+                return resultado.getLong("resta").doubleValue() / 3600;
+             else
+                return null;
             
         } catch (Exception e) {throw new AccesoDatosException("Error al obtener las horas trabajadas", e);}
     }
@@ -154,7 +168,14 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
 
         } catch (Exception e) {throw new AccesoDatosException("Error al obtener la fecha del primer día de trabajo del empleado", e);}
     }
-    
+    /**
+     * Registra la entrada de un empleado.
+     * @param empleado Empleado que registra su entrada.
+     * @param fechaAsistencia Fecha de la asistencia.
+     * @param horaEntrada Hora de entrada.
+     * @return VERDADERO si se registró la entrada, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
+     */
     @Override
     public boolean registrarEntrada(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaEntrada) throws AccesoDatosException {
         try {
@@ -179,7 +200,14 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
             throw new AccesoDatosException("Error al registrar la entrada del empleado", e);
         }
     }
-    
+    /**
+     * Registra la salida de un empleado.
+     * @param empleado Empleado que registra su entrada.
+     * @param fechaAsistencia Fecha de la asistencia.
+     * @param horaSalida Hora de salida.
+     * @return VERDADERO si se registró la entrada, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
+     */
     @Override
     public boolean registrarSalida(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaSalida) throws AccesoDatosException {
         try {

@@ -497,7 +497,6 @@
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="bonoSelectorItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bonoSelectorActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="Bonos[] bonos = Bonos.values();&#xa;for (Bonos bono : bonos) {&#xa;    bonoSelector.addItem(bono.toString());&#xa;}"/>

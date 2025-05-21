@@ -105,7 +105,7 @@ public class NominaBO implements INominaBO {
         // Se extrae el horario laboral completo del empleado.
         List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
         // Acumulador de las horas esperadas.
-        Double horasEsperadas = null;
+        Double horasEsperadas = 0.0;
         // Itera sobre el período, añadiendo las horas de cada día laboral
         do{
             // Recorre cada día laboral del empleado.
@@ -114,14 +114,16 @@ public class NominaBO implements INominaBO {
                 if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaInicio.getDayOfWeek().getValue() ){
                     Duration duracion = Duration.between(diaLaboral.getHoraInicioTurno(), diaLaboral.getHoraFinTurno());
                     horasEsperadas += duracion.toSeconds() / 3600;
+                    break;
                 }
-                // Pasa al día siguiente del período.
-                fechaInicio.plusDays(1);
             }
+            // Pasa al día siguiente del período.
+            fechaInicio = fechaInicio.plusDays(1);
         // Mientras la fecha que se está iterando no sea la misma que la actual.
         } while(!fechaInicio.isEqual(fechaActual));
-        
-        return horasEsperadas;
+        if(horasEsperadas > 0)
+            return horasEsperadas;
+        else return null;
     }
     
     /**
@@ -143,6 +145,8 @@ public class NominaBO implements INominaBO {
         List<HorarioLaboralDTO> horario = empleado.getHorariosLaborales();
         // Almacenará la fecha que se espera sea el primer día de 
         LocalDate fechaPrimerDiaTrabajoEsperado = null;
+        // Variable para salirse del ciclo cuando se encunetre el día
+        boolean encontrado = false;
         // Itera sobre el período
         do{
             // Recorre cada día laboral del empleado.
@@ -153,11 +157,15 @@ public class NominaBO implements INominaBO {
                 */
                 if(DiaSemana.valueOf(diaLaboral.getDiaSemana()).getNumero() == fechaInicioContrato.getDayOfWeek().getValue() ){
                     fechaPrimerDiaTrabajoEsperado = fechaInicioContrato;
+                    encontrado = true;
                     break;
                 }
-                // Pasa al día siguiente del período.
-                fechaInicioContrato.plusDays(1);
             }
+            if(encontrado == false)
+                // Pasa al día siguiente del período.
+                fechaInicioContrato = fechaInicioContrato.plusDays(1);
+            else 
+                break;
         // Mientras la fecha que se está iterando no sea la misma que la actual.
         } while(!fechaInicioContrato.isEqual(fechaActual));
         

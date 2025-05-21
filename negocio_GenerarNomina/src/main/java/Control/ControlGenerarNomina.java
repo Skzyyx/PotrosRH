@@ -134,8 +134,8 @@ public class ControlGenerarNomina implements IGenerarNomina {
             nomina.setEmpleadoId(empleado.getId());
             nomina.setBono(0.0);
             nomina.setDiasTrabajados(diasTrabajados);
-            nomina.setIsr(calcularISR(empleado.getSalarioBase(), diasTrabajados));
-            nomina.setSalarioBruto(empleado.getSalarioBase() * diasTrabajados);
+            nomina.setSalarioBruto(empleado.getSalarioBase() * horasTrabajadas);
+            nomina.setIsr(calcularISR(nomina.getSalarioBruto(), diasTrabajados));
             nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());
             nomina.setFechaCorte(LocalDate.now());
             nomina.setHorasTrabajadas(horasTrabajadas);

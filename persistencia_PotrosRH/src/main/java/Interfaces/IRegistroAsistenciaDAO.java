@@ -43,8 +43,22 @@ public interface IRegistroAsistenciaDAO {
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     public LocalDate obtenerFechaPrimerDiaTrabajo(Empleado empleado) throws AccesoDatosException;
-    
-    public boolean registrarEntrada(Empleado empleado,LocalDate fechaAsistencia,LocalTime horaEntrada)throws AccesoDatosException;
-    
-    public boolean registrarSalida(Empleado empleado,LocalDate FechaAsistencia,LocalTime horaSalida)throws AccesoDatosException;
-}
+    /**
+     * Registra la entrada de un empleado.
+     * @param empleado Empleado que registra su entrada.
+     * @param fechaAsistencia Fecha de la asistencia.
+     * @param horaEntrada Hora de entrada.
+     * @return VERDADERO si se registró la entrada, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
+     */
+    public boolean registrarEntrada(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaEntrada)throws AccesoDatosException;
+    /**
+     * Registra la salida de un empleado.
+     * @param empleado Empleado que registra su entrada.
+     * @param fechaAsistencia Fecha de la asistencia.
+     * @param horaSalida Hora de salida.
+     * @return VERDADERO si se registró la entrada, FALSO en caso contrario.
+     * @throws AccesoDatosException Excepción del proyecto DAO.
+     */
+    public boolean registrarSalida(Empleado empleado, LocalDate fechaAsistencia, LocalTime horaSalida)throws AccesoDatosException;
+} 

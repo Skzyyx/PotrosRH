@@ -331,11 +331,6 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 bonoSelectorItemStateChanged(evt);
             }
         });
-        bonoSelector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bonoSelectorActionPerformed(evt);
-            }
-        });
 
         jLabel14.setFont(new java.awt.Font("sansserif", 0, 19)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -434,12 +429,9 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void bonoSelectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_bonoSelectorItemStateChanged
-
+        if(empleado != null)
+            actualizarBono();
     }//GEN-LAST:event_bonoSelectorItemStateChanged
-
-    private void bonoSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bonoSelectorActionPerformed
-        actualizarBono();
-    }//GEN-LAST:event_bonoSelectorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -489,18 +481,14 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     */
     private void actualizarBono() {
         try {
-            String rfc = empleado.getRfc();
             String item = (String) bonoSelector.getSelectedItem();
-
-            if (rfc.equals(".")) 
-                return;
             
             EmpleadoDTO empleadoEncontrado = ControlNomina.getInstance().obtenerEmpleado(empleado);
             if (empleadoEncontrado == null) 
                 return;
             
 
-            if (Bonos.valueOf(item) == null && ControlNomina.getInstance().obtenerEmpleado(empleado) == null) 
+            if (Bonos.valueOf(item) == null) 
                 return;
             
             
@@ -526,6 +514,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     * (horas trabajadas, horas extras, salario bruto, ISR y salario neto).
     * @param empleado Empleado asociado a la nómina.
     * @param nomina Objeto NominaDTOcon los datos de la nómina.
+    * @throws PresentacionException Excepción de la capa de Presentación.
     */
     public void setDatosNomina(NominaDTO nomina,EmpleadoDTO empleado) throws PresentacionException {
         if(empleado != null && nomina != null){

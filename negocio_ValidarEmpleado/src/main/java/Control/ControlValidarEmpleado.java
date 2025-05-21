@@ -9,8 +9,8 @@ import bo.ContratoBO;
 import bo.NominaBO;
 import bo.RegistroAsistenciaBO;
 import dto.EmpleadoDTO;
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +42,7 @@ public class ControlValidarEmpleado {
         if(empleado.getEstado() == null)
             throw new ValidarEmpleadoException("El estado del empleado no puede estar vacío.");
         
-        return !empleado.getEstado().equals("ACTIVO");
+        return empleado.getEstado().equals("ACTIVO");
     }
     /**
      * Valida que el empleado tenga al menos un 80% de asistencia,
@@ -144,7 +144,7 @@ public class ControlValidarEmpleado {
                     throw new ObjetosNegocioException("El empleado asociado no tiene un horario laboral. Contacte a su gerente para evaluar esta anomalía.");
             }
             
-            return Duration.between(fechaValidar, LocalDate.now()).toDays() >= 5;
+            return ChronoUnit.DAYS.between(fechaValidar, LocalDate.now()) >= 5;
             
         } catch (ObjetosNegocioException e) {
             Logger.getLogger(ValidarEmpleadoException.class.getName()).log(Level.SEVERE, null, e);
