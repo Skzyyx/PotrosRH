@@ -38,6 +38,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,7 +109,7 @@ public class ControlGenerarContrato {
         document.add(new Paragraph("\n"));
 
         // Agregar número de contrato
-        Paragraph numeroContrato = new Paragraph("Contrato N°: " + contrato.getId())
+        Paragraph numeroContrato = new Paragraph("Contrato N°: " + new Random().nextInt(0, 100))
                 .setFont(fontBold)
                 .setFontSize(12)
                 .setTextAlignment(TextAlignment.RIGHT);

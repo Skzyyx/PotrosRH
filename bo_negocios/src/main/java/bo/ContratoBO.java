@@ -46,7 +46,7 @@ public class ContratoBO implements IContratoBO {
         }
         
         try {
-            Contrato map = ContratoMapper.toEntity(contrato);
+            Contrato map = ContratoMapper.toEntityNuevo(contrato);
             return ContratoMapper.toDTO(contratoDAO.registrarContrato(map));
         } catch (AccesoDatosException ex) {
             Logger.getLogger(ContratoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());

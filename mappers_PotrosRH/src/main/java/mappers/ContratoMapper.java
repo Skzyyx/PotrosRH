@@ -17,7 +17,23 @@ import org.bson.types.ObjectId;
  */
 public class ContratoMapper {
     
-    public static Contrato toEntity(ContratoDTO dto) {
+    public static Contrato toEntityNuevo(ContratoDTO dto) {
+        return new Contrato(
+                dto.getDepartamento(),
+                TipoContrato.valueOf(dto.getTipoContrato()),
+                dto.getLugarTrabajo(),
+                dto.getFechaInicio(),
+                dto.getFechaFin(),
+                dto.getPuesto(),
+                dto.getSueldo(),
+                PeriodoPago.valueOf(dto.getPeriodoPago()),
+                ModoPago.valueOf(dto.getModoPago()),
+                EmpleadoMapper.toEntityViejo(dto.getEmpleado()),
+                HorarioLaboralMapper.toEntitySet(dto.getHorarios())            
+        );
+    }
+    
+    public static Contrato toEntityViejo(ContratoDTO dto) {
         return new Contrato(
                 new ObjectId(dto.getId()),
                 dto.getDepartamento(),
@@ -29,11 +45,12 @@ public class ContratoMapper {
                 dto.getSueldo(),
                 PeriodoPago.valueOf(dto.getPeriodoPago()),
                 ModoPago.valueOf(dto.getModoPago()),
-                EvaluacionMapper.toEntityViejo(dto.getEvaluacion()),
-                new ObjectId(dto.getEmpleadoId()),
+                EmpleadoMapper.toEntityViejo(dto.getEmpleado()),
                 HorarioLaboralMapper.toEntitySet(dto.getHorarios())            
         );
     }
+    
+    
     
     public static ContratoDTO toDTO(Contrato contrato) {
         return new ContratoDTO(
@@ -47,8 +64,7 @@ public class ContratoMapper {
                 contrato.getSueldo(),
                 contrato.getPeriodoPago().toString(),
                 contrato.getModoPago().toString(),
-                EvaluacionMapper.toDTOViejo(contrato.getEvaluacion()),
-                contrato.getEmpleadoId().toString(),
+                EmpleadoMapper.toDTO(contrato.getEmpleado()),
                 HorarioLaboralMapper.toDTOSet(contrato.getHorarios())            
         );
     }

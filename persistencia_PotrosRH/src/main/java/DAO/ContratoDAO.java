@@ -63,9 +63,11 @@ public class ContratoDAO implements IContratoDAO {
     @Override
     public Contrato registrarContrato(Contrato contrato) throws AccesoDatosException {
         try {
-            Bson match = Aggregates.match(Filters.eq("empleadoId", contrato.getEmpleadoId()));
+            Bson unwind = Aggregates.unwind("$empleado");
+            Bson match = Aggregates.match(Filters.eq("empleado._id", contrato.getEmpleado().getId()));
             // Verifica si ya existe un candidato con el mismo nombre
             AggregateIterable<Contrato> resultado = contratosCollection.aggregate(Arrays.asList(
+                    unwind,
                     match
             ));
 

@@ -132,7 +132,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Filtrar por");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(17, 119, 202));
         jPanel2.setMaximumSize(new java.awt.Dimension(329, 438));
         jPanel2.setMinimumSize(new java.awt.Dimension(329, 438));
         jPanel2.setPreferredSize(new java.awt.Dimension(329, 438));
@@ -397,20 +397,19 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
                     break;
             }
 
-            List<EmpleadoDTO> candidatos = ControlRegistro.getInstance().obtenerTodosSinContrato(filtro);
-
+            List<EmpleadoDTO> empleados = ControlRegistro.getInstance().obtenerTodosSinContrato(filtro);
             DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
 
             // Limpiar filas anteriores
             modelo.setRowCount(0);
 
             // Agregar nuevas filas
-            for (EmpleadoDTO c : candidatos) {
+            for (EmpleadoDTO e : empleados) {
                 modelo.addRow(new Object[]{
-                    String.join(" ", c.getNombre(), c.getApellidoPaterno(), c.getApellidoMaterno()),
-                    c.getRfc(),
-                    c.getEmail(),
-                    c.getTelefono()
+                    String.join(" ", e.getNombre(), e.getApellidoPaterno(), e.getApellidoMaterno()),
+                    e.getRfc(),
+                    e.getEmail(),
+                    e.getTelefono()
                 });
             }
         } catch (PresentacionException ex) {
@@ -495,6 +494,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         empleado.setRfc(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         try {
             empleado = ControlRegistro.getInstance().obtenerEmpleado(empleado);
+            System.out.println(empleado.toString());
             ControlFlujoRegistro.mostrarCapturarDatosContrato(empleado);
         } catch (PresentacionException ex) {
             Logger.getLogger(SeleccionarEmpleadoContrato.class.getName()).log(Level.SEVERE, null, ex);

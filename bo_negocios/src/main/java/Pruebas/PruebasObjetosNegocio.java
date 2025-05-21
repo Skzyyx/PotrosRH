@@ -3,8 +3,11 @@ package Pruebas;
 
 import Exceptions.ObjetosNegocioException;
 import bo.CandidatoBO;
+import bo.EmpleadoBO;
 import dto.CandidatoDTO;
 import dto.CandidatoFiltroDTO;
+import dto.EmpleadoDTO;
+import dto.EmpleadoFiltroDTO;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -25,10 +28,10 @@ public class PruebasObjetosNegocio {
      */
     public static void main(String[] args) {
         
-        CandidatoFiltroDTO filtro = new CandidatoFiltroDTO();
-        filtro.setRfc("DASDASDASDA");
+        EmpleadoFiltroDTO filtro = new EmpleadoFiltroDTO();
+        filtro.setRfc("LOI");
         try {
-            List<CandidatoDTO> candidatosFiltrados = CandidatoBO.getInstance().obtenerPorFiltro(filtro);
+            List<EmpleadoDTO> candidatosFiltrados = EmpleadoBO.getInstance().obtenerTodosSinContrato(filtro);
             candidatosFiltrados.forEach(t -> {
                 System.out.println(t.toString());
             });

@@ -396,21 +396,36 @@ public class EmpleadoDTO {
         this.horariosLaborales = horariosLaborales;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("EmpleadoDTO{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", apellidoPaterno=").append(apellidoPaterno);
+        sb.append(", apellidoMaterno=").append(apellidoMaterno);
+        sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", sexo=").append(sexo);
+        sb.append(", email=").append(email);
+        sb.append(", rfc=").append(rfc);
+        sb.append(", curp=").append(curp);
+        sb.append(", calle=").append(calle);
+        sb.append(", colonia=").append(colonia);
+        sb.append(", numero=").append(numero);
+        sb.append(", telefono=").append(telefono);
+        sb.append(", departamento=").append(departamento);
+        sb.append(", puesto=").append(puesto);
+        sb.append(", salarioBase=").append(salarioBase);
+        sb.append(", estado=").append(estado);
+        sb.append(", horariosLaborales=").append(horariosLaborales);
+        sb.append('}');
+        return sb.toString();
+    }
+
     /**
      * Regresa una cadena con la información relevante del empleado.
      *
      * @return Cadena con la información relevante del empleado.
      */
-    @Override
-    public String toString() {
-        return String.format(
-                "%s %s %s, %s, %s, %s, %s",
-                getNombre(),
-                getApellidoPaterno(),
-                getApellidoMaterno(),
-                getEmail(),
-                getTelefono(),
-                getDepartamento(),
-                getPuesto());
-    }
+    
 }

@@ -57,7 +57,8 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
         return new ControlObtenerEmpleado().obtenerEmpleadoActivo(empleado);
     }
-    
+   
+    @Override
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException {
         return new ControlObtenerEmpleado().obtenerTodosSinContrato(filtro);
     }

@@ -30,8 +30,7 @@ public class Contrato {
     private Double sueldo;
     private PeriodoPago periodoPago;
     private ModoPago modoPago;
-    private Evaluacion evaluacion;
-    private ObjectId empleadoId;
+    private Empleado empleado;
     private Set<HorarioLaboral> horarios = new HashSet<>();
 
     /**
@@ -53,11 +52,10 @@ public class Contrato {
      * @param sueldo Salario acordado
      * @param periodoPago Periodicidad del pago
      * @param modoPago Método de pago
-     * @param evaluacion Evaluación asociada al proceso de contratación
-     * @param empleadoId Identificador del empleado
+     * @param empleado Empleado asociado al contrato
      * @param horarios Conjunto de horarios laborales
      */
-    public Contrato(ObjectId id, String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Evaluacion evaluacion, ObjectId empleadoId, Set<HorarioLaboral> horarios) {
+    public Contrato(ObjectId id, String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
         this.id = id;
         this.departamento = departamento;
         this.tipoContrato = tipoContrato;
@@ -68,8 +66,21 @@ public class Contrato {
         this.sueldo = sueldo;
         this.periodoPago = periodoPago;
         this.modoPago = modoPago;
-        this.evaluacion = evaluacion;
-        this.empleadoId = empleadoId;
+        this.empleado = empleado;
+        this.horarios = horarios;
+    }
+    
+    public Contrato(String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
+        this.departamento = departamento;
+        this.tipoContrato = tipoContrato;
+        this.lugarTrabajo = lugarTrabajo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.puesto = puesto;
+        this.sueldo = sueldo;
+        this.periodoPago = periodoPago;
+        this.modoPago = modoPago;
+        this.empleado = empleado;
         this.horarios = horarios;
     }
     
@@ -253,40 +264,12 @@ public class Contrato {
         this.modoPago = modoPago;
     }
 
-    /**
-     * Obtiene la evaluación asociada al proceso de contratación.
-     * 
-     * @return Evaluación asociada
-     */
-    public Evaluacion getEvaluacion() {
-        return evaluacion;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    /**
-     * Establece la evaluación asociada al proceso de contratación.
-     * 
-     * @param evaluacion Nueva evaluación asociada
-     */
-    public void setEvaluacion(Evaluacion evaluacion) {
-        this.evaluacion = evaluacion;
-    }
-
-    /**
-     * Obtiene el identificador del empleado asociado al contrato.
-     * 
-     * @return Identificador único del empleado
-     */
-    public ObjectId getEmpleadoId() {
-        return empleadoId;
-    }
-
-    /**
-     * Establece el identificador del empleado asociado al contrato.
-     * 
-     * @param empleadoId Nuevo identificador único del empleado
-     */
-    public void setEmpleadoId(ObjectId empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     /**
@@ -326,8 +309,7 @@ public class Contrato {
         sb.append(", sueldo=").append(sueldo);
         sb.append(", periodoPago=").append(periodoPago);
         sb.append(", modoPago=").append(modoPago);
-        sb.append(", evaluacion=").append(evaluacion);
-        sb.append(", empleadoId=").append(empleadoId);
+        sb.append(", empleado=").append(empleado);
         sb.append(", horarios=").append(horarios);
         sb.append('}');
         return sb.toString();

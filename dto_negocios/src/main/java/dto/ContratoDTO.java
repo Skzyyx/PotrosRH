@@ -24,14 +24,13 @@ public class ContratoDTO {
     private Double sueldo;
     private String periodoPago;
     private String modoPago;
-    private EvaluacionDTO evaluacion;
-    private String empleadoId;
+    private EmpleadoDTO empleado;
     private Set<HorarioLaboralDTO> horarios = new HashSet<>();
 
     public ContratoDTO() {
     }
 
-    public ContratoDTO(String id, String departamento, String tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EvaluacionDTO evaluacion, String empleadoId, Set<HorarioLaboralDTO> horarios) {
+    public ContratoDTO(String id, String departamento, String tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
         this.id = id;
         this.departamento = departamento;
         this.tipoContrato = tipoContrato;
@@ -42,11 +41,24 @@ public class ContratoDTO {
         this.sueldo = sueldo;
         this.periodoPago = periodoPago;
         this.modoPago = modoPago;
-        this.evaluacion = evaluacion;
-        this.empleadoId = empleadoId;
+        this.empleado = empleado;
         this.horarios = horarios;
     }
 
+    public ContratoDTO(String departamento, String tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
+        this.departamento = departamento;
+        this.tipoContrato = tipoContrato;
+        this.lugarTrabajo = lugarTrabajo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.puesto = puesto;
+        this.sueldo = sueldo;
+        this.periodoPago = periodoPago;
+        this.modoPago = modoPago;
+        this.empleado = empleado;
+        this.horarios = horarios;
+    }
+    
     public String getId() {
         return id;
     }
@@ -127,20 +139,12 @@ public class ContratoDTO {
         this.modoPago = modoPago;
     }
 
-    public EvaluacionDTO getEvaluacion() {
-        return evaluacion;
+    public EmpleadoDTO getEmpleado() {
+        return empleado;
     }
 
-    public void setEvaluacion(EvaluacionDTO evaluacion) {
-        this.evaluacion = evaluacion;
-    }
-
-    public String getEmpleadoId() {
-        return empleadoId;
-    }
-
-    public void setEmpleadoId(String empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleado(EmpleadoDTO empleado) {
+        this.empleado = empleado;
     }
 
     public Set<HorarioLaboralDTO> getHorarios() {
@@ -165,8 +169,7 @@ public class ContratoDTO {
         sb.append(", sueldo=").append(sueldo);
         sb.append(", periodoPago=").append(periodoPago);
         sb.append(", modoPago=").append(modoPago);
-        sb.append(", evaluacion=").append(evaluacion);
-        sb.append(", empleadoId=").append(empleadoId);
+        sb.append(", empleado=").append(empleado);
         sb.append(", horarios=").append(horarios);
         sb.append('}');
         return sb.toString();
