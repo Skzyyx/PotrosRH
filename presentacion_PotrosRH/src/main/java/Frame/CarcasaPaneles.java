@@ -31,6 +31,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         ControlFlujo.setContenedor(contenedor);
         ControlFlujoRegistro.setContenedor(contenedor);
         ControlFlujo.mostrarMenuPrincipal();
+        setTitle("PotrosRH System Ver. 1.0");
     }
 
     public static CarcasaPaneles getInstance() {
@@ -116,4 +117,5 @@ public class CarcasaPaneles extends javax.swing.JFrame {
     public JPanel getContenedor() {
         return contenedor;
     }
+   
 }

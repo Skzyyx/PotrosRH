@@ -2,6 +2,7 @@ package PanelesCasoBase;
 
 import Controles.ControlFlujo;
 import Controles.ControlFlujoRegistro;
+import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -23,7 +24,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
     public MenuPrincipal() {
         initComponents();
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +41,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnAsistencias = new javax.swing.JButton();
         btnExpedientes = new javax.swing.JButton();
         btnReportarEmpleado = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -116,6 +120,14 @@ public class MenuPrincipal extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(17, 119, 202));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("PotrosRH");
+        jPanel1.add(jLabel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,11 +148,14 @@ public class MenuPrincipal extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnReportarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(48, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContrataciones, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -156,7 +171,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnReportarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAsistencias, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         btnContrataciones.setBorderPainted(false);
@@ -269,7 +284,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAsistenciasActionPerformed
 
     private void btnExpedientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedientesActionPerformed
-        // TODO add your handling code here:
+        OptionPane.showInfoMessage(this, "Este módulo se encuentra en mantenimiento hasta nuevo aviso. Gracias.", "Módulo en mantenimiento");
     }//GEN-LAST:event_btnExpedientesActionPerformed
 
     private void btnReportarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportarEmpleadoActionPerformed
@@ -284,5 +299,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton btnExpedientes;
     private javax.swing.JButton btnNominas;
     private javax.swing.JButton btnReportarEmpleado;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -170,6 +170,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             );
             return empleados.aggregate(pipeline, Empleado.class).into(new ArrayList<>());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AccesoDatosException("Ocurrió un error al obtener los empleados sin contrato");
         }
     }

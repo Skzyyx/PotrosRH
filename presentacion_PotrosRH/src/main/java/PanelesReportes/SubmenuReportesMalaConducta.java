@@ -39,7 +39,7 @@ public class SubmenuReportesMalaConducta extends javax.swing.JPanel {
         btnRegistrarReporte.setBackground(new java.awt.Color(0, 0, 0));
         btnRegistrarReporte.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnRegistrarReporte.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarReporte.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC WHITE WOLF\\Documents\\GitHub\\PotrosRH\\presentacion_PotrosRH\\src\\main\\resources\\Images\\Reportes\\NuevoReporte.png")); // NOI18N
+        btnRegistrarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Reportes/NuevoReporte.png"))); // NOI18N
         btnRegistrarReporte.setText("Registrar Nuevo Reporte");
         btnRegistrarReporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarReporte.addActionListener(new java.awt.event.ActionListener() {

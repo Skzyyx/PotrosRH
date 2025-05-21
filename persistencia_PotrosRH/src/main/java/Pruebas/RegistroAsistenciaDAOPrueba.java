@@ -29,6 +29,7 @@ public class RegistroAsistenciaDAOPrueba {
             rfc = new EmpleadoDAO().obtenerEmpleado(rfc);
             
             RegistroAsistencia r1 = new RegistroAsistencia(rfc.getId(), LocalDate.of(2025, Month.MAY, 13), LocalTime.of(9, 7, 55), LocalTime.of(16, 35, 24));
+            RegistroAsistencia r0 = new RegistroAsistencia(rfc.getId(), LocalDate.of(2025, Month.MAY, 12), LocalTime.of(9, 7, 55), LocalTime.of(16, 35, 24));
             RegistroAsistencia r2 = new RegistroAsistencia(rfc.getId(), LocalDate.of(2025, Month.MAY, 14), LocalTime.of(9, 32, 45), LocalTime.of(17, 02, 57));
             RegistroAsistencia r3 = new RegistroAsistencia(rfc.getId(), LocalDate.of(2025, Month.MAY, 15), LocalTime.of(10, 21, 00), LocalTime.of(16, 58, 49));
             RegistroAsistencia r4 = new RegistroAsistencia(rfc.getId(), LocalDate.of(2025, Month.MAY, 16), LocalTime.of(9, 1, 54), LocalTime.of(17, 0, 0));
