@@ -100,7 +100,7 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
                     Filters.eq("empleadoId", empleadoId),
                     Filters.gte("fechaHoraEntrada", fechaInicio.atStartOfDay()),
                     Filters.ne("fechaHoraSalida", null),
-                    Filters.expr(new Document("$gte", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
+                    Filters.expr(new Document("$gt", Arrays.asList("$fechaHoraSalida", "$fechaHoraEntrada")))
                 )),
                 Aggregates.addFields(new Field<>("horasTrabajadas", 
                     new Document("$divide", Arrays.asList(
