@@ -95,7 +95,7 @@ public class ContratoDAO implements IContratoDAO {
     public LocalDate obtenerFechaInicioContrato(Empleado empleado) throws AccesoDatosException{
         try {
             // Filtro para el id del empleado, asociado al contrato.
-            Bson empleadoId = Filters.eq("empleadoId", empleado.getId());
+            Bson empleadoId = Filters.eq("empleado._id", empleado.getId());
             // Realiza la consulta y obtiene la fecha de inicio del contrato en una entidad Contrato.
             Contrato resultado = contratosCollection.find(empleadoId).projection(Projections.include("fechaInicio")).first();
             // Si la búsqueda fue exitosa, se extrae la fecha de inicio del contrato.

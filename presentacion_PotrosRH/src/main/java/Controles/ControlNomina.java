@@ -69,21 +69,15 @@ public class ControlNomina {
     * Este método obtiene el empleado mediante el RFC proporcionado y luego valida 
     * sus datos. Si ocurre un error durante el proceso, se lanzan excepciones específicas 
     * que se capturan y se vuelven a lanzar como una PresentacionException.
-    * 
-    * @param rfc El RFC del empleado que se desea validar.
-    * 
+    * @param empleado Empleado a validar.
     * @return true si el empleado es válido, false si no lo es.
-    * 
     * @throws PresentacionException Si ocurre un error al obtener o validar al empleado.
     */
-    public boolean validarEmpleado(String rfc) throws PresentacionException {
+    public boolean validarEmpleado(EmpleadoDTO empleado) throws PresentacionException {
         try {
-            EmpleadoDTO empleado = new EmpleadoDTO();
-            empleado.setRfc(rfc);
-            return validarEmpleado.validarEmpleado(obtenerEmpleado.obtenerEmpleado(empleado));
+            return validarEmpleado.validarEmpleado(empleado);
             
-        } catch (ValidarEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());
-        } catch (ObtenerEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
+        } catch (ValidarEmpleadoException ex) {throw new PresentacionException("Error: " + ex.getMessage());}
     }
     /**
     * Obtiene un empleado a partir de su RFC, encapsulado en el

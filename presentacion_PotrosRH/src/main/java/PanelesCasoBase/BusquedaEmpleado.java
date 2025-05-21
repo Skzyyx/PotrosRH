@@ -62,6 +62,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -72,6 +73,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -221,8 +223,14 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
             EmpleadoDTO empleadoEncontrado = new EmpleadoDTO();
             empleadoEncontrado.setRfc(rfc);
             empleadoEncontrado = ControlNomina.getInstance().obtenerEmpleado(empleadoEncontrado);
-            if (empleadoEncontrado != null) 
-                ControlFlujo.mostrarPrevisualizarEmpleado(empleadoEncontrado);
+            
+            if(empleadoEncontrado == null)
+                throw new PresentacionException("Empleaod no encontrado.");
+            
+            if(!ControlNomina.getInstance().validarEmpleado(empleadoEncontrado)) 
+                throw new PresentacionException("El empleado no cumple con los requisitos para generar una nómina.");
+            
+            ControlFlujo.mostrarPrevisualizarEmpleado(empleadoEncontrado);
             
         } catch (PresentacionException e) {
             OptionPane.showErrorMessage(this, e.getMessage(), "Error");

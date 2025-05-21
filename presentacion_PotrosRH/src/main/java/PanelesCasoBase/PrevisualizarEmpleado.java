@@ -30,9 +30,7 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form PrevisualisarEmpleado
      */
-    public PrevisualizarEmpleado() {
-        initComponents();
-    }
+    public PrevisualizarEmpleado() {initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,11 +90,6 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
         btnCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -285,9 +278,6 @@ public class PrevisualizarEmpleado extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-    }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         int resultado = OptionPane.showConfirmDialog(this, "¿Deseas previsualizar la nómina?", "Mensaje de confirmación");

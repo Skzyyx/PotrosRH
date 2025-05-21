@@ -30,6 +30,7 @@ import com.github.javafaker.Faker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -54,17 +55,18 @@ public class Dao_PotrosRH {
         Faker faker = new Faker();
 
         Candidato c = new Candidato();
-        c.setNombre("Jesús Ernesto");
-        c.setApellidoPaterno("López");
-        c.setApellidoMaterno("Ibarra");
-        c.setRfc("LOIJ920315XYZ");
-        c.setEmail("neto@potros.itson.edu.mx");
+        c.setNombre("Leonardo");
+        c.setApellidoPaterno("Flores");
+        c.setApellidoMaterno("Leyva");
+        c.setRfc("GUMF900101ABC");
+        c.setEmail("leonardo.flores252390@potros.itson.edu.mx");
         c.setTelefono("6622537849");
-        c.setCurp("CURPNETO1234");
+        c.setCurp("CURPLEON1234");
         c.setSexo(Sexo.HOMBRE);
-        c.setExperiencia("Experto en Pokemon.");
+        c.setFechaNacimiento(LocalDate.of(2005, Month.OCTOBER, 9));
+        c.setExperiencia("Experto en Doom.");
         c.setNivelEstudio("Universidad.");
-        c.setHabilidadesClave("Juegos Interactivos.");
+        c.setHabilidadesClave("Inteligencia Artificial.");
 
         try {
             c = cDAO.registrarCandidato(c);
@@ -102,19 +104,20 @@ public class Dao_PotrosRH {
         horarios.add(new HorarioLaboral(DiaSemana.VIERNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
 
         em.setHorariosLaborales(horarios);
-        em.setNombre(faker.name().name());
-        em.setApellidoPaterno(faker.name().firstName());
-        em.setApellidoMaterno(faker.name().lastName());
+        em.setNombre(c.getNombre());
+        em.setApellidoPaterno(c.getApellidoPaterno());
+        em.setApellidoMaterno(c.getApellidoMaterno());
         em.setRfc(c.getRfc());
-        em.setEmail(faker.internet().emailAddress());
+        em.setEmail(c.getEmail());
         em.setTelefono(faker.phoneNumber().cellPhone());
         em.setCurp(c.getCurp());
+        em.setFechaNacimiento(c.getFechaNacimiento());
         em.setDepartamento("Producción");
         em.setDireccion(new Direccion(faker.address().streetName(), faker.address().streetAddressNumber(), faker.address().secondaryAddress()));
         em.setEstado(EstadoEmpleado.ACTIVO);
         em.setPuesto(faker.job().title());
-        em.setSalarioBase(40000.00);
-        em.setFechaNacimiento(LocalDate.of(2005, 12, 29));
+        em.setSalarioBase(200.00);
+        em.setFechaNacimiento(LocalDate.of(2005, 10, 9));
 
         try {
             emDAO.registrarEmpleado(em);
@@ -123,6 +126,27 @@ public class Dao_PotrosRH {
         }
 
         System.out.println(em.toString());
+        
+        try {
+            Empleado empleado = emDAO.obtenerEmpleado(em);
+            Contrato contrato = new Contrato();
+            contrato.setEmpleado(empleado);
+            contrato.setDepartamento(empleado.getDepartamento());
+            contrato.setFechaInicio(LocalDate.of(2025, Month.MAY, 10));
+            contrato.setFechaFin(LocalDate.of(2026, Month.MAY, 10));
+            contrato.setHorarios(null);
+            contrato.setLugarTrabajo("ITSON");
+            contrato.setSueldo(empleado.getSalarioBase());
+            contrato.setModoPago(ModoPago.TRANSFERENCIA);
+            contrato.setPeriodoPago(PeriodoPago.SEMANAL);
+            contrato.setPuesto(empleado.getPuesto());
+            contrato.setTipoContrato(TipoContrato.PERIODO);
+            coDAO.registrarContrato(contrato);
+            
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
 //        Set<HorarioLaboral> horarios2 = new HashSet();
 //        horarios2.add(new HorarioLaboral(DiaSemana.LUNES, LocalTime.of(9, 0), LocalTime.of(17, 0)));
