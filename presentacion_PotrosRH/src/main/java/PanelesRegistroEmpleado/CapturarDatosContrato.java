@@ -4,7 +4,7 @@
  */
 package PanelesRegistroEmpleado;
 
-import Controles.ControlFlujoRegistro;
+import Controles.ControlFlujo;
 import Controles.ControlRegistro;
 import Excepciones.PresentacionException;
 import dto.ContratoDTO;
@@ -804,7 +804,7 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void btnVolver() {
-        ControlFlujoRegistro.mostrarSeleccionarEmpleadoContrato();
+        ControlFlujo.mostrarSeleccionarEmpleadoContrato();
     }
 
     private void btnTerminar() {
@@ -851,7 +851,7 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
             
             OptionPane.OptionPane.showInfoMessage(this, "Contrato registrado exitosamente", "Éxito");
             limpiarCampos();
-            ControlFlujoRegistro.mostrarSeleccionarEmpleadoContrato();
+            ControlFlujo.mostrarSeleccionarEmpleadoContrato();
         } catch (PresentacionException ex) {
             Logger.getLogger(CapturarDatosContrato.class.getName()).log(Level.SEVERE, null, ex);
         }

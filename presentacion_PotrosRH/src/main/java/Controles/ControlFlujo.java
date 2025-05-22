@@ -11,6 +11,12 @@ import PanelesCasoBase.PrevisualizarNomina;
 import PanelesRegistrarAsistencia.RegistrarEntrada;
 import PanelesRegistrarAsistencia.RegistrarSalida;
 import PanelesRegistrarAsistencia.SubmenuRegistrarAsistencia;
+import PanelesRegistroEmpleado.CapturarDatosContrato;
+import PanelesRegistroEmpleado.CapturarDatosEvaluacion;
+import PanelesRegistroEmpleado.MenuContrataciones;
+import PanelesRegistroEmpleado.RegistrarCandidato;
+import PanelesRegistroEmpleado.SeleccionarCandidatoEvaluacion;
+import PanelesRegistroEmpleado.SeleccionarEmpleadoContrato;
 import PanelesReportes.AnalisisInicialEInvestigacion;
 import PanelesReportes.BuscarReporte;
 import PanelesReportes.DatosGenerales;
@@ -20,6 +26,7 @@ import PanelesReportes.ImpactoIncidente;
 import PanelesReportes.MotivoOmisionMalaConducta;
 import PanelesReportes.RegistroDatosGenerales;
 import PanelesReportes.SubmenuReportesMalaConducta;
+import dto.CandidatoDTO;
 import dto.EmpleadoDTO;
 import dto.NominaDTO;
 import dto.ReporteMalaConductaDTO;
@@ -64,6 +71,13 @@ public class ControlFlujo {
     private static SubmenuRegistrarAsistencia submenuRegistrarAsistencia;
     private static RegistrarEntrada registrarEntrada;
     private static RegistrarSalida registrarSalida;
+    // CU: Registrar Empleado
+    private static MenuContrataciones menuContrataciones;
+    private static RegistrarCandidato registrarCandidato;
+    private static SeleccionarCandidatoEvaluacion seleccionarCandidatoEvaluacion;
+    private static CapturarDatosEvaluacion capturarDatosEvaluacion;
+    private static SeleccionarEmpleadoContrato seleccionarEmpleadoContrato;
+    private static CapturarDatosContrato capturarDatosContrato;
     /**
     * Muestra la pantalla del menú principal de la aplicación.
     * 
@@ -372,5 +386,50 @@ public class ControlFlujo {
             registrarSalida = new RegistrarSalida();
         
         cambiarPantalla(registrarSalida);
+    }
+    
+    public static void mostrarMenuContrataciones() {
+        if (menuContrataciones == null) {
+            menuContrataciones = new MenuContrataciones();
+        }
+        cambiarPantalla(menuContrataciones);
+    }
+    
+    public static void mostrarRegistrarCandidato() {
+        if (registrarCandidato == null) {
+            registrarCandidato = new RegistrarCandidato();
+        }
+        cambiarPantalla(registrarCandidato);
+    }
+    
+    public static void mostrarSeleccionarCandidatoEvaluacion() {
+        if (seleccionarCandidatoEvaluacion == null) {
+            seleccionarCandidatoEvaluacion = new SeleccionarCandidatoEvaluacion();
+        }
+        seleccionarCandidatoEvaluacion.limpiarCampos();
+        cambiarPantalla(seleccionarCandidatoEvaluacion);
+    }
+    
+    public static void mostrarCapturarDatosEvaluacion(CandidatoDTO candidato) {
+        if (capturarDatosEvaluacion == null) {
+            capturarDatosEvaluacion = new CapturarDatosEvaluacion();
+        }
+        capturarDatosEvaluacion.setCandidato(candidato);
+        cambiarPantalla(capturarDatosEvaluacion);
+    }
+    
+    public static void mostrarSeleccionarEmpleadoContrato() {
+        if (seleccionarEmpleadoContrato == null) {
+            seleccionarEmpleadoContrato = new SeleccionarEmpleadoContrato();
+        }
+        cambiarPantalla(seleccionarEmpleadoContrato);
+    }
+
+    public static void mostrarCapturarDatosContrato(EmpleadoDTO empleado) {
+        if (capturarDatosContrato == null) {
+            capturarDatosContrato = new CapturarDatosContrato();
+        }
+        capturarDatosContrato.setEmpleado(empleado);
+        cambiarPantalla(capturarDatosContrato);
     }
 }

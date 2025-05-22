@@ -5,7 +5,7 @@
 package PanelesRegistroEmpleado;
 
 import Controles.ControlCampos;
-import Controles.ControlFlujoRegistro;
+import Controles.ControlFlujo;
 import Controles.ControlRegistro;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
@@ -564,7 +564,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void btnCancelar() {
-        ControlFlujoRegistro.mostrarMenuContrataciones();
+        ControlFlujo.mostrarMenuContrataciones();
     }
 
     private void btnRegistrar() {
@@ -595,7 +595,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
 
             ControlRegistro.getInstance().registrarCandidato(candidato);
             OptionPane.showInfoMessage(this, "¡Candidato registrado exitosamente!", "Éxito");
-            ControlFlujoRegistro.mostrarMenuContrataciones();
+            ControlFlujo.mostrarMenuContrataciones();
         } catch (PresentacionException ex) {
             Logger.getLogger(RegistrarCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             OptionPane.showErrorMessage(this, ex.getMessage(), "Error");

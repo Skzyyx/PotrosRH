@@ -4,7 +4,7 @@
  */
 package PanelesRegistroEmpleado;
 
-import Controles.ControlFlujoRegistro;
+import Controles.ControlFlujo;
 import Controles.ControlRegistro;
 import Excepciones.PresentacionException;
 import dto.CandidatoDTO;
@@ -16,8 +16,6 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
@@ -481,7 +479,7 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
     }
 
     private void btnVolver() {
-        ControlFlujoRegistro.mostrarMenuContrataciones();
+        ControlFlujo.mostrarMenuContrataciones();
         limpiarCampos();
         llenarTabla();
     }
@@ -495,7 +493,7 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
         candidato.setRfc(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         try {
             candidato = ControlRegistro.getInstance().obtenerCandidato(candidato);
-            ControlFlujoRegistro.mostrarCapturarDatosEvaluacion(candidato);
+            ControlFlujo.mostrarCapturarDatosEvaluacion(candidato);
         } catch (PresentacionException ex) {
             Logger.getLogger(SeleccionarCandidatoEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
         }

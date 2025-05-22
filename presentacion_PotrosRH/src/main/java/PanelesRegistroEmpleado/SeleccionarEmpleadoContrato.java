@@ -4,11 +4,9 @@
  */
 package PanelesRegistroEmpleado;
 
-import Controles.ControlFlujoRegistro;
+import Controles.ControlFlujo;
 import Controles.ControlRegistro;
 import Excepciones.PresentacionException;
-import dto.CandidatoDTO;
-import dto.CandidatoFiltroDTO;
 import dto.EmpleadoDTO;
 import dto.EmpleadoFiltroDTO;
 import java.awt.Dimension;
@@ -480,7 +478,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
     }
 
     private void btnVolver() {
-        ControlFlujoRegistro.mostrarMenuContrataciones();
+        ControlFlujo.mostrarMenuContrataciones();
         limpiarCampos();
         llenarTabla();
     }
@@ -495,7 +493,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
         try {
             empleado = ControlRegistro.getInstance().obtenerEmpleado(empleado);
             System.out.println(empleado.toString());
-            ControlFlujoRegistro.mostrarCapturarDatosContrato(empleado);
+            ControlFlujo.mostrarCapturarDatosContrato(empleado);
         } catch (PresentacionException ex) {
             Logger.getLogger(SeleccionarEmpleadoContrato.class.getName()).log(Level.SEVERE, null, ex);
         }

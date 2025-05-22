@@ -5,7 +5,6 @@
 package PanelesRegistroEmpleado;
 
 import Controles.ControlFlujo;
-import Controles.ControlFlujoRegistro;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -190,15 +189,15 @@ public class MenuContrataciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAñadirCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCandidatoActionPerformed
-        ControlFlujoRegistro.mostrarRegistrarCandidato();
+        ControlFlujo.mostrarRegistrarCandidato();
     }//GEN-LAST:event_btnAñadirCandidatoActionPerformed
 
     private void btnEvaluarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEvaluarCandidatoActionPerformed
-        ControlFlujoRegistro.mostrarSeleccionarCandidatoEvaluacion();
+        ControlFlujo.mostrarSeleccionarCandidatoEvaluacion();
     }//GEN-LAST:event_btnEvaluarCandidatoActionPerformed
 
     private void btnGenerarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarContratoActionPerformed
-        ControlFlujoRegistro.mostrarSeleccionarEmpleadoContrato();
+        ControlFlujo.mostrarSeleccionarEmpleadoContrato();
     }//GEN-LAST:event_btnGenerarContratoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

@@ -1,11 +1,6 @@
 package Frame;
 
 import Controles.ControlFlujo;
-import Controles.ControlFlujoRegistro;
-import PanelesCasoBase.BusquedaEmpleado;
-import PanelesCasoBase.MenuPrincipal;
-import PanelesCasoBase.PrevisualizarEmpleado;
-import PanelesCasoBase.PrevisualizarNomina;
 import javax.swing.JPanel;
 
 /**
@@ -29,7 +24,6 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         ControlFlujo.setContenedor(contenedor);
-        ControlFlujoRegistro.setContenedor(contenedor);
         ControlFlujo.mostrarMenuPrincipal();
         setTitle("PotrosRH System Ver. 1.0");
     }
