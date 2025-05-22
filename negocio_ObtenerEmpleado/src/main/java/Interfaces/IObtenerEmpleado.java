@@ -6,7 +6,7 @@ import dto.EmpleadoFiltroDTO;
 import java.util.List;
 
 /**
- *
+ * 
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -35,6 +35,14 @@ public interface IObtenerEmpleado {
      * @throws ObtenerEmpleadoException Excepción del subsistema.
      */
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
+    /**
+     * Obtiene un empleado activo a partir de su RFC, cuyo departamento es
+     * igual a Recursos Humanos.
+     * @param empleado Empleado con RFC de búsqueda.
+     * @return Empleado de recursos humanos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
     
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException;
 }

@@ -57,7 +57,18 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
         return new ControlObtenerEmpleado().obtenerEmpleadoActivo(empleado);
     }
-   
+    /**
+     * Obtiene un empleado activo a partir de su RFC, cuyo departamento es
+     * igual a Recursos Humanos.
+     * @param empleado Empleado con RFC de búsqueda.
+     * @return Empleado de recursos humanos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    @Override
+    public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
+        return new ControlObtenerEmpleado().obtenerEmpleadoRH(empleado);
+    }
+    
     @Override
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException {
         return new ControlObtenerEmpleado().obtenerTodosSinContrato(filtro);
