@@ -71,6 +71,23 @@ public class Candidato {
         this.habilidadesClave = habilidadesClave;
     }
 
+    /**
+     * Constructor con todos los atributos excepto el id, que se generará automáticamente.
+     * 
+     * @param nombre Nombre del candidato
+     * @param apellidoPaterno Apellido paterno del candidato
+     * @param apellidoMaterno Apellido materno del candidato
+     * @param rfc RFC del candidato
+     * @param curp CURP del candidato
+     * @param email Correo electrónico del candidato
+     * @param telefono Número telefónico del candidato
+     * @param fechaNacimiento Fecha de Nacimiento del candidato
+     * @param sexo Sexo del candidato
+     * @param direccion Direccion del candidato
+     * @param experiencia Descripción de la experiencia laboral del candidato
+     * @param nivelEstudio Nivel de estudios del candidato
+     * @param habilidadesClave Habilidades clave del candidato
+     */
     public Candidato(String nombre, String apellidoPaterno, String apellidoMaterno, String rfc, String curp, String email, String telefono, LocalDate fechaNacimiento, Sexo sexo, Direccion direccion, String experiencia, String nivelEstudio, String habilidadesClave) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -177,10 +194,20 @@ public class Candidato {
         this.rfc = rfc;
     }
 
+    /**
+     * Obtiene la CURP del candidato.
+     * 
+     * @return CURP del candidato
+     */
     public String getCurp() {
         return curp;
     }
 
+    /**
+     * Establece la CURP del candidato.
+     * 
+     * @param curp Nueva CURP del candidato
+     */
     public void setCurp(String curp) {
         this.curp = curp;
     }

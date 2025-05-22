@@ -70,6 +70,21 @@ public class Contrato {
         this.horarios = horarios;
     }
     
+    /**
+     * Constructor con todos los atributos excepto el id, que se generará automáticamente.
+     * 
+     * @param departamento Departamento asignado
+     * @param tipoContrato Tipo de contrato
+     * @param lugarTrabajo Ubicación del trabajo
+     * @param fechaInicio Fecha de inicio del contrato
+     * @param fechaFin Fecha de finalización del contrato
+     * @param puesto Puesto o cargo asignado
+     * @param sueldo Salario acordado
+     * @param periodoPago Periodicidad del pago
+     * @param modoPago Método de pago
+     * @param empleado Empleado asociado al contrato
+     * @param horarios Conjunto de horarios laborales
+     */
     public Contrato(String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
         this.departamento = departamento;
         this.tipoContrato = tipoContrato;
@@ -264,10 +279,20 @@ public class Contrato {
         this.modoPago = modoPago;
     }
 
+    /**
+     * Obtiene el empleado asociado al contrato.
+     * 
+     * @return Empleado asociado al contrato
+     */
     public Empleado getEmpleado() {
         return empleado;
     }
 
+    /**
+     * Establece el empleado asociado al contrato.
+     * 
+     * @param empleado Nuevo empleado asociado al contrato
+     */
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }

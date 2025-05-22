@@ -38,7 +38,6 @@ public class Evaluacion {
      * @param candidato Candidato evaluado
      * @param preguntas Conjunto de preguntas realizadas
      */
-    
     public Evaluacion(ObjectId id, LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, String puntuacionesClave, String notas, Candidato candidato, Set<Pregunta> preguntas) {
         this.id = id;
         this.fechaHoraEvaluacion = fechaHoraEvaluacion;
@@ -49,6 +48,17 @@ public class Evaluacion {
         this.preguntas = preguntas;
     }
 
+    /**
+     * Constructor con todos los atributos excepto el id, que se generará
+     * automáticamente.
+     *
+     * @param fechaHoraEvaluacion Fecha y hora de la evaluación
+     * @param resultado Resultado de la evaluación
+     * @param puntuacionesClave Puntuaciones clave obtenidas en la evaluación
+     * @param notas Notas adicionales sobre la evaluación
+     * @param candidato Candidato evaluado
+     * @param preguntas Conjunto de preguntas realizadas
+     */
     public Evaluacion(LocalDateTime fechaHoraEvaluacion, ResultadoEvaluacion resultado, String puntuacionesClave, String notas, Candidato candidato, Set<Pregunta> preguntas) {
         this.fechaHoraEvaluacion = fechaHoraEvaluacion;
         this.resultado = resultado;
@@ -112,18 +122,38 @@ public class Evaluacion {
         this.resultado = resultado;
     }
 
+    /**
+     * Obtiene las puntuaciones clave de la evaluación.
+     *
+     * @return Puntuaciones clave de la evaluación
+     */
     public String getPuntuacionesClave() {
         return puntuacionesClave;
     }
 
+    /**
+     * Establece las puntuaciones clave de la evaluación.
+     *
+     * @param puntuacionesClave Nuevas puntuaciones clave de la evaluación
+     */
     public void setPuntuacionesClave(String puntuacionesClave) {
         this.puntuacionesClave = puntuacionesClave;
     }
 
+    /**
+     * Obtiene las notas adicionales de la evaluación.
+     *
+     * @return Notas adicionales de la evaluación
+     */
     public String getNotas() {
         return notas;
     }
 
+    /**
+     * Establece las notas adicionales de la evaluación.
+     *
+     * @param notas Nuevas notas adicionales de la evaluación
+     */
     public void setNotas(String notas) {
         this.notas = notas;
     }
@@ -176,6 +206,8 @@ public class Evaluacion {
         sb.append("id=").append(id);
         sb.append(", fechaHoraEvaluacion=").append(fechaHoraEvaluacion);
         sb.append(", resultado=").append(resultado);
+        sb.append(", puntuacionesClave=").append(puntuacionesClave);
+        sb.append(", notas=").append(notas);
         sb.append(", candidato=").append(candidato);
         sb.append(", preguntas=").append(preguntas);
         sb.append('}');

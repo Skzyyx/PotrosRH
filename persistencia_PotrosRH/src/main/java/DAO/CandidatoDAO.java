@@ -13,14 +13,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.InsertOneResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 /**
  * Esta clase implementa la interfaz ICandidatoDAO y proporciona métodos para
@@ -122,6 +120,14 @@ public class CandidatoDAO implements ICandidatoDAO {
         }
     }
 
+    /**
+     * Recupera candidatos que cumplen con los criterios especificados en el pipeline
+     * de agregación y que no tienen evaluaciones con resultado APROBADO.
+     *
+     * @param pipelines Lista de etapas de agregación para filtrar candidatos
+     * @return Lista de candidatos que cumplen con los criterios de filtrado
+     * @throws AccesoDatosException Si ocurre un error al consultar la base de datos
+     */
     @Override
     public List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException {
 
@@ -133,7 +139,7 @@ public class CandidatoDAO implements ICandidatoDAO {
 
             return candidatosCollection.aggregate(pipelines, Candidato.class).into(new ArrayList<>());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, null, e);
             throw new AccesoDatosException("Error al consultar los candidatos sin evaluaciones.");
         }
     }

@@ -6,7 +6,7 @@ package Enums;
 
 /**
  *
- * @author skyro
+ * @author Jose Luis Islas Molina 252574
  */
 public enum PeriodoPago {
     SEMANAL,
