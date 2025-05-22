@@ -4,7 +4,7 @@
  */
 package PanelesRegistroEmpleado;
 
-import Controles.ControlFlujoRegistro;
+import Controles.ControlFlujo;
 import Controles.ControlRegistro;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
@@ -336,7 +336,7 @@ public class CapturarDatosEvaluacion extends javax.swing.JPanel {
 
         if (result == JOptionPane.OK_OPTION) {
             candidato = null;
-            ControlFlujoRegistro.mostrarSeleccionarCandidatoEvaluacion();
+            ControlFlujo.mostrarSeleccionarCandidatoEvaluacion();
         }
     }
 
@@ -357,7 +357,7 @@ public class CapturarDatosEvaluacion extends javax.swing.JPanel {
             evaluacion.setPreguntas(obtenerPreguntas());
             ControlRegistro.getInstance().registrarEvaluacion(evaluacion);
             OptionPane.showInfoMessage(this, "Evaluación registrada exitosamente", "Éxito");
-            ControlFlujoRegistro.mostrarSeleccionarCandidatoEvaluacion();
+            ControlFlujo.mostrarSeleccionarCandidatoEvaluacion();
         } catch (PresentacionException ex) {
             Logger.getLogger(CapturarDatosEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
         }

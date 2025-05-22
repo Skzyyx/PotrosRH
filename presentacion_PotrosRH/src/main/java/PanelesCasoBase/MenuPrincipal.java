@@ -1,7 +1,6 @@
 package PanelesCasoBase;
 
 import Controles.ControlFlujo;
-import Controles.ControlFlujoRegistro;
 import OptionPane.OptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -267,7 +266,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        ControlFlujoRegistro.mostrarMenuContrataciones();
+        ControlFlujo.mostrarMenuContrataciones();
     }//GEN-LAST:event_btnContratacionesActionPerformed
 
     private void btnDespedirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespedirEmpleadoActionPerformed
