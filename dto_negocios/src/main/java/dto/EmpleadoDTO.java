@@ -172,10 +172,20 @@ public class EmpleadoDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     * Obtiene el sexo del empleado.
+     * 
+     * @return Sexo del empleado
+     */
     public String getSexo() {
         return sexo;
     }
 
+    /**
+     * Establece el sexo del empleado.
+     * 
+     * @param sexo Nuevo sexo del empleado
+     */
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
@@ -396,6 +406,11 @@ public class EmpleadoDTO {
         this.horariosLaborales = horariosLaborales;
     }
 
+    /**
+     * Regresa una cadena con la información relevante del empleado.
+     *
+     * @return Cadena con la información relevante del empleado.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -420,12 +435,5 @@ public class EmpleadoDTO {
         sb.append(", horariosLaborales=").append(horariosLaborales);
         sb.append('}');
         return sb.toString();
-    }
-
-    /**
-     * Regresa una cadena con la información relevante del empleado.
-     *
-     * @return Cadena con la información relevante del empleado.
-     */
-    
+    } 
 }

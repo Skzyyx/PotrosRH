@@ -50,6 +50,16 @@ public interface ICandidatoDAO {
      * @throws AccesoDatosException Si ocurre un error durante la consulta
      */
     List<Candidato> obtenerTodos() throws AccesoDatosException;
-    
+
+    /**
+     * Recupera candidatos que cumplen con los criterios especificados en el
+     * pipeline de agregación y que no tienen evaluaciones con resultado
+     * APROBADO.
+     *
+     * @param pipelines Lista de etapas de agregación para filtrar candidatos
+     * @return Lista de candidatos que cumplen con los criterios de filtrado
+     * @throws AccesoDatosException Si ocurre un error al consultar la base de
+     * datos
+     */
     List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException;
 }

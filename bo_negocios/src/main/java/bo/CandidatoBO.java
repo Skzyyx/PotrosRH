@@ -23,18 +23,36 @@ import mappers.CandidatoMapper;
 import org.bson.conversions.Bson;
 
 /**
+ * Objeto de negocio CandidatoBO. Implementa la interfaz ICandidatoBO y
+ * proporciona la lógica de negocio para gestionar candidatos en el sistema.
+ * Actúa como intermediario entre la capa de presentación y la capa de acceso a
+ * datos, aplicando reglas de negocio y validaciones.
  *
- * @author skyro
+ * @author Jose Luis Islas Molina 252574
  */
 public class CandidatoBO implements ICandidatoBO {
 
+    /**
+     * Instancia única de la clase (patrón Singleton).
+     */
     private static CandidatoBO instance;
 
+    /**
+     * Objeto DAO para operaciones CRUD con Candidatos.
+     */
     private ICandidatoDAO candidatoDAO = new CandidatoDAO();
 
+    /**
+     * Constructor privado para implementar el patrón Singleton.
+     */
     private CandidatoBO() {
     }
 
+    /**
+     * Método para obtener la instancia única de la clase (patrón Singleton).
+     *
+     * @return Instancia única de CandidatoBO
+     */
     public static synchronized ICandidatoBO getInstance() {
         if (instance == null) {
             instance = new CandidatoBO();
@@ -42,6 +60,15 @@ public class CandidatoBO implements ICandidatoBO {
         return instance;
     }
 
+    /**
+     * Registra un nuevo candidato en el sistema.
+     *
+     * @param candidato El objeto CandidatoDTO con la información del candidato
+     * a registrar
+     * @return El objeto CandidatoDTO registrado, con identificadores generados
+     * @throws ObjetosNegocioException Si ocurre un error durante el registro o
+     * si ya existe un candidato con el mismo RFC
+     */
     @Override
     public CandidatoDTO registrarCandidato(CandidatoDTO candidato) throws ObjetosNegocioException {
         if (candidato == null) {
@@ -57,6 +84,13 @@ public class CandidatoBO implements ICandidatoBO {
         }
     }
 
+    /**
+     * Busca y recupera un candidato según su RFC.
+     *
+     * @param candidato El objeto CandidatoDTO con el RFC del candidato a buscar
+     * @return El objeto CandidatoDTO encontrado, o null si no existe
+     * @throws ObjetosNegocioException Si ocurre un error durante la consulta
+     */
     @Override
     public CandidatoDTO obtenerCandidato(CandidatoDTO candidato) throws ObjetosNegocioException {
         try {
@@ -67,6 +101,12 @@ public class CandidatoBO implements ICandidatoBO {
         }
     }
 
+    /**
+     * Recupera todos los candidatos almacenados en el sistema.
+     *
+     * @return Una lista con todos los objetos CandidatoDTO disponibles
+     * @throws ObjetosNegocioException Si ocurre un error durante la consulta
+     */
     @Override
     public List<CandidatoDTO> obtenerTodos() throws ObjetosNegocioException {
         try {
@@ -77,6 +117,14 @@ public class CandidatoBO implements ICandidatoBO {
         }
     }
 
+    /**
+     * Recupera candidatos que cumplen con los criterios de filtrado
+     * especificados.
+     *
+     * @param filtro Objeto CandidatoFiltroDTO con los criterios de filtrado
+     * @return Lista de objetos CandidatoDTO que cumplen con los criterios
+     * @throws ObjetosNegocioException Si ocurre un error durante la consulta
+     */
     @Override
     public List<CandidatoDTO> obtenerPorFiltro(CandidatoFiltroDTO filtro) throws ObjetosNegocioException {
         List<Bson> filters = new ArrayList<>();
