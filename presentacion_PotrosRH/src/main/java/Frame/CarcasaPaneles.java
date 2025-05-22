@@ -24,7 +24,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         ControlFlujo.setContenedor(contenedor);
-        ControlFlujo.mostrarMenuPrincipal();
+        ControlFlujo.mostrarInicioSesion();
         setTitle("PotrosRH System Ver. 1.0");
     }
 

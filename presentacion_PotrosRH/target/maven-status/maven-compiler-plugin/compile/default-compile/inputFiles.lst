@@ -1,41 +1,41 @@
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\RegistrarSalida.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\RegistroDatosGenerales.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\ConfirmacionDespido.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\RegistrarEntrada.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlReportes.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Excepciones\PresentacionException.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlAsistencia.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\OptionPane\OptionPane.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\RegistrarCandidato.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\JTextLimit.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DatosGenerales.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Frame\CarcasaPaneles.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\BusquedaEmpleadoDespedir.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\BuscarReporte.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\CapturarDatosContrato.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarEmpleado.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarNomina.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\PrevisualizarEmpleadoDespedir.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlFlujo.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Enums\EstadoConfirmacionMalaConducta.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\AnalisisInicialEInvestigacion.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Enums\Bonos.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\CapturarDatosEvaluacion.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlCampos.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\MotivoOmisionMalaConducta.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\LogIn.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\MenuPrincipal.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\MenuContrataciones.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DeterminacionCaso.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\SeleccionarEmpleadoContrato.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlDespido.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\BusquedaEmpleado.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DescripcionIncidente.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\ImpactoIncidente.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\ConfirmacionMalaConducta.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Pruebas\Pruebas.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlNomina.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\SubmenuReportesMalaConducta.java
-C:\Users\skyro\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlRegistro.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlRegistro.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlAsistencia.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\IniciarSesion.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\SeleccionarEmpleadoContrato.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DatosGenerales.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\CapturarDatosContrato.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\AnalisisInicialEInvestigacion.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DeterminacionCaso.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlFlujo.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\DescripcionIncidente.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\JTextLimit.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Enums\Bonos.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlReportes.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\SubmenuRegistrarAsistencia.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\SubmenuReportesMalaConducta.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\BuscarReporte.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\MenuContrataciones.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlCampos.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\RegistrarEntrada.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\OptionPane\OptionPane.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistrarAsistencia\RegistrarSalida.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\MenuPrincipal.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\PrevisualizarEmpleadoDespedir.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarNomina.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\CapturarDatosEvaluacion.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\BusquedaEmpleadoDespedir.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\ImpactoIncidente.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Frame\CarcasaPaneles.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\BusquedaEmpleado.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Excepciones\PresentacionException.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Enums\EstadoConfirmacionMalaConducta.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesCasoBase\PrevisualizarEmpleado.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\RegistroDatosGenerales.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlDespido.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesDespidos\ConfirmacionDespido.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\MotivoOmisionMalaConducta.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Controles\ControlNomina.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesRegistroEmpleado\RegistrarCandidato.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\PanelesReportes\ConfirmacionMalaConducta.java
+C:\Users\PC WHITE WOLF\Documents\GitHub\PotrosRH\presentacion_PotrosRH\src\main\java\Pruebas\Pruebas.java

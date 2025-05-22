@@ -1,5 +1,6 @@
 package PanelesDespidos;
 
+import Controles.ControlCampos;
 import Controles.ControlDespido;
 import Controles.ControlFlujo;
 import Excepciones.PresentacionException;
@@ -26,7 +27,11 @@ public class BusquedaEmpleadoDespedir extends javax.swing.JPanel {
     /**
      * Creates new form BusquedaRFCNomina
      */
-    public BusquedaEmpleadoDespedir() {initComponents();}
+    public BusquedaEmpleadoDespedir() {
+        initComponents();
+        ControlCampos.configurarCamposRFC(txtRfc);
+        ControlCampos.limiteCaracteresCampoTexto(txtRfc, 13);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

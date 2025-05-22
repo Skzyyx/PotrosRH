@@ -244,9 +244,17 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             if(!(jTRFCReportado.getText() != null && !jTRFCReportado.getText().trim().isEmpty()))
                 throw new PresentacionException("Ingrese el RFC del empleado reportado.");
             
+            // Si el RFC del empleado reportante no es válido.
+             if (!(jTRFCReportado.getText().trim().matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && jTRFCReportado.getText().trim().length() == 13))
+                throw new PresentacionException("RFC del empleado reportado no válido.");
+            
             // Si el campo del RFC del empleado reportante está vacío.
-            if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
+            if(!(jTRFCReportante.getText().trim() != null && !jTRFCReportante.getText().trim().isEmpty() && jTRFCReportante.getText().trim().length() == 13))
                 throw new PresentacionException("Ingrese el RFC del empleado reportante.");
+            
+            // Si el RFC del empleado reportante no es válido.
+            if (!(jTRFCReportante.getText().trim().matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$")))
+                throw new PresentacionException("RFC del empleado reportado no válido.");
             
             if(jTRFCReportado.getText().trim().equals(jTRFCReportante.getText().trim()))
                 throw new PresentacionException("El RFC de ambos empleados está duplicado. Ingrese un RFC distinto para cada uno.");
@@ -264,11 +272,11 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             
             // Se obtiene el RFC del empleado reportado.
             EmpleadoDTO empleadoReportado = new EmpleadoDTO();
-            empleadoReportado.setRfc(jTRFCReportado.getText());
+            empleadoReportado.setRfc(jTRFCReportado.getText().trim().toUpperCase());
             
             // Se se obtiene el RFC del empleado reportante.
             EmpleadoDTO empleadoReportante = new EmpleadoDTO();
-            empleadoReportante.setRfc(jTRFCReportante.getText());
+            empleadoReportante.setRfc(jTRFCReportante.getText().trim().toUpperCase());
             
             // Se se ha seleccionado una fecha y hora posterior a la actual.
             if(fechaHoraSeleccionada.isAfter(LocalDateTime.now()))

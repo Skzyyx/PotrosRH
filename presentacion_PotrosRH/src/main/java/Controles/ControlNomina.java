@@ -3,7 +3,6 @@ package Controles;
 import Excepciones.ObtenerEmpleadoException;
 import Excepciones.PresentacionException;
 import Exceptions.GenerarNominaException;
-import Control.ControlGenerarNomina;
 import Interfaces.IGenerarNomina;
 import Interfaces.IObtenerEmpleado;
 import Excepciones.ValidarEmpleadoException;
@@ -30,10 +29,7 @@ public class ControlNomina {
 
     private static ControlNomina instance;
     
-    private EmpleadoDTO empleadoDTO;
-    private NominaDTO nominaDTO;
-    
-    private IGenerarNomina generarNomina = GenerarNomina.getInstance();
+    private final IGenerarNomina generarNomina = GenerarNomina.getInstance();
     private final IObtenerEmpleado obtenerEmpleado = ObtenerEmpleado.getInstance();
     private final IValidarEmpleado validarEmpleado = ValidarEmpleado.getInstance();
     /**
@@ -44,12 +40,7 @@ public class ControlNomina {
     * que la clase siga un patrón de diseño como el Singleton, evitando múltiples 
     * instancias de la clase.
     */
-    private ControlNomina() {
-        this.empleadoDTO = new EmpleadoDTO();
-        this.nominaDTO = new NominaDTO();
-        this.generarNomina = new ControlGenerarNomina();
-
-    }
+    private ControlNomina() {}
     /**
     * Obtiene la instancia única de la clase ControlNomina.
     * 
@@ -58,9 +49,8 @@ public class ControlNomina {
     * @return La instancia única de la clase ControlNomina.
     */
     public static ControlNomina getInstance() {
-        if (instance == null) {
+        if (instance == null) 
             instance = new ControlNomina();
-        }
         return instance;
     }
     /**
@@ -103,9 +93,7 @@ public class ControlNomina {
     */
     public NominaDTO generarNomina(EmpleadoDTO empleado) throws PresentacionException {
         try {
-            NominaDTO nomina  = generarNomina.generarNomina(empleado);
-            nominaDTO = nomina;
-            return nomina;
+            return generarNomina.generarNomina(empleado);
         } catch (GenerarNominaException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Error: " + ex.getMessage());
@@ -126,7 +114,7 @@ public class ControlNomina {
     */    
     public NominaDTO guardarNomina(NominaDTO nomina) throws PresentacionException {
         try {
-            return generarNomina.guardarNomina(nominaDTO);
+            return generarNomina.guardarNomina(nomina);
         } catch (GenerarNominaException ex) {
             Logger.getLogger(ControlNomina.class.getName()).log(Level.SEVERE, null, ex);
             throw new PresentacionException("Error: " + ex.getMessage());

@@ -32,6 +32,7 @@ public class BusquedaEmpleado extends javax.swing.JPanel {
     public BusquedaEmpleado() {
         initComponents();
         ControlCampos.limiteCaracteresCampoTexto(txtRfc, 13);
+        ControlCampos.configurarCamposRFC(txtRfc);
     }
 
     /**

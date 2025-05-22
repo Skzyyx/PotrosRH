@@ -27,27 +27,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnContrataciones" min="-2" pref="385" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnDespedirEmpleado" min="-2" pref="385" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnNominas" min="-2" pref="385" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnExpedientes" min="-2" pref="385" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAsistencias" min="-2" pref="385" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnReportarEmpleado" min="-2" pref="385" max="-2" attributes="0"/>
+                  <Component id="btnSalir" min="-2" pref="193" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnContrataciones" min="-2" pref="385" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnDespedirEmpleado" min="-2" pref="385" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnNominas" min="-2" pref="385" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnExpedientes" min="-2" pref="385" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnAsistencias" min="-2" pref="385" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnReportarEmpleado" min="-2" pref="385" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -77,7 +80,9 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="200" max="32767" attributes="0"/>
+              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <Component id="btnSalir" min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,5 +269,28 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnSalir">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI Black" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="btnSalir.setBorderPainted(false);&#xa;btnSalir.setContentAreaFilled(false);&#xa;btnSalir.setOpaque(false);&#xa;btnSalir.setUI(new javax.swing.plaf.basic.BasicButtonUI() {&#xa;    @Override&#xa;    public void paint(Graphics g, JComponent c) {&#xa;        Graphics2D g2 = (Graphics2D) g.create();&#xa;        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);&#xa;        // Pinta un fondo redondeado&#xa;        g2.setColor(c.getBackground());&#xa;        g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 50, 50);&#xa;        super.paint(g2, c);&#xa;        g2.dispose();&#xa;    }&#xa;});"/>
+      </AuxValues>
+    </Component>
   </SubComponents>
 </Form>

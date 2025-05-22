@@ -2,6 +2,7 @@ package Controles;
 
 import Excepciones.PresentacionException;
 import PanelesCasoBase.BusquedaEmpleado;
+import PanelesCasoBase.IniciarSesion;
 import PanelesDespidos.BusquedaEmpleadoDespedir;
 import PanelesDespidos.ConfirmacionDespido;
 import PanelesCasoBase.MenuPrincipal;
@@ -48,7 +49,9 @@ public class ControlFlujo {
 
     private static JPanel panelContenedor;
     private static JPanel panelActual;
-
+    // Pantalla de inicio de sesión del sistema.
+    private static IniciarSesion inicioSesion;
+    // Menu principal del sistema.
     private static MenuPrincipal menuPrincipal;
     //CU: Nómina de empleado
     private static BusquedaEmpleado busquedaEmpleado;
@@ -79,7 +82,19 @@ public class ControlFlujo {
     private static CapturarDatosEvaluacion capturarDatosEvaluacion;
     private static SeleccionarEmpleadoContrato seleccionarEmpleadoContrato;
     private static CapturarDatosContrato capturarDatosContrato;
-
+    /**
+     * Muestra la página de inicio de sesión.
+     */
+    public static void mostrarInicioSesion(){
+        
+        if(menuPrincipal != null)
+            menuPrincipal = null;
+        
+        if(inicioSesion == null)
+            inicioSesion = new IniciarSesion();
+        cambiarPantalla(inicioSesion);
+    }
+    
     /**
      * Muestra la pantalla del menú principal de la aplicación.
      *
@@ -87,6 +102,10 @@ public class ControlFlujo {
      * Luego, se cambia la pantalla actual para mostrar dicha vista.
      */
     public static void mostrarMenuPrincipal() {
+        
+        if(inicioSesion != null)
+            inicioSesion = null;
+        
         if (menuPrincipal == null) {
             menuPrincipal = new MenuPrincipal();
         }

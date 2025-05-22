@@ -74,7 +74,7 @@ public class ControlObtenerEmpleado {
         // Se extrae el RFC del empleado.
         String rfc = empleado.getRfc();   
         
-        if (!(rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() <= 13))
+        if (!(rfc.matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && rfc.length() == 13))
             throw new ObtenerEmpleadoException("RFC no válido");
     }
     
