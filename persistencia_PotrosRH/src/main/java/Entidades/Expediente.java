@@ -6,181 +6,263 @@ package Entidades;
  */
 import org.bson.types.ObjectId;
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Representa el expediente laboral de un empleado
  * Contiene datos personales, laborales, contrato y nómina, que son necesarios 
  * para construir el expediente laboral de un empleado
  */
+
 public class Expediente {
-
-    /**
-     * Identificador único del expediente para la base de datos
-     */
+    
     private ObjectId id;
+    private String nombreCompleto;
+    private LocalDate fechaNacimiento;
+    private String correoElectronico;
+    private String rfc;
+    private String puesto;
+    private String departamento;
+    private LocalDate fechaIngreso;
+    private double sueldoBase;
 
     /**
-     * Datos personales del empleado
-     */
-    private Empleado empleado;
-
-    /**
-     * Datos del contrato
-     */
-    private Contrato contrato;
-
-    /**
-     * Historial de nóminas del empleado
-     */
-    private List<Nomina> historialNominas;
-
-    /**
-     * Fecha de creación del expediente
-     */
-    private LocalDate fechaCreacion;
-
-    /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public Expediente() {
     }
 
     /**
-     * Constructor que recibe todos los atributos del expediente
-     *
+     * Constructor con todos los atributos, incluyendo el ID.
+     * 
      * @param id Identificador único del expediente
-     * @param empleado Datos personales del empleado
-     * @param contrato Datos del contrato laboral
-     * @param historialNominas Historial de nóminas del empleado
-     * @param fechaCreacion Fecha de creación del expediente
+     * @param nombreCompleto Nombre completo del empleado
+     * @param fechaNacimiento Fecha de nacimiento del empleado
+     * @param correoElectronico Correo electrónico del empleado
+     * @param rfc RFC del empleado
+     * @param puesto Puesto que ocupa el empleado
+     * @param departamento Departamento en el que trabaja el empleado
+     * @param fechaIngreso Fecha de ingreso a la empresa
+     * @param sueldoBase Sueldo base del empleado
      */
-    public Expediente(ObjectId id, Empleado empleado, Contrato contrato, List<Nomina> historialNominas, LocalDate fechaCreacion) {
+    public Expediente(ObjectId id, String nombreCompleto, LocalDate fechaNacimiento, String correoElectronico, String rfc,
+                      String puesto, String departamento, LocalDate fechaIngreso, double sueldoBase) {
         this.id = id;
-        this.empleado = empleado;
-        this.contrato = contrato;
-        this.historialNominas = historialNominas;
-        this.fechaCreacion = fechaCreacion;
+        this.nombreCompleto = nombreCompleto;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoElectronico = correoElectronico;
+        this.rfc = rfc;
+        this.puesto = puesto;
+        this.departamento = departamento;
+        this.fechaIngreso = fechaIngreso;
+        this.sueldoBase = sueldoBase;
     }
-    
+
     /**
-     * Constructor sin el identificador único, pero si con los demás atributos
-     *
-     * @param empleado Datos personales del empleado
-     * @param contrato Datos del contrato laboral
-     * @param historialNominas Historial de nóminas del empleado
-     * @param fechaCreacion Fecha de creación del expediente
+     * Constructor sin ID (para registros nuevos).
+     * 
+     * @param nombreCompleto Nombre completo del empleado
+     * @param fechaNacimiento Fecha de nacimiento del empleado
+     * @param correoElectronico Correo electrónico del empleado
+     * @param rfc RFC del empleado
+     * @param puesto Puesto que ocupa el empleado
+     * @param departamento Departamento en el que trabaja el empleado
+     * @param fechaIngreso Fecha de ingreso a la empresa
+     * @param sueldoBase Sueldo base del empleado
      */
-    public Expediente(Empleado empleado, Contrato contrato, List<Nomina> historialNominas, LocalDate fechaCreacion) {
-        this.empleado = empleado;
-        this.contrato = contrato;
-        this.historialNominas = historialNominas;
-        this.fechaCreacion = fechaCreacion;
+    public Expediente(String nombreCompleto, LocalDate fechaNacimiento, String correoElectronico, String rfc,
+                      String puesto, String departamento, LocalDate fechaIngreso, double sueldoBase) {
+        this.nombreCompleto = nombreCompleto;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoElectronico = correoElectronico;
+        this.rfc = rfc;
+        this.puesto = puesto;
+        this.departamento = departamento;
+        this.fechaIngreso = fechaIngreso;
+        this.sueldoBase = sueldoBase;
     }
-    
+
     /**
-     * Obtiene el identificador único del expediente
+     * Obtiene el identificador único del expediente.
      *
-     * @return Retorna el identificador único del expediente
+     * @return El identificador único (ObjectId)
      */
     public ObjectId getId() {
         return id;
     }
 
     /**
-     * Setea/establece el identificador único del expediente
+     * Establece el identificador único del expediente.
      *
-     * @param id identificador único del expediente
+     * @param id Nuevo identificador único (ObjectId)
      */
     public void setId(ObjectId id) {
         this.id = id;
     }
 
     /**
-     * Obtiene los datos personales del empleado
+     * Obtiene el nombre completo del empleado.
      *
-     * @return Datos personales del empleado
+     * @return Nombre completo del empleado
      */
-    public Empleado getEmpleado() {
-        return empleado;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
     /**
-     * Establece los datos personales del empleado
+     * Establece el nombre completo del empleado.
      *
-     * @param empleado datos personales del empleado
+     * @param nombreCompleto Nuevo nombre completo del empleado
      */
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     /**
-     * Obtiene los datos del contrato laboral
+     * Obtiene la fecha de nacimiento del empleado.
      *
-     * @return Datos del contrato laboral
+     * @return Fecha de nacimiento del empleado
      */
-    public Contrato getContrato() {
-        return contrato;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     /**
-     * Establece los datos del contrato laboral
+     * Establece la fecha de nacimiento del empleado.
      *
-     * @param contrato datos del contrato laboral
+     * @param fechaNacimiento Nueva fecha de nacimiento del empleado
      */
-    public void setContrato(Contrato contrato) {
-        this.contrato = contrato;
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     /**
-     * Obtiene el historial de nóminas del empleado
+     * Obtiene el correo electrónico del empleado.
      *
-     * @return Lista con el historial de nóminas
+     * @return Correo electrónico del empleado
      */
-    public List<Nomina> getHistorialNominas() {
-        return historialNominas;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
     /**
-     * Establece el historial de nóminas del empleado
+     * Establece el correo electrónico del empleado.
      *
-     * @param historialNominas lista con el historial de nóminas
+     * @param correoElectronico Nuevo correo electrónico del empleado
      */
-    public void setHistorialNominas(List<Nomina> historialNominas) {
-        this.historialNominas = historialNominas;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
     /**
-     * Obtiene la fecha de creación del expediente
+     * Obtiene el RFC del empleado.
      *
-     * @return Fecha de creación del expediente
+     * @return RFC del empleado
      */
-    public LocalDate getFechaCreacion() {
-        return fechaCreacion;
+    public String getRfc() {
+        return rfc;
     }
 
     /**
-     * Establece la fecha de creación del expediente
+     * Establece el RFC del empleado.
      *
-     * @param fechaCreacion fecha de creación del expediente
+     * @param rfc Nuevo RFC del empleado
      */
-    public void setFechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
     /**
-     * Representación en cadena del expediente laboral
+     * Obtiene el puesto actual del empleado.
      *
-     * @return Cadena con la información relevante del expediente
+     * @return Puesto del empleado
+     */
+    public String getPuesto() {
+        return puesto;
+    }
+
+    /**
+     * Establece el puesto actual del empleado.
+     *
+     * @param puesto Nuevo puesto del empleado
+     */
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
+    /**
+     * Obtiene el departamento al que pertenece el empleado.
+     *
+     * @return Departamento del empleado
+     */
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * Establece el departamento al que pertenece el empleado.
+     *
+     * @param departamento Nuevo departamento del empleado
+     */
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    /**
+     * Obtiene la fecha de ingreso del empleado a la empresa.
+     *
+     * @return Fecha de ingreso del empleado
+     */
+    public LocalDate getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    /**
+     * Establece la fecha de ingreso del empleado a la empresa.
+     *
+     * @param fechaIngreso Nueva fecha de ingreso del empleado
+     */
+    public void setFechaIngreso(LocalDate fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    /**
+     * Obtiene el sueldo base del empleado.
+     *
+     * @return Sueldo base del empleado
+     */
+    public double getSueldoBase() {
+        return sueldoBase;
+    }
+
+    /**
+     * Establece el sueldo base del empleado.
+     *
+     * @param sueldoBase Nuevo sueldo base del empleado
+     */
+    public void setSueldoBase(double sueldoBase) {
+        this.sueldoBase = sueldoBase;
+    }
+
+
+    /**
+     * Devuelve una representación en cadena de texto del objeto Expediente.
+     * 
+     * @return Cadena con todos los atributos del expediente
      */
     @Override
     public String toString() {
-        return "ExpedienteLaboral{" +
-                "id=" + id +
-                ", empleado=" + empleado +
-                ", contrato=" + contrato +
-                ", historialNominas=" + historialNominas +
-                ", fechaCreacion=" + fechaCreacion +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Expediente{");
+        sb.append("id=").append(id);
+        sb.append(", nombreCompleto=").append(nombreCompleto);
+        sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", correoElectronico=").append(correoElectronico);
+        sb.append(", rfc=").append(rfc);
+        sb.append(", puesto=").append(puesto);
+        sb.append(", departamento=").append(departamento);
+        sb.append(", fechaIngreso=").append(fechaIngreso);
+        sb.append(", sueldoBase=").append(sueldoBase);
+        sb.append('}');
+        return sb.toString();
     }
 }
