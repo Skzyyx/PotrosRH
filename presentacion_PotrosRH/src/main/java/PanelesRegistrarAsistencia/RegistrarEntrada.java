@@ -240,7 +240,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     private void btnRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntradaActionPerformed
         try {
-            // Validar que tenemos un empleado
             if (this.empleadoEncontrado == null) {
                 JOptionPane.showMessageDialog(this, "Primero busque un empleado válido", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -264,6 +263,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ControlFlujo.mostrarSubmenuRegistrarAsistenia();
+        resetearFormulario();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoActionPerformed
@@ -292,7 +292,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                     LocalDate.now()
                 );
 
-                    jlblHoraDeEntradaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
+                jlblHoraDeEntradaEsperada.setText(horario.getHoraInicioTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
                 
 
                 btnRegistrarEntrada.setEnabled(true);

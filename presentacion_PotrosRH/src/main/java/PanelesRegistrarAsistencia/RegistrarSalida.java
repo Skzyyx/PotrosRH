@@ -264,6 +264,7 @@ public class RegistrarSalida extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ControlFlujo.mostrarSubmenuRegistrarAsistenia();
+        resetearFormulario();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoActionPerformed
@@ -295,7 +296,6 @@ public class RegistrarSalida extends javax.swing.JPanel {
                 jlblHoraDeSalidaEsperada.setText(horario.getHoraFinTurno().format(DateTimeFormatter.ofPattern("HH:mm")));
     
 
-                btnRegistrarSalida.setEnabled(true);
             } else {
                 ocultarTodo();
                 JOptionPane.showMessageDialog(this, "No se encontró empleado con ese RFC", "Error", JOptionPane.ERROR_MESSAGE);
