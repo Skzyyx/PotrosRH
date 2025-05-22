@@ -63,6 +63,25 @@ public class ControlObtenerEmpleado {
         } catch (ObjetosNegocioException ex) {throw new ObtenerEmpleadoException(ex.getMessage(), ex);}
     }
     /**
+     * Obtiene un empleado activo a partir de su RFC, cuyo departamento es
+     * igual a Recursos Humanos.
+     * @param empleado Empleado con RFC de búsqueda.
+     * @return Empleado de recursos humanos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObtenerEmpleadoException{
+        
+        validarEmpleadoRFC(empleado);
+        
+        try {
+            EmpleadoDTO empleadoEncontrado = empleadoBO.obtenerEmpleadoRH(empleado);
+            if(empleadoEncontrado == null)
+                throw new ObtenerEmpleadoException("No existe un empleado de recursos humanos registrado con el RFC recibido.");
+            else
+                return empleadoEncontrado;
+        } catch (ObjetosNegocioException ex) {throw new ObtenerEmpleadoException(ex.getMessage(), ex);}
+    }
+    /**
      * Valida el objeto EmpleadoDTO recibido y el RFC contenido en este.
      * @param empleado Empleado a validar.
      * @throws ObtenerEmpleadoException i el RFC es inválido o ocurre un error al obtener los datos.

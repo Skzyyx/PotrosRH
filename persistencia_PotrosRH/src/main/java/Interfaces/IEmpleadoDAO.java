@@ -44,15 +44,13 @@ public interface IEmpleadoDAO {
      * @throws AccesoDatosException Excepción del proyecto DAO.
      */
     public Empleado obtenerEmpleadoActivo(Empleado empleado) throws AccesoDatosException;
-
     /**
-     * Actualiza la información de un empleado existente en la base de datos.
-     *
-     * @param empleado Empleado con la información actualizada
-     * @throws AccesoDatosException Si ocurre un error durante la actualización
-     * o si el empleado no existe
+     * Obtiene un empleado cuyo departamento es el de Recursos Humanos.
+     * @param empleado Empleado con RFC a buscar.
+     * @return Empleado de Recursos Humanos.
+     * @throws AccesoDatosException 
      */
-    public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException;
+    public Empleado obtenerEmpleadoRH(Empleado empleado) throws AccesoDatosException;
 
     /**
      * Registra un nuevo empleado en el sistema de persistencia.

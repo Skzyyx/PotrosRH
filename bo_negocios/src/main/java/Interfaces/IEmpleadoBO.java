@@ -48,7 +48,16 @@ public interface IEmpleadoBO {
      * está registrado.
      */
     public EmpleadoDTO obtenerEmpleadoActivo(EmpleadoDTO empleado) throws ObjetosNegocioException;
-
+    
+    /**
+     * Obtiene un empleado activo a partir de su RFC, cuyo departamento es
+     * igual a Recursos Humanos.
+     * @param empleado Empleado con RFC de búsqueda.
+     * @return Empleado de recursos humanos.
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObjetosNegocioException;
+    
     /**
      * Actualiza el estado de un empleado directamente en la base de datos.
      *

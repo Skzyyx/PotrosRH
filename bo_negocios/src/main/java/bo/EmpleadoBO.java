@@ -142,7 +142,31 @@ public class EmpleadoBO implements IEmpleadoBO {
             throw new ObjetosNegocioException(ex.getMessage());
         }
     }
+    
+    /**
+     * Obtiene un empleado activo a partir de su RFC, cuyo departamento es
+     * igual a Recursos Humanos.
+     * @param empleado Empleado con RFC de búsqueda.
+     * @return Empleado de recursos humanos.
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    @Override
+    public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObjetosNegocioException{
+        
+        if (!(empleado != null && empleado.getRfc() != null && !empleado.getRfc().isEmpty())) {
+            throw new ObjetosNegocioException("El RFC no puede estar vacío.");
+        }
 
+        try {
+
+            Empleado empleadoPersistir = new Empleado();
+            empleadoPersistir.setRfc(empleado.getRfc());
+            empleadoPersistir = empleadoDAO.obtenerEmpleadoRH(empleadoPersistir);
+            return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
+
+        } catch (AccesoDatosException ex) {throw new ObjetosNegocioException(ex.getMessage());}
+    }
+    
     /**
      * Registra un nuevo empleado en el sistema.
      *

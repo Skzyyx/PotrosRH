@@ -74,6 +74,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         try {
             return empleados.find(Filters.eq("_id", empleado.getId())).first();
         } catch (Exception e) {
+            LOG.log(Level.WARNING, "Error al obtener empleado por RFC: {0}", e.getMessage());
             throw new AccesoDatosException("Ocurrió un error al obtener el empleado.");
         }
     }
@@ -100,25 +101,30 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
         }
     }
-
+    
     /**
-     * Actualiza la información de un empleado en la base de datos simulada
-     *
-     * @param empleado La entidad Empleado con la información actualizada
-     * @throws AccesoDatosException Si ocurre un error al actualizar el empleado
-     * o si no se encuentra
+     * Obtiene un empleado cuyo departamento es el de Recursos Humanos.
+     * @param empleado Empleado con RFC a buscar.
+     * @return Empleado de Recursos Humanos.
+     * @throws AccesoDatosException 
      */
     @Override
-    public void actualizarEmpleado(Empleado empleado) throws AccesoDatosException {
-//        for (int i = 0; i < empleados.size(); i++) {
-//            if (empleados.get(i).getRfc().equalsIgnoreCase(empleado.getRfc())) {
-//                empleados.set(i, empleado);
-//                return;
-//            }
-//        }
-//        throw new AccesoDatosException("No se encontró el empleado con el RFC proporcionado para actualizar.");
+    public Empleado obtenerEmpleadoRH(Empleado empleado) throws AccesoDatosException{
+        try {
+            // Filtro para el RFC
+            Bson filtroRFC = Filters.eq("rfc", empleado.getRfc());
+            // Filtro para el estado del empleado.
+            Bson filtroEstado = Filters.eq("estado", EstadoEmpleado.ACTIVO);
+            // Filtro para encontrar empleados del departamento de RH, con regex.
+            Bson filtroRH = Filters.regex("departamento", "^Recursos Humanos", "i");
+            // Ejecuta la consulta y devuelve el empleado obtenido.
+            return empleados.find(Filters.and(filtroRFC, filtroEstado, filtroRH)).first();
+        } catch (Exception e) {
+            LOG.log(Level.WARNING, "Error al obtener empleado activo por RFC: {0}", e.getMessage());
+            throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado de recursos humanos.");
+        }
     }
-
+    
     @Override
     public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException {
         try {
@@ -169,10 +175,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             ))
             );
             return empleados.aggregate(pipeline, Empleado.class).into(new ArrayList<>());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AccesoDatosException("Ocurrió un error al obtener los empleados sin contrato");
-        }
+        } catch (Exception e) {throw new AccesoDatosException("Ocurrió un error al obtener los empleados sin contrato");}
     }
 
 //    public List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException {
