@@ -19,17 +19,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Controlador para las operaciones de registro de evaluaciones. Valida los
+ * datos de evaluación y maneja la conversión de candidatos a empleados.
  *
- * @author skyro
+ * @author Jose Luis Islas Molina 252574
  */
 public class ControlRegistrarEvaluacion {
 
     private static IEvaluacionBO evaluacionBO = EvaluacionBO.getInstance();
     private static IEmpleadoBO empleadoBO = EmpleadoBO.getInstance();
 
+    /**
+     * Constructor por defecto de la clase ControlRegistrarEvaluacion.
+     */
     public ControlRegistrarEvaluacion() {
     }
 
+    /**
+     * Valida que todos los campos requeridos de una evaluación no sean nulos.
+     *
+     * @param evaluacion El DTO de evaluación a validar
+     * @return true si todos los campos requeridos son válidos
+     * @throws RegistrarEvaluacionException Si algún campo requerido es nulo o
+     * hay un error de acceso
+     */
     public Boolean validarEvaluacion(EvaluacionDTO evaluacion) throws RegistrarEvaluacionException {
         for (Field field : evaluacion.getClass().getDeclaredFields()) {
             field.setAccessible(true);
@@ -50,11 +63,15 @@ public class ControlRegistrarEvaluacion {
         return true;
     }
 
-//    private String departamento;
-//    private String puesto;
-//    private Double salarioBase;
-//    private String estado;
-//    private List<HorarioLaboralDTO> horariosLaborales;
+    /**
+     * Registra una nueva evaluación en el sistema y convierte al candidato
+     * asociado en un empleado.
+     *
+     * @param evaluacion El DTO de evaluación a registrar
+     * @return La evaluación registrada
+     * @throws RegistrarEvaluacionException Si la evaluación es nula o ocurre un
+     * error durante el registro
+     */
     public EvaluacionDTO registrarEvaluacion(EvaluacionDTO evaluacion) throws RegistrarEvaluacionException {
         if (evaluacion == null) {
             throw new RegistrarEvaluacionException("La evaluación no puede ser nula.");
@@ -79,8 +96,7 @@ public class ControlRegistrarEvaluacion {
             empleado.setHorariosLaborales(new ArrayList<>());
 
             empleadoBO.registrarEmpleado(empleado);
-            
-            
+
             return evaluacionBO.registrarEvaluacion(evaluacion);
         } catch (ObjetosNegocioException ex) {
             Logger.getLogger(ControlRegistrarEvaluacion.class.getName()).log(Level.SEVERE, null, ex.getMessage());

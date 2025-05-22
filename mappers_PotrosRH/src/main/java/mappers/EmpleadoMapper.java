@@ -6,6 +6,7 @@ import Entidades.HorarioLaboral;
 import dto.EmpleadoDTO;
 import dto.HorarioLaboralDTO;
 import Enums.EstadoEmpleado;
+import Enums.Sexo;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -78,6 +79,7 @@ public class EmpleadoMapper {
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
         empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
+        empleado.setSexo(Sexo.valueOf(empleadoDTO.getSexo()));
         empleado.setRfc(empleadoDTO.getRfc());
         empleado.setCurp(empleadoDTO.getCurp());
         empleado.setEmail(empleadoDTO.getEmail());
@@ -124,6 +126,7 @@ public class EmpleadoMapper {
         empleadoDTO.setFechaNacimiento(empleado.getFechaNacimiento());
         empleadoDTO.setRfc(empleado.getRfc());
         empleadoDTO.setCurp(empleado.getCurp());
+        empleadoDTO.setSexo(empleado.getSexo().toString());
         empleadoDTO.setEmail(empleado.getEmail());
         empleadoDTO.setTelefono(empleado.getTelefono());
         empleadoDTO.setEstado(empleado.getEstado().toString());
@@ -148,6 +151,12 @@ public class EmpleadoMapper {
         return empleadoDTO;
     }
 
+    /**
+     * Convierte una lista de objetos Empleado a una lista de objetos EmpleadoDTO.
+     * 
+     * @param empleados La lista de objetos Empleado a convertir
+     * @return Una lista de objetos EmpleadoDTO con los datos de las entidades
+     */
     public static List<EmpleadoDTO> toDTOViejoList(List<Empleado> empleados) {
         List<EmpleadoDTO> dtos = new ArrayList<>();
         for (Empleado empleado : empleados) {

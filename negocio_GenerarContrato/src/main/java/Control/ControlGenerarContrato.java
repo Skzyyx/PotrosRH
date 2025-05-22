@@ -25,40 +25,56 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import dto.ContratoDTO;
 import dto.CorreoDTO;
 import dto.HorarioLaboralDTO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase de control que implementa la lógica para la generación y registro de
+ * contratos. Se encarga de validar los datos del contrato, registrarlo en la
+ * base de datos, generar el documento PDF del contrato y enviarlo por correo
+ * electrónico.
  *
- * @author skyro
+ * @author Jose Luis Islas Molina 252574
  */
 public class ControlGenerarContrato {
 
+    /**
+     * Color principal utilizado en el diseño del documento PDF del contrato.
+     */
     private static final DeviceRgb COLOR_PRINCIPAL = new DeviceRgb(41, 128, 185);
+
+    /**
+     * Color secundario utilizado en el diseño del documento PDF del contrato.
+     */
     private static final DeviceRgb COLOR_SECUNDARIO = new DeviceRgb(52, 73, 94);
 
+    /**
+     * Objeto de negocio para operaciones con contratos.
+     */
     private static IContratoBO contratoBO = ContratoBO.getInstance();
 
+    /**
+     * Registra un nuevo contrato en el sistema después de validar sus campos.
+     *
+     * @param contrato El objeto ContratoDTO con la información del contrato a
+     * registrar
+     * @return El objeto ContratoDTO registrado, con identificadores generados
+     * @throws GenerarContratoException Si ocurre un error durante la validación
+     * o registro
+     */
     public ContratoDTO registrarContrato(ContratoDTO contrato) throws GenerarContratoException {
         if (contrato == null) {
             throw new GenerarContratoException("El contrato no puede ser nulo.");
         }
-        
+
         for (Field field : contrato.getClass().getDeclaredFields()) {
             field.setAccessible(true);
 
@@ -82,13 +98,19 @@ public class ControlGenerarContrato {
             Logger.getLogger(ControlGenerarContrato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             throw new GenerarContratoException(ex.getMessage());
         }
-    }    
+    }
 
+    /**
+     * Envía el contrato por correo electrónico al empleado.
+     *
+     * @param correo Objeto CorreoDTO con la información del correo a enviar
+     * @param contrato Objeto ContratoDTO con la información del contrato
+     */
     public void enviarContrato(CorreoDTO correo, ContratoDTO contrato) {
-        
+
         try {
             ISistemaCorreo sistemaCorreo = new SistemaCorreo();
-            
+
             sistemaCorreo.sendEmail(correo, generarPDFContrato(contrato));
         } catch (IOException ex) {
             Logger.getLogger(ControlGenerarContrato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
@@ -96,7 +118,14 @@ public class ControlGenerarContrato {
             Logger.getLogger(ControlGenerarContrato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
     }
-    
+
+    /**
+     * Genera un documento PDF con la información del contrato.
+     *
+     * @param contrato Objeto ContratoDTO con la información del contrato
+     * @return Array de bytes que representa el documento PDF generado
+     * @throws IOException Si ocurre un error durante la generación del PDF
+     */
     private byte[] generarPDFContrato(ContratoDTO contrato) throws IOException {
         // Crear un stream para almacenar el PDF
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -185,7 +214,6 @@ public class ControlGenerarContrato {
         tablaHorarios.addHeaderCell(cellEntrada);
         tablaHorarios.addHeaderCell(cellSalida);
 
-
         // Agregar filas con los horarios
         if (contrato.getHorarios() != null && !contrato.getHorarios().isEmpty()) {
             for (HorarioLaboralDTO horario : contrato.getHorarios()) {
@@ -240,7 +268,15 @@ public class ControlGenerarContrato {
         return baos.toByteArray();
     }
 
-// Método auxiliar para agregar filas a la tabla
+    /**
+     * Método auxiliar para agregar filas a la tabla del contrato.
+     *
+     * @param table Tabla a la que se agregará la fila
+     * @param etiqueta Etiqueta o nombre del campo
+     * @param valor Valor del campo
+     * @param fontBold Fuente en negrita para la etiqueta
+     * @param fontRegular Fuente regular para el valor
+     */
     private void agregarFilaTabla(Table table, String etiqueta, String valor, PdfFont fontBold, PdfFont fontRegular) {
         Cell cellEtiqueta = new Cell().add(new Paragraph(etiqueta).setFont(fontBold))
                 .setTextAlignment(TextAlignment.RIGHT)
@@ -253,7 +289,12 @@ public class ControlGenerarContrato {
         table.addCell(cellValor);
     }
 
-// Método para formatear fechas
+    /**
+     * Método para formatear fechas en el documento.
+     *
+     * @param fecha Fecha en formato String
+     * @return Fecha formateada o mensaje si no está especificada
+     */
     private String formatearFecha(String fecha) {
         if (fecha == null || fecha.isEmpty()) {
             return "No especificada";
@@ -261,7 +302,13 @@ public class ControlGenerarContrato {
         return fecha;
     }
 
-// Método para formatear el sueldo
+    /**
+     * Método para formatear el sueldo en el documento.
+     *
+     * @param sueldo Valor del sueldo
+     * @return Sueldo formateado con símbolo de moneda o mensaje si no está
+     * especificado
+     */
     private String formatearSueldo(Double sueldo) {
         if (sueldo == null) {
             return "No especificado";

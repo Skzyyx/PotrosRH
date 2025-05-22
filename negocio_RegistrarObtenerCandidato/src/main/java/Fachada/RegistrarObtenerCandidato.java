@@ -12,8 +12,10 @@ import dto.CandidatoFiltroDTO;
 import java.util.List;
 
 /**
- *
- * @author skyro
+ * Fachada para las operaciones de registro y obtención de candidatos.
+ * Implementa el patrón Singleton y delega las operaciones al controlador.
+ * 
+ * @author Jose Luis Islas Molina 252574
  */
 public class RegistrarObtenerCandidato implements IRegistrarObteneCandidato {
 

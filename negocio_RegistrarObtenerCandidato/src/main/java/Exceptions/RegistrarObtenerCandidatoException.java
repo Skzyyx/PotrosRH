@@ -5,8 +5,9 @@
 package Exceptions;
 
 /**
- *
- * @author skyro
+ * Excepción personalizada para errores en el registro y obtención de candidatos.
+ * 
+ * @author Jose Luis Islas Molina 252574
  */
 public class RegistrarObtenerCandidatoException extends Exception {
 
