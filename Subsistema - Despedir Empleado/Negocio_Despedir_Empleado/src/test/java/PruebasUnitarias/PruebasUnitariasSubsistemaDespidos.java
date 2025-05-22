@@ -2,6 +2,7 @@ package PruebasUnitarias;
 
 import Control.ControlSubsistemaDespidos;
 import Excepciones.CorreoException;
+import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
 import Interface.ISistemaCorreo;
 import Interfaces.IDespidoEmpleadoBO;
@@ -9,18 +10,21 @@ import Interfaces.IEmpleadoBO;
 import dto.CorreoDTO;
 import dto.DespidoDTO;
 import dto.EmpleadoDTO;
-import static net.bytebuddy.matcher.ElementMatchers.any;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.Mockito.eq;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
@@ -55,34 +59,102 @@ public class PruebasUnitariasSubsistemaDespidos {
     }
 
     @Test
-    void cambiarEstado_DatosValidos_EstadoCambiado() throws Exception {
-        when(empleadoBO.obtenerEmpleadoActivo((EmpleadoDTO) any())).thenReturn(empleado);
+    void testDespidoExitoso() throws Exception {
+        // Act
+        controlDespidos.registrarDespido(empleado, "Incumplimiento de reglas");
 
-        EmpleadoDTO resultado = controlDespidos.cambiarEstado(empleado, "INACTIVO");
-
-        verify(empleadoBO).actualizarEstadoEmpleadoD(eq("ABC123"), eq("INACTIVO"));
-        assertEquals("Juan", resultado.getNombre());
+        // Assert
+        verify(despidoBO).registrarDespido(any(DespidoDTO.class));
+        verify(empleadoBO).actualizarEstadoEmpleadoD(eq("ABCD123FGHI"), eq("INACTIVO"));
+        verify(sistemaCorreo).sendEmail(any(CorreoDTO.class));
     }
 
     @Test
-    void cambiarEstado_DatosNulos_LanzaCorreoException() {
-        assertThrows(CorreoException.class, () -> controlDespidos.cambiarEstado(null, "INACTIVO"));
+    void testEmpleadoNuloLanzaExcepcion() {
+        ObjetosNegocioException exception = assertThrows(
+            ObjetosNegocioException.class,
+            () -> controlDespidos.registrarDespido(null, "motivo")
+        );
+        assertTrue(exception.getMessage().contains("Datos incompletos"));
     }
 
     @Test
-    void registrarDespido_DatosValidos_DespidoRegistradoYCorreoEnviado() throws Exception {
-        when(empleadoBO.obtenerEmpleadoActivo((EmpleadoDTO) any())).thenReturn(empleado);
-        //when(empleadoBO.actualizarEstadoEmpleadoD(anyString(), anyString())).thenReturn(true);
-
-        controlDespidos.registrarDespido(empleado, "Incumplimiento de normas");
-
-        //verify(despidoBO).registrarDespido(any(DespidoDTO.class));
-        //verify(sistemaCorreo).sendEmail(any(CorreoDTO.class));
-    }
-
-    @Test
-    void registrarDespido_DatosIncompletos_LanzaObjetosNegocioException() {
+    void testEmpleadoSinIdLanzaExcepcion() {
         empleado.setId(null);
-        assertThrows(ObjetosNegocioException.class, () -> controlDespidos.registrarDespido(empleado, "Falta grave"));
+
+        ObjetosNegocioException exception = assertThrows(
+            ObjetosNegocioException.class,
+            () -> controlDespidos.registrarDespido(empleado, "motivo")
+        );
+        assertTrue(exception.getMessage().contains("Datos incompletos"));
+    }
+
+    @Test
+    void testMotivoVacioLanzaExcepcion() {
+        ObjetosNegocioException exception = assertThrows(
+            ObjetosNegocioException.class,
+            () -> {
+            try {
+                controlDespidos.registrarDespido(empleado, "");
+            } catch (CorreoException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ObjetosNegocioException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+        assertTrue(exception.getMessage().contains("Datos incompletos"));
+    }
+
+    @Test
+    void testErrorEnRegistroDeDespidoLanzaExcepcion() throws Exception {
+        doThrow(new AccesoDatosException("fallo")).when(despidoBO).registrarDespido(any());
+
+        ObjetosNegocioException exception = assertThrows(
+            ObjetosNegocioException.class,
+            () -> {
+            try {
+                controlDespidos.registrarDespido(empleado, "motivo");
+            } catch (CorreoException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ObjetosNegocioException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+        assertTrue(exception.getMessage().contains("Error al registrar el despido"));
+    }
+
+    @Test
+    void testErrorAlActualizarEstadoEmpleadoLanzaExcepcion() throws Exception {
+        doNothing().when(despidoBO).registrarDespido(any());
+        doThrow(new AccesoDatosException("fallo")).when(empleadoBO).actualizarEstadoEmpleadoD(anyString(), anyString());
+
+        ObjetosNegocioException exception = assertThrows(
+            ObjetosNegocioException.class,
+            () -> {
+            try {
+                controlDespidos.registrarDespido(empleado, "motivo");
+            } catch (CorreoException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ObjetosNegocioException ex) {
+                Logger.getLogger(PruebasUnitariasSubsistemaDespidos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        );
+        assertTrue(exception.getMessage().contains("Error al cambiar el estado del empleado"));
+    }
+
+    @Test
+    void testErrorAlEnviarCorreoLanzaExcepcion() throws Exception {
+        doNothing().when(despidoBO).registrarDespido(any());
+        doNothing().when(empleadoBO).actualizarEstadoEmpleadoD(anyString(), anyString());
+        doThrow(new CorreoException("fallo")).when(sistemaCorreo).sendEmail(any());
+
+        CorreoException exception = assertThrows(
+            CorreoException.class,
+            () -> controlDespidos.registrarDespido(empleado, "motivo")
+        );
+        assertTrue(exception.getMessage().contains("Error al enviar el correo de despido"));
     }
 }
