@@ -23,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author INSPIRON
+ * @author Benjamin Soto Coronado (253183)
  */
 public class RegistrarSalida extends javax.swing.JPanel {
     private EmpleadoDTO empleadoEncontrado;

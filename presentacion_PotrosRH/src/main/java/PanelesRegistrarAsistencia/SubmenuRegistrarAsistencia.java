@@ -12,7 +12,7 @@ import javax.swing.JComponent;
 
 /**
  *
- * @author INSPIRON
+ * @author Benjamin Soto Coronado (253183)
  */
 public class SubmenuRegistrarAsistencia extends javax.swing.JPanel {
 
@@ -63,7 +63,7 @@ public class SubmenuRegistrarAsistencia extends javax.swing.JPanel {
             }
         });
 
-        btnVolver.setBackground(new java.awt.Color(51, 51, 51));
+        btnVolver.setBackground(new java.awt.Color(255, 0, 0));
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
@@ -116,10 +116,10 @@ public class SubmenuRegistrarAsistencia extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
-        btnRegistrarEntrada.setBorderPainted(false);
-        btnRegistrarEntrada.setContentAreaFilled(false);
-        btnRegistrarEntrada.setOpaque(false);
-        btnRegistrarEntrada.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        btnRegistrarSalida.setBorderPainted(false);
+        btnRegistrarSalida.setContentAreaFilled(false);
+        btnRegistrarSalida.setOpaque(false);
+        btnRegistrarSalida.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
                 Graphics2D g2 = (Graphics2D) g.create();

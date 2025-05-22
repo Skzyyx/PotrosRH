@@ -24,7 +24,7 @@ import javax.swing.plaf.basic.BasicTextFieldUI;
 
 /**
  *
- * @author INSPIRON
+ * @author Benjamin Soto Coronado (253183)
  */
 public class RegistrarEntrada extends javax.swing.JPanel {
 
@@ -254,7 +254,7 @@ public class RegistrarEntrada extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Entrada registrada exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 resetearFormulario();
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo registrar la entrada", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Verifique que este empleado no tenga una entrada ya registrada previamente sin salida", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (PresentacionException ex) {
             JOptionPane.showMessageDialog(this, "Error al registrar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -336,7 +336,6 @@ public class RegistrarEntrada extends javax.swing.JPanel {
         this.empleadoEncontrado = null;
         txtRfcRegistrarEntrada.setText("");
         ocultarTodo();
-        btnRegistrarEntrada.setEnabled(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarEmpleado;
