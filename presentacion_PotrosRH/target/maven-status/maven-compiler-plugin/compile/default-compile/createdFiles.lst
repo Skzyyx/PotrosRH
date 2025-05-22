@@ -32,6 +32,7 @@ PanelesCasoBase\BusquedaEmpleado$2.class
 PanelesReportes\SubmenuReportesMalaConducta$1.class
 PanelesRegistroEmpleado\SeleccionarCandidatoEvaluacion$5.class
 PanelesReportes\DeterminacionCaso$1.class
+Controles\ControlInicioSesion.class
 PanelesReportes\DescripcionIncidente$6.class
 PanelesRegistroEmpleado\CapturarDatosEvaluacion$4.class
 Controles\ControlCampos$2.class

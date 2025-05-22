@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  * Implementa la interfaz IEmpleadoBO y sus métodos.
@@ -105,7 +106,7 @@ public class EmpleadoBO implements IEmpleadoBO {
         try {
 
             Empleado empleadoPersistir = new Empleado();
-            empleadoPersistir.setRfc(empleado.getId());
+            empleadoPersistir.setId(new ObjectId(empleado.getId()));
             empleadoPersistir = empleadoDAO.obtenerEmpleadoId(empleadoPersistir);
             return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
 

@@ -14,6 +14,8 @@ import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -135,7 +137,8 @@ public class RegistroAsistenciaDAO implements IRegistroAsistenciaDAO {
             Document resultado = RegistroAsistenciaCollection.aggregate(pipeline, Document.class).first();
             
             if(resultado != null)
-                return resultado.getLong("resta").doubleValue() / 3600;
+                // Retorna el resultado redondeado a 2 decimales al valor superior.
+                return new BigDecimal(resultado.getLong("resta").doubleValue() / 3600).setScale(2, RoundingMode.CEILING).doubleValue();
              else
                 return null;
             

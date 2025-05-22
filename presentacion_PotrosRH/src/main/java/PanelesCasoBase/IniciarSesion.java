@@ -2,8 +2,10 @@ package PanelesCasoBase;
 
 import Controles.ControlCampos;
 import Controles.ControlFlujo;
+import Controles.ControlInicioSesion;
 import Excepciones.PresentacionException;
 import OptionPane.OptionPane;
+import dto.EmpleadoDTO;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -162,7 +164,12 @@ public class IniciarSesion extends javax.swing.JPanel {
             if (!(txtRfc.getText().trim().matches("^[A-ZÑ&]{3,4}\\d{6}[A-Z0-9]{2,3}$") && txtRfc.getText().trim().length() == 13))
                 throw new PresentacionException("RFC del empleado reportado no válido.");
             
-            ControlFlujo.mostrarMenuPrincipal();
+            // Se encapsula el RFC a buscar en un objeto EmpleadoDTO.
+            EmpleadoDTO rfc = new EmpleadoDTO();
+            rfc.setRfc(txtRfc.getText().trim().toUpperCase());
+            // Se busca al empleado, y si el objeto recibido no es null, se muestra el menú principal.
+            if(new ControlInicioSesion().buscarEmpleadoRH(rfc) != null)
+                ControlFlujo.mostrarMenuPrincipal();
             
         } catch (PresentacionException ex) {OptionPane.showErrorMessage(this, "ERROR: " + ex.getMessage(), "ERROR");}
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -174,5 +181,4 @@ public class IniciarSesion extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
-   
 }

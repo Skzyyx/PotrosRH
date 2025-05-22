@@ -20,12 +20,13 @@ import bo.ContratoBO;
 import bo.EmpleadoBO;
 import bo.RegistroAsistenciaBO;
 import dto.CorreoDTO;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 /**
  * Realiza validaciones de negocio y genera la nómina correspondiente al
  * empleado recibido.
- *
  * @author Leonardo Flores Leyva (252390)
  * @author José Alfredo Guzmán Moreno (252524)
  * @author Jesús Ernesto López Ibarra (252663)
@@ -134,14 +135,14 @@ public class ControlGenerarNomina implements IGenerarNomina {
             nomina.setEmpleadoId(empleado.getId());
             nomina.setBono(0.0);
             nomina.setDiasTrabajados(diasTrabajados);
-            nomina.setSalarioBruto(empleado.getSalarioBase() * horasTrabajadas);
+            nomina.setSalarioBruto(new BigDecimal(empleado.getSalarioBase() * horasTrabajadas).setScale(2, RoundingMode.CEILING).doubleValue());
             nomina.setIsr(calcularISR(nomina.getSalarioBruto(), diasTrabajados));
-            nomina.setSalarioNeto(nomina.getSalarioBruto() - nomina.getIsr());
+            nomina.setSalarioNeto(new BigDecimal(nomina.getSalarioBruto() - nomina.getIsr()).setScale(2, RoundingMode.CEILING).doubleValue());
             nomina.setFechaCorte(LocalDate.now());
             nomina.setHorasTrabajadas(horasTrabajadas);
             // Se agregan las horas extra (si es que hay).
             if(horasExtra > 0.0)
-                nomina.setHorasExtra(horasExtra);
+                nomina.setHorasExtra(new BigDecimal(horasExtra).setScale(2, RoundingMode.CEILING).doubleValue());
             else
                 nomina.setHorasExtra(0.0);
             
@@ -247,7 +248,7 @@ public class ControlGenerarNomina implements IGenerarNomina {
         double excedente = ingresoMensual - limiteInferior;
         double isrMensual = cuotaFija + (excedente * (tasaExcedente / 100));
         // Ajustar ISR a los días trabajados
-        return isrMensual * (diasPagados / 30.4);
+        return new BigDecimal(isrMensual * (diasPagados / 30.4)).setScale(2, RoundingMode.CEILING).doubleValue();
     }
     
     /**

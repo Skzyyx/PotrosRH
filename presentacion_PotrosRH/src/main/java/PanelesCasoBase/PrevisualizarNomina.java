@@ -27,6 +27,7 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
     // Nómina a mostrar.
     private NominaDTO nomina;
     private EmpleadoDTO empleado;
+    private double bono = 0.0;
 
     /**
      * Creates new form PrevisualizarNomina
@@ -422,13 +423,14 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
      */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            nomina.setBono(Double.valueOf(lblBono.getText()));
+            if(bono > 0.0)
+                nomina.setBono(bono);
 
-            if (ControlNomina.getInstance().guardarNomina(nomina) != null) {
-                OptionPane.showInfoMessage(this, "Nomina guardada con exito", "Exito");
-            }
+            if (ControlNomina.getInstance().guardarNomina(nomina) != null) 
+                OptionPane.showInfoMessage(this, "Nomina guardada con éxito", "Éxito");
 
             ControlFlujo.mostrarBusquedaEmpleado();
+            
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -501,16 +503,15 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
                 return;
             
             Bonos bonoEnum = Bonos.valueOf(item);
-            double bono = bonoEnum.getCantidad();
-            lblBono.setText(String.valueOf(bono));
+            bono = bonoEnum.getCantidad();
+            lblBono.setText(String.format("$%.2f", bono));
 
             double salarioBruto = nomina.getSalarioBruto() + bono;
-            lblSalarioBrutoEmpleado.setText(String.format("%.4f", salarioBruto));
-
-            double isr = nomina.getIsr();
-            double salarioNeto = salarioBruto - isr;
-            nomina.setSalarioNeto(salarioNeto);
-            lblSalarioNetoEmpleado.setText(String.format("%.4f", salarioNeto));
+            lblSalarioBrutoEmpleado.setText(String.format("$%.2f", salarioBruto));
+            
+            double salarioNeto = salarioBruto - nomina.getIsr();
+            nomina.setSalarioNeto(salarioBruto - nomina.getIsr());
+            lblSalarioNetoEmpleado.setText(String.format("$%.2f", salarioNeto));
         } catch (PresentacionException ex) {
             Logger.getLogger(PrevisualizarNomina.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -538,9 +539,9 @@ public class PrevisualizarNomina extends javax.swing.JPanel {
             lblEstadoEmpleado.setText(String.valueOf(empleado.getEstado()));
             lblHorasTrabajadasEmpleado.setText(String.format("%.1f", nomina.getHorasTrabajadas()));
             lblHorasExtraEmpleado.setText(String.format("%.1f", nomina.getHorasExtra()));
-            lblSalarioBrutoEmpleado.setText(String.format("%.4f", nomina.getSalarioBruto()));
-            lblIsrEmpleado.setText(String.format("%.4f", nomina.getIsr()));
-            lblSalarioNetoEmpleado.setText(String.format("%.4f", nomina.getSalarioNeto()));
+            lblSalarioBrutoEmpleado.setText(String.format("$%.2f", nomina.getSalarioBruto()));
+            lblIsrEmpleado.setText(String.format("$%.2f", nomina.getIsr()));
+            lblSalarioNetoEmpleado.setText(String.format("$%.2f", nomina.getSalarioNeto()));
         } else
             throw new PresentacionException("La nómina o el empleado están vacíos.");
         
