@@ -494,6 +494,7 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
         try {
             candidato = ControlRegistro.getInstance().obtenerCandidato(candidato);
             ControlFlujo.mostrarCapturarDatosEvaluacion(candidato);
+            limpiarCampos();
         } catch (PresentacionException ex) {
             Logger.getLogger(SeleccionarCandidatoEvaluacion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -502,10 +503,13 @@ public class SeleccionarCandidatoEvaluacion extends javax.swing.JPanel {
     public void limpiarCampos() {
 
         boxFiltro.setSelectedIndex(0);
+        
         tfBuscador.setText(" ");
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         jTable1.setModel(model);
+        
         lblRfc.setText(" ");
         lblNombreCompleto.setText(" ");
         lblDireccion.setText(" ");

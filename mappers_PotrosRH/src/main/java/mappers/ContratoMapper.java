@@ -7,7 +7,6 @@ package mappers;
 import Entidades.Contrato;
 import Enums.ModoPago;
 import Enums.PeriodoPago;
-import Enums.TipoContrato;
 import dto.ContratoDTO;
 import org.bson.types.ObjectId;
 
@@ -31,7 +30,6 @@ public class ContratoMapper {
     public static Contrato toEntityNuevo(ContratoDTO dto) {
         return new Contrato(
                 dto.getDepartamento(),
-                TipoContrato.valueOf(dto.getTipoContrato()),
                 dto.getLugarTrabajo(),
                 dto.getFechaInicio(),
                 dto.getFechaFin(),
@@ -56,7 +54,6 @@ public class ContratoMapper {
         return new Contrato(
                 new ObjectId(dto.getId()),
                 dto.getDepartamento(),
-                TipoContrato.valueOf(dto.getTipoContrato()),
                 dto.getLugarTrabajo(),
                 dto.getFechaInicio(),
                 dto.getFechaFin(),
@@ -81,7 +78,6 @@ public class ContratoMapper {
         return new ContratoDTO(
                 contrato.getId().toString(),
                 contrato.getDepartamento(),
-                contrato.getTipoContrato().toString(),
                 contrato.getLugarTrabajo(),
                 contrato.getFechaInicio(),
                 contrato.getFechaFin(),

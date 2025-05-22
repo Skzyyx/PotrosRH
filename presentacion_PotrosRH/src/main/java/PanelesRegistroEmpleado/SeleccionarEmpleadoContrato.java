@@ -494,6 +494,7 @@ public class SeleccionarEmpleadoContrato extends javax.swing.JPanel {
             empleado = ControlRegistro.getInstance().obtenerEmpleado(empleado);
             System.out.println(empleado.toString());
             ControlFlujo.mostrarCapturarDatosContrato(empleado);
+            limpiarCampos();
         } catch (PresentacionException ex) {
             Logger.getLogger(SeleccionarEmpleadoContrato.class.getName()).log(Level.SEVERE, null, ex);
         }

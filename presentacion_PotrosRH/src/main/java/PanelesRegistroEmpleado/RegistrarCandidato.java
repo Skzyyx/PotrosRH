@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -293,6 +294,32 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                         .addGap(190, 190, 190)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(596, 596, 596)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel11))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel12)
+                                                .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tfRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel5))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel6)
+                                                .addComponent(tfCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addGap(63, 63, 63))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(100, 100, 100))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(174, 174, 174)
@@ -326,39 +353,10 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel18)
-                                                    .addComponent(tfHabilidadesClave, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(tfHabilidadesClave, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addComponent(tfNivelEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel23))
-                                .addGap(757, 757, 757))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(596, 596, 596)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel11))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel12)
-                                                .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(tfRfc, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel5))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6)
-                                                .addComponent(tfCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addGap(63, 63, 63))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(100, 100, 100)))))))
+                                .addGap(428, 428, 428)))))
                 .addContainerGap(190, Short.MAX_VALUE))
         );
 
@@ -373,7 +371,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -386,10 +384,9 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                             .addComponent(tfApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel20)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel21))
+                        .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42)
@@ -445,7 +442,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfNivelEstudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -565,6 +562,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
 
     private void btnCancelar() {
         ControlFlujo.mostrarMenuContrataciones();
+        limpiarCampos();
     }
 
     private void btnRegistrar() {
@@ -596,6 +594,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
             ControlRegistro.getInstance().registrarCandidato(candidato);
             OptionPane.showInfoMessage(this, "¡Candidato registrado exitosamente!", "Éxito");
             ControlFlujo.mostrarMenuContrataciones();
+            limpiarCampos();
         } catch (PresentacionException ex) {
             Logger.getLogger(RegistrarCandidato.class.getName()).log(Level.SEVERE, null, ex.getMessage());
             OptionPane.showErrorMessage(this, ex.getMessage(), "Error");
@@ -617,6 +616,13 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                 throw new PresentacionException("Todos los campos deben estar llenos.");
             }
         }
+        if (dpFechaNacimiento.getDate().isAfter(LocalDate.now())) {
+            throw new PresentacionException("La fecha no puede ser mayor a la actual.");
+        }
+        int anios = Period.between(dpFechaNacimiento.getDate(), LocalDate.now()).getYears();
+        if (anios < 18) {
+            throw new PresentacionException("El empleado debe tener como mínimo 18 años.");
+        }
     }
     
     private void configurarCampos() {
@@ -625,6 +631,8 @@ public class RegistrarCandidato extends javax.swing.JPanel {
         ControlCampos.configurarCamposTexto(tfApellidoP);
         ControlCampos.configurarCamposTexto(tfApellidoM);
         ControlCampos.configurarCamposTexto(tfCalle);
+        ControlCampos.configurarCamposRFC(tfRfc);
+        ControlCampos.configurarCamposRFC(tfCurp);
         ControlCampos.configurarCamposTexto(tfColonia);
         ControlCampos.configurarCamposCantidades(tfExperiencia);
         ControlCampos.configurarCamposTexto(tfHabilidadesClave);
@@ -632,5 +640,27 @@ public class RegistrarCandidato extends javax.swing.JPanel {
         ControlCampos.configurarCamposCantidades(tfNumeroCasa);
         ControlCampos.configurarCamposCantidades(tfTelefono);
         ControlCampos.configurarCamposTexto(tfUltimaEmpresa);
+    }
+
+    private void limpiarCampos() {
+        tfNombres.setText("");
+        tfApellidoP.setText("");
+        tfApellidoM.setText("");
+        tfCalle.setText("");
+        tfNumeroCasa.setText("");
+        tfColonia.setText("");
+        tfEmail.setText("");
+        tfTelefono.setText("");
+        tfUltimaEmpresa.setText("");
+        tfExperiencia.setText("");
+        tfHabilidadesClave.setText("");
+        tfRfc.setText("");
+        tfCurp.setText("");
+        tfNivelEstudio.setText("");
+        
+        boxSexo.setSelectedIndex(0);
+        boxExperiencia.setSelectedIndex(0);
+        
+        dpFechaNacimiento.clear();
     }
 }

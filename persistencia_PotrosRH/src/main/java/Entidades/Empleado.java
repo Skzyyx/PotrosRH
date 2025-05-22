@@ -368,6 +368,7 @@ public class Empleado {
         sb.append(", apellidoPaterno=").append(apellidoPaterno);
         sb.append(", apellidoMaterno=").append(apellidoMaterno);
         sb.append(", fechaNacimiento=").append(fechaNacimiento);
+        sb.append(", sexo=").append(sexo);
         sb.append(", email=").append(email);
         sb.append(", rfc=").append(rfc);
         sb.append(", curp=").append(curp);
@@ -381,5 +382,6 @@ public class Empleado {
         sb.append('}');
         return sb.toString();
     }
+    
 
 }

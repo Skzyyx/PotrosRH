@@ -16,8 +16,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -805,10 +810,23 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
 
     private void btnVolver() {
         ControlFlujo.mostrarSeleccionarEmpleadoContrato();
+        limpiarCampos();
     }
 
     private void btnTerminar() {
         try {
+            if (dpFechaInicio.getDate().isBefore(LocalDate.now()) || dpFechaFin.getDate().isBefore(LocalDate.now())) {
+                throw new PresentacionException("Las fechas no pueden ser anteriores a la actual.");
+            }
+            
+            if (dpFechaInicio.getDate().isAfter(dpFechaFin.getDate())) {
+                throw new PresentacionException("Las fecha de fin no puede ser anterior a la de inicio.");
+            }
+            
+            if (tpHoraSalida.getTime().isBefore(tpHoraEntrada.getTime())) {
+                throw new PresentacionException("La hora de salida no puede ser anterior a la de salida.");
+            }
+            
             ContratoDTO contrato = new ContratoDTO();
             contrato.setDepartamento(tfDepartamento.getText());
             contrato.setTipoContrato(boxTipoContrato.getSelectedItem().toString());
@@ -819,7 +837,6 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
             contrato.setSueldo(Double.valueOf(tfSalarioHora.getText()));
             contrato.setPeriodoPago(boxPeriodoPago.getSelectedItem().toString());
             contrato.setModoPago(boxModoPago.getSelectedItem().toString());
-            contrato.setEmpleado(empleado);
 
             Set<HorarioLaboralDTO> horarios = new LinkedHashSet();
             
@@ -845,7 +862,10 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
                 horarios.add(new HorarioLaboralDTO("SABADO", tpHoraEntrada.getTime(), tpHoraSalida.getTime()));
             }
             
+            empleado.setHorariosLaborales(new LinkedList<>(horarios));
+            empleado.setEstado("ACTIVO");
             contrato.setHorarios(horarios);
+            contrato.setEmpleado(empleado);
             System.out.println(horarios.toString());
             ControlRegistro.getInstance().registrarContrato(contrato);
             
@@ -870,6 +890,33 @@ public class CapturarDatosContrato extends javax.swing.JPanel {
     }
     
     private void limpiarCampos() {
+        lblRfc1.setText("");
+        lblNombreCompleto1.setText("");
+        lblFechaNacimiento1.setText("");
+        lblTelefono1.setText("");
+        lblEmail1.setText("");
+        lblDireccion1.setText("");
         
+        tfPuesto.setText("");
+        tfDepartamento.setText("");
+        tfLugarTrabajo.setText("");
+        tfSalarioHora.setText("");
+        
+        saturday.setSelected(false);
+        monday.setSelected(false);
+        thursday.setSelected(false);
+        wednesday.setSelected(false);
+        tuesday.setSelected(false);
+        friday.setSelected(false);
+        sunday.setSelected(false);
+        
+        dpFechaInicio.clear();
+        dpFechaFin.clear();
+        
+        tpHoraEntrada.clear();
+        tpHoraSalida.clear();
+        
+        boxPeriodoPago.setSelectedIndex(0);
+        boxModoPago.setSelectedIndex(0);
     }
 }

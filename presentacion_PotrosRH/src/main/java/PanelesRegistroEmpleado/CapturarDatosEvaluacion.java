@@ -408,4 +408,8 @@ public class CapturarDatosEvaluacion extends javax.swing.JPanel {
         }
         return listaCandidatos;
     }
+    
+    private void limpiarCampos() {
+        
+    }
 }

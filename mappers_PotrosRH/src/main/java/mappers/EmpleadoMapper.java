@@ -33,6 +33,7 @@ public class EmpleadoMapper {
         empleado.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
         empleado.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
         empleado.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
+        empleado.setSexo(Sexo.valueOf(empleadoDTO.getSexo()));
         empleado.setRfc(empleadoDTO.getRfc());
         empleado.setCurp(empleadoDTO.getCurp());
         empleado.setEmail(empleadoDTO.getEmail());

@@ -6,7 +6,6 @@ package Entidades;
 
 import Enums.ModoPago;
 import Enums.PeriodoPago;
-import Enums.TipoContrato;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +21,6 @@ public class Contrato {
     
     private ObjectId id;
     private String departamento;
-    private TipoContrato tipoContrato;
     private String lugarTrabajo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -44,7 +42,6 @@ public class Contrato {
      * 
      * @param id Identificador único del contrato
      * @param departamento Departamento asignado
-     * @param tipoContrato Tipo de contrato
      * @param lugarTrabajo Ubicación del trabajo
      * @param fechaInicio Fecha de inicio del contrato
      * @param fechaFin Fecha de finalización del contrato
@@ -55,10 +52,9 @@ public class Contrato {
      * @param empleado Empleado asociado al contrato
      * @param horarios Conjunto de horarios laborales
      */
-    public Contrato(ObjectId id, String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
+    public Contrato(ObjectId id, String departamento, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
         this.id = id;
         this.departamento = departamento;
-        this.tipoContrato = tipoContrato;
         this.lugarTrabajo = lugarTrabajo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -74,7 +70,6 @@ public class Contrato {
      * Constructor con todos los atributos excepto el id, que se generará automáticamente.
      * 
      * @param departamento Departamento asignado
-     * @param tipoContrato Tipo de contrato
      * @param lugarTrabajo Ubicación del trabajo
      * @param fechaInicio Fecha de inicio del contrato
      * @param fechaFin Fecha de finalización del contrato
@@ -85,9 +80,8 @@ public class Contrato {
      * @param empleado Empleado asociado al contrato
      * @param horarios Conjunto de horarios laborales
      */
-    public Contrato(String departamento, TipoContrato tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
+    public Contrato(String departamento, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, PeriodoPago periodoPago, ModoPago modoPago, Empleado empleado, Set<HorarioLaboral> horarios) {
         this.departamento = departamento;
-        this.tipoContrato = tipoContrato;
         this.lugarTrabajo = lugarTrabajo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -133,24 +127,6 @@ public class Contrato {
      */
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
-    }
-
-    /**
-     * Obtiene el tipo de contrato.
-     * 
-     * @return Tipo de contrato
-     */
-    public TipoContrato getTipoContrato() {
-        return tipoContrato;
-    }
-
-    /**
-     * Establece el tipo de contrato.
-     * 
-     * @param tipoContrato Nuevo tipo de contrato
-     */
-    public void setTipoContrato(TipoContrato tipoContrato) {
-        this.tipoContrato = tipoContrato;
     }
 
     /**
@@ -326,7 +302,6 @@ public class Contrato {
         sb.append("Contrato{");
         sb.append("id=").append(id);
         sb.append(", departamento=").append(departamento);
-        sb.append(", tipoContrato=").append(tipoContrato);
         sb.append(", lugarTrabajo=").append(lugarTrabajo);
         sb.append(", fechaInicio=").append(fechaInicio);
         sb.append(", fechaFin=").append(fechaFin);
