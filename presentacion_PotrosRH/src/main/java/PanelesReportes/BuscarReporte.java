@@ -34,6 +34,7 @@ public class BuscarReporte extends javax.swing.JPanel {
         initComponents();
         ControlCampos.limiteCaracteresCampoTexto(jTEmpleado, 13);
         ControlCampos.limiteCaracteresCampoTexto(jTNumSeguimiento, 10);
+        ControlCampos.configurarCamposRFC(jTEmpleado);
         ControlCampos.configurarCamposCantidades(jTNumSeguimiento);
         jLNumSeguimiento.setVisible(false);
         jTNumSeguimiento.setVisible(false);

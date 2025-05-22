@@ -37,6 +37,24 @@ public class ControlCampos {
         });
     }
     /**
+     * Asegura que un campo de texto solo reciba letras y números.
+     * Ideal para nombres.
+     * @param campo JTextField a configurar.
+     */
+    public static void configurarCamposRFC(JTextField campo){
+        for(KeyListener keyListener : Arrays.asList(campo.getKeyListeners()))
+            campo.removeKeyListener(keyListener);
+        
+        campo.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char input = e.getKeyChar();
+                if(!Character.isLetterOrDigit(input) && input != KeyEvent.VK_BACK_SPACE &&  input != KeyEvent.VK_DELETE && input != KeyEvent.VK_SPACE)
+                    e.consume();
+            }
+        });
+    }
+    /**
      * Asegura que un campo de texto solo reciba números decimales positivos.
      * Ideal para bonos o salarios.
      * @param campo Campo a configurar.

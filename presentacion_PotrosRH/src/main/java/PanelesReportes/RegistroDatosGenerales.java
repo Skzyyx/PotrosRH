@@ -29,6 +29,8 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
         initComponents();
         ControlCampos.limiteCaracteresCampoTexto(jTRFCReportado, 13);
         ControlCampos.limiteCaracteresCampoTexto(jTRFCReportante, 13);
+        ControlCampos.configurarCamposRFC(jTRFCReportado);
+        ControlCampos.configurarCamposRFC(jTRFCReportante);
     }
 
     /**
@@ -245,6 +247,9 @@ public class RegistroDatosGenerales extends javax.swing.JPanel {
             // Si el campo del RFC del empleado reportante está vacío.
             if(!(jTRFCReportante.getText() != null && !jTRFCReportante.getText().trim().isEmpty()))
                 throw new PresentacionException("Ingrese el RFC del empleado reportante.");
+            
+            if(jTRFCReportado.getText().trim().equals(jTRFCReportante.getText().trim()))
+                throw new PresentacionException("El RFC de ambos empleados está duplicado. Ingrese un RFC distinto para cada uno.");
             
             // Si no se ha seleccionado una fecha del incidente.
             if(jDPFechaIncidente.getSelectedDate() == null)
