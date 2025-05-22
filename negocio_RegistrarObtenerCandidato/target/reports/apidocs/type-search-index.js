@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Control","l":"ControlRegistrarObtenerCandidato"},{"p":"Interfaces","l":"IRegistrarObteneCandidato"},{"p":"Pruebas","l":"Negocio_RegistrarObtenerCandidato"},{"p":"Fachada","l":"RegistrarObtenerCandidato"},{"p":"Exceptions","l":"RegistrarObtenerCandidatoException"}];updateSearchResults();
