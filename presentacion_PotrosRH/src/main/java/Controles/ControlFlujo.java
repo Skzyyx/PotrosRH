@@ -9,6 +9,9 @@ import PanelesCasoBase.MenuPrincipal;
 import PanelesCasoBase.PrevisualizarEmpleado;
 import PanelesDespidos.PrevisualizarEmpleadoDespedir;
 import PanelesCasoBase.PrevisualizarNomina;
+import PanelesExpedientes.ExpedienteEmpleado;
+import PanelesExpedientes.ModificarExpediente;
+import PanelesExpedientes.SubmenuExpedientes;
 import PanelesRegistrarAsistencia.RegistrarEntrada;
 import PanelesRegistrarAsistencia.RegistrarSalida;
 import PanelesRegistrarAsistencia.SubmenuRegistrarAsistencia;
@@ -82,6 +85,11 @@ public class ControlFlujo {
     private static CapturarDatosEvaluacion capturarDatosEvaluacion;
     private static SeleccionarEmpleadoContrato seleccionarEmpleadoContrato;
     private static CapturarDatosContrato capturarDatosContrato;
+    // CU: Expediente Empleado
+    private static SubmenuExpedientes submenuExpedientes;
+    private static ExpedienteEmpleado expedienteEmpleado;
+    private static ModificarExpediente modificarExpediente;
+    
     /**
      * Muestra la página de inicio de sesión.
      */
@@ -532,5 +540,35 @@ public class ControlFlujo {
         }
         capturarDatosContrato.setEmpleado(empleado);
         cambiarPantalla(capturarDatosContrato);
+    }
+    
+    /**
+     * Mostrar submenu Expedientes.
+     */
+    public static void mostrarSubmenuExpedientes() {
+        if (submenuExpedientes == null) {
+            submenuExpedientes = new SubmenuExpedientes();
+        }
+        cambiarPantalla(submenuExpedientes);
+    }
+    
+    /**
+     * Muestra el panel del expediente consultado.
+     */
+    public static void mostrarExpedienteEmpleado() {
+        if (expedienteEmpleado == null) {
+            expedienteEmpleado = new ExpedienteEmpleado();
+        }
+        cambiarPantalla(expedienteEmpleado);
+    }
+    
+    /**
+     * Muestra el panel del expediente que se modificara.
+     */
+    public static void mostrarModificarExpediente() {
+        if (modificarExpediente == null) {
+            modificarExpediente = new ModificarExpediente();
+        }
+        cambiarPantalla(modificarExpediente);
     }
 }
