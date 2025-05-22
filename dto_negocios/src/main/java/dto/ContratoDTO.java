@@ -20,7 +20,6 @@ public class ContratoDTO {
 
     private String id;
     private String departamento;
-    private String tipoContrato;
     private String lugarTrabajo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -50,10 +49,9 @@ public class ContratoDTO {
      * @param empleado Empleado asociado al contrato
      * @param horarios Conjunto de horarios laborales
      */
-    public ContratoDTO(String id, String departamento, String tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
+    public ContratoDTO(String id, String departamento, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
         this.id = id;
         this.departamento = departamento;
-        this.tipoContrato = tipoContrato;
         this.lugarTrabajo = lugarTrabajo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -81,9 +79,8 @@ public class ContratoDTO {
      * @param empleado Empleado asociado al contrato
      * @param horarios Conjunto de horarios laborales
      */
-    public ContratoDTO(String departamento, String tipoContrato, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
+    public ContratoDTO(String departamento, String lugarTrabajo, LocalDate fechaInicio, LocalDate fechaFin, String puesto, Double sueldo, String periodoPago, String modoPago, EmpleadoDTO empleado, Set<HorarioLaboralDTO> horarios) {
         this.departamento = departamento;
-        this.tipoContrato = tipoContrato;
         this.lugarTrabajo = lugarTrabajo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -129,24 +126,6 @@ public class ContratoDTO {
      */
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
-    }
-
-    /**
-     * Obtiene el tipo de contrato.
-     *
-     * @return Tipo de contrato
-     */
-    public String getTipoContrato() {
-        return tipoContrato;
-    }
-
-    /**
-     * Establece el tipo de contrato.
-     *
-     * @param tipoContrato Nuevo tipo de contrato
-     */
-    public void setTipoContrato(String tipoContrato) {
-        this.tipoContrato = tipoContrato;
     }
 
     /**
@@ -322,7 +301,6 @@ public class ContratoDTO {
         sb.append("ContratoDTO{");
         sb.append("id=").append(id);
         sb.append(", departamento=").append(departamento);
-        sb.append(", tipoContrato=").append(tipoContrato);
         sb.append(", lugarTrabajo=").append(lugarTrabajo);
         sb.append(", fechaInicio=").append(fechaInicio);
         sb.append(", fechaFin=").append(fechaFin);

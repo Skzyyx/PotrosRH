@@ -171,7 +171,6 @@ public class ControlGenerarContrato {
 
         // Agregar filas a la tabla con los datos del contrato
         agregarFilaTabla(table, "Departamento:", contrato.getDepartamento(), fontBold, fontRegular);
-        agregarFilaTabla(table, "Tipo de Contrato:", contrato.getTipoContrato(), fontBold, fontRegular);
         agregarFilaTabla(table, "Lugar de Trabajo:", contrato.getLugarTrabajo(), fontBold, fontRegular);
         agregarFilaTabla(table, "Fecha de Inicio:", formatearFecha(contrato.getFechaInicio().toString()), fontBold, fontRegular);
         agregarFilaTabla(table, "Fecha de Finalización:", formatearFecha(contrato.getFechaFin().toString()), fontBold, fontRegular);

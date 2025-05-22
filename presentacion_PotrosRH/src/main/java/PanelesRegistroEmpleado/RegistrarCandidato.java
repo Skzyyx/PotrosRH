@@ -222,7 +222,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
             }
         });
 
-        btnRegistrar.setText("Generar");
+        btnRegistrar.setText("Registrar");
         btnRegistrar.setBackground(new java.awt.Color(44, 44, 44));
         btnRegistrar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -238,9 +238,9 @@ public class RegistrarCandidato extends javax.swing.JPanel {
             }
         });
 
+        jLabel23.setText("Nivel de Estudios");
         jLabel23.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Nivel de Estudios");
 
         jLabel22.setText("Datos Personales");
         jLabel22.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
@@ -385,7 +385,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
                             .addComponent(tfApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel20)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -562,7 +562,7 @@ public class RegistrarCandidato extends javax.swing.JPanel {
 
     private void btnCancelar() {
         ControlFlujo.mostrarMenuContrataciones();
-        limpiarCampos();
+        limpiarCampos(  );
     }
 
     private void btnRegistrar() {
