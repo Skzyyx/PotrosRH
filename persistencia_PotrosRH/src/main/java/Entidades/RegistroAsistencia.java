@@ -13,18 +13,22 @@ import org.bson.types.ObjectId;
  * @author Benjamin Soto Coronado (253183)
  */
 public class RegistroAsistencia {
+
     // Atrbutos de un registro de asistencia.
     private ObjectId id;
     private LocalDate fechaAsistencia;
     private LocalTime horaEntrada;
     private LocalTime horaSalida;
     private ObjectId empleadoId;
+
     /**
      * Constructor por defecto.
      */
     public RegistroAsistencia() {}
+
     /**
      * Constructor que recibe los atributos.
+     * 
      * @param empleadoId Empleado asociado al registro de la asistencia.
      * @param fechaAsistencia Fecha del registro de la asistencia.
      * @param horaEntrada Hora de entrada del registro de la asistencia.
@@ -36,82 +40,98 @@ public class RegistroAsistencia {
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
     }
-    /**
-     * Retorna el empleado asociado al registro de la asistencia.
-     * @return Empleado asociado al registro de la asistencia.
-     */
-                         //public Empleado getEmpleado() {return empleado;}
-    /**
-     * Establece el empleado asociado al registro de la asistencia.
-     * @param empleado Nuevo empleado asociado al registro de la asistencia.
-     */
-                        //public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
+
     /**
      * Retorna la fecha del registro de la asistencia.
+     * 
      * @return Fecha del registro de la asistencia.
      */
-    public LocalDate getFechaAsistencia() {return fechaAsistencia;}
+    public LocalDate getFechaAsistencia() { return fechaAsistencia; }
+
     /**
      * Establece la fecha del registro de la asistencia.
+     * 
      * @param fechaAsistencia Nueva fecha del registro de la asistencia.
      */
-    public void setFechaAsistencia(LocalDate fechaAsistencia) {this.fechaAsistencia = fechaAsistencia;}
+    public void setFechaAsistencia(LocalDate fechaAsistencia) { this.fechaAsistencia = fechaAsistencia; }
+
     /**
      * Retorna la hora de entrada del registro de la asistencia.
+     * 
      * @return Hora de entrada del registro de la asistencia.
      */
-    public LocalTime getHoraEntrada() {return horaEntrada;}
+    public LocalTime getHoraEntrada() { return horaEntrada; }
+
     /**
      * Establece la hora de entrada del registro de la asistencia.
+     * 
      * @param horaEntrada Nueva hora de entrada del registro de la asistencia.
      */
-    public void setHoraEntrada(LocalTime horaEntrada) {this.horaEntrada = horaEntrada;}
+    public void setHoraEntrada(LocalTime horaEntrada) { this.horaEntrada = horaEntrada; }
+
     /**
      * Retorna la hora de salida del registro de la asistencia.
+     * 
      * @return Hora de salida del registro de la asistencia.
      */
-    public LocalTime getHoraSalida() {return horaSalida;}
+    public LocalTime getHoraSalida() { return horaSalida; }
+
     /**
      * Establece la hora de salida del registro de la asistencia.
+     * 
      * @param horaSalida Nueva hora de salida del registro de la asistencia.
      */
-    public void setHoraSalida(LocalTime horaSalida) {this.horaSalida = horaSalida;}
+    public void setHoraSalida(LocalTime horaSalida) { this.horaSalida = horaSalida; }
 
+    /**
+     * Retorna el identificador único del registro de asistencia.
+     * 
+     * @return Identificador del registro.
+     */
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     * Establece el identificador único del registro de asistencia.
+     * 
+     * @param id Identificador a asignar.
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+    /**
+     * Retorna el identificador del empleado relacionado con este registro.
+     * 
+     * @return Identificador del empleado.
+     */
     public ObjectId getEmpleadoId() {
         return empleadoId;
     }
 
+    /**
+     * Establece el identificador del empleado relacionado con este registro.
+     * 
+     * @param empleadoId Identificador del empleado.
+     */
     public void setEmpleadoId(ObjectId empleadoId) {
         this.empleadoId = empleadoId;
     }
-    
-    
+
     /**
      * Retorna una cadena con la información relevante del registro de la asistencia.
-     * @return Cadena con la información relevante del registro de la asistencia.
+     * 
+     * @return Cadena con los detalles del registro.
      */
     @Override
     public String toString() {
-        return String.format(
-                "%s, %d/%d/%d, %d:%d:%d, %d:%d:%d", 
-                //getEmpleado().getNombre(),
-                getFechaAsistencia().getDayOfMonth(),
-                getFechaAsistencia().getMonthValue(),
-                getFechaAsistencia().getYear(),
-                getHoraEntrada().getHour(),
-                getHoraEntrada().getMinute(),
-                getHoraEntrada().getSecond(),
-                getHoraSalida().getHour(),
-                getHoraSalida().getMinute(),
-                getHoraSalida().getSecond()
-        );
-    }   
+        return "RegistroAsistencia{" + 
+                "id=" + id + 
+                ", fechaAsistencia=" + fechaAsistencia + 
+                ", horaEntrada=" + horaEntrada + 
+                ", horaSalida=" + horaSalida + 
+                ", empleadoId=" + empleadoId + 
+                '}';
+    }     
 }

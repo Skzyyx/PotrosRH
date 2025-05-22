@@ -19,21 +19,48 @@ import mappers.EmpleadoMapper;
 import org.bson.types.ObjectId;
 
 /**
- *
+ *Clase de negocio que gestiona el registro de asistencia de los empleados.
  * @author Benjamin Soto Coronado (253183)
  */
 public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
+
+    /**
+     * Instancia única de la clase para aplicar el patrón Singleton.
+     */
     public static IRegistroAsistenciaBO instance;
+
+    /**
+     * DAO utilizado para acceder a los datos de registro de asistencia.
+     */
     private final IRegistroAsistenciaDAO registroAsistenciaDAO = new RegistroAsistenciaDAO();
-    
+
+    /**
+     * Constructor por defecto.
+     */
     public RegistroAsistenciaBO(){
     }
-    
+
+    /**
+     * Devuelve la instancia única de la clase RegistroAsistenciaBO.
+     * 
+     * @return Instancia única de IRegistroAsistenciaBO.
+     */
     public static synchronized IRegistroAsistenciaBO getInstance() {
         if (instance == null) 
             instance = new RegistroAsistenciaBO();
         return instance;
     }
+
+    /**
+     * Registra la hora de entrada de un empleado en una fecha específica.
+     * 
+     * @param empleado DTO del empleado que realiza la entrada.
+     * @param fechaAsistencia Fecha del registro de entrada.
+     * @param horaEntrada Hora exacta en la que se registra la entrada.
+     * @return true si el registro fue exitoso, false en caso contrario.
+     * @throws ObjetosNegocioException Si el empleado es nulo, su RFC está vacío, 
+     *         o si ocurre un error al acceder a los datos.
+     */
     @Override
     public boolean registrarEntrada(EmpleadoDTO empleado, LocalDate fechaAsistencia, LocalTime horaEntrada) throws ObjetosNegocioException {
         if(empleado == null)
@@ -49,6 +76,16 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         }
     }
 
+    /**
+     * Registra la hora de salida de un empleado en una fecha específica.
+     * 
+     * @param empleado DTO del empleado que realiza la salida.
+     * @param fechaAsistencia Fecha del registro de salida.
+     * @param horaSalida Hora exacta en la que se registra la salida.
+     * @return true si el registro fue exitoso, false en caso contrario.
+     * @throws ObjetosNegocioException Si el empleado es nulo, su RFC está vacío, 
+     *         o si ocurre un error al acceder a los datos.
+     */
     @Override
     public boolean registrarSalida(EmpleadoDTO empleado, LocalDate fechaAsistencia, LocalTime horaSalida) throws ObjetosNegocioException {
         if(empleado == null)
@@ -61,7 +98,8 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         } catch (AccesoDatosException ex) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, ex);
             throw new ObjetosNegocioException(ex.getMessage(), ex);
-        }    }
+        }    
+    }
     
     /**
      * Obtiene los días trabajados de un empleado.
