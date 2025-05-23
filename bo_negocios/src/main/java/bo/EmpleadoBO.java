@@ -16,15 +16,12 @@ import Exceptions.ObjetosNegocioException;
 import dto.EmpleadoDTO;
 import Interfaces.IEmpleadoBO;
 import Interfaces.IEmpleadoDAO;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
+import Pruebas.InsertarEmpleadosDefault;
 import dto.EmpleadoFiltroDTO;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
-import org.bson.conversions.Bson;
 
 /**
  * Implementa la interfaz IEmpleadoBO y sus métodos.
@@ -231,15 +228,23 @@ public class EmpleadoBO implements IEmpleadoBO {
     @Override
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObjetosNegocioException {
         try {
-        String rfc = filtro.getRfc();
-        String email = filtro.getEmail();
-        String telefono = filtro.getTelefono();
+            String rfc = filtro.getRfc();
+            String email = filtro.getEmail();
+            String telefono = filtro.getTelefono();
 
-        List<Empleado> empleados = empleadoDAO.obtenerTodosSinContrato(rfc, email, telefono);
-        return EmpleadoMapper.toDTOViejoList(empleados);
-    } catch (AccesoDatosException ex) {
-        Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-        throw new ObjetosNegocioException(ex.getMessage());
+            List<Empleado> empleados = empleadoDAO.obtenerTodosSinContrato(rfc, email, telefono);
+            return EmpleadoMapper.toDTOViejoList(empleados);
+        } catch (AccesoDatosException ex) {
+            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+            throw new ObjetosNegocioException(ex.getMessage());
+        }
     }
-    }
+    
+    /**
+     * Inserta automáticamente empleados de prueba en la
+     * base de datos.
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    @Override
+    public void insertarDefault() throws ObjetosNegocioException{new InsertarEmpleadosDefault().insertarEmpleados();}
 }

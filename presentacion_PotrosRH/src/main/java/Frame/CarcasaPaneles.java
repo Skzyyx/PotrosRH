@@ -1,6 +1,7 @@
 package Frame;
 
 import Controles.ControlFlujo;
+import Controles.ControlRegistro;
 import javax.swing.JPanel;
 
 /**
@@ -22,7 +23,7 @@ public class CarcasaPaneles extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
-        
+        ControlRegistro.getInstance().insertarDefault();
         ControlFlujo.setContenedor(contenedor);
         ControlFlujo.mostrarInicioSesion();
         setTitle("PotrosRH System Ver. 1.0");

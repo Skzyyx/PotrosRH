@@ -45,4 +45,9 @@ public interface IObtenerEmpleado {
     public EmpleadoDTO obtenerEmpleadoRH(EmpleadoDTO empleado) throws ObtenerEmpleadoException;
     
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException;
+    /**
+     * Inserta empleados por default en la base de datos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    public void insertarEmpleadosDefault() throws ObtenerEmpleadoException;
 }

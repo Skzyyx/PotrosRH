@@ -105,4 +105,16 @@ public class ControlObtenerEmpleado {
             throw new ObtenerEmpleadoException(ex.getMessage());
         }
     }
+    
+    /**
+     * Inserta empleados por default en la base de datos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    public void insertarEmpleadosDefault() throws ObtenerEmpleadoException{
+        try {
+            empleadoBO.insertarDefault();
+        } catch (ObjetosNegocioException ex) {
+            Logger.getLogger(ControlObtenerEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

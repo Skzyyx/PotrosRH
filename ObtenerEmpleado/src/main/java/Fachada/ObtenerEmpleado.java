@@ -73,4 +73,13 @@ public class ObtenerEmpleado implements IObtenerEmpleado{
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObtenerEmpleadoException {
         return new ControlObtenerEmpleado().obtenerTodosSinContrato(filtro);
     }
+    
+    /**
+     * Inserta empleados por default en la base de datos.
+     * @throws ObtenerEmpleadoException Excepción del subsistema.
+     */
+    @Override
+    public void insertarEmpleadosDefault() throws ObtenerEmpleadoException{
+        new ControlObtenerEmpleado().insertarEmpleadosDefault();
+    }
 }

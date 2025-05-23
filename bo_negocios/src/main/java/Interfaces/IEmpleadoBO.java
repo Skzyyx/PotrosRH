@@ -91,4 +91,10 @@ public interface IEmpleadoBO {
      * @throws ObjetosNegocioException Si ocurre un error durante la consulta
      */
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObjetosNegocioException;
+    /**
+     * Inserta automáticamente empleados de prueba en la
+     * base de datos.
+     * @throws ObjetosNegocioException Excepción de negocio.
+     */
+    public void insertarDefault() throws ObjetosNegocioException;
 }

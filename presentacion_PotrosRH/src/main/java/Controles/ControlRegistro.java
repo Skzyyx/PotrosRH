@@ -202,4 +202,14 @@ public class ControlRegistro {
             throw new PresentacionException(ex.getMessage());
         }
     }
+    /**
+     * Inserta empleados por default en la base de datos.
+     */
+    public void insertarDefault(){
+        try {
+            obtenerEmpleado.insertarEmpleadosDefault();
+        } catch (ObtenerEmpleadoException ex) {
+            Logger.getLogger(ControlRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
