@@ -164,15 +164,6 @@ public class Dao_PotrosRH {
 //
 //        System.out.println(co.toString());
 
-        try {
-            System.out.println("----------------------");
-            emDAO.obtenerTodosSinContrato(new ArrayList<>())
-                    .forEach((t) -> {
-                        System.out.println(t.toString());
-                    });
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(Dao_PotrosRH.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

@@ -101,15 +101,16 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado.");
         }
     }
-    
+
     /**
      * Obtiene un empleado cuyo departamento es el de Recursos Humanos.
+     *
      * @param empleado Empleado con RFC a buscar.
      * @return Empleado de Recursos Humanos.
-     * @throws AccesoDatosException 
+     * @throws AccesoDatosException
      */
     @Override
-    public Empleado obtenerEmpleadoRH(Empleado empleado) throws AccesoDatosException{
+    public Empleado obtenerEmpleadoRH(Empleado empleado) throws AccesoDatosException {
         try {
             // Filtro para el RFC
             Bson filtroRFC = Filters.eq("rfc", empleado.getRfc());
@@ -124,7 +125,7 @@ public class EmpleadoDAO implements IEmpleadoDAO {
             throw new AccesoDatosException("Ocurrió un error al acceder a la base de datos para obtener el empleado de recursos humanos.");
         }
     }
-    
+
     @Override
     public Empleado registrarEmpleado(Empleado empleado) throws AccesoDatosException {
         try {
@@ -159,9 +160,42 @@ public class EmpleadoDAO implements IEmpleadoDAO {
         }
     }
 
+    /**
+     * Recupera todos los empleados que no tienen contrato asociado y que
+     * cumplen con los criterios especificados en el pipeline de agregación.
+     *
+     * @param rfc RFC a filtrar
+     * @param email Email a filtrar
+     * @param telefono Teléfono a filtrar
+     * @return Lista de empleados sin contrato que cumplen con los criterios de
+     * filtrado
+     * @throws AccesoDatosException Si ocurre un error al consultar la base de
+     * datos
+     */
     @Override
-    public List<Empleado> obtenerTodosSinContrato(List<Bson> pipeline) throws AccesoDatosException {
+    public List<Empleado> obtenerTodosSinContrato(String rfc, String email, String telefono) throws AccesoDatosException {
         try {
+            List<Bson> filters = new ArrayList<>();
+
+            if (rfc != null && !rfc.isBlank()) {
+                filters.add(Filters.regex("rfc", ".*" + rfc + ".*", "i"));
+            }
+
+            if (email != null && !email.isBlank()) {
+                filters.add(Filters.regex("email", ".*" + email + ".*", "i"));
+            }
+
+            if (telefono != null && !telefono.isBlank()) {
+                filters.add(Filters.regex("telefono", ".*" + telefono + ".*", "i"));
+            }
+
+            List<Bson> pipeline = new ArrayList<>();
+
+            if (!filters.isEmpty()) {
+                pipeline.add(Aggregates.match(Filters.and(filters)));
+            }
+
+            // Lógica para obtener empleados sin contrato vigente
             pipeline.add(Aggregates.lookup("contratos", "_id", "empleadoId", "contratos"));
             pipeline.add(Aggregates.match(Filters.or(
                     Filters.eq("contratos", Arrays.asList()),
@@ -172,24 +206,11 @@ public class EmpleadoDAO implements IEmpleadoDAO {
                                     .append("in", new Document("$gt", Arrays.asList("$$c.fechaFin", LocalDate.now())))
                             ))
                     ))
-            ))
-            );
-            return empleados.aggregate(pipeline, Empleado.class).into(new ArrayList<>());
-        } catch (Exception e) {throw new AccesoDatosException("Ocurrió un error al obtener los empleados sin contrato");}
-    }
+            )));
 
-//    public List<Candidato> obtenerPorFiltro(List<Bson> pipelines) throws AccesoDatosException {
-//
-//        try {
-//            pipelines.add(Aggregates.lookup("evaluaciones", "_id", "candidato._id", "evaluaciones"));
-//            pipelines.add(Aggregates.match(
-//                    Filters.not(Filters.elemMatch("evaluaciones", Filters.eq("resultado", "APROBADO")))
-//            ));
-//
-//            return candidatosCollection.aggregate(pipelines, Candidato.class).into(new ArrayList<>());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new AccesoDatosException("Error al consultar los candidatos sin evaluaciones.");
-//        }
-//    }
+            return empleados.aggregate(pipeline, Empleado.class).into(new ArrayList<>());
+        } catch (Exception e) {
+            throw new AccesoDatosException("Ocurrió un error al obtener los empleados sin contrato");
+        }
+    }
 }

@@ -230,31 +230,16 @@ public class EmpleadoBO implements IEmpleadoBO {
      */
     @Override
     public List<EmpleadoDTO> obtenerTodosSinContrato(EmpleadoFiltroDTO filtro) throws ObjetosNegocioException {
-        List<Bson> filters = new ArrayList<>();
-
-        if (filtro.getRfc() != null && !filtro.getRfc().isBlank()) {
-            filters.add(Filters.regex("rfc", ".*" + filtro.getRfc() + ".*", "i")); // Contiene, ignorando mayúsculas
-        }
-
-        if (filtro.getEmail() != null && !filtro.getEmail().isBlank()) {
-            filters.add(Filters.regex("email", ".*" + filtro.getEmail() + ".*", "i"));
-        }
-
-        if (filtro.getTelefono() != null && !filtro.getTelefono().isBlank()) {
-            filters.add(Filters.regex("telefono", ".*" + filtro.getTelefono() + ".*", "i"));
-        }
-
-        List<Bson> pipeline = new ArrayList<>();
-
-        if (!filters.isEmpty()) {
-            pipeline.add(Aggregates.match(Filters.and(filters)));
-        }
-
         try {
-            return EmpleadoMapper.toDTOViejoList(empleadoDAO.obtenerTodosSinContrato(pipeline));
-        } catch (AccesoDatosException ex) {
-            Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-            throw new ObjetosNegocioException(ex.getMessage());
-        }
+        String rfc = filtro.getRfc();
+        String email = filtro.getEmail();
+        String telefono = filtro.getTelefono();
+
+        List<Empleado> empleados = empleadoDAO.obtenerTodosSinContrato(rfc, email, telefono);
+        return EmpleadoMapper.toDTOViejoList(empleados);
+    } catch (AccesoDatosException ex) {
+        Logger.getLogger(EmpleadoBO.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        throw new ObjetosNegocioException(ex.getMessage());
+    }
     }
 }

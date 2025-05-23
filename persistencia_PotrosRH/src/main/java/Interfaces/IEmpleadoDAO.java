@@ -77,11 +77,13 @@ public interface IEmpleadoDAO {
      * Recupera todos los empleados que no tienen contrato asociado y que
      * cumplen con los criterios especificados en el pipeline de agregación.
      *
-     * @param pipeline Lista de etapas de agregación para filtrar empleados
+     * @param rfc RFC a filtrar
+     * @param email Email a filtrar
+     * @param telefono Teléfono a filtrar
      * @return Lista de empleados sin contrato que cumplen con los criterios de
      * filtrado
      * @throws AccesoDatosException Si ocurre un error al consultar la base de
      * datos
      */
-    public List<Empleado> obtenerTodosSinContrato(List<Bson> pipeline) throws AccesoDatosException;
+    public List<Empleado> obtenerTodosSinContrato(String rfc, String email, String telefono) throws AccesoDatosException;
 }
