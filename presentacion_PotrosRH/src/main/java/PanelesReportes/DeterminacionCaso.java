@@ -119,6 +119,7 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLDespido = new javax.swing.JCheckBox();
         jCLAdvertenciaEscrita = new javax.swing.JCheckBox();
         btnConfirmar = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -375,6 +376,12 @@ public class DeterminacionCaso extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
+
+        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton1.setText("jRadioButton1");
+        jRadioButton1.setOpaque(true);
+        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 540, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Regresa al panel del análisis inicial e investigación.
@@ -481,9 +488,19 @@ public class DeterminacionCaso extends javax.swing.JPanel {
                     if(actual.isSelected() && !actual.equals(checkBox))
                         actual.setSelected(false);
                 }
-            } else
-                // Si se deselecciona la sancion, se convierte a null el atributo sancionSeleccionada.
-                sancionSeleccionada = null;
+            } else {
+                
+                boolean algunoSeleccionado = false;
+                for (JCheckBox actual : sanciones) {
+                    if (actual.isSelected()) {
+                        algunoSeleccionado = true;
+                        break;
+                    }
+                }
+                if (!algunoSeleccionado) {
+                    sancionSeleccionada = null;
+                }
+            }
         });
     }
     /**
@@ -499,9 +516,19 @@ public class DeterminacionCaso extends javax.swing.JPanel {
                     if(actual.isSelected() && !actual.equals(checkBox))
                         actual.setSelected(false);
                 }
-            } else
-                // Si se deselecciona el nivel de gravedad, se convierte a null el atributo nivelSeleccionado.
-                nivelSeleccionado = null;
+            } else {
+                
+                boolean algunoSeleccionado = false;
+                for (JCheckBox actual : nivelesGravedad) {
+                    if (actual.isSelected()) {
+                        algunoSeleccionado = true;
+                        break;
+                    }
+                }
+                if (!algunoSeleccionado) {
+                    nivelSeleccionado = null;
+                }
+            }
             
         });
     }
@@ -543,6 +570,7 @@ public class DeterminacionCaso extends javax.swing.JPanel {
     private javax.swing.JLabel jLOtraAccionCorrectiva;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAOtraAccionCorrectiva;
     // End of variables declaration//GEN-END:variables

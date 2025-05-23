@@ -328,11 +328,11 @@ public class ImpactoIncidente extends javax.swing.JPanel {
             // Si la descripción de las acciones previas del empleado reportado no está vacía, se agrega al reporte.
             if(jTAccionesPrevias.getText() != null && !jTAccionesPrevias.getText().trim().isEmpty())
                 reporteMalaConducta.setAccionesPrevias(jTAccionesPrevias.getText().trim());
-            
+            ReporteMalaConductaDTO reporteRegistrado = ControlReportes.getInstance().registrarReporte(reporteMalaConducta);
             // Si el registro fue exitoso.
-            if(ControlReportes.getInstance().registrarReporte(reporteMalaConducta) != null){
+            if(reporteRegistrado != null){
                 // Se muestra un mensaje de confirmación y se regresa al menú de reportes.
-                OptionPane.showInfoMessage(this, "¡Reporte registrado con éxito y listo para ser revisado!", "¡Reporte registrado!");
+                OptionPane.showInfoMessage(this, String.format("¡Reporte registrado con éxito, con su número de seguimiento: %d!", reporteRegistrado.getNumeroSeguimiento()), "¡Reporte registrado!");
                 ControlFlujo.mostrarSubmenuReportes();
             }
         } catch (PresentacionException e) {OptionPane.showErrorMessage(this, "ERROR: " + e.getMessage(), "Error en registro de reporte");}
