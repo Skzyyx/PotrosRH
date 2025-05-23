@@ -119,7 +119,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jCLDespido = new javax.swing.JCheckBox();
         jCLAdvertenciaEscrita = new javax.swing.JCheckBox();
         btnConfirmar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(17, 119, 202));
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -197,10 +196,8 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         jLDeterminacionCaso.setText("Determinación del caso:");
         add(jLDeterminacionCaso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 334, 49));
 
-        jTAOtraAccionCorrectiva.setBackground(new java.awt.Color(255, 255, 255));
         jTAOtraAccionCorrectiva.setColumns(20);
         jTAOtraAccionCorrectiva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTAOtraAccionCorrectiva.setForeground(new java.awt.Color(0, 0, 0));
         jTAOtraAccionCorrectiva.setLineWrap(true);
         jTAOtraAccionCorrectiva.setRows(5);
         jTAOtraAccionCorrectiva.setWrapStyleWord(true);
@@ -209,18 +206,15 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 330, 330, 150));
 
         jLOtraAccionCorrectiva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLOtraAccionCorrectiva.setForeground(new java.awt.Color(0, 0, 0));
         jLOtraAccionCorrectiva.setText("Describa el otro tipo de sanción:");
         add(jLOtraAccionCorrectiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 300, 280, 30));
 
         jLAccionCorrectiva.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLAccionCorrectiva.setForeground(new java.awt.Color(0, 0, 0));
         jLAccionCorrectiva.setText("Acción correctiva o sanción aplicada:");
         add(jLAccionCorrectiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 440, 49));
 
         jCLDivulgacionConfidencial.setBackground(new java.awt.Color(255, 255, 255));
         jCLDivulgacionConfidencial.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLDivulgacionConfidencial.setForeground(new java.awt.Color(0, 0, 0));
         jCLDivulgacionConfidencial.setText("Divulgación de información confidencial");
         jCLDivulgacionConfidencial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLDivulgacionConfidencial.setIconTextGap(10);
@@ -229,7 +223,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLLeve.setBackground(new java.awt.Color(255, 255, 255));
         jCLLeve.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLLeve.setForeground(new java.awt.Color(0, 0, 0));
         jCLLeve.setText("Leve");
         jCLLeve.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLLeve.setIconTextGap(10);
@@ -238,7 +231,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLModerado.setBackground(new java.awt.Color(255, 255, 255));
         jCLModerado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLModerado.setForeground(new java.awt.Color(0, 0, 0));
         jCLModerado.setText("Moderado");
         jCLModerado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLModerado.setIconTextGap(10);
@@ -247,7 +239,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLGrave.setBackground(new java.awt.Color(255, 255, 255));
         jCLGrave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLGrave.setForeground(new java.awt.Color(0, 0, 0));
         jCLGrave.setText("Grave");
         jCLGrave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLGrave.setIconTextGap(10);
@@ -256,7 +247,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLCapacitacionObligatoria.setBackground(new java.awt.Color(255, 255, 255));
         jCLCapacitacionObligatoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLCapacitacionObligatoria.setForeground(new java.awt.Color(0, 0, 0));
         jCLCapacitacionObligatoria.setText("Capacitación obligatoria");
         jCLCapacitacionObligatoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLCapacitacionObligatoria.setIconTextGap(10);
@@ -265,7 +255,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLAdvertenciaVerbal.setBackground(new java.awt.Color(255, 255, 255));
         jCLAdvertenciaVerbal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLAdvertenciaVerbal.setForeground(new java.awt.Color(0, 0, 0));
         jCLAdvertenciaVerbal.setText("Advertencia verbal");
         jCLAdvertenciaVerbal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLAdvertenciaVerbal.setIconTextGap(10);
@@ -274,7 +263,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLOtraAccionCorrectiva.setBackground(new java.awt.Color(255, 255, 255));
         jCLOtraAccionCorrectiva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLOtraAccionCorrectiva.setForeground(new java.awt.Color(0, 0, 0));
         jCLOtraAccionCorrectiva.setText("Otra");
         jCLOtraAccionCorrectiva.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLOtraAccionCorrectiva.setIconTextGap(10);
@@ -288,7 +276,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLSuspensionTemporal.setBackground(new java.awt.Color(255, 255, 255));
         jCLSuspensionTemporal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLSuspensionTemporal.setForeground(new java.awt.Color(0, 0, 0));
         jCLSuspensionTemporal.setText("Suspensión temporal");
         jCLSuspensionTemporal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLSuspensionTemporal.setIconTextGap(10);
@@ -297,7 +284,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLPoliticaPrivacidad.setBackground(new java.awt.Color(255, 255, 255));
         jCLPoliticaPrivacidad.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLPoliticaPrivacidad.setForeground(new java.awt.Color(0, 0, 0));
         jCLPoliticaPrivacidad.setText("Política de privacidad");
         jCLPoliticaPrivacidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLPoliticaPrivacidad.setIconTextGap(10);
@@ -306,7 +292,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLRespetoTolerancia.setBackground(new java.awt.Color(255, 255, 255));
         jCLRespetoTolerancia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLRespetoTolerancia.setForeground(new java.awt.Color(0, 0, 0));
         jCLRespetoTolerancia.setText("Respeto y tolerancia");
         jCLRespetoTolerancia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLRespetoTolerancia.setIconTextGap(10);
@@ -315,7 +300,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLDesobediencia.setBackground(new java.awt.Color(255, 255, 255));
         jCLDesobediencia.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jCLDesobediencia.setForeground(new java.awt.Color(0, 0, 0));
         jCLDesobediencia.setText("Desobediencia");
         jCLDesobediencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLDesobediencia.setIconTextGap(10);
@@ -323,18 +307,15 @@ public class DeterminacionCaso extends javax.swing.JPanel {
         add(jCLDesobediencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 330, 40));
 
         jLNormasVioladas.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLNormasVioladas.setForeground(new java.awt.Color(0, 0, 0));
         jLNormasVioladas.setText("Normas o políticas violadas*:");
         add(jLNormasVioladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 330, 49));
 
         jLNivelGravedad.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jLNivelGravedad.setForeground(new java.awt.Color(0, 0, 0));
         jLNivelGravedad.setText("Nivel de gravedad*:");
         add(jLNivelGravedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 220, 49));
 
         jCLDespido.setBackground(new java.awt.Color(255, 255, 255));
         jCLDespido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLDespido.setForeground(new java.awt.Color(0, 0, 0));
         jCLDespido.setText("Despido");
         jCLDespido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLDespido.setIconTextGap(10);
@@ -343,7 +324,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
 
         jCLAdvertenciaEscrita.setBackground(new java.awt.Color(255, 255, 255));
         jCLAdvertenciaEscrita.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCLAdvertenciaEscrita.setForeground(new java.awt.Color(0, 0, 0));
         jCLAdvertenciaEscrita.setText("Advertencia escrita");
         jCLAdvertenciaEscrita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCLAdvertenciaEscrita.setIconTextGap(10);
@@ -376,12 +356,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
                 g2.dispose();
             }
         });
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("jRadioButton1");
-        jRadioButton1.setOpaque(true);
-        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 540, 140, 30));
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Regresa al panel del análisis inicial e investigación.
@@ -570,7 +544,6 @@ public class DeterminacionCaso extends javax.swing.JPanel {
     private javax.swing.JLabel jLOtraAccionCorrectiva;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAOtraAccionCorrectiva;
     // End of variables declaration//GEN-END:variables

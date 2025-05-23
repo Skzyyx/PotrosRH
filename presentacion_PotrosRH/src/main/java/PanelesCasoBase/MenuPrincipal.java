@@ -315,7 +315,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAsistenciasActionPerformed
 
     private void btnExpedientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedientesActionPerformed
-        ControlFlujo.mostrarSubmenuExpedientes();
+        OptionPane.showInfoMessage(this, "No quedó :,(", "Advertencia");
     }//GEN-LAST:event_btnExpedientesActionPerformed
 
     private void btnReportarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportarEmpleadoActionPerformed
