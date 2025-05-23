@@ -1,6 +1,5 @@
 package PruebasUnitarias;
 
-import Control.ControlSubsistemaDespidos;
 import Excepciones.CorreoException;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.verify;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
- *
+ * Da error porque moví de lugar el proyecto y no me detecta el import del Control del subsistema
  * @author Jesús Ernesto López Ibarra (252663)
  */
 @ExtendWith(MockitoExtension.class)
