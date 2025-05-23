@@ -96,7 +96,7 @@ public class ControlValidarEmpleado {
             
             // Se verifica que se obtuvo una cantidad de horas trabajadas
             if(horasTrabajadas == null)
-                throw new ValidarEmpleadoException("Ocurrió un error en el cálculo del salario bruto y neto de la nómina.");
+                throw new ValidarEmpleadoException("El empleado carece de registros de asistencias asociados.");
             
             // Obtiene el 80% de asistencias, a partir de las horas trabajadas esperadas.
             double porcentaje = horasEsperadas * 0.8;

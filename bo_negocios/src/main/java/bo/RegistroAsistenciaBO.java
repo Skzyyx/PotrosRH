@@ -16,7 +16,6 @@ import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mappers.EmpleadoMapper;
-import org.bson.types.ObjectId;
 
 /**
  *Clase de negocio que gestiona el registro de asistencia de los empleados.
@@ -119,11 +118,7 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         
         try {
             
-            //Se extrae el ID del empleado
-            Empleado empleadoId = new Empleado();
-            empleadoId.setId(new ObjectId(empleado.getId()));
-            
-            return registroAsistenciaDAO.obtenerDiasTrabajados(empleadoId, fechaInicio);
+            return registroAsistenciaDAO.obtenerDiasTrabajados(EmpleadoMapper.toEntityViejo(empleado), fechaInicio);
             
         } catch (AccesoDatosException e) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, e);
@@ -148,11 +143,7 @@ public class RegistroAsistenciaBO implements IRegistroAsistenciaBO {
         
         try {
             
-            //Se extrae el ID del empleado
-            Empleado empleadoId = new Empleado();
-            empleadoId.setId(new ObjectId(empleado.getId()));
-            
-            return registroAsistenciaDAO.obtenerHorasTrabajadas(empleadoId, fechaInicio);
+            return registroAsistenciaDAO.obtenerHorasTrabajadas(EmpleadoMapper.toEntityViejo(empleado), fechaInicio);
             
         } catch (AccesoDatosException e) {
             Logger.getLogger(HorarioLaboralBO.class.getName()).log(Level.SEVERE, null, e);

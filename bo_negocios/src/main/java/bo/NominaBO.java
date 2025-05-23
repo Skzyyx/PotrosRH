@@ -1,7 +1,6 @@
 package bo;
 
 import DAO.NominaDAO;
-import Entidades.Empleado;
 import Enums.DiaSemana;
 import Exceptions.AccesoDatosException;
 import Exceptions.ObjetosNegocioException;
@@ -15,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mappers.EmpleadoMapper;
 import mappers.NominaMapper;
-import org.bson.types.ObjectId;
 
 /**
  * Objeto de negocio NominaBO.
@@ -77,12 +76,9 @@ public class NominaBO implements INominaBO {
             throw new ObjetosNegocioException("El empleado no puede ser nulo");
         
         try {
-            //Se extrae el ID del empleado
-            Empleado empleadoId = new Empleado();
-            empleadoId.setId(new ObjectId(empleado.getId()));
             
             // Se obtiene la fecha de la última nómina del empleado.
-            return nominaDAO.obtenerFechaUltimaNomina(empleadoId);
+            return nominaDAO.obtenerFechaUltimaNomina(EmpleadoMapper.toEntityViejo(empleado));
             
         } catch (AccesoDatosException e) {
             Logger.getLogger(NominaBO.class.getName()).log(Level.SEVERE, null, e);

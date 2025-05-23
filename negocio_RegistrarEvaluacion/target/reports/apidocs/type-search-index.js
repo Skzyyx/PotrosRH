@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Control","l":"ControlRegistrarEvaluacion"},{"p":"Interface","l":"IRegistrarEvaluacion"},{"p":"Pruebas","l":"Negocio_RegistrarEvaluacion"},{"p":"Fachada","l":"RegistrarEvaluacion"},{"p":"Exceptions","l":"RegistrarEvaluacionException"}];updateSearchResults();
