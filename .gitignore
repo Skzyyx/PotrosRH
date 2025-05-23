@@ -19,3 +19,6 @@
 *.class
 *.class
 /negocio_RegistrarAsistencia/nbproject/
+/GenerarNomina/target/
+/ObtenerEmpleado/target/
+/RegistrarRevisarReporte/target/

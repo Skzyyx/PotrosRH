@@ -165,4 +165,15 @@ public class EmpleadoMapper {
         }
         return dtos;
     }
+    /**
+     * Devuelve un empleado con el ID del DTO
+     * recibido.
+     * @param empleadoDTO EmpleadoDTO con ID.
+     * @return Empleado con ID, como ObjectId.
+     */
+    public static Empleado toEntityId(EmpleadoDTO empleadoDTO){
+        Empleado empleado = new Empleado();
+        empleado.setId(new ObjectId(empleadoDTO.getId()));
+        return empleado;
+    }
 }

@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.252390</groupId>
-    <artifactId>negocio_RegistrarRevisarReporte</artifactId>
+    <groupId>com.mycompany.com</groupId>
+    <artifactId>negocio_ObtenerEmpleado</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>dto_negocios</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>252524</groupId>
             <artifactId>bo_negocios</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.10.0</version>
-        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>23</maven.compiler.release>
-        <exec.mainClass>com.negocio_registrarrevisarreporte.Negocio_RegistrarRevisarReporte</exec.mainClass>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
+        <exec.mainClass>com.mycompany.com.negocio_obtenerempleado.Negocio_ObtenerEmpleado</exec.mainClass>
     </properties>
+    <name>ObtenerEmpleado</name>
 </project>

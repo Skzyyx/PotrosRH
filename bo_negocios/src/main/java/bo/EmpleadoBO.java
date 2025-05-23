@@ -103,7 +103,7 @@ public class EmpleadoBO implements IEmpleadoBO {
         }
 
         try {
-            Empleado empleadoPersistir = empleadoDAO.obtenerEmpleadoId(EmpleadoMapper.toEntityViejo(empleado));
+            Empleado empleadoPersistir = empleadoDAO.obtenerEmpleadoId(EmpleadoMapper.toEntityId(empleado));
             return empleadoPersistir != null ? EmpleadoMapper.toDTO(empleadoPersistir) : null;
 
         } catch (AccesoDatosException ex) {
